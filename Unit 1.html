@@ -63,6 +63,9 @@
             top: 15px;
             z-index: 1000;
             margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
 
         .audio-card {
@@ -75,6 +78,10 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
+        }
+
+        .audio-card-model {
+            border-color: var(--accent-cyan);
         }
 
         .audio-title {
@@ -405,9 +412,10 @@
 
     <!-- Sticky Audio Player Container -->
     <div class="audio-sticky-wrapper">
+        <!-- Original Audio Player -->
         <div class="audio-card">
             <div class="audio-title">
-                <span>🔊 Audio Track: Unit 1</span>
+                <span>🔊 Audio Track: Student Response</span>
                 <span id="timeDisplay" style="font-size: 0.8rem; color: var(--text-secondary);">00:00 / --:--</span>
             </div>
             <!-- Audio file support: looks for "Unit 1", "Unit 1.m4a", or "Unit 1.mp3" in root -->
@@ -415,6 +423,18 @@
                 <source src="Unit 1.m4a" type="audio/mp4">
                 <source src="Unit 1" type="audio/mp4">
                 <source src="Unit 1.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+
+        <!-- Model Audio Player -->
+        <div class="audio-card audio-card-model">
+            <div class="audio-title">
+                <span>✨ Audio Track: Model Answer</span>
+                <span id="timeDisplayModel" style="font-size: 0.8rem; color: var(--text-secondary);">00:00 / --:--</span>
+            </div>
+            <audio id="audioPlayerModel" controls preload="metadata">
+                <source src="UNIT 1 - MODEL.mp3" type="audio/mpeg">
                 Your browser does not support the audio element.
             </audio>
         </div>
@@ -858,8 +878,10 @@
 <script>
     const audio = document.getElementById('audioPlayer');
     const timeDisplay = document.getElementById('timeDisplay');
+    const audioModel = document.getElementById('audioPlayerModel');
+    const timeDisplayModel = document.getElementById('timeDisplayModel');
 
-    // Function to jump to timestamp in audio
+    // Function to jump to timestamp in primary student audio
     function jumpTo(seconds) {
         if (audio) {
             audio.currentTime = seconds;
@@ -867,12 +889,23 @@
         }
     }
 
-    // Update audio player time display
-    audio.addEventListener('timeupdate', () => {
-        const curSec = Math.floor(audio.currentTime);
-        const durSec = Math.floor(audio.duration || 0);
-        timeDisplay.textContent = `${formatTime(curSec)} / ${formatTime(durSec)}`;
-    });
+    // Update primary audio player time display
+    if (audio) {
+        audio.addEventListener('timeupdate', () => {
+            const curSec = Math.floor(audio.currentTime);
+            const durSec = Math.floor(audio.duration || 0);
+            timeDisplay.textContent = `${formatTime(curSec)} / ${formatTime(durSec)}`;
+        });
+    }
+
+    // Update model audio player time display
+    if (audioModel) {
+        audioModel.addEventListener('timeupdate', () => {
+            const curSec = Math.floor(audioModel.currentTime);
+            const durSec = Math.floor(audioModel.duration || 0);
+            timeDisplayModel.textContent = `${formatTime(curSec)} / ${formatTime(durSec)}`;
+        });
+    }
 
     function formatTime(sec) {
         const m = Math.floor(sec / 60);
