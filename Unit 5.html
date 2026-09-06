@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS Speaking Evaluation & Transcript Workbench - Unit 5</title>
+    <style>
+        :root {
+            --bg-color: #0b132b;
+            --card-bg: #1c2541;
+            --card-bg-alt: #131b2e;
+            --border-color: #2a385b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --accent-blue: #3b82f6;
+            --accent-cyan: #06b6d4;
+            --accent-gold: #f59e0b;
+            --accent-green: #10b981;
+            --accent-hover: #2563eb;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding-bottom: 60px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-top: 20px;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            color: #ffffff;
+            margin-bottom: 6px;
+            letter-spacing: -0.5px;
+        }
+
+        header p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Sticky Audio Player Bar */
+        .audio-sticky-wrapper {
+            position: sticky;
+            top: 15px;
+            z-index: 1000;
+            margin-bottom: 30px;
+        }
+
+        .audio-card {
+            background: rgba(28, 37, 65, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--accent-blue);
+            border-radius: 12px;
+            padding: 15px 20px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .audio-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--accent-cyan);
+        }
+
+        audio {
+            width: 100%;
+            height: 40px;
+            border-radius: 8px;
+            outline: none;
+        }
+
+        /* Content Cards */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        /* Original Transcript Block */
+        .verbatim-block {
+            background-color: var(--card-bg-alt);
+            border-left: 4px solid var(--accent-blue);
+            padding: 16px;
+            border-radius: 6px;
+            font-style: italic;
+            color: #cbd5e1;
+            font-size: 0.98rem;
+            line-height: 1.7;
+        }
+
+        /* Correction Form Items */
+        .sentence-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .sentence-item {
+            background-color: var(--card-bg-alt);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        .sentence-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .timestamp-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(59, 130, 246, 0.15);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            border-radius: 6px;
+            padding: 4px 10px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+
+        .timestamp-link:hover {
+            background-color: var(--accent-blue);
+            color: #ffffff;
+            border-color: var(--accent-blue);
+        }
+
+        .original-text {
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            flex-grow: 1;
+            padding-top: 2px;
+        }
+
+        .input-group {
+            margin-top: 8px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+
+        textarea.correction-input {
+            width: 100%;
+            height: calc(2 * 1.6em + 12px);
+            background-color: #0b132b;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: #ffffff;
+            padding: 8px 12px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            resize: vertical;
+            transition: border-color 0.2s;
+        }
+
+        textarea.correction-input:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+        }
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            margin-top: 25px;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--accent-blue), #1d4ed8);
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.1s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(1px);
+        }
+
+        /* Score Section & Progress Bars */
+        .score-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin-top: 15px;
+        }
+
+        .score-item {
+            background-color: var(--card-bg-alt);
+            padding: 16px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .score-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .score-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #ffffff;
+        }
+
+        .score-val {
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--accent-cyan);
+        }
+
+        .progress-track {
+            position: relative;
+            height: 12px;
+            background-color: #0b132b;
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
+            border-radius: 6px;
+            transition: width 0.6s ease-out;
+        }
+
+        .goal-line {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 72.22%; /* 6.5 / 9.0 * 100 */
+            width: 2px;
+            background-color: var(--accent-gold);
+            z-index: 2;
+        }
+
+        .scale-legend {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 6px;
+        }
+
+        .legend-indicator {
+            display: flex;
+            gap: 15px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+            justify-content: flex-end;
+        }
+
+        .legend-tag {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        /* Recommendations & Feedback Tables/Lists */
+        .feedback-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .feedback-item {
+            background-color: var(--card-bg-alt);
+            padding: 14px 16px;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-cyan);
+            font-size: 0.92rem;
+        }
+
+        .feedback-item strong {
+            color: #ffffff;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        /* Model Answer Styling */
+        .model-answer-p {
+            margin-bottom: 14px;
+            line-height: 1.7;
+            font-size: 0.98rem;
+            color: #e2e8f0;
+        }
+
+        .model-answer-p strong {
+            color: var(--accent-cyan);
+        }
+
+        .upgrades-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+
+        .upgrades-table th, .upgrades-table td {
+            text-align: left;
+            padding: 12px 14px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .upgrades-table th {
+            background-color: var(--card-bg-alt);
+            color: var(--accent-cyan);
+            font-weight: 600;
+        }
+
+        .upgrades-table td {
+            background-color: rgba(19, 27, 46, 0.4);
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .container { padding: 12px; }
+            .card { padding: 16px; }
+            .upgrades-table { font-size: 0.8rem; }
+            .upgrades-table th, .upgrades-table td { padding: 8px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>IELTS Speaking Evaluation Workbench</h1>
+        <p>Unit 5: Animals & the Natural World — Part 2 Response Analysis</p>
+    </header>
+
+    <!-- Sticky Audio Player Container -->
+    <div class="audio-sticky-wrapper">
+        <div class="audio-card">
+            <div class="audio-title">
+                <span>🔊 Audio Track: Unit 5</span>
+                <span id="timeDisplay" style="font-size: 0.8rem; color: var(--text-secondary);">00:00 / --:--</span>
+            </div>
+            <audio id="audioPlayer" controls preload="metadata">
+                <source src="Unit 5.m4a" type="audio/mp4">
+                <source src="Unit 5" type="audio/mp4">
+                <source src="Unit 5.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+    </div>
+
+    <!-- SECTION 1: ORIGINAL TRANSCRIPT -->
+    <section class="card">
+        <div class="card-title">
+            <span>📝 Original Verbatim Transcript</span>
+        </div>
+        <div class="verbatim-block">
+            "A place I visited where I could see many interesting animal is Sea Shells in Win Win Win Wonder at Phu Quoc. Uh the Sea Shell like big turtle near the beach, long beach. Um and the Sea Shell have the one tunnels under the water. Uh the the tunnels give a 360 360 degree view of the ocean life. It it have it has a many animal or um penguin, shark, whale, jellyfish, clownfish, blue tang, seahorse, coral reefs, and many sea animals. Mm. Recently uh on the world in the world many people talking is a talking is a industrial industrial is oil dumping uh for the sea. And have many oil on the on the oceans. And many fish fishers catch the whale um catch a whale and shark and many fish. Um I I read on the newspaper uh at the Japan have um many fishers catch the whale catch a many whale. And the world is the talking is not catch a whale. And uh and it was an eye-opening experience that helped me understand the importance of protecting endangered endangered animals and preserving our oceans."
+        </div>
+    </section>
+
+    <!-- SECTION 2: SENTENCE CORRECTION FORM & MARKDOWN GENERATOR -->
+    <section class="card">
+        <div class="card-title">
+            <span>🛠️ Sentence-by-Sentence Correction Form</span>
+        </div>
+        <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 20px;">
+            Click any sentence timestamp link to jump to that moment in the audio. Add your sentence-level corrections or notes below each item, then press <strong>SUBMIT</strong> to generate a downloadable Markdown file.
+        </p>
+
+        <form id="correctionForm">
+            <div class="sentence-list">
+
+                <div class="sentence-item" data-index="1" data-original="A place I visited where I could see many interesting animal is Sea Shells in Win Win Win Wonder at Phu Quoc.">
+                    <div class="sentence-header">
+                        <a onclick="jumpTo(0)" class="timestamp-link">#1 (0:00)</a>
+                        <div class="original-text">A place I visited where I could see many interesting animal is Sea Shells in Win Win Win Wonder at Phu Quoc.</div>
+                    </div>
+                    <div class="input-group">
+                        <label>Correction / Refinement:</label>
+                        <textarea class="correction-input" placeholder="Type correction here..."></textarea>
+                    </div>
+                </div>
+
+                <div class="sentence-item" data-index="2" data-original="Uh the Sea Shell like big turtle near the beach, long beach.">
+                    <div class="sentence-header">
+                        <a onclick="jumpTo(10)" class="timestamp-link">#2 (0:10)</a>
+                        <div class="original-text">Uh the Sea Shell like big turtle near the beach, long beach.</div>
+                    </div>
+                    <div class="input-group">
+                        <label>Correction / Refinement:</label>
+                        <textarea class="correction-input" placeholder="Type correction here..."></textarea>
+                    </div>
+                </div>
+
+                <div class="sentence-item" data-index="3" data-original="Um and the Sea Shell have the one tunnels under the water.">
+                    <div class="sentence-header">
+                        <a onclick="jumpTo(17)" class="timestamp-link">#3 (0:17)</a>
+                        <div class="original-text">Um and the Sea Shell have the one tunnels under the water.</div>
+                    </div>
+                    <div class="input-group">
+                        <label>Correction / Refinement:</label>
+                        <textarea class="correction-input" placeholder="Type correction here..."></textarea>
+                    </div>
+                </div>
+
+                <div class="sentence-item" data-index="4" data-original="Uh the the tunnels give a 360 360 degree view of the ocean life.">
+                    <div class="sentence-header">
+                        <a onclick="jumpTo(22)" class="timestamp-link">#4 (0:22)</a>
+                        <div class="original-text">Uh the the tunnels give a 360 360 degree view of the ocean life.</div>
+                    </div>
+                    <div class="input-group">
+                        <label>Correction / Refinement:</label>
+                        <textarea class="correction-input" placeholder="Type correction here..."></textarea>
+                    </div>
+                </div>
+
+                <div class="sentence-item" data-index="5" data-original="It it have it has a many animal or um penguin, shark, whale, jellyfish, clownfish, blue tang, seahorse, coral reefs, and many sea animals.">
+                    <div class="sentence-header">
+                        <a onclick="jumpTo(29)" class="timestamp-link">#5 (0:29)</a>
+                        <div class="original-text">It it have it has a many animal or um penguin, shark, whale, jellyfish, clownfish, blue tang, seahorse, coral reefs, and many sea animals.</div>
+                    </div>
+                    <div class="input-group">
+                        <label>Correction / Refinement:</label>
+                        <textarea class="correction-input" placeholder="Type correction here..."></textarea>
+                    </div>
+                </div>
+
+                <div class="sentence-item" data-index="6" data-original="Recently uh on the world in the world many people talking is a talking is a industrial industrial is oil dumping uh for the sea.">
+                    <div class="sentence-header">
+                        <a onclick="jumpTo(48)" class="timestamp-link">#6 (0:48)</a>
+                        <div class="original-text">Recently uh on the world in the world many people talking is a talking is a industrial industrial is oil dumping uh for the sea.</div>
+                    </div>
+                    <div class="input-group">
+                        <label>Correction / Refinement:</label>
+                        <textarea class="correction-input" placeholder="Type correction here..."></textarea>
+                    </div>
+                </div>
+
+                <div class="sentence-item" data-index="7" data-original="And have many oil on the on the oceans.">
+                    <div class="sentence-header">
+                        <a onclick="jumpTo(62)" class="timestamp-link">#7 (1:02)</a>
+                        <div class="original-text">And have many oil on the on the oceans.</div>
+                    </div>
+                    <div class="input-group">
+                        <label>Correction / Refinement:</label>
+                        <textarea class="correction-input" placeholder="Type correction here..."></textarea>
+                    </div>
+                </div>
+
+                <div class="sentence-item" data-index="8" data-original="And many fish fishers catch the whale um catch a whale and shark and many fish.">
+                    <div class="sentence-header">
+                        <a onclick="jumpTo(66)" class="timestamp-link">#8 (1:06)</a>
+                        <div class="original-text">And many fish fishers catch the whale um catch a whale and shark and many fish.</div>
+                    </div>
+                    <div class="input-group">
+                        <label>Correction / Refinement:</label>
+                        <textarea class="correction-input" placeholder="Type correction here..."></textarea>
+                    </div>
+                </div>
+
+                <div class="sentence-item" data-index="9" data-original="Um I I read on the newspaper uh at the Japan have um many fishers catch the whale catch a many whale.">
+                    <div class="sentence-header">
+                        <a onclick="jumpTo(75)" class="timestamp-link">#9 (1:15)</a>
+                        <div class="original-text">Um I I read on the newspaper uh at the Japan have um many fishers catch the whale catch a many whale.</div>
+                    </div>
+                    <div class="input-group">
+                        <label>Correction / Refinement:</label>
+                        <textarea class="correction-input" placeholder="Type correction here..."></textarea>
+                    </div>
+                </div>
+
+                <div class="sentence-item" data-index="10" data-original="And the world is the talking is not catch a whale.">
+                    <div class="sentence-header">
+                        <a onclick="jumpTo(88)" class="timestamp-link">#10 (1:28)</a>
+                        <div class="original-text">And the world is the talking is not catch a whale.</div>
+                    </div>
+                    <div class="input-group">
+                        <label>Correction / Refinement:</label>
+                        <textarea class="correction-input" placeholder="Type correction here..."></textarea>
+                    </div>
+                </div>
+
+                <div class="sentence-item" data-index="11" data-original="And uh and it was an eye-opening experience that helped me understand the importance of protecting endangered endangered animals and preserving our oceans.">
+                    <div class="sentence-header">
+                        <a onclick="jumpTo(93)" class="timestamp-link">#11 (1:33)</a>
+                        <div class="original-text">And uh and it was an eye-opening experience that helped me understand the importance of protecting endangered endangered animals and preserving our oceans.</div>
+                    </div>
+                    <div class="input-group">
+                        <label>Correction / Refinement:</label>
+                        <textarea class="correction-input" placeholder="Type correction here..."></textarea>
+                    </div>
+                </div>
+
+            </div>
+
+            <button type="submit" class="submit-btn">📥 SUBMIT & DOWNLOAD MARKDOWN CORRECTIONS</button>
+        </form>
+    </section>
+
+    <!-- SECTION 3: ESTIMATED IELTS BAND SCORE & RECOMMENDATIONS -->
+    <section class="card">
+        <div class="card-title">
+            <span>📊 IELTS Assessment & Estimated Band Score</span>
+        </div>
+
+        <div class="legend-indicator">
+            <div class="legend-tag">
+                <span class="dot" style="background-color: var(--accent-cyan);"></span> Estimated Score
+            </div>
+            <div class="legend-tag">
+                <span class="dot" style="background-color: var(--accent-gold);"></span> Target Goal (6.5)
+            </div>
+        </div>
+
+        <div class="score-grid">
+
+            <!-- Overall Score -->
+            <div class="score-item" style="border-color: var(--accent-blue);">
+                <div class="score-header-row">
+                    <span class="score-name" style="font-size: 1.1rem; color: var(--accent-cyan);">Overall Band Score</span>
+                    <span class="score-val" style="font-size: 1.2rem;">4.5 - 5.0</span>
+                </div>
+                <div class="progress-track">
+                    <div class="goal-line" title="Target Band 6.5"></div>
+                    <div class="progress-fill" style="width: 52.7%;"></div>
+                </div>
+                <div class="scale-legend">
+                    <span>0.0</span>
+                    <span>Max 9.0</span>
+                </div>
+            </div>
+
+            <!-- Fluency & Coherence -->
+            <div class="score-item">
+                <div class="score-header-row">
+                    <span class="score-name">Fluency & Coherence</span>
+                    <span class="score-val">4.5 - 5.0</span>
+                </div>
+                <div class="progress-track">
+                    <div class="goal-line" title="Target Band 6.5"></div>
+                    <div class="progress-fill" style="width: 52.7%;"></div>
+                </div>
+                <div class="scale-legend"><span>0.0</span><span>Max 9.0</span></div>
+            </div>
+
+            <!-- Lexical Resource -->
+            <div class="score-item">
+                <div class="score-header-row">
+                    <span class="score-name">Lexical Resource</span>
+                    <span class="score-val">5.0 - 5.5</span>
+                </div>
+                <div class="progress-track">
+                    <div class="goal-line" title="Target Band 6.5"></div>
+                    <div class="progress-fill" style="width: 58.3%;"></div>
+                </div>
+                <div class="scale-legend"><span>0.0</span><span>Max 9.0</span></div>
+            </div>
+
+            <!-- Grammatical Range & Accuracy -->
+            <div class="score-item">
+                <div class="score-header-row">
+                    <span class="score-name">Grammatical Range & Accuracy</span>
+                    <span class="score-val">4.0 - 4.5</span>
+                </div>
+                <div class="progress-track">
+                    <div class="goal-line" title="Target Band 6.5"></div>
+                    <div class="progress-fill" style="width: 47.2%;"></div>
+                </div>
+                <div class="scale-legend"><span>0.0</span><span>Max 9.0</span></div>
+            </div>
+
+            <!-- Pronunciation -->
+            <div class="score-item">
+                <div class="score-header-row">
+                    <span class="score-name">Pronunciation</span>
+                    <span class="score-val">4.5 - 5.0</span>
+                </div>
+                <div class="progress-track">
+                    <div class="goal-line" title="Target Band 6.5"></div>
+                    <div class="progress-fill" style="width: 52.7%;"></div>
+                </div>
+                <div class="scale-legend"><span>0.0</span><span>Max 9.0</span></div>
+            </div>
+
+        </div>
+
+        <!-- Key Feedback & Recommendations -->
+        <h3 style="margin-top: 25px; font-size: 1.1rem; color: #ffffff;">Key Feedback & Recommendations</h3>
+        <ul class="feedback-list">
+            <li class="feedback-item">
+                <strong>Fluency & Coherence</strong>
+                Contains frequent hesitations, false starts, and choppy delivery. The final concluding sentence (<em>"it was an eye-opening experience..."</em>) is a clearly memorized template phrase that contrasts sharply with the spontaneous, fragmented speech preceding it.
+            </li>
+            <li class="feedback-item">
+                <strong>Lexical Resource</strong>
+                Displays a surprisingly good range of specific marine species names (<em>"clownfish"</em>, <em>"blue tang"</em>, <em>"seahorse"</em>, <em>"coral reefs"</em>), but struggles significantly when trying to explain broader environmental topics (<em>"industrial is oil dumping"</em>, <em>"the world is the talking is not catch a whale"</em>).
+            </li>
+            <li class="feedback-item">
+                <strong>Grammatical Range & Accuracy</strong>
+                Pervasive grammatical errors in subject-verb agreement (<em>"the Sea Shell have"</em>, <em>"have many oil"</em>), article usage (<em>"a many animal"</em>), and clause formation (<em>"at the Japan have many fishers catch"</em>).
+            </li>
+            <li class="feedback-item">
+                <strong>Pronunciation</strong>
+                Individual words are mostly intelligible, but mispronunciations of proper nouns (<em>"Win Wonder"</em> for VinWonders) and choppy sentence stress hinder overall speech naturalness.
+            </li>
+        </ul>
+    </section>
+
+    <!-- SECTION 4: BAND 7.5 MODEL ANSWER & UPGRADES -->
+    <section class="card">
+        <div class="card-title">
+            <span>✨ Band 7.5+ Model Answer</span>
+        </div>
+
+        <div style="background-color: var(--card-bg-alt); padding: 20px; border-radius: 8px; border: 1px solid var(--border-color);">
+            <p class="model-answer-p">
+                A remarkable place I visited that offers incredible views of marine wildlife is <strong>The Sea Shell Aquarium</strong>, located within the VinWonders theme park on Phu Quoc Island. The facility itself is an architectural marvel, <strong>housed inside a massive building shaped like a giant hawksbill turtle</strong> situated right along the coast.
+            </p>
+            <p class="model-answer-p">
+                What makes this aquarium truly spectacular is its state-of-the-art <strong>underwater tunnel</strong>, which provides visitors with an <strong>immersive, 360-degree panorama of ocean life</strong>. As you walk through the glass enclosure, you are completely surrounded by thousands of fascinating marine creatures. I was fortunate enough to observe a vast array of species, ranging from majestic sharks and playful penguins to colorful clownfish, blue tangs, delicate seahorses, and vibrant coral reef ecosystems.
+            </p>
+            <p class="model-answer-p">
+                While marveling at these animals, I couldn't help but reflect on the severe threats facing marine life today. In recent years, issues such as <strong>industrial waste dumping, oil spills, and overfishing</strong> have severely disrupted oceanic habitats. Furthermore, international controversies surrounding <strong>commercial whaling</strong> in countries like Japan highlight how vulnerable large sea mammals are to human exploitation.
+            </p>
+            <p class="model-answer-p" style="margin-bottom: 0;">
+                Seeing these creatures up close was a deeply <strong>eye-opening experience</strong>. It reinforced for me how crucial it is to enforce international marine protections, combat pollution, and preserve our oceans for future generations.
+            </p>
+        </div>
+
+        <h3 style="margin-top: 25px; font-size: 1.1rem; color: #ffffff;">Key Language Upgrades Used</h3>
+        <table class="upgrades-table">
+            <thead>
+                <tr>
+                    <th>Original Expression</th>
+                    <th>Upgraded Vocabulary / Structure</th>
+                    <th>Category</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><em>"Sea Shell in Win Wonder"</em></td>
+                    <td><strong>"The Sea Shell Aquarium, located within VinWonders"</strong></td>
+                    <td>Proper Nouns & Precision</td>
+                </tr>
+                <tr>
+                    <td><em>"like big turtle near the beach"</em></td>
+                    <td><strong>"housed inside a massive building shaped like a giant hawksbill turtle"</strong></td>
+                    <td>Advanced Descriptive Imagery</td>
+                </tr>
+                <tr>
+                    <td><em>"one tunnels... give 360 degree view"</em></td>
+                    <td><strong>"immersive, 360-degree panorama of ocean life"</strong></td>
+                    <td>High-Level Topic Collocation</td>
+                </tr>
+                <tr>
+                    <td><em>"industrial is oil dumping for the sea"</em></td>
+                    <td><strong>"industrial waste dumping, oil spills, and overfishing"</strong></td>
+                    <td>Environmental Vocabulary</td>
+                </tr>
+                <tr>
+                    <td><em>"at the Japan have many fishers catch the whale"</em></td>
+                    <td><strong>"international controversies surrounding commercial whaling in countries like Japan"</strong></td>
+                    <td>Band 8.0 Lexical Resource</td>
+                </tr>
+                <tr>
+                    <td><em>"the world is the talking is not catch a whale"</em></td>
+                    <td><strong>"highlight how vulnerable large sea mammals are to human exploitation"</strong></td>
+                    <td>Complex Structure & Register</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+</div>
+
+<script>
+    const audio = document.getElementById('audioPlayer');
+    const timeDisplay = document.getElementById('timeDisplay');
+
+    // Function to jump to timestamp in audio
+    function jumpTo(seconds) {
+        if (audio) {
+            audio.currentTime = seconds;
+            audio.play();
+        }
+    }
+
+    // Update audio player time display
+    audio.addEventListener('timeupdate', () => {
+        const curSec = Math.floor(audio.currentTime);
+        const durSec = Math.floor(audio.duration || 0);
+        timeDisplay.textContent = `${formatTime(curSec)} / ${formatTime(durSec)}`;
+    });
+
+    function formatTime(sec) {
+        if (isNaN(sec)) return "00:00";
+        const m = Math.floor(sec / 60);
+        const s = sec % 60;
+        return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+    }
+
+    // Submit handler to construct and download Markdown file
+    document.getElementById('correctionForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        let mdContent = "# IELTS Speaking Transcript - Sentence Corrections (Unit 5)\n\n";
+        mdContent += "| # | Original Transcript Sentence | Correction / Suggested Refinement |\n";
+        mdContent += "|---|---|---|\n";
+
+        const items = document.querySelectorAll('.sentence-item');
+        items.forEach((item) => {
+            const index = item.getAttribute('data-index');
+            let original = item.getAttribute('data-original');
+            original = original.replace(/\|/g, '\\|');
+
+            const inputVal = item.querySelector('.correction-input').value.trim().replace(/\|/g, '\\|').replace(/\n/g, ' ');
+
+            mdContent += `| ${index} | ${original} | ${inputVal.length > 0 ? inputVal : '-'} |\n`;
+        });
+
+        const blob = new Blob([mdContent], { type: 'text/markdown;charset=utf-8;' });
+        const downloadUrl = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = downloadUrl;
+        a.download = 'Unit_5_Transcript_Corrections.md';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(downloadUrl);
+    });
+</script>
+
+</body>
+</html>

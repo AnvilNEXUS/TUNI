@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS Speaking Evaluation Workbench</title>
+    <style>
+        :root {
+            --bg-color: #0b132b;
+            --card-bg: #1c2541;
+            --card-bg-hover: #23314e;
+            --border-color: #2a385b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --accent-blue: #3b82f6;
+            --accent-cyan: #06b6d4;
+            --accent-gold: #f59e0b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            color: #ffffff;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        header p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            background-color: var(--card-bg-hover);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 8px 24px rgba(6, 182, 212, 0.15);
+        }
+
+        .card-tag {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--accent-cyan);
+            margin-bottom: 8px;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 12px;
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .card-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--accent-blue);
+            transition: color 0.2s ease;
+        }
+
+        .card:hover .card-action {
+            color: var(--accent-cyan);
+        }
+
+        .card-action span {
+            transition: transform 0.2s ease;
+        }
+
+        .card:hover .card-action span {
+            transform: translateX(4px);
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>IELTS Speaking Evaluation Workbench</h1>
+        <p>Select a unit below to analyze verbatim transcripts, edit corrections, and view band scores.</p>
+    </header>
+
+    <div class="grid">
+        <!-- Unit 1 -->
+        <a href="Unit 1.html" class="card">
+            <div>
+                <div class="card-tag">Unit 1</div>
+                <div class="card-title">City Living & Hometowns</div>
+                <div class="card-desc">Part 2 response evaluation on visiting a town or city in central Vietnam (Tuy Hoa).</div>
+            </div>
+            <div class="card-action">
+                Open Evaluation Workbench <span>→</span>
+            </div>
+        </a>
+
+        <!-- Unit 2 -->
+        <a href="Unit 2.html" class="card">
+            <div>
+                <div class="card-tag">Unit 2</div>
+                <div class="card-title">People's Lives & Adventures</div>
+                <div class="card-desc">Part 2 response evaluation describing an inspiring person and idol (Cristiano Ronaldo).</div>
+            </div>
+            <div class="card-action">
+                Open Evaluation Workbench <span>→</span>
+            </div>
+        </a>
+
+        <!-- Unit 3 -->
+        <a href="Unit 3.html" class="card">
+            <div>
+                <div class="card-tag">Unit 3</div>
+                <div class="card-title">Travel, Transport & Journeys</div>
+                <div class="card-desc">Part 2 response evaluation on a memorable sleeper bus journey from HCMC to Can Tho.</div>
+            </div>
+            <div class="card-action">
+                Open Evaluation Workbench <span>→</span>
+            </div>
+        </a>
+
+        <!-- Unit 4 -->
+        <a href="Unit 4.html" class="card">
+            <div>
+                <div class="card-tag">Unit 4</div>
+                <div class="card-title">Inventions, Devices & Technology</div>
+                <div class="card-desc">Part 2 response evaluation on a useful electronic device (Huawei Wireless Earbuds).</div>
+            </div>
+            <div class="card-action">
+                Open Evaluation Workbench <span>→</span>
+            </div>
+        </a>
+
+        <!-- Unit 5 -->
+        <a href="Unit 5.html" class="card">
+            <div>
+                <div class="card-tag">Unit 5</div>
+                <div class="card-title">Animals & the Natural World</div>
+                <div class="card-desc">Part 2 response evaluation on visiting an aquarium and marine wildlife center (Sea Shells).</div>
+            </div>
+            <div class="card-action">
+                Open Evaluation Workbench <span>→</span>
+            </div>
+        </a>
+    </div>
+</div>
+
+</body>
+</html>
