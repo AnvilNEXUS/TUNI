@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Complete IELTS (Bands 4-5) - Unit 6 Interactive Activities</title>
+  <style>
+    :root {
+      --primary: #1e3a8a;
+      --secondary: #2563eb;
+      --accent: #0284c7;
+      --save-green: #22c55e;
+      --save-green-hover: #16a34a;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --border: #cbd5e1;
+      --success: #15803d;
+      --success-bg: #dcfce7;
+      --error: #b91c1c;
+      --error-bg: #fee2e2;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+    }
+
+    .app-header {
+      background: var(--primary);
+      color: #ffffff;
+      padding: 24px 20px 16px 20px;
+      text-align: center;
+    }
+
+    .app-header h1 {
+      margin: 0 0 6px 0;
+      font-size: 1.6rem;
+      font-weight: 700;
+    }
+
+    .app-header p {
+      margin: 0;
+      font-size: 0.95rem;
+      opacity: 0.9;
+    }
+
+    /* Tab Navigation */
+    .nav-wrapper {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+    }
+
+    .tabs {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      overflow-x: auto;
+      scrollbar-width: thin;
+      padding: 0 10px;
+    }
+
+    .tab-btn {
+      background: none;
+      border: none;
+      outline: none;
+      padding: 14px 18px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      white-space: nowrap;
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn:hover {
+      color: var(--secondary);
+    }
+
+    .tab-btn.active {
+      color: var(--secondary);
+      border-bottom-color: var(--secondary);
+    }
+
+    /* Main Container & Panels */
+    .container {
+      max-width: 900px;
+      margin: 24px auto 60px auto;
+      padding: 0 16px;
+    }
+
+    .panel {
+      display: none;
+      background: var(--card-bg);
+      padding: 32px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      border: 1px solid var(--border);
+    }
+
+    .panel.active {
+      display: block;
+    }
+
+    .section-header {
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 14px;
+      margin-bottom: 24px;
+    }
+
+    .section-header h2 {
+      margin: 0 0 6px 0;
+      color: var(--primary);
+      font-size: 1.45rem;
+    }
+
+    .section-header p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* Word Bank */
+    .word-bank {
+      background: #eff6ff;
+      border: 1px dashed var(--secondary);
+      border-radius: 8px;
+      padding: 14px;
+      margin-bottom: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+    }
+
+    .badge {
+      background: #ffffff;
+      color: var(--secondary);
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      border: 1px solid var(--border);
+      font-size: 0.85rem;
+    }
+
+    /* Question Cards */
+    .q-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .q-text {
+      font-size: 0.98rem;
+      margin-bottom: 10px;
+    }
+
+    .select-wrap select, input[type="text"], textarea {
+      width: 100%;
+      max-width: 320px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      font-size: 0.95rem;
+      background: #ffffff;
+      font-family: inherit;
+    }
+
+    textarea {
+      max-width: 100%;
+      resize: vertical;
+      margin-top: 8px;
+    }
+
+    .input-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .hint-tag {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      background: #f1f5f9;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+
+    .error-word {
+      color: var(--error);
+      font-weight: 700;
+      text-decoration: underline wavy var(--error);
+    }
+
+    .opt-group {
+      margin: 8px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .opt-group label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+
+    /* Action Buttons Row */
+    .actions-row {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 12px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+
+    .btn-submit {
+      background: var(--primary);
+      color: #ffffff;
+      border: none;
+      padding: 12px 24px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-submit:hover {
+      background: var(--secondary);
+    }
+
+    .btn-save {
+      background: var(--save-green);
+      color: #ffffff;
+      border: none;
+      padding: 12px 24px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 2px 4px rgba(34, 197, 94, 0.25);
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .btn-save:hover {
+      background: var(--save-green-hover);
+    }
+
+    .btn-save:active {
+      transform: scale(0.98);
+    }
+
+    /* Prompts & Reveals */
+    .prompt-banner {
+      background: #f1f5f9;
+      border-left: 4px solid var(--primary);
+      padding: 14px;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 24px;
+      font-size: 0.95rem;
+    }
+
+    .revealer-btn {
+      background: #f0f9ff;
+      color: var(--primary);
+      border: 1px solid var(--secondary);
+      padding: 7px 14px;
+      border-radius: 6px;
+      font-size: 0.88rem;
+      cursor: pointer;
+      font-weight: 600;
+      margin-top: 10px;
+      transition: background 0.2s;
+    }
+
+    .revealer-btn:hover {
+      background: #e0f2fe;
+    }
+
+    .answer-box {
+      display: none;
+      margin-top: 12px;
+      padding: 12px 16px;
+      background: #f8fafc;
+      border-left: 4px solid var(--primary);
+      border-radius: 0 6px 6px 0;
+      font-size: 0.95rem;
+    }
+
+    /* Feedback & Scoring */
+    .feedback {
+      display: none;
+      margin-top: 10px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .feedback.correct {
+      display: block;
+      background: var(--success-bg);
+      color: var(--success);
+    }
+
+    .feedback.incorrect {
+      display: block;
+      background: var(--error-bg);
+      color: var(--error);
+    }
+
+    .rule-note {
+      font-size: 0.85rem;
+      color: #475569;
+      margin-top: 4px;
+    }
+
+    .score-banner {
+      display: none;
+      margin-top: 20px;
+      padding: 14px;
+      border-radius: 8px;
+      background: #e0f2fe;
+      color: #0369a1;
+      font-weight: 700;
+      text-align: center;
+      font-size: 1.05rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-header">
+    <h1>Complete IELTS (Bands 4–5): Unit 6</h1>
+    <p>Being Human — Practice Review & Activities</p>
+  </div>
+
+  <div class="nav-wrapper">
+    <nav class="tabs">
+      <button class="tab-btn active" onclick="switchTab(0)">1. Vocabulary</button>
+      <button class="tab-btn" onclick="switchTab(1)">2. Word Formation</button>
+      <button class="tab-btn" onclick="switchTab(2)">3. Spelling</button>
+      <button class="tab-btn" onclick="switchTab(3)">4. Grammar</button>
+      <button class="tab-btn" onclick="switchTab(4)">5. Academic Concepts</button>
+      <button class="tab-btn" onclick="switchTab(5)">6. Speaking Part 3</button>
+      <button class="tab-btn" onclick="switchTab(6)">7. Writing Task 2</button>
+    </nav>
+  </div>
+
+  <div class="container">
+
+    <!-- TAB 1: VOCABULARY -->
+    <section class="panel active" id="tab-0">
+      <div class="section-header">
+        <h2>Section 1: Vocabulary in Context</h2>
+        <p>Complete each sentence with the most appropriate term from the unit word list.</p>
+      </div>
+
+      <div class="word-bank">
+        <span class="badge">colleagues</span>
+        <span class="badge">consistency</span>
+        <span class="badge">conventional</span>
+        <span class="badge">donate</span>
+        <span class="badge">findings</span>
+        <span class="badge">insecurity</span>
+        <span class="badge">novelty</span>
+        <span class="badge">openness</span>
+        <span class="badge">participants</span>
+        <span class="badge">vital element</span>
+      </div>
+
+      <div id="vocab-questions">
+        <div class="q-card" data-ans="findings">
+          <div class="q-text">1. After months of laboratory tests, the research team finally published their latest ________ in an international science journal.</div>
+          <div class="select-wrap"><select><option value="">-- Choose word --</option></select></div>
+          <div class="feedback"></div>
+        </div>
+
+        <div class="q-card" data-ans="insecurity">
+          <div class="q-text">2. Starting a brand-new career can bring excitement, but it also creates financial ________ for many families.</div>
+          <div class="select-wrap"><select><option value="">-- Choose word --</option></select></div>
+          <div class="feedback"></div>
+        </div>
+
+        <div class="q-card" data-ans="donate">
+          <div class="q-text">3. The local museum relies heavily on wealthy citizens who ________ rare artwork and historic items.</div>
+          <div class="select-wrap"><select><option value="">-- Choose word --</option></select></div>
+          <div class="feedback"></div>
+        </div>
+
+        <div class="q-card" data-ans="conventional">
+          <div class="q-text">4. Unlike his artistic parents, David chose a very ________ career in accounting and office administration.</div>
+          <div class="select-wrap"><select><option value="">-- Choose word --</option></select></div>
+          <div class="feedback"></div>
+        </div>
+
+        <div class="q-card" data-ans="novelty">
+          <div class="q-text">5. At the beginning of the mobile app craze, the pure ________ of the technology attracted millions of users.</div>
+          <div class="select-wrap"><select><option value="">-- Choose word --</option></select></div>
+          <div class="feedback"></div>
+        </div>
+
+        <div class="q-card" data-ans="openness">
+          <div class="q-text">6. Effective teachers demonstrate a high degree of ________ to innovative classroom methods.</div>
+          <div class="select-wrap"><select><option value="">-- Choose word --</option></select></div>
+          <div class="feedback"></div>
+        </div>
+
+        <div class="q-card" data-ans="participants">
+          <div class="q-text">7. During the experiment, over two hundred ________ were asked to memorise paired lists of vocabulary words.</div>
+          <div class="select-wrap"><select><option value="">-- Choose word --</option></select></div>
+          <div class="feedback"></div>
+        </div>
+
+        <div class="q-card" data-ans="consistency">
+          <div class="q-text">8. Achieving excellence in athletics requires extreme ________ in training day after day.</div>
+          <div class="select-wrap"><select><option value="">-- Choose word --</option></select></div>
+          <div class="feedback"></div>
+        </div>
+
+        <div class="q-card" data-ans="colleagues">
+          <div class="q-text">9. Dr. Harris collaborated with several esteemed ________ from the biology department to finish the report.</div>
+          <div class="select-wrap"><select><option value="">-- Choose word --</option></select></div>
+          <div class="feedback"></div>
+        </div>
+
+        <div class="q-card" data-ans="vital element">
+          <div class="q-text">10. Accurate recall of where an event took place is a ________ of long-term memory formation.</div>
+          <div class="select-wrap"><select><option value="">-- Choose word --</option></select></div>
+          <div class="feedback"></div>
+        </div>
+      </div>
+
+      <div class="actions-row">
+        <button type="button" class="btn-submit" onclick="checkVocab()">CHECK ANSWERS</button>
+        <button type="button" class="btn-save" onclick="saveSubmission(1)">SAVE TO SUBMIT</button>
+      </div>
+      <div id="vocab-score" class="score-banner"></div>
+    </section>
+
+    <!-- TAB 2: WORD FORMATION -->
+    <section class="panel" id="tab-1">
+      <div class="section-header">
+        <h2>Section 2: Word Formation & Parts of Speech</h2>
+        <p>Convert the base word in brackets into its appropriate part of speech.</p>
+      </div>
+
+      <div id="wf-questions">
+        <div class="q-card" data-ans='["skilfully", "skillfully"]'>
+          <div class="q-text">11. She played the violin so ________ that the entire audience stood up to applaud.</div>
+          <div class="input-row">
+            <input type="text" placeholder="Your answer...">
+            <span class="hint-tag">Prompt: skilful</span>
+          </div>
+          <div class="feedback"></div>
+        </div>
+
+        <div class="q-card" data-ans='["succeed"]'>
+          <div class="q-text">12. With thorough preparation and guidance, any dedicated student can ________ in higher education.</div>
+          <div class="input-row">
+            <input type="text" placeholder="Your answer...">
+            <span class="hint-tag">Prompt: success</span>
+          </div>
+          <div class="feedback"></div>
+        </div>
+
+        <div class="q-card" data-ans='["achievement"]'>
+          <div class="q-text">13. Earning a master's degree while working full-time was a remarkable personal ________.</div>
+          <div class="input-row">
+            <input type="text" placeholder="Your answer...">
+            <span class="hint-tag">Prompt: achieve</span>
+          </div>
+          <div class="feedback"></div>
+        </div>
+
+        <div class="q-card" data-ans='["natural"]'>
+          <div class="q-text">14. Some musicians possess an innate, ________ ability to recognize complex musical pitches instantly.</div>
+          <div class="input-row">
+            <input type="text" placeholder="Your answer...">
+            <span class="hint-tag">Prompt: nature</span>
+          </div>
+          <div class="feedback"></div>
+        </div>
+
+        <div class="q-card" data-ans='["regularly"]'>
+          <div class="q-text">15. If you do not exercise ________, you will lose muscle tone and physical endurance.</div>
+          <div class="input-row">
+            <input type="text" placeholder="Your answer...">
+            <span class="hint-tag">Prompt: regular</span>
+          </div>
+          <div class="feedback"></div>
+        </div>
+
+        <div class="q-card" data-ans='["talented"]'>
+          <div class="q-text">16. The agency is searching for exceptionally ________ young designers for its new marketing campaign.</div>
+          <div class="input-row">
+            <input type="text" placeholder="Your answer...">
+            <span class="hint-tag">Prompt: talent</span>
+          </div>
+          <div class="feedback"></div>
+        </div>
+
+        <div class="q-card" data-ans='["fame"]'>
+          <div class="q-text">17. Following his unexpected viral video, the amateur baker achieved international ________ overnight.</div>
+          <div class="input-row">
+            <input type="text" placeholder="Your answer...">
+            <span class="hint-tag">Prompt: famous</span>
+          </div>
+          <div class="feedback"></div>
+        </div>
+
+        <div class="q-card" data-ans='["hard work"]'>
+          <div class="q-text">18. Long-term goals cannot be accomplished by luck alone; they require persistent ________.</div>
+          <div class="input-row">
+            <input type="text" placeholder="Your answer...">
+            <span class="hint-tag">Prompt: hard-working</span>
+          </div>
+          <div class="feedback"></div>
+        </div>
+      </div>
+
+      <div class="actions-row">
+        <button type="button" class="btn-submit" onclick="checkWordFormation()">CHECK ANSWERS</button>
+        <button type="button" class="btn-save" onclick="saveSubmission(2)">SAVE TO SUBMIT</button>
+      </div>
+      <div id="wf-score" class="score-banner"></div>
+    </section>
+
+    <!-- TAB 3: SPELLING -->
+    <section class="panel" id="tab-2">
+      <div class="section-header">
+        <h2>Section 3: Spelling & Suffix Corrections</h2>
+        <p>Identify the misspelled word with an incorrect suffix or letter pattern and type the correction.</p>
+      </div>
+
+      <div id="spelling-questions">
+        <div class="q-card" data-ans="attendance" data-rule="Suffix is -ance, not -ence.">
+          <div class="q-text">19. The manager checked the daily <span class="error-word">attendence</span> sheets before assigning project teams.</div>
+          <div class="input-row"><input type="text" placeholder="Correct spelling..."></div>
+          <div class="feedback"></div>
+        </div>
+
+        <div class="q-card" data-ans="beginning" data-rule="Double the final consonant before -ing (begin -> beginning).">
+          <div class="q-text">20. At the <span class="error-word">begining</span> of the seminar, each participant received an introductory folder.</div>
+          <div class="input-row"><input type="text" placeholder="Correct spelling..."></div>
+          <div class="feedback"></div>
+        </div>
+
+        <div class="q-card" data-ans="development" data-rule="Drop the silent 'e' from develop before adding -ment.">
+          <div class="q-text">21. Proper infrastructure is essential for the <span class="error-word">developement</span> of sustainable public transport.</div>
+          <div class="input-row"><input type="text" placeholder="Correct spelling..."></div>
+          <div class="feedback"></div>
+        </div>
+
+        <div class="q-card" data-ans="unnecessary" data-rule="Prefix un- + necessary retains both 'n's.">
+          <div class="q-text">22. Purchasing duplicate copies of the textbook was completely <span class="error-word">unecessary</span>.</div>
+          <div class="input-row"><input type="text" placeholder="Correct spelling..."></div>
+          <div class="feedback"></div>
+        </div>
+
+        <div class="q-card" data-ans="laziness" data-rule="Change 'y' to 'i' before -ness (lazy -> laziness).">
+          <div class="q-text">23. Overcoming personal <span class="error-word">lazyness</span> is often the first step toward getting fit.</div>
+          <div class="input-row"><input type="text" placeholder="Correct spelling..."></div>
+          <div class="feedback"></div>
+        </div>
+
+        <div class="q-card" data-ans="happened" data-rule="Single 'p' at the end of happen (happen -> happened).">
+          <div class="q-text">24. Witnesses were asked to describe exactly what had <span class="error-word">hapenned</span> during the incident.</div>
+          <div class="input-row"><input type="text" placeholder="Correct spelling..."></div>
+          <div class="feedback"></div>
+        </div>
+
+        <div class="q-card" data-ans="really" data-rule="Root real + -ly produces a double 'l'.">
+          <div class="q-text">25. She was <span class="error-word">realy</span> enthusiastic about participating in the memory study.</div>
+          <div class="input-row"><input type="text" placeholder="Correct spelling..."></div>
+          <div class="feedback"></div>
+        </div>
+
+        <div class="q-card" data-ans="argument" data-rule="Drop the silent 'e' of argue before -ment.">
+          <div class="q-text">26. The committee members engaged in a heated <span class="error-word">arguement</span> regarding project funding.</div>
+          <div class="input-row"><input type="text" placeholder="Correct spelling..."></div>
+          <div class="feedback"></div>
+        </div>
+      </div>
+
+      <div class="actions-row">
+        <button type="button" class="btn-submit" onclick="checkSpelling()">CHECK ANSWERS</button>
+        <button type="button" class="btn-save" onclick="saveSubmission(3)">SAVE TO SUBMIT</button>
+      </div>
+      <div id="spelling-score" class="score-banner"></div>
+    </section>
+
+    <!-- TAB 4: GRAMMAR -->
+    <section class="panel" id="tab-3">
+      <div class="section-header">
+        <h2>Section 4: Key Grammar – Zero & First Conditionals</h2>
+        <p>Review condition/result clauses and proper use of <em>if</em> versus <em>unless</em>.</p>
+      </div>
+
+      <div id="grammar-questions">
+        <div class="q-card" data-correct="B">
+          <div class="q-text"><strong>27.</strong> Which sentence correctly fixes: <em>"If children will get adequate rest, they concentrate better in class."</em>?</div>
+          <div class="opt-group">
+            <label><input type="radio" name="g27" value="A"> A. If children would get adequate rest, they concentrate better in class.</label>
+            <label><input type="radio" name="g27" value="B"> B. If children get adequate rest, they concentrate better in class.</label>
+            <label><input type="radio" name="g27" value="C"> C. If children got adequate rest, they will concentrate better in class.</label>
+          </div>
+          <div class="feedback"></div>
+        </div>
+
+        <div class="q-card" data-correct="A">
+          <div class="q-text"><strong>28.</strong> Which sentence correctly fixes the double negative in: <em>"A candidate cannot pass unless he won't review the material."</em>?</div>
+          <div class="opt-group">
+            <label><input type="radio" name="g28" value="A"> A. A candidate cannot pass unless he reviews the material carefully.</label>
+            <label><input type="radio" name="g28" value="B"> B. A candidate cannot pass unless he doesn't review the material carefully.</label>
+            <label><input type="radio" name="g28" value="C"> C. A candidate can pass unless he reviews the material carefully.</label>
+          </div>
+          <div class="feedback"></div>
+        </div>
+
+        <div class="q-card" data-correct="C">
+          <div class="q-text"><strong>29.</strong> Which sentence fixes the tense clash in: <em>"If a professional musician didn't practise daily, she will struggle."</em>?</div>
+          <div class="opt-group">
+            <label><input type="radio" name="g29" value="A"> A. If a professional musician wouldn't practise daily, she will struggle.</label>
+            <label><input type="radio" name="g29" value="B"> B. If a professional musician hadn't practised daily, she will struggle.</label>
+            <label><input type="radio" name="g29" value="C"> C. If a professional musician does not practise daily, she will struggle.</label>
+          </div>
+          <div class="feedback"></div>
+        </div>
+
+        <div class="q-card" data-correct="B">
+          <div class="q-text"><strong>30.</strong> Which sentence corrects: <em>"I would say that if people are constantly stressed, they would make more errors."</em>?</div>
+          <div class="opt-group">
+            <label><input type="radio" name="g30" value="A"> A. ...if people are constantly stressed, they would made more errors.</label>
+            <label><input type="radio" name="g30" value="B"> B. ...if people are constantly stressed, they will make more errors.</label>
+            <label><input type="radio" name="g30" value="C"> C. ...if people will be constantly stressed, they would make more errors.</label>
+          </div>
+          <div class="feedback"></div>
+        </div>
+
+        <div class="q-card" data-correct="submits">
+          <div class="q-text"><strong>31.</strong> First Conditional: <em>"If the lab team ________ (submit) their findings today, the director will review them tomorrow."</em></div>
+          <div class="opt-group">
+            <label><input type="radio" name="g31" value="will submit"> will submit</label>
+            <label><input type="radio" name="g31" value="submits"> submits (or submit)</label>
+            <label><input type="radio" name="g31" value="submitted"> submitted</label>
+          </div>
+          <div class="feedback"></div>
+        </div>
+
+        <div class="q-card" data-correct="will not award">
+          <div class="q-text"><strong>32.</strong> First Conditional: <em>"The university ________ (not award) the scholarship unless the applicant satisfies all criteria."</em></div>
+          <div class="opt-group">
+            <label><input type="radio" name="g32" value="will not award"> will not award / won't award</label>
+            <label><input type="radio" name="g32" value="does not award"> does not award</label>
+            <label><input type="radio" name="g32" value="would not award"> would not award</label>
+          </div>
+          <div class="feedback"></div>
+        </div>
+
+        <div class="q-card" data-correct="experience">
+          <div class="q-text"><strong>33.</strong> Zero Conditional: <em>"When people ________ (experience) extreme fatigue, their cognitive recall slows down."</em></div>
+          <div class="opt-group">
+            <label><input type="radio" name="g33" value="will experience"> will experience</label>
+            <label><input type="radio" name="g33" value="experience"> experience</label>
+            <label><input type="radio" name="g33" value="experienced"> experienced</label>
+          </div>
+          <div class="feedback"></div>
+        </div>
+
+        <div class="q-card" data-correct="A">
+          <div class="q-text"><strong>34.</strong> Rewrite using <em>unless</em>: <em>"If you do not register for the seminar before Friday, you cannot attend."</em></div>
+          <div class="opt-group">
+            <label><input type="radio" name="g34" value="A"> A. You cannot attend the seminar unless you register before Friday.</label>
+            <label><input type="radio" name="g34" value="B"> B. You cannot attend the seminar unless you do not register before Friday.</label>
+          </div>
+          <div class="feedback"></div>
+        </div>
+
+        <div class="q-card" data-correct="A">
+          <div class="q-text"><strong>35.</strong> Rewrite using <em>if ... not</em>: <em>"Unless scientists publish their theories early, competitors may claim the credit."</em></div>
+          <div class="opt-group">
+            <label><input type="radio" name="g35" value="A"> A. Competitors may claim the credit if scientists do not publish their theories early.</label>
+            <label><input type="radio" name="g35" value="B"> B. Competitors may claim the credit if scientists will not publish early.</label>
+          </div>
+          <div class="feedback"></div>
+        </div>
+
+        <div class="q-card" data-correct="First">
+          <div class="q-text"><strong>36.</strong> Identify conditional form: <em>"If an employee arrives late repeatedly, the company will issue a formal warning."</em></div>
+          <div class="opt-group">
+            <label><input type="radio" name="g36" value="Zero"> Zero Conditional (General universal truth)</label>
+            <label><input type="radio" name="g36" value="First"> First Conditional (Real specific future outcome)</label>
+          </div>
+          <div class="feedback"></div>
+        </div>
+      </div>
+
+      <div class="actions-row">
+        <button type="button" class="btn-submit" onclick="checkGrammar()">CHECK ANSWERS</button>
+        <button type="button" class="btn-save" onclick="saveSubmission(4)">SAVE TO SUBMIT</button>
+      </div>
+      <div id="grammar-score" class="score-banner"></div>
+    </section>
+
+    <!-- TAB 5: ACADEMIC CONCEPTS -->
+    <section class="panel" id="tab-4">
+      <div class="section-header">
+        <h2>Section 5: Academic Concepts & Research Language</h2>
+        <p>Explore memory research terminology, IELTS reading criteria, and human behaviour trends.</p>
+      </div>
+
+      <div id="concepts-questions">
+        <div class="q-card" data-title="37. Collocation: Research Leadership">
+          <div class="q-text"><strong>37. Collocation: Research Leadership</strong><br>"The principal ________ (investigator / participant / novelty) designed the double-blind experiment to test false memory formation."</div>
+          <div class="input-row"><input type="text" placeholder="Type your answer..."></div>
+          <button class="revealer-btn" onclick="toggleReveal('ans37')">Show Answer & Academic Note</button>
+          <div id="ans37" class="answer-box">
+            <strong>investigator</strong><br>
+            <em>Academic Context:</em> "Principal investigator" is the formal designation for the lead researcher directing an experiment or laboratory grant project.
+          </div>
+        </div>
+
+        <div class="q-card" data-title="38. Academic Dependent Preposition">
+          <div class="q-text"><strong>38. Academic Dependent Preposition</strong><br>"Elderly patients who suffer from chronic fatigue may be more ________ (prone to / familiar with / consistent in) confusing prescription instructions."</div>
+          <div class="input-row"><input type="text" placeholder="Type your answer..."></div>
+          <button class="revealer-btn" onclick="toggleReveal('ans38')">Show Answer & Academic Note</button>
+          <div id="ans38" class="answer-box">
+            <strong>prone to</strong><br>
+            <em>Academic Context:</em> "Prone to" denotes an inclination or vulnerability to an adverse condition (e.g., prone to false memories or errors).
+          </div>
+        </div>
+
+        <div class="q-card" data-title="39. Reading Strategy: NO vs. NOT GIVEN">
+          <div class="q-text"><strong>39. Reading Strategy: NO vs. NOT GIVEN</strong><br>Explain the difference between an answer evaluated as <strong>NO</strong> and one marked <strong>NOT GIVEN</strong> in IELTS Reading.</div>
+          <textarea rows="2" placeholder="Formulate your explanation..."></textarea>
+          <button class="revealer-btn" onclick="toggleReveal('ans39')">Reveal Examiner Criteria</button>
+          <div id="ans39" class="answer-box">
+            <ul>
+              <li><strong>NO:</strong> The passage explicitly contradicts the writer's claim or argument.</li>
+              <li><strong>NOT GIVEN:</strong> The passage lacks sufficient details to know what the author thinks about the statement.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="q-card" data-title="40. Cognitive Science: Source Memory">
+          <div class="q-text"><strong>40. Cognitive Science: Source Memory</strong><br>In memory research, what is "source memory," and why is it considered a vital element of accurate recall?</div>
+          <textarea rows="2" placeholder="Draft your answer..."></textarea>
+          <button class="revealer-btn" onclick="toggleReveal('ans40')">Reveal Scientific Explanation</button>
+          <div id="ans40" class="answer-box">
+            <strong>Source memory</strong> refers to the context in which information was acquired (e.g., where, when, or from whom it was seen or heard). It is vital because remembering the origin enables the brain to distinguish true facts from incorrect or suggested details.
+          </div>
+        </div>
+
+        <div class="q-card" data-title="41. Life Patterns & Novelty">
+          <div class="q-text"><strong>41. Life Patterns & Novelty</strong><br>Why do individuals tend to seek less novelty and become more conventional as they grow into middle age?</div>
+          <textarea rows="2" placeholder="Draft your answer..."></textarea>
+          <button class="revealer-btn" onclick="toggleReveal('ans41')">Reveal Psychological Analysis</button>
+          <div id="ans41" class="answer-box">
+            Adults must manage routine responsibilities (careers, raising children, elder care) that demand consistency. Unfamiliar experiences and sudden changes bring insecurity, leading most people to prefer the familiar.
+          </div>
+        </div>
+
+        <div class="q-card" data-title="42. Dependent Preposition Collocation">
+          <div class="q-text"><strong>42. Dependent Preposition Collocation</strong><br>"Younger adults generally show a greater interest ________ novelty than older generations."</div>
+          <div class="input-row"><input type="text" placeholder="Type preposition..."></div>
+          <button class="revealer-btn" onclick="toggleReveal('ans42')">Show Preposition</button>
+          <div id="ans42" class="answer-box">
+            <strong>in</strong> ("an interest <em>in</em> something").
+          </div>
+        </div>
+      </div>
+
+      <div class="actions-row">
+        <button type="button" class="btn-save" onclick="saveSubmission(5)">SAVE TO SUBMIT</button>
+      </div>
+    </section>
+
+    <!-- TAB 6: SPEAKING -->
+    <section class="panel" id="tab-5">
+      <div class="section-header">
+        <h2>Section 6: Speaking Part 3 – Generalising & Pronunciation</h2>
+        <p>Adopt broad sociological perspectives and master clause intonation patterns.</p>
+      </div>
+
+      <div id="speaking-questions">
+        <div class="q-card" data-title="43. Analysis of Candidate Responses">
+          <div class="q-text"><strong>43. Analysis of Candidate Responses</strong><br>Why is the answer <em>"I always keep a small notepad in my pocket"</em> rated weak for the Part 3 question: <em>"How do people ensure they do not forget daily tasks?"</em></div>
+          <textarea rows="2" placeholder="Type your analysis..."></textarea>
+          <button class="revealer-btn" onclick="toggleReveal('ans43')">Show Examiner Critique</button>
+          <div id="ans43" class="answer-box">
+            Speaking Part 3 requires discussing <strong>people and society in general</strong>. Answering with a personal habit ("I...") is too narrow, overly short, and provides only one isolated technique without general elaboration.
+          </div>
+        </div>
+
+        <div class="q-card" data-title="44. Sentence Generalisation Transformation">
+          <div class="q-text"><strong>44. Sentence Generalisation Transformation</strong><br>Rewrite this personal statement using generalising markers (e.g., <em>many people, tend to, individuals</em>):<br>
+          <em>"I always forget my doctor's appointment if I don't write it on my hand."</em></div>
+          <textarea rows="2" placeholder="Type your generalised sentence..."></textarea>
+          <button class="revealer-btn" onclick="toggleReveal('ans44')">Compare with Model Response</button>
+          <div id="ans44" class="answer-box">
+            <strong>Model Response:</strong> "Many people tend to forget important appointments unless they write reminders on their hands, record dates in a diary, or set digital calendar alarms."
+          </div>
+        </div>
+
+        <div class="q-card" data-title="45. Intonation Markers for Lists">
+          <div class="q-text"><strong>45. Intonation Markers for Lists</strong><br>Determine whether the voice pitch should <strong>RISE</strong> or <strong>FALL</strong> on each bracketed item:<br>
+          <em>"To remember daily chores, people often consult a diary [1], check a mobile calendar [2], or make a written list [3]."</em></div>
+          <textarea rows="2" placeholder="Write [1] RISE/FALL, [2] RISE/FALL, [3] RISE/FALL..."></textarea>
+          <button class="revealer-btn" onclick="toggleReveal('ans45')">Check Pitch Curves</button>
+          <div id="ans45" class="answer-box">
+            <ul>
+              <li><strong>[1] diary:</strong> ↗ <strong>RISE</strong> (shows the list is continuing)</li>
+              <li><strong>[2] calendar:</strong> ↗ <strong>RISE</strong> (shows the list is continuing)</li>
+              <li><strong>[3] list:</strong> ↘ <strong>FALL</strong> (signals final item / completion of thought)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="q-card" data-title="46. Intonation in Conditional Clauses">
+          <div class="q-text"><strong>46. Intonation in Conditional Clauses</strong><br>What communicative signal does a rising pitch send when pausing at the end of an introductory condition clause (e.g., <em>"If someone is under severe pressure at work... [↗]"</em>)?</div>
+          <textarea rows="2" placeholder="Explain the communicative signal..."></textarea>
+          <button class="revealer-btn" onclick="toggleReveal('ans46')">Show Explanation</button>
+          <div id="ans46" class="answer-box">
+            It tells the listener that the speaker has <strong>not finished what they are saying</strong> and that the main consequence is about to follow.
+          </div>
+        </div>
+      </div>
+
+      <div class="actions-row">
+        <button type="button" class="btn-save" onclick="saveSubmission(6)">SAVE TO SUBMIT</button>
+      </div>
+    </section>
+
+    <!-- TAB 7: WRITING -->
+    <section class="panel" id="tab-6">
+      <div class="section-header">
+        <h2>Section 7: Writing Task 2 – Essay Structures & Critical Arguments</h2>
+        <p>Examine academic paraphrasing, conditional concessions, and concluding frameworks.</p>
+      </div>
+
+      <div class="prompt-banner">
+        <strong>Task 2 Prompt:</strong> Some people believe that exceptional success in sports or the arts is entirely the result of natural talent, while others argue that continuous hard work is the vital factor. Discuss both views and give your opinion.
+      </div>
+
+      <div id="writing-questions">
+        <div class="q-card" data-title="47. Paraphrasing the Prompt">
+          <div class="q-text"><strong>47. Paraphrasing the Prompt</strong><br>Draft a formal, academic introduction paraphrase of the prompt above.</div>
+          <textarea rows="2" placeholder="Draft your paraphrase..."></textarea>
+          <button class="revealer-btn" onclick="toggleReveal('ans47')">Show Model Paraphrase</button>
+          <div id="ans47" class="answer-box">
+            <strong>Model:</strong> "While some maintain that elite performance in athletics and creative disciplines stems purely from innate talent, others argue that dedicated, continuous hard work is the true key to reaching the top."
+          </div>
+        </div>
+
+        <div class="q-card" data-title="48. Conditional Concession Clause">
+          <div class="q-text"><strong>48. Conditional Concession Clause</strong><br>Complete this First Conditional sentence to argue that talent alone is insufficient:<br>
+          <em>"Even if a young athlete possesses extraordinary natural ability, she will not reach the top unless..."</em></div>
+          <textarea rows="2" placeholder="Complete the clause..."></textarea>
+          <button class="revealer-btn" onclick="toggleReveal('ans48')">Show Model Concession</button>
+          <div id="ans48" class="answer-box">
+            <strong>Model:</strong> "...she practises hard and regularly, works closely with a coach, and maintains absolute dedication."
+          </div>
+        </div>
+
+        <div class="q-card" data-title="49. Collocation: 'contribute to success'">
+          <div class="q-text"><strong>49. Collocation: "contribute to success"</strong><br>Write a supporting sentence incorporating additional factors (luck, money, networking), using the phrase <strong>contribute to success</strong>.</div>
+          <textarea rows="2" placeholder="Write your sentence..."></textarea>
+          <button class="revealer-btn" onclick="toggleReveal('ans49')">Show Model Sentence</button>
+          <div id="ans49" class="answer-box">
+            <strong>Model:</strong> "Furthermore, external circumstances such as financial security and meeting the right mentors also contribute significantly to success."
+          </div>
+        </div>
+
+        <div class="q-card" data-title="50. Essential Elements of a Task 2 Conclusion">
+          <div class="q-text"><strong>50. Essential Elements of a Task 2 Conclusion</strong><br>What two elements must be included when writing an essay conclusion beginning with <em>"In conclusion"</em>?</div>
+          <textarea rows="2" placeholder="List the two components..."></textarea>
+          <button class="revealer-btn" onclick="toggleReveal('ans50')">Show Conclusion Criteria</button>
+          <div id="ans50" class="answer-box">
+            <ol>
+              <li><strong>Summary of Main Points:</strong> A concise synthesis of both sides discussed in the body paragraphs.</li>
+              <li><strong>Clear Personal Verdict:</strong> An unambiguous statement confirming the writer's final opinion.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions-row">
+        <button type="button" class="btn-save" onclick="saveSubmission(7)">SAVE TO SUBMIT</button>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    // Tab switching
+    function switchTab(index) {
+      const tabs = document.querySelectorAll(".tab-btn");
+      const panels = document.querySelectorAll(".panel");
+      tabs.forEach((tab, i) => {
+        if (i === index) {
+          tab.classList.add("active");
+          panels[i].classList.add("active");
+        } else {
+          tab.classList.remove("active");
+          panels[i].classList.remove("active");
+        }
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Toggle reveal answers
+    function toggleReveal(id) {
+      const el = document.getElementById(id);
+      el.style.display = (el.style.display === "block") ? "none" : "block";
+    }
+
+    // Section 1: Dropdown Population
+    const vocabBank = [
+      "colleagues", "consistency", "conventional", "donate", 
+      "findings", "insecurity", "novelty", "openness", 
+      "participants", "vital element"
+    ];
+    document.querySelectorAll("#vocab-questions select").forEach(sel => {
+      vocabBank.forEach(word => {
+        const opt = document.createElement("option");
+        opt.value = word;
+        opt.textContent = word;
+        sel.appendChild(opt);
+      });
+    });
+
+    // Scoring Functions
+    function checkVocab() {
+      let score = 0;
+      const cards = document.querySelectorAll("#vocab-questions .q-card");
+      cards.forEach(card => {
+        const target = card.getAttribute("data-ans");
+        const val = card.querySelector("select").value;
+        const fb = card.querySelector(".feedback");
+        if (val === target) {
+          score++;
+          fb.className = "feedback correct";
+          fb.textContent = `✓ Correct! "${target}" fits accurately here.`;
+        } else {
+          fb.className = "feedback incorrect";
+          fb.textContent = `✗ Incorrect. The correct answer is "${target}".`;
+        }
+      });
+      const banner = document.getElementById("vocab-score");
+      banner.style.display = "block";
+      banner.textContent = `You scored ${score} out of ${cards.length} in Section 1!`;
+      return { score, total: cards.length };
+    }
+
+    function checkWordFormation() {
+      let score = 0;
+      const cards = document.querySelectorAll("#wf-questions .q-card");
+      cards.forEach(card => {
+        const allowed = JSON.parse(card.getAttribute("data-ans"));
+        const userVal = card.querySelector("input").value.trim().toLowerCase();
+        const fb = card.querySelector(".feedback");
+        if (allowed.includes(userVal)) {
+          score++;
+          fb.className = "feedback correct";
+          fb.textContent = `✓ Correct! "${userVal}" is the proper form.`;
+        } else {
+          fb.className = "feedback incorrect";
+          fb.textContent = `✗ Incorrect. Expected: ${allowed.join(" or ")}`;
+        }
+      });
+      const banner = document.getElementById("wf-score");
+      banner.style.display = "block";
+      banner.textContent = `You scored ${score} out of ${cards.length} in Section 2!`;
+      return { score, total: cards.length };
+    }
+
+    function checkSpelling() {
+      let score = 0;
+      const cards = document.querySelectorAll("#spelling-questions .q-card");
+      cards.forEach(card => {
+        const target = card.getAttribute("data-ans");
+        const rule = card.getAttribute("data-rule");
+        const userVal = card.querySelector("input").value.trim().toLowerCase();
+        const fb = card.querySelector(".feedback");
+        if (userVal === target) {
+          score++;
+          fb.className = "feedback correct";
+          fb.innerHTML = `✓ Correct! <strong>${target}</strong><div class="rule-note">${rule}</div>`;
+        } else {
+          fb.className = "feedback incorrect";
+          fb.innerHTML = `✗ Incorrect. Correct spelling is <strong>${target}</strong>.<div class="rule-note">${rule}</div>`;
+        }
+      });
+      const banner = document.getElementById("spelling-score");
+      banner.style.display = "block";
+      banner.textContent = `You scored ${score} out of ${cards.length} in Section 3!`;
+      return { score, total: cards.length };
+    }
+
+    function checkGrammar() {
+      let score = 0;
+      const cards = document.querySelectorAll("#grammar-questions .q-card");
+      cards.forEach(card => {
+        const target = card.getAttribute("data-correct");
+        const checked = card.querySelector("input:checked");
+        const fb = card.querySelector(".feedback");
+        if (checked && checked.value === target) {
+          score++;
+          fb.className = "feedback correct";
+          fb.textContent = "✓ Correct!";
+        } else {
+          fb.className = "feedback incorrect";
+          fb.textContent = `✗ Incorrect. The correct option is: ${target}`;
+        }
+      });
+      const banner = document.getElementById("grammar-score");
+      banner.style.display = "block";
+      banner.textContent = `You scored ${score} out of ${cards.length} in Section 4!`;
+      return { score, total: cards.length };
+    }
+
+    // Markdown File Download Helper
+    function downloadMarkdownFile(filename, markdownContent) {
+      const blob = new Blob([markdownContent], { type: "text/markdown;charset=utf-8;" });
+      const link = document.createElement("a");
+      const url = URL.createObjectURL(blob);
+      link.setAttribute("href", url);
+      link.setAttribute("download", filename);
+      link.style.visibility = "hidden";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }
+
+    // SAVE TO SUBMIT Logic per Page
+    function saveSubmission(sectionNum) {
+      const pageCode = String(sectionNum).padStart(2, "0");
+      const filename = `UNIT 06 SUBMISSION ${pageCode}.md`;
+      const dateStr = new Date().toLocaleString();
+      let md = "";
+
+      if (sectionNum === 1) {
+        const res = checkVocab();
+        md += `# UNIT 06 SUBMISSION 01: Vocabulary in Context\n\n`;
+        md += `**Date:** ${dateStr}\n`;
+        md += `**Student Score:** ${res.score} / ${res.total}\n\n`;
+        md += `---\n\n`;
+
+        document.querySelectorAll("#vocab-questions .q-card").forEach((card, idx) => {
+          const qText = card.querySelector(".q-text").innerText.replace(/\s+/g, " ").trim();
+          const target = card.getAttribute("data-ans");
+          const ans = card.querySelector("select").value || "[No Answer Selected]";
+          const isCorrect = (ans.toLowerCase() === target.toLowerCase());
+          md += `### Question ${idx + 1}\n`;
+          md += `* **Prompt:** ${qText}\n`;
+          md += `* **Student Answer:** \`${ans}\`\n`;
+          md += `* **Target Answer:** \`${target}\`\n`;
+          md += `* **Result:** ${isCorrect ? "CORRECT (✓)" : "INCORRECT (✗)"}\n\n`;
+        });
+      } else if (sectionNum === 2) {
+        const res = checkWordFormation();
+        md += `# UNIT 06 SUBMISSION 02: Word Formation & Parts of Speech\n\n`;
+        md += `**Date:** ${dateStr}\n`;
+        md += `**Student Score:** ${res.score} / ${res.total}\n\n`;
+        md += `---\n\n`;
+
+        document.querySelectorAll("#wf-questions .q-card").forEach((card, idx) => {
+          const qText = card.querySelector(".q-text").innerText.replace(/\s+/g, " ").trim();
+          const allowed = JSON.parse(card.getAttribute("data-ans"));
+          const ans = card.querySelector("input").value.trim() || "[No Answer Entered]";
+          const isCorrect = allowed.includes(ans.toLowerCase());
+          md += `### Question ${idx + 11}\n`;
+          md += `* **Prompt:** ${qText}\n`;
+          md += `* **Student Answer:** \`${ans}\`\n`;
+          md += `* **Target Answer:** \`${allowed.join(" / ")}\`\n`;
+          md += `* **Result:** ${isCorrect ? "CORRECT (✓)" : "INCORRECT (✗)"}\n\n`;
+        });
+      } else if (sectionNum === 3) {
+        const res = checkSpelling();
+        md += `# UNIT 06 SUBMISSION 03: Spelling & Suffix Corrections\n\n`;
+        md += `**Date:** ${dateStr}\n`;
+        md += `**Student Score:** ${res.score} / ${res.total}\n\n`;
+        md += `---\n\n`;
+
+        document.querySelectorAll("#spelling-questions .q-card").forEach((card, idx) => {
+          const qText = card.querySelector(".q-text").innerText.replace(/\s+/g, " ").trim();
+          const target = card.getAttribute("data-ans");
+          const rule = card.getAttribute("data-rule");
+          const ans = card.querySelector("input").value.trim() || "[No Answer Entered]";
+          const isCorrect = (ans.toLowerCase() === target.toLowerCase());
+          md += `### Question ${idx + 19}\n`;
+          md += `* **Prompt:** ${qText}\n`;
+          md += `* **Student Answer:** \`${ans}\`\n`;
+          md += `* **Target Spelling:** \`${target}\`\n`;
+          md += `* **Spelling Rule:** ${rule}\n`;
+          md += `* **Result:** ${isCorrect ? "CORRECT (✓)" : "INCORRECT (✗)"}\n\n`;
+        });
+      } else if (sectionNum === 4) {
+        const res = checkGrammar();
+        md += `# UNIT 06 SUBMISSION 04: Key Grammar – Conditionals (if / unless)\n\n`;
+        md += `**Date:** ${dateStr}\n`;
+        md += `**Student Score:** ${res.score} / ${res.total}\n\n`;
+        md += `---\n\n`;
+
+        document.querySelectorAll("#grammar-questions .q-card").forEach((card, idx) => {
+          const qText = card.querySelector(".q-text").innerText.replace(/\s+/g, " ").trim();
+          const target = card.getAttribute("data-correct");
+          const checked = card.querySelector("input:checked");
+          const ans = checked ? checked.value : "[No Option Selected]";
+          const isCorrect = (ans === target);
+          md += `### Question ${idx + 27}\n`;
+          md += `* **Prompt:** ${qText}\n`;
+          md += `* **Selected Option:** \`${ans}\`\n`;
+          md += `* **Correct Option:** \`${target}\`\n`;
+          md += `* **Result:** ${isCorrect ? "CORRECT (✓)" : "INCORRECT (✗)"}\n\n`;
+        });
+      } else if (sectionNum === 5) {
+        md += `# UNIT 06 SUBMISSION 05: Academic Concepts & Research Language\n\n`;
+        md += `**Date:** ${dateStr}\n`;
+        md += `**Evaluation:** Conceptual / Self-Study & Guided Recall\n\n`;
+        md += `---\n\n`;
+
+        document.querySelectorAll("#concepts-questions .q-card").forEach((card) => {
+          const title = card.getAttribute("data-title");
+          const qText = card.querySelector(".q-text").innerText.replace(/\s+/g, " ").trim();
+          const input = card.querySelector("input, textarea");
+          const ans = input ? (input.value.trim() || "[No Written Response]") : "[None]";
+          const refBox = card.querySelector(".answer-box").innerText.replace(/\s+/g, " ").trim();
+          md += `### ${title}\n`;
+          md += `* **Question:** ${qText}\n`;
+          md += `* **Student Response:**\n\n> ${ans}\n\n`;
+          md += `* **Academic Reference & Notes:**\n\n> ${refBox}\n\n`;
+        });
+      } else if (sectionNum === 6) {
+        md += `# UNIT 06 SUBMISSION 06: Speaking Part 3 – Generalising & Pronunciation\n\n`;
+        md += `**Date:** ${dateStr}\n`;
+        md += `**Evaluation:** Communicative Strategy & Intonation Analysis\n\n`;
+        md += `---\n\n`;
+
+        document.querySelectorAll("#speaking-questions .q-card").forEach((card) => {
+          const title = card.getAttribute("data-title");
+          const qText = card.querySelector(".q-text").innerText.replace(/\s+/g, " ").trim();
+          const textarea = card.querySelector("textarea");
+          const ans = textarea ? (textarea.value.trim() || "[No Response Recorded]") : "[None]";
+          const refBox = card.querySelector(".answer-box").innerText.replace(/\s+/g, " ").trim();
+          md += `### ${title}\n`;
+          md += `* **Question:** ${qText}\n`;
+          md += `* **Student Draft:**\n\n> ${ans}\n\n`;
+          md += `* **Examiner Guidelines & Model:**\n\n> ${refBox}\n\n`;
+        });
+      } else if (sectionNum === 7) {
+        md += `# UNIT 06 SUBMISSION 07: Writing Task 2 – Essay Structures & Arguments\n\n`;
+        md += `**Date:** ${dateStr}\n`;
+        md += `**Task 2 Topic:** Success: 10% talent vs. 90% hard work\n\n`;
+        md += `---\n\n`;
+
+        document.querySelectorAll("#writing-questions .q-card").forEach((card) => {
+          const title = card.getAttribute("data-title");
+          const qText = card.querySelector(".q-text").innerText.replace(/\s+/g, " ").trim();
+          const textarea = card.querySelector("textarea");
+          const ans = textarea ? (textarea.value.trim() || "[No Response Drafted]") : "[None]";
+          const refBox = card.querySelector(".answer-box").innerText.replace(/\s+/g, " ").trim();
+          md += `### ${title}\n`;
+          md += `* **Prompt / Task:** ${qText}\n`;
+          md += `* **Student Output:**\n\n> ${ans}\n\n`;
+          md += `* **Model Response / Structural Criteria:**\n\n> ${refBox}\n\n`;
+        });
+      }
+
+      downloadMarkdownFile(filename, md);
+    }
+  </script>
+</body>
+</html>
