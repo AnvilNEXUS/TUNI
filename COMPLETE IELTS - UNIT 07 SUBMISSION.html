@@ -1,0 +1,1635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Complete IELTS Band 4-5 | Unit 7: Literacy & Academic Skills</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --primary-light: #dbeafe;
+      --success: #16a34a;
+      --success-bright: #22c55e;
+      --success-dark: #15803d;
+      --success-bg: #dcfce7;
+      --danger: #dc2626;
+      --danger-bg: #fee2e2;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --border: #cbd5e1;
+      --border-focus: #3b82f6;
+      --radius: 8px;
+      --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    /* Header Bar */
+    header {
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: white;
+      padding: 24px;
+    }
+
+    header h1 {
+      font-size: 1.75rem;
+      margin-bottom: 6px;
+    }
+
+    header p {
+      color: #bfdbfe;
+      font-size: 0.95rem;
+    }
+
+    .student-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 16px;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 12px 16px;
+      border-radius: var(--radius);
+      align-items: center;
+    }
+
+    .student-bar label {
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .student-bar input {
+      padding: 8px 12px;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      flex: 1;
+      min-width: 220px;
+    }
+
+    .student-bar input:focus {
+      outline: 2px solid #93c5fd;
+    }
+
+    /* Tab Navigation */
+    .tabs-nav {
+      display: flex;
+      flex-wrap: wrap;
+      background: #f1f5f9;
+      border-bottom: 2px solid var(--border);
+      padding: 6px 12px 0;
+      gap: 4px;
+    }
+
+    .tab-btn {
+      padding: 10px 14px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      border-top-left-radius: 6px;
+      border-top-right-radius: 6px;
+      transition: all 0.2s;
+    }
+
+    .tab-btn:hover {
+      color: var(--primary);
+      background: #e2e8f0;
+    }
+
+    .tab-btn.active {
+      color: var(--primary-dark);
+      background: var(--surface);
+      border-bottom: 3px solid var(--primary);
+    }
+
+    /* Section Pages */
+    .section-page {
+      display: none;
+      padding: 28px;
+    }
+
+    .section-page.active {
+      display: block;
+    }
+
+    .section-header {
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 12px;
+      margin-bottom: 24px;
+    }
+
+    .section-header h2 {
+      font-size: 1.4rem;
+      color: #0f172a;
+    }
+
+    .section-header p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-top: 4px;
+    }
+
+    .rule-box {
+      background: #f8fafc;
+      border-left: 4px solid var(--primary);
+      padding: 12px 16px;
+      margin-bottom: 24px;
+      border-radius: 0 6px 6px 0;
+      font-size: 0.9rem;
+      color: #334155;
+    }
+
+    .rule-box strong {
+      color: #0f172a;
+    }
+
+    /* Question Cards */
+    .q-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      margin-bottom: 20px;
+      transition: border-color 0.2s;
+    }
+
+    .q-card:hover {
+      border-color: #cbd5e1;
+    }
+
+    .q-number {
+      display: inline-block;
+      background: #e0e7ff;
+      color: #3730a3;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 999px;
+      margin-bottom: 8px;
+    }
+
+    .q-text {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 12px;
+      color: #1e293b;
+    }
+
+    /* Inputs & Form Elements */
+    .text-input {
+      width: 100%;
+      max-width: 480px;
+      padding: 9px 12px;
+      border: 1.5px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.95rem;
+      transition: border-color 0.2s;
+    }
+
+    .text-input:focus {
+      outline: none;
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+    }
+
+    .inline-input {
+      display: inline-block;
+      width: 170px;
+      padding: 5px 10px;
+      margin: 0 4px;
+      border: 1.5px solid var(--border);
+      border-radius: 4px;
+      font-size: 0.95rem;
+    }
+
+    textarea.text-area {
+      width: 100%;
+      min-height: 85px;
+      padding: 10px 12px;
+      border: 1.5px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.95rem;
+      resize: vertical;
+    }
+
+    textarea.text-area:focus {
+      outline: none;
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+    }
+
+    .options-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .option-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+
+    .option-item:hover {
+      background: #f1f5f9;
+    }
+
+    .option-item input[type="radio"] {
+      cursor: pointer;
+    }
+
+    select.select-input {
+      padding: 7px 12px;
+      border: 1.5px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.95rem;
+      background: white;
+      cursor: pointer;
+    }
+
+    /* Feedback Callouts */
+    .feedback-box {
+      margin-top: 12px;
+      padding: 10px 14px;
+      border-radius: 6px;
+      font-size: 0.88rem;
+      display: none;
+    }
+
+    .feedback-box.correct {
+      display: block;
+      background: var(--success-bg);
+      border: 1px solid #86efac;
+      color: #14532d;
+    }
+
+    .feedback-box.incorrect {
+      display: block;
+      background: var(--danger-bg);
+      border: 1px solid #fca5a5;
+      color: #7f1d1d;
+    }
+
+    .feedback-box.info {
+      display: block;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      color: #1e40af;
+    }
+
+    /* Action Footer Bar */
+    .action-bar {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 12px;
+      padding-top: 24px;
+      margin-top: 28px;
+      border-top: 2px solid #e2e8f0;
+    }
+
+    .score-badge {
+      margin-right: auto;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #1e3a8a;
+      background: #e0f2fe;
+      padding: 8px 16px;
+      border-radius: 999px;
+      display: none;
+    }
+
+    button.btn {
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: background-color 0.2s, transform 0.1s;
+    }
+
+    button.btn:active {
+      transform: translateY(1px);
+    }
+
+    .btn-check {
+      background: #e2e8f0;
+      color: #1e293b;
+    }
+
+    .btn-check:hover {
+      background: #cbd5e1;
+    }
+
+    /* Bright Green SAVE TO SUBMIT Button */
+    .btn-save-submit {
+      background: #22c55e !important;
+      color: #ffffff !important;
+      box-shadow: 0 3px 6px rgba(34, 197, 94, 0.35);
+      font-weight: 700 !important;
+      letter-spacing: 0.02em;
+    }
+
+    .btn-save-submit:hover {
+      background: #16a34a !important;
+      box-shadow: 0 4px 10px rgba(22, 163, 74, 0.45);
+    }
+
+    /* Matching Table layout */
+    .matching-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+    }
+
+    .matching-table td {
+      padding: 8px;
+      border-bottom: 1px solid #f1f5f9;
+      font-size: 0.92rem;
+    }
+
+    .matching-table td:first-child {
+      width: 60%;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Header -->
+  <header>
+    <h1>Unit 7: Literacy & Academic Skills</h1>
+    <p>Complete IELTS Review & Self-Evaluation — 50 Practice Items</p>
+    <div class="student-bar">
+      <label for="studentName">Student Name:</label>
+      <input type="text" id="studentName" placeholder="Enter your full name..." value="Robert Becker">
+      <label for="studentId">Student ID / Cohort:</label>
+      <input type="text" id="studentId" placeholder="e.g. IELTS-2026-A" value="IELTS-U07">
+    </div>
+  </header>
+
+  <!-- Navigation Tabs -->
+  <nav class="tabs-nav" id="tabsNav">
+    <button class="tab-btn active" onclick="switchTab(1)">01 Academic Vocab</button>
+    <button class="tab-btn" onclick="switchTab(2)">02 Raise vs Rise</button>
+    <button class="tab-btn" onclick="switchTab(3)">03 Speed Reading</button>
+    <button class="tab-btn" onclick="switchTab(4)">04 Speaking Part 3</button>
+    <button class="tab-btn" onclick="switchTab(5)">05 Word Stress</button>
+    <button class="tab-btn" onclick="switchTab(6)">06 Describing Trends</button>
+    <button class="tab-btn" onclick="switchTab(7)">07 Graph Prepositions</button>
+    <button class="tab-btn" onclick="switchTab(8)">08 Spelling & Adverbs</button>
+  </nav>
+
+  <!-- ================= SECTION 01 ================= -->
+  <div id="section-01" class="section-page active">
+    <div class="section-header">
+      <h2>Section 01: Academic & Study Skills Vocabulary (Questions 1–8)</h2>
+      <p>Test your command of essential academic terms, instructional formats, and word meanings.</p>
+    </div>
+
+    <div class="rule-box">
+      <strong>Word Bank for Q1–Q3:</strong> brochure | feedback | enrolment | tutorial | seminar | assignment
+    </div>
+
+    <div class="q-card" id="card-q1">
+      <div class="q-number">Question 01</div>
+      <div class="q-text">Before classes began in September, the department held an orientation to finalize student <input type="text" class="inline-input" id="q1" placeholder="enter word"> and issue library cards.</div>
+      <div class="feedback-box" id="fb-q1"></div>
+    </div>
+
+    <div class="q-card" id="card-q2">
+      <div class="q-number">Question 02</div>
+      <div class="q-text">After submitting the first draft of her thesis, Maria met with her professor to receive detailed <input type="text" class="inline-input" id="q2" placeholder="enter word"> on how to structure her arguments.</div>
+      <div class="feedback-box" id="fb-q2"></div>
+    </div>
+
+    <div class="q-card" id="card-q3">
+      <div class="q-number">Question 03</div>
+      <div class="q-text">Rather than a large lecture hall of 200 students, the research methods class meets weekly in a small <input type="text" class="inline-input" id="q3" placeholder="enter word"> where everyone actively discusses case studies.</div>
+      <div class="feedback-box" id="fb-q3"></div>
+    </div>
+
+    <div class="q-card" id="card-q4">
+      <div class="q-number">Question 04</div>
+      <div class="q-text">When students are under pressure to complete a major term ________, time management is essential.</div>
+      <div class="options-group">
+        <label class="option-item"><input type="radio" name="q4" value="A"> A) brochure</label>
+        <label class="option-item"><input type="radio" name="q4" value="B"> B) assignment</label>
+        <label class="option-item"><input type="radio" name="q4" value="C"> C) circuit</label>
+      </div>
+      <div class="feedback-box" id="fb-q4"></div>
+    </div>
+
+    <div class="q-card" id="card-q5">
+      <div class="q-number">Question 05</div>
+      <div class="q-text">To participate in the digital design workshop, visitors must first ________ an official registration form online.</div>
+      <div class="options-group">
+        <label class="option-item"><input type="radio" name="q5" value="A"> A) fill out</label>
+        <label class="option-item"><input type="radio" name="q5" value="B"> B) give up</label>
+        <label class="option-item"><input type="radio" name="q5" value="C"> C) make through</label>
+      </div>
+      <div class="feedback-box" id="fb-q5"></div>
+    </div>
+
+    <div class="q-card" id="card-q6">
+      <div class="q-number">Question 06</div>
+      <div class="q-text">Studies show that learners make much faster progress when they are actively ________ in the subject matter.</div>
+      <div class="options-group">
+        <label class="option-item"><input type="radio" name="q6" value="A"> A) qualified</label>
+        <label class="option-item"><input type="radio" name="q6" value="B"> B) engaged</label>
+        <label class="option-item"><input type="radio" name="q6" value="C"> C) reduced</label>
+      </div>
+      <div class="feedback-box" id="fb-q6"></div>
+    </div>
+
+    <div class="q-card" id="card-q7">
+      <div class="q-number">Question 07</div>
+      <div class="q-text">What is the main structural difference between <strong>attending a lecture</strong> and <strong>participating in a tutorial</strong>?</div>
+      <textarea class="text-area" id="q7" placeholder="Type your explanation here..."></textarea>
+      <div class="feedback-box" id="fb-q7"></div>
+    </div>
+
+    <div class="q-card" id="card-q8">
+      <div class="q-number">Question 08</div>
+      <div class="q-text">Define the adjective <strong>illiterate</strong> in the context of adult education.</div>
+      <input type="text" class="text-input" id="q8" placeholder="Definition...">
+      <div class="feedback-box" id="fb-q8"></div>
+    </div>
+
+    <div class="action-bar">
+      <span class="score-badge" id="score-01">Score: -- / 8</span>
+      <button class="btn btn-check" onclick="checkSection01()">CHECK ANSWERS</button>
+      <button class="btn btn-save-submit" onclick="saveSection(1)">SAVE TO SUBMIT</button>
+    </div>
+  </div>
+
+  <!-- ================= SECTION 02 ================= -->
+  <div id="section-02" class="section-page">
+    <div class="section-header">
+      <h2>Section 02: Confusable Verbs — Raise vs. Rise (Questions 9–16)</h2>
+      <p>Master the grammar, transitivity, and irregular principal forms of <em>raise</em> and <em>rise</em>.</p>
+    </div>
+
+    <div class="rule-box">
+      <strong>Grammar Reminder:</strong><br>
+      • <strong>Raise</strong> (regular: <em>raise, raised, raised</em>): Transitive — MUST take a direct object.<br>
+      • <strong>Rise</strong> (irregular: <em>rise, rose, risen</em>): Intransitive — CANNOT take a direct object.
+    </div>
+
+    <div class="q-card" id="card-q9">
+      <div class="q-number">Question 09</div>
+      <div class="q-text">The non-profit foundation hopes to (<strong>raise</strong> / <strong>rise</strong>) £50,000 for community literacy projects.</div>
+      <select class="select-input" id="q9">
+        <option value="">-- Choose Verb --</option>
+        <option value="raise">raise</option>
+        <option value="rise">rise</option>
+      </select>
+      <div class="feedback-box" id="fb-q9"></div>
+    </div>
+
+    <div class="q-card" id="card-q10">
+      <div class="q-number">Question 10</div>
+      <div class="q-text">Average global temperatures continue to (<strong>raise</strong> / <strong>rise</strong>) at an unprecedented rate.</div>
+      <select class="select-input" id="q10">
+        <option value="">-- Choose Verb --</option>
+        <option value="raise">raise</option>
+        <option value="rise">rise</option>
+      </select>
+      <div class="feedback-box" id="fb-q10"></div>
+    </div>
+
+    <div class="q-card" id="card-q11">
+      <div class="q-number">Question 11</div>
+      <div class="q-text">The regional transit authority (<strong>raised</strong> / <strong>rose</strong>) bus fares by 15 percent at the beginning of the year.</div>
+      <select class="select-input" id="q11">
+        <option value="">-- Choose Form --</option>
+        <option value="raised">raised</option>
+        <option value="rose">rose</option>
+      </select>
+      <div class="feedback-box" id="fb-q11"></div>
+    </div>
+
+    <div class="q-card" id="card-q12">
+      <div class="q-number">Question 12</div>
+      <div class="q-text">Between 2018 and 2022, the proportion of university applicants from rural districts (<strong>raised</strong> / <strong>rose</strong>) steadily.</div>
+      <select class="select-input" id="q12">
+        <option value="">-- Choose Form --</option>
+        <option value="raised">raised</option>
+        <option value="rose">rose</option>
+      </select>
+      <div class="feedback-box" id="fb-q12"></div>
+    </div>
+
+    <div class="q-card" id="card-q13">
+      <div class="q-number">Question 13</div>
+      <div class="q-text"><strong>Find and correct the error:</strong> "In 2024, the government <em>rised</em> the minimum wage for young apprentices."</div>
+      <input type="text" class="text-input" id="q13" placeholder="Write the corrected verb...">
+      <div class="feedback-box" id="fb-q13"></div>
+    </div>
+
+    <div class="q-card" id="card-q14">
+      <div class="q-number">Question 14</div>
+      <div class="q-text"><strong>Find and correct the error:</strong> "During the economic crisis, commercial property rental values <em>raised</em> dramatically."</div>
+      <input type="text" class="text-input" id="q14" placeholder="Write the corrected verb...">
+      <div class="feedback-box" id="fb-q14"></div>
+    </div>
+
+    <div class="q-card" id="card-q15">
+      <div class="q-number">Question 15</div>
+      <div class="q-text">
+        <strong>Sentence Transformation:</strong> Complete the second sentence using the verb <em>rise</em> so that it has the same meaning:<br>
+        <em>Original:</em> "There was a sharp increase in customer numbers last spring."<br>
+        <em>Rewrite:</em> Customer numbers <input type="text" class="inline-input" style="width:220px;" id="q15" placeholder="verb phrase"> last spring.
+      </div>
+      <div class="feedback-box" id="fb-q15"></div>
+    </div>
+
+    <div class="q-card" id="card-q16">
+      <div class="q-number">Question 16</div>
+      <div class="q-text">Why is the sentence <em>"The company rised employee salaries"</em> doubly incorrect? Explain both errors (form & transitivity).</div>
+      <textarea class="text-area" id="q16" placeholder="Explain the form error and transitivity error..."></textarea>
+      <div class="feedback-box" id="fb-q16"></div>
+    </div>
+
+    <div class="action-bar">
+      <span class="score-badge" id="score-02">Score: -- / 8</span>
+      <button class="btn btn-check" onclick="checkSection02()">CHECK ANSWERS</button>
+      <button class="btn btn-save-submit" onclick="saveSection(2)">SAVE TO SUBMIT</button>
+    </div>
+  </div>
+
+  <!-- ================= SECTION 03 ================= -->
+  <div id="section-03" class="section-page">
+    <div class="section-header">
+      <h2>Section 03: Reading Mechanics & Speed Reading Concepts (Questions 17–23)</h2>
+      <p>Evaluate chunking methods, eye movements, subvocal articulation, and cognitive retention.</p>
+    </div>
+
+    <div class="q-card" id="card-q17">
+      <div class="q-number">Question 17</div>
+      <div class="q-text">In reading theory, what is the technique of <strong>"chunking"</strong>, and how does it differ from beginner reading habits?</div>
+      <textarea class="text-area" id="q17" placeholder="Type explanation..."></textarea>
+      <div class="feedback-box" id="fb-q17"></div>
+    </div>
+
+    <div class="q-card" id="card-q18">
+      <div class="q-number">Question 18</div>
+      <div class="q-text">Why does <strong>reading each word aloud</strong> or vocalizing internally reduce reading speed compared to reading silently?</div>
+      <textarea class="text-area" id="q18" placeholder="Type explanation..."></textarea>
+      <div class="feedback-box" id="fb-q18"></div>
+    </div>
+
+    <div class="q-card" id="card-q19">
+      <div class="q-number">Question 19</div>
+      <div class="q-text">Explain what happens to a reader's eye movements and comprehension when they repeatedly <strong>"skip back"</strong> to previous lines of text.</div>
+      <textarea class="text-area" id="q19" placeholder="Type explanation..."></textarea>
+      <div class="feedback-box" id="fb-q19"></div>
+    </div>
+
+    <div class="q-card" id="card-q20">
+      <div class="q-number">Question 20</div>
+      <div class="q-text">When a reader needs only an outline and the key facts of a long report, which method is best?</div>
+      <div class="options-group">
+        <label class="option-item"><input type="radio" name="q20" value="A"> A) Reading aloud slowly word by word</label>
+        <label class="option-item"><input type="radio" name="q20" value="B"> B) Skimming the material quickly</label>
+        <label class="option-item"><input type="radio" name="q20" value="C"> C) Analyzing the grammatical circuit of every sentence</label>
+      </div>
+      <div class="feedback-box" id="fb-q20"></div>
+    </div>
+
+    <div class="q-card" id="card-q21">
+      <div class="q-number">Question 21</div>
+      <div class="q-text">
+        Cognitive research indicates that humans can often read scrambled words easily if which two letters remain in their original positions?<br>
+        The <input type="text" class="inline-input" id="q21a" placeholder="1st position"> and <input type="text" class="inline-input" id="q21b" placeholder="2nd position"> letters.
+      </div>
+      <div class="feedback-box" id="fb-q21"></div>
+    </div>
+
+    <div class="q-card" id="card-q22">
+      <div class="q-number">Question 22</div>
+      <div class="q-text">According to reading specialists, what should you do if you find your mind wandering and you constantly have to re-read the same paragraph?</div>
+      <textarea class="text-area" id="q22" placeholder="What practical change should the reader make?"></textarea>
+      <div class="feedback-box" id="fb-q22"></div>
+    </div>
+
+    <div class="q-card" id="card-q23">
+      <div class="q-number">Question 23</div>
+      <div class="q-text"><strong>True or False:</strong> Speed reading is measured solely by how many words per minute a person scans, regardless of how much information they comprehend.</div>
+      <div class="options-group">
+        <label class="option-item"><input type="radio" name="q23" value="True"> True</label>
+        <label class="option-item"><input type="radio" name="q23" value="False"> False</label>
+      </div>
+      <input type="text" class="text-input" id="q23_just" placeholder="Brief justification..." style="margin-top: 8px;">
+      <div class="feedback-box" id="fb-q23"></div>
+    </div>
+
+    <div class="action-bar">
+      <span class="score-badge" id="score-03">Score: -- / 7</span>
+      <button class="btn btn-check" onclick="checkSection03()">CHECK ANSWERS</button>
+      <button class="btn btn-save-submit" onclick="saveSection(3)">SAVE TO SUBMIT</button>
+    </div>
+  </div>
+
+  <!-- ================= SECTION 04 ================= -->
+  <div id="section-04" class="section-page">
+    <div class="section-header">
+      <h2>Section 04: Speaking Part 3 — Stating Opinions & Giving Reasons (Questions 24–30)</h2>
+      <p>Structure natural academic oral discourse using discourse markers, opinion qualifiers, and cohesive reason clauses.</p>
+    </div>
+
+    <div class="rule-box">
+      <strong>Useful Phrases:</strong> In my view | I think it depends | One reason is that | because | Another reason is that | I would say that
+    </div>
+
+    <div class="q-card" id="card-q24">
+      <div class="q-number">Question 24</div>
+      <div class="q-text">
+        "<u><input type="text" class="inline-input" id="q24a" placeholder="Opinion phrase"></u>, public libraries must receive sustained funding, <u><input type="text" class="inline-input" id="q24b" placeholder="Reason marker"></u> they provide free technological access to job seekers."
+      </div>
+      <div class="feedback-box" id="fb-q24"></div>
+    </div>
+
+    <div class="q-card" id="card-q25">
+      <div class="q-number">Question 25</div>
+      <div class="q-text">
+        "Why do teenagers spend less time reading? <u><input type="text" class="inline-input" style="width:190px;" id="q25a" placeholder="Condition phrase"></u> on their interests. <u><input type="text" class="inline-input" style="width:190px;" id="q25b" placeholder="1st reason marker"></u> social media occupies their free time, and <u><input type="text" class="inline-input" style="width:190px;" id="q25c" placeholder="2nd reason marker"></u> school textbooks are often perceived as unengaging."
+      </div>
+      <div class="feedback-box" id="fb-q25"></div>
+    </div>
+
+    <div class="q-card" id="card-q26">
+      <div class="q-number">Question 26</div>
+      <div class="q-text">Match each phrase with its communicative function:</div>
+      <table class="matching-table">
+        <tr>
+          <td>a) <em>I would say that...</em></td>
+          <td>
+            <select class="select-input" id="q26a">
+              <option value="">-- Choose Function --</option>
+              <option value="1">1) Introducing an Opinion</option>
+              <option value="2">2) Introducing a Reason</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>b) <em>...as it allows students to concentrate.</em></td>
+          <td>
+            <select class="select-input" id="q26b">
+              <option value="">-- Choose Function --</option>
+              <option value="1">1) Introducing an Opinion</option>
+              <option value="2">2) Introducing a Reason</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>c) <em>From my perspective...</em></td>
+          <td>
+            <select class="select-input" id="q26c">
+              <option value="">-- Choose Function --</option>
+              <option value="1">1) Introducing an Opinion</option>
+              <option value="2">2) Introducing a Reason</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>d) <em>Perhaps because they lack sufficient time...</em></td>
+          <td>
+            <select class="select-input" id="q26d">
+              <option value="">-- Choose Function --</option>
+              <option value="1">1) Introducing an Opinion</option>
+              <option value="2">2) Introducing a Reason</option>
+            </select>
+          </td>
+        </tr>
+      </table>
+      <div class="feedback-box" id="fb-q26"></div>
+    </div>
+
+    <div class="q-card" id="card-q27">
+      <div class="q-number">Question 27</div>
+      <div class="q-text">
+        <strong>Rewrite into academic IELTS style:</strong><br>
+        <em>Weak answer:</em> "Young kids must read books. Books are good."<br>
+        (Include an opinion phrase and a clear reason marker).
+      </div>
+      <textarea class="text-area" id="q27" placeholder="Model rewrite..."></textarea>
+      <div class="feedback-box" id="fb-q27"></div>
+    </div>
+
+    <div class="q-card" id="card-q28">
+      <div class="q-number">Question 28</div>
+      <div class="q-text">
+        <strong>Speaking Part 3 Simulation:</strong> "Why do some adults find it difficult to read regularly after finishing their formal education?"<br>
+        (Write a 2–3 sentence response starting with <em>"In my view..."</em> and a reason marker).
+      </div>
+      <textarea class="text-area" id="q28" placeholder="In my view..."></textarea>
+      <div class="feedback-box" id="fb-q28"></div>
+    </div>
+
+    <div class="q-card" id="card-q29">
+      <div class="q-number">Question 29</div>
+      <div class="q-text">
+        <strong>Speaking Part 3 Simulation:</strong> "How can schools encourage reluctant readers to enjoy literature?"<br>
+        (Write 2–3 sentences including <em>"I would say that..."</em> and <em>"particularly because..."</em>).
+      </div>
+      <textarea class="text-area" id="q29" placeholder="I would say that..."></textarea>
+      <div class="feedback-box" id="fb-q29"></div>
+    </div>
+
+    <div class="q-card" id="card-q30">
+      <div class="q-number">Question 30</div>
+      <div class="q-text">
+        Complete with the correct term: "Without basic literacy programmes, many disadvantaged adults remain <input type="text" class="inline-input" id="q30" placeholder="adjective">, severely limiting their career opportunities."
+      </div>
+      <div class="feedback-box" id="fb-q30"></div>
+    </div>
+
+    <div class="action-bar">
+      <span class="score-badge" id="score-04">Score: -- / 7</span>
+      <button class="btn btn-check" onclick="checkSection04()">CHECK ANSWERS</button>
+      <button class="btn btn-save-submit" onclick="saveSection(4)">SAVE TO SUBMIT</button>
+    </div>
+  </div>
+
+  <!-- ================= SECTION 05 ================= -->
+  <div id="section-05" class="section-page">
+    <div class="section-header">
+      <h2>Section 05: Pronunciation & Word Stress (Questions 31–35)</h2>
+      <p>Identify primary lexical stress patterns in multisyllabic academic vocabulary.</p>
+    </div>
+
+    <div class="q-card" id="card-q31">
+      <div class="q-number">Question 31</div>
+      <div class="q-text">Identify which syllable carries the primary stress:</div>
+      <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+        <div>
+          <label><strong>a) par-tic-u-lar-ly:</strong></label><br>
+          <select class="select-input" id="q31a" style="margin-top:4px;">
+            <option value="">-- Stressed Syllable --</option>
+            <option value="1">1st (PAR-tic-u-lar-ly)</option>
+            <option value="2">2nd (par-TIC-u-lar-ly)</option>
+            <option value="3">3rd (par-tic-U-lar-ly)</option>
+            <option value="4">4th (par-tic-u-LAR-ly)</option>
+          </select>
+        </div>
+        <div>
+          <label><strong>b) im-ag-i-na-tion:</strong></label><br>
+          <select class="select-input" id="q31b" style="margin-top:4px;">
+            <option value="">-- Stressed Syllable --</option>
+            <option value="1">1st (IM-ag-i-na-tion)</option>
+            <option value="2">2nd (im-AG-i-na-tion)</option>
+            <option value="3">3rd (im-ag-I-na-tion)</option>
+            <option value="4">4th (im-ag-i-NA-tion)</option>
+            <option value="5">5th (im-ag-i-na-TION)</option>
+          </select>
+        </div>
+      </div>
+      <div class="feedback-box" id="fb-q31"></div>
+    </div>
+
+    <div class="q-card" id="card-q32">
+      <div class="q-number">Question 32</div>
+      <div class="q-text">Identify which syllable carries the primary stress:</div>
+      <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+        <div>
+          <label><strong>a) ed-u-ca-tion:</strong></label><br>
+          <select class="select-input" id="q32a" style="margin-top:4px;">
+            <option value="">-- Stressed Syllable --</option>
+            <option value="1">1st (ED-u-ca-tion)</option>
+            <option value="2">2nd (ed-U-ca-tion)</option>
+            <option value="3">3rd (ed-u-CA-tion)</option>
+            <option value="4">4th (ed-u-ca-TION)</option>
+          </select>
+        </div>
+        <div>
+          <label><strong>b) il-lit-er-ate:</strong></label><br>
+          <select class="select-input" id="q32b" style="margin-top:4px;">
+            <option value="">-- Stressed Syllable --</option>
+            <option value="1">1st (IL-lit-er-ate)</option>
+            <option value="2">2nd (il-LIT-er-ate)</option>
+            <option value="3">3rd (il-lit-ER-ate)</option>
+            <option value="4">4th (il-lit-er-ATE)</option>
+          </select>
+        </div>
+      </div>
+      <div class="feedback-box" id="fb-q32"></div>
+    </div>
+
+    <div class="q-card" id="card-q33">
+      <div class="q-number">Question 33</div>
+      <div class="q-text">Identify which syllable carries the primary stress:</div>
+      <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+        <div>
+          <label><strong>a) as-sign-ment:</strong></label><br>
+          <select class="select-input" id="q33a" style="margin-top:4px;">
+            <option value="">-- Stressed Syllable --</option>
+            <option value="1">1st (AS-sign-ment)</option>
+            <option value="2">2nd (as-SIGN-ment)</option>
+            <option value="3">3rd (as-sign-MENT)</option>
+          </select>
+        </div>
+        <div>
+          <label><strong>b) re-lax:</strong></label><br>
+          <select class="select-input" id="q33b" style="margin-top:4px;">
+            <option value="">-- Stressed Syllable --</option>
+            <option value="1">1st (RE-lax)</option>
+            <option value="2">2nd (re-LAX)</option>
+          </select>
+        </div>
+      </div>
+      <div class="feedback-box" id="fb-q33"></div>
+    </div>
+
+    <div class="q-card" id="card-q34">
+      <div class="q-number">Question 34</div>
+      <div class="q-text">Which word has its primary stress on the <strong>FIRST</strong> syllable?</div>
+      <div class="options-group">
+        <label class="option-item"><input type="radio" name="q34" value="A"> A) attractive</label>
+        <label class="option-item"><input type="radio" name="q34" value="B"> B) secondary</label>
+        <label class="option-item"><input type="radio" name="q34" value="C"> C) assignment</label>
+        <label class="option-item"><input type="radio" name="q34" value="D"> D) discussing</label>
+      </div>
+      <div class="feedback-box" id="fb-q34"></div>
+    </div>
+
+    <div class="q-card" id="card-q35">
+      <div class="q-number">Question 35</div>
+      <div class="q-text">Which word has its primary stress on the <strong>SECOND</strong> syllable?</div>
+      <div class="options-group">
+        <label class="option-item"><input type="radio" name="q35" value="A"> A) parents</label>
+        <label class="option-item"><input type="radio" name="q35" value="B"> B) chatting</label>
+        <label class="option-item"><input type="radio" name="q35" value="C"> C) prefer</label>
+        <label class="option-item"><input type="radio" name="q35" value="D"> D) brochure</label>
+      </div>
+      <div class="feedback-box" id="fb-q35"></div>
+    </div>
+
+    <div class="action-bar">
+      <span class="score-badge" id="score-05">Score: -- / 5</span>
+      <button class="btn btn-check" onclick="checkSection05()">CHECK ANSWERS</button>
+      <button class="btn btn-save-submit" onclick="saveSection(5)">SAVE TO SUBMIT</button>
+    </div>
+  </div>
+
+  <!-- ================= SECTION 06 ================= -->
+  <div id="section-06" class="section-page">
+    <div class="section-header">
+      <h2>Section 06: Describing Trends — Noun Phrases vs. Verb Phrases (Questions 36–40)</h2>
+      <p>Transform trends flexibly between noun phrases and verb phrases for Task 1 lexical variety.</p>
+    </div>
+
+    <div class="rule-box">
+      <strong>Trend Transformation Guide:</strong><br>
+      • Noun Phrase: <em>There was a [adjective] [noun] in [subject]...</em> (e.g., <em>There was a dramatic rise in figures</em>)<br>
+      • Verb Phrase: <em>[Subject] [verb] [adverb]...</em> (e.g., <em>Figures rose dramatically</em>)
+    </div>
+
+    <div class="q-card" id="card-q36">
+      <div class="q-number">Question 36</div>
+      <div class="q-text">
+        <strong>Noun phrase ➔ Verb phrase:</strong><br>
+        <em>Original:</em> "Between 2018 and 2021, there was a <strong>dramatic increase</strong> in renewable energy investments."<br>
+        <em>Rewrite:</em> Between 2018 and 2021, renewable energy investments <input type="text" class="inline-input" style="width:240px;" id="q36" placeholder="verb + adverb">.
+      </div>
+      <div class="feedback-box" id="fb-q36"></div>
+    </div>
+
+    <div class="q-card" id="card-q37">
+      <div class="q-number">Question 37</div>
+      <div class="q-text">
+        <strong>Verb phrase ➔ Noun phrase:</strong><br>
+        <em>Original:</em> "Laptop sales <strong>fell sharply</strong> in the third quarter of 2023."<br>
+        <em>Rewrite:</em> In the third quarter of 2023, there was <input type="text" class="inline-input" style="width:280px;" id="q37" placeholder="article + adjective + noun phrase">.
+      </div>
+      <div class="feedback-box" id="fb-q37"></div>
+    </div>
+
+    <div class="q-card" id="card-q38">
+      <div class="q-number">Question 38</div>
+      <div class="q-text">
+        <strong>Noun phrase ➔ Verb phrase:</strong><br>
+        <em>Original:</em> "From March to June, the clinic recorded a <strong>gradual decrease</strong> in patient visits."<br>
+        <em>Rewrite:</em> From March to June, patient visits <input type="text" class="inline-input" style="width:240px;" id="q38" placeholder="verb + adverb">.
+      </div>
+      <div class="feedback-box" id="fb-q38"></div>
+    </div>
+
+    <div class="q-card" id="card-q39">
+      <div class="q-number">Question 39</div>
+      <div class="q-text">Match each trend descriptor with its synonymous expression:</div>
+      <table class="matching-table">
+        <tr>
+          <td>1. Reached a peak</td>
+          <td>
+            <select class="select-input" id="q39_1">
+              <option value="">-- Match --</option>
+              <option value="a">a. Dropped considerably</option>
+              <option value="b">b. Remained steady</option>
+              <option value="c">c. Hit the highest point</option>
+              <option value="d">d. Rose and fell erratically</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>2. Fluctuated</td>
+          <td>
+            <select class="select-input" id="q39_2">
+              <option value="">-- Match --</option>
+              <option value="a">a. Dropped considerably</option>
+              <option value="b">b. Remained steady</option>
+              <option value="c">c. Hit the highest point</option>
+              <option value="d">d. Rose and fell erratically</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>3. Fell sharply</td>
+          <td>
+            <select class="select-input" id="q39_3">
+              <option value="">-- Match --</option>
+              <option value="a">a. Dropped considerably</option>
+              <option value="b">b. Remained steady</option>
+              <option value="c">c. Hit the highest point</option>
+              <option value="d">d. Rose and fell erratically</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>4. Leveled off</td>
+          <td>
+            <select class="select-input" id="q39_4">
+              <option value="">-- Match --</option>
+              <option value="a">a. Dropped considerably</option>
+              <option value="b">b. Remained steady</option>
+              <option value="c">c. Hit the highest point</option>
+              <option value="d">d. Rose and fell erratically</option>
+            </select>
+          </td>
+        </tr>
+      </table>
+      <div class="feedback-box" id="fb-q39"></div>
+    </div>
+
+    <div class="q-card" id="card-q40">
+      <div class="q-number">Question 40</div>
+      <div class="q-text">
+        <strong>Task 1 Overview Writing:</strong><br>
+        <em>Data summary:</em> In 2000, 12% of households subscribed to digital newspapers. This figure grew to 22% in 2010, 48% in 2020, and reached 65% in 2025.<br>
+        Write a concise, high-scoring <strong>one-sentence overview</strong> of this overall trend:
+      </div>
+      <textarea class="text-area" id="q40" placeholder="Overall, there was..."></textarea>
+      <div class="feedback-box" id="fb-q40"></div>
+    </div>
+
+    <div class="action-bar">
+      <span class="score-badge" id="score-06">Score: -- / 5</span>
+      <button class="btn btn-check" onclick="checkSection06()">CHECK ANSWERS</button>
+      <button class="btn btn-save-submit" onclick="saveSection(6)">SAVE TO SUBMIT</button>
+    </div>
+  </div>
+
+  <!-- ================= SECTION 07 ================= -->
+  <div id="section-07" class="section-page">
+    <div class="section-header">
+      <h2>Section 07: Key Grammar — Prepositions to Describe Graphs (Questions 41–45)</h2>
+      <p>Precision review of <em>at, by, from, to, during, over,</em> and <em>in</em> when reporting data.</p>
+    </div>
+
+    <div class="rule-box">
+      <strong>Prepositions Box:</strong> at | by | from | to | between | during | in | of | over
+    </div>
+
+    <div class="q-card" id="card-q41">
+      <div class="q-number">Question 41</div>
+      <div class="q-text">Solar power output rose dramatically <input type="text" class="inline-input" id="q41a" placeholder="prep"> 250 megawatts in 2015 <input type="text" class="inline-input" id="q41b" placeholder="prep"> 900 megawatts in 2020.</div>
+      <div class="feedback-box" id="fb-q41"></div>
+    </div>
+
+    <div class="q-card" id="card-q42">
+      <div class="q-number">Question 42</div>
+      <div class="q-text">Production reached a peak <input type="text" class="inline-input" id="q42" placeholder="prep"> 1,400 units in August before declining.</div>
+      <div class="feedback-box" id="fb-q42"></div>
+    </div>
+
+    <div class="q-card" id="card-q43">
+      <div class="q-number">Question 43</div>
+      <div class="q-text">Between January and April, total operational expenses fell <input type="text" class="inline-input" id="q43a" placeholder="prep"> £30,000, representing a decrease <input type="text" class="inline-input" id="q43b" placeholder="prep"> nearly 12 percent.</div>
+      <div class="feedback-box" id="fb-q43"></div>
+    </div>
+
+    <div class="q-card" id="card-q44">
+      <div class="q-number">Question 44</div>
+      <div class="q-text"><input type="text" class="inline-input" id="q44a" placeholder="prep"> the decade from 2010 to 2020, enrollment figures fluctuated widely before stabilizing <input type="text" class="inline-input" id="q44b" placeholder="prep"> 5,000 students.</div>
+      <div class="feedback-box" id="fb-q44"></div>
+    </div>
+
+    <div class="q-card" id="card-q45">
+      <div class="q-number">Question 45</div>
+      <div class="q-text">
+        <strong>Identify and correct three preposition mistakes:</strong><br>
+        <em>"The percentage of remote workers increased of 18% on 2021, peaking as 44% in December."</em>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px; margin: 10px 0;">
+        <div>1. Change <strong>of 18%</strong> ➔ to: <input type="text" class="inline-input" id="q45_err1" placeholder="correct preposition"></div>
+        <div>2. Change <strong>on 2021</strong> ➔ to: <input type="text" class="inline-input" id="q45_err2" placeholder="correct preposition"></div>
+        <div>3. Change <strong>peaking as</strong> ➔ to: <input type="text" class="inline-input" id="q45_err3" placeholder="correct preposition"></div>
+      </div>
+      <textarea class="text-area" id="q45_full" placeholder="Write out the full corrected sentence here..."></textarea>
+      <div class="feedback-box" id="fb-q45"></div>
+    </div>
+
+    <div class="action-bar">
+      <span class="score-badge" id="score-07">Score: -- / 5</span>
+      <button class="btn btn-check" onclick="checkSection07()">CHECK ANSWERS</button>
+      <button class="btn btn-save-submit" onclick="saveSection(7)">SAVE TO SUBMIT</button>
+    </div>
+  </div>
+
+  <!-- ================= SECTION 08 ================= -->
+  <div id="section-08" class="section-page">
+    <div class="section-header">
+      <h2>Section 08: Spelling Rules & Adverb Formation (Questions 46–50)</h2>
+      <p>Transform adjectives to adverbs and eliminate frequent orthographical mistakes.</p>
+    </div>
+
+    <div class="rule-box">
+      <strong>Spelling Reference:</strong><br>
+      • Regular adjectives: add <em>-ly</em> (e.g. <em>rapidly</em>)<br>
+      • Ending in <em>-l</em>: double <em>l</em> (e.g. <em>carefully</em>)<br>
+      • Ending in consonant + <em>-y</em>: <em>-ily</em> (e.g. <em>steadily</em>)<br>
+      • Ending in <em>-le</em>: drop <em>-e</em>, add <em>-y</em> (e.g. <em>gently</em>)<br>
+      • Ending in <em>-ic</em>: add <em>-ally</em> (e.g. <em>dramatically</em>)
+    </div>
+
+    <div class="q-card" id="card-q46">
+      <div class="q-number">Question 46</div>
+      <div class="q-text">Form the correct adverb from each base adjective:</div>
+      <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+        <div>a) clear ➔ <input type="text" class="inline-input" id="q46a" placeholder="adverb"></div>
+        <div>b) logic ➔ <input type="text" class="inline-input" id="q46b" placeholder="adverb"></div>
+      </div>
+      <div class="feedback-box" id="fb-q46"></div>
+    </div>
+
+    <div class="q-card" id="card-q47">
+      <div class="q-number">Question 47</div>
+      <div class="q-text">Form the correct adverb from each base adjective:</div>
+      <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+        <div>a) dramatic ➔ <input type="text" class="inline-input" id="q47a" placeholder="adverb"></div>
+        <div>b) steady ➔ <input type="text" class="inline-input" id="q47b" placeholder="adverb"></div>
+      </div>
+      <div class="feedback-box" id="fb-q47"></div>
+    </div>
+
+    <div class="q-card" id="card-q48">
+      <div class="q-number">Question 48</div>
+      <div class="q-text">Form the correct adverb from each base adjective:</div>
+      <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+        <div>a) thorough ➔ <input type="text" class="inline-input" id="q48a" placeholder="adverb"></div>
+        <div>b) gentle ➔ <input type="text" class="inline-input" id="q48b" placeholder="adverb"></div>
+      </div>
+      <div class="feedback-box" id="fb-q48"></div>
+    </div>
+
+    <div class="q-card" id="card-q49">
+      <div class="q-number">Question 49</div>
+      <div class="q-text">
+        <strong>Identify and correct the misspelled adverb in this sentence:</strong><br>
+        <em>"The online writing modules were factual accurate, but the lesson plans were not basicly suitable for complete beginners."</em>
+      </div>
+      <div style="margin-top: 8px;">
+        Misspelled: <em>basicly</em> ➔ Correct: <input type="text" class="inline-input" id="q49" placeholder="corrected spelling">
+      </div>
+      <div class="feedback-box" id="fb-q49"></div>
+    </div>
+
+    <div class="q-card" id="card-q50">
+      <div class="q-number">Question 50</div>
+      <div class="q-text">
+        <strong>Find and correct the three spelling mistakes in this summary:</strong><br>
+        <em>"Ticket sales increased slighty in July, fell steadly during August, and dropped gentley until the end of the year."</em>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
+        <div>1. <em>slighty</em> ➔ <input type="text" class="inline-input" id="q50_1" placeholder="corrected"></div>
+        <div>2. <em>steadly</em> ➔ <input type="text" class="inline-input" id="q50_2" placeholder="corrected"></div>
+        <div>3. <em>gentley</em> ➔ <input type="text" class="inline-input" id="q50_3" placeholder="corrected"></div>
+      </div>
+      <div class="feedback-box" id="fb-q50"></div>
+    </div>
+
+    <div class="action-bar">
+      <span class="score-badge" id="score-08">Score: -- / 5</span>
+      <button class="btn btn-check" onclick="checkSection08()">CHECK ANSWERS</button>
+      <button class="btn btn-save-submit" onclick="saveSection(8)">SAVE TO SUBMIT</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Navigation
+  function switchTab(pageNumber) {
+    document.querySelectorAll('.tab-btn').forEach((btn, idx) => {
+      btn.classList.toggle('active', idx === pageNumber - 1);
+    });
+    document.querySelectorAll('.section-page').forEach((page, idx) => {
+      page.classList.toggle('active', idx === pageNumber - 1);
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Helper formatting
+  function trimLower(val) {
+    return (val || '').trim().toLowerCase();
+  }
+
+  function setFeedback(elementId, isCorrect, correctMsg, userVal) {
+    const el = document.getElementById(elementId);
+    if (!el) return;
+    el.className = 'feedback-box ' + (isCorrect ? 'correct' : 'incorrect');
+    el.innerHTML = isCorrect 
+      ? `<strong>✓ Correct!</strong> (${correctMsg})`
+      : `<strong>✗ Incorrect.</strong> Target Answer: <strong>${correctMsg}</strong> (Entered: "${userVal || 'none'}")`;
+  }
+
+  function setInfoFeedback(elementId, modelMsg) {
+    const el = document.getElementById(elementId);
+    if (!el) return;
+    el.className = 'feedback-box info';
+    el.innerHTML = `<strong>Model / Benchmark Response:</strong><br>${modelMsg}`;
+  }
+
+  // Section 01 Checker
+  function checkSection01() {
+    let score = 0;
+    const total = 8;
+
+    // Q1
+    const q1Val = trimLower(document.getElementById('q1').value);
+    const q1Ok = q1Val === 'enrolment' || q1Val === 'enrollment';
+    if (q1Ok) score++;
+    setFeedback('fb-q1', q1Ok, 'enrolment / enrollment', q1Val);
+
+    // Q2
+    const q2Val = trimLower(document.getElementById('q2').value);
+    const q2Ok = q2Val === 'feedback';
+    if (q2Ok) score++;
+    setFeedback('fb-q2', q2Ok, 'feedback', q2Val);
+
+    // Q3
+    const q3Val = trimLower(document.getElementById('q3').value);
+    const q3Ok = q3Val === 'seminar' || q3Val === 'tutorial';
+    if (q3Ok) score++;
+    setFeedback('fb-q3', q3Ok, 'seminar (or tutorial)', q3Val);
+
+    // Q4
+    const q4Selected = document.querySelector('input[name="q4"]:checked');
+    const q4Val = q4Selected ? q4Selected.value : '';
+    const q4Ok = q4Val === 'B';
+    if (q4Ok) score++;
+    setFeedback('fb-q4', q4Ok, 'B (assignment)', q4Val);
+
+    // Q5
+    const q5Selected = document.querySelector('input[name="q5"]:checked');
+    const q5Val = q5Selected ? q5Selected.value : '';
+    const q5Ok = q5Val === 'A';
+    if (q5Ok) score++;
+    setFeedback('fb-q5', q5Ok, 'A (fill out)', q5Val);
+
+    // Q6
+    const q6Selected = document.querySelector('input[name="q6"]:checked');
+    const q6Val = q6Selected ? q6Selected.value : '';
+    const q6Ok = q6Val === 'B';
+    if (q6Ok) score++;
+    setFeedback('fb-q6', q6Ok, 'B (engaged)', q6Val);
+
+    // Q7 (Written)
+    setInfoFeedback('fb-q7', 'A <strong>lecture</strong> is a formal talk delivered to a large group with limited participation, while a <strong>tutorial</strong> is a small interactive class where students discuss work and ask questions directly with a tutor.');
+    if (document.getElementById('q7').value.trim().length > 10) score++;
+
+    // Q8
+    const q8Val = trimLower(document.getElementById('q8').value);
+    const q8Ok = q8Val.includes('read') && q8Val.includes('write');
+    if (q8Ok) score++;
+    setFeedback('fb-q8', q8Ok, 'Unable to read or write', q8Val);
+
+    const badge = document.getElementById('score-01');
+    badge.style.display = 'inline-block';
+    badge.textContent = `Score: ${score} / ${total}`;
+    return score;
+  }
+
+  // Section 02 Checker
+  function checkSection02() {
+    let score = 0;
+    const total = 8;
+
+    const q9Val = document.getElementById('q9').value;
+    const q9Ok = q9Val === 'raise';
+    if (q9Ok) score++;
+    setFeedback('fb-q9', q9Ok, 'raise (takes direct object £50,000)', q9Val);
+
+    const q10Val = document.getElementById('q10').value;
+    const q10Ok = q10Val === 'rise';
+    if (q10Ok) score++;
+    setFeedback('fb-q10', q10Ok, 'rise (intransitive; no object)', q10Val);
+
+    const q11Val = document.getElementById('q11').value;
+    const q11Ok = q11Val === 'raised';
+    if (q11Ok) score++;
+    setFeedback('fb-q11', q11Ok, 'raised (transitive past tense)', q11Val);
+
+    const q12Val = document.getElementById('q12').value;
+    const q12Ok = q12Val === 'rose';
+    if (q12Ok) score++;
+    setFeedback('fb-q12', q12Ok, 'rose (intransitive past tense)', q12Val);
+
+    const q13Val = trimLower(document.getElementById('q13').value);
+    const q13Ok = q13Val.includes('raised');
+    if (q13Ok) score++;
+    setFeedback('fb-q13', q13Ok, 'raised (government raised the minimum wage)', q13Val);
+
+    const q14Val = trimLower(document.getElementById('q14').value);
+    const q14Ok = q14Val.includes('rose');
+    if (q14Ok) score++;
+    setFeedback('fb-q14', q14Ok, 'rose (rental values rose dramatically)', q14Val);
+
+    const q15Val = trimLower(document.getElementById('q15').value);
+    const q15Ok = q15Val.includes('rose sharply') || q15Val.includes('increased sharply');
+    if (q15Ok) score++;
+    setFeedback('fb-q15', q15Ok, 'rose sharply (or increased sharply)', q15Val);
+
+    setInfoFeedback('fb-q16', '<strong>Form error:</strong> "Rise" is irregular (rise, rose, risen); the word "rised" does not exist.<br><strong>Transitivity error:</strong> "Rise" cannot take an object ("employee salaries"). The transitive verb "raise" is required: <em>"The company raised employee salaries."</em>');
+    if (document.getElementById('q16').value.trim().length > 10) score++;
+
+    const badge = document.getElementById('score-02');
+    badge.style.display = 'inline-block';
+    badge.textContent = `Score: ${score} / ${total}`;
+    return score;
+  }
+
+  // Section 03 Checker
+  function checkSection03() {
+    let score = 0;
+    const total = 7;
+
+    setInfoFeedback('fb-q17', '<strong>Chunking:</strong> Reading groups/blocks of words together at a glance instead of reading individual letters or words one by one.');
+    if (document.getElementById('q17').value.trim().length > 5) score++;
+
+    setInfoFeedback('fb-q18', '<strong>Vocalizing aloud:</strong> Forces written information to complete a longer motor/speech circuit in the brain before meaning is registered.');
+    if (document.getElementById('q18').value.trim().length > 5) score++;
+
+    setInfoFeedback('fb-q19', '<strong>Skipping back:</strong> Causes irregular eye movements, tires eye muscles quickly, breaks structure, and muddles overall comprehension.');
+    if (document.getElementById('q19').value.trim().length > 5) score++;
+
+    const q20Sel = document.querySelector('input[name="q20"]:checked');
+    const q20Val = q20Sel ? q20Sel.value : '';
+    const q20Ok = q20Val === 'B';
+    if (q20Ok) score++;
+    setFeedback('fb-q20', q20Ok, 'B (Skimming the material quickly)', q20Val);
+
+    const q21a = trimLower(document.getElementById('q21a').value);
+    const q21b = trimLower(document.getElementById('q21b').value);
+    const q21Ok = (q21a === 'first' && q21b === 'last') || (q21a === 'last' && q21b === 'first');
+    if (q21Ok) score++;
+    setFeedback('fb-q21', q21Ok, 'first and last letters', `${q21a}, ${q21b}`);
+
+    setInfoFeedback('fb-q22', '<strong>Switch material:</strong> Switch to reading texts that genuinely interest you and grab your attention to re-engage active focus.');
+    if (document.getElementById('q22').value.trim().length > 5) score++;
+
+    const q23Sel = document.querySelector('input[name="q23"]:checked');
+    const q23Val = q23Sel ? q23Sel.value : '';
+    const q23Ok = q23Val === 'False';
+    if (q23Ok) score++;
+    setFeedback('fb-q23', q23Ok, 'False (Competitors must remember at least 50% of the content to qualify)', q23Val);
+
+    const badge = document.getElementById('score-03');
+    badge.style.display = 'inline-block';
+    badge.textContent = `Score: ${score} / ${total}`;
+    return score;
+  }
+
+  // Section 04 Checker
+  function checkSection04() {
+    let score = 0;
+    const total = 7;
+
+    const q24a = trimLower(document.getElementById('q24a').value);
+    const q24b = trimLower(document.getElementById('q24b').value);
+    const q24Ok = (q24a.includes('in my view') || q24a.includes('i think')) && (q24b.includes('because') || q24b.includes('as'));
+    if (q24Ok) score++;
+    setFeedback('fb-q24', q24Ok, 'In my view / because (or as)', `${q24a} / ${q24b}`);
+
+    const q25a = trimLower(document.getElementById('q25a').value);
+    const q25b = trimLower(document.getElementById('q25b').value);
+    const q25c = trimLower(document.getElementById('q25c').value);
+    const q25Ok = q25a.includes('depend') && q25b.includes('one reason') && q25c.includes('another');
+    if (q25Ok) score++;
+    setFeedback('fb-q25', q25Ok, 'I think it depends / One reason is that / Another reason is that', `${q25a} / ${q25b} / ${q25c}`);
+
+    const q26a = document.getElementById('q26a').value;
+    const q26b = document.getElementById('q26b').value;
+    const q26c = document.getElementById('q26c').value;
+    const q26d = document.getElementById('q26d').value;
+    const q26Ok = q26a === '1' && q26b === '2' && q26c === '1' && q26d === '2';
+    if (q26Ok) score++;
+    setFeedback('fb-q26', q26Ok, 'a: 1 (Opinion), b: 2 (Reason), c: 1 (Opinion), d: 2 (Reason)', `a:${q26a}, b:${q26b}, c:${q26c}, d:${q26d}`);
+
+    setInfoFeedback('fb-q27', '<strong>Model Answer:</strong> In my view, reading books is essential for young children, primarily because it stimulates creative imagination and develops foundational literacy.');
+    if (document.getElementById('q27').value.trim().length > 10) score++;
+
+    setInfoFeedback('fb-q28', '<strong>Model Answer:</strong> In my view, many adults struggle to read regularly because demanding workplace obligations leave them mentally drained, leading them toward passive screen entertainment.');
+    if (document.getElementById('q28').value.trim().length > 10) score++;
+
+    setInfoFeedback('fb-q29', '<strong>Model Answer:</strong> I would say that teachers should let students choose titles matching their personal interests, particularly because genuine curiosity accelerates reading confidence.');
+    if (document.getElementById('q29').value.trim().length > 10) score++;
+
+    const q30Val = trimLower(document.getElementById('q30').value);
+    const q30Ok = q30Val === 'illiterate';
+    if (q30Ok) score++;
+    setFeedback('fb-q30', q30Ok, 'illiterate', q30Val);
+
+    const badge = document.getElementById('score-04');
+    badge.style.display = 'inline-block';
+    badge.textContent = `Score: ${score} / ${total}`;
+    return score;
+  }
+
+  // Section 05 Checker
+  function checkSection05() {
+    let score = 0;
+    const total = 5;
+
+    const q31a = document.getElementById('q31a').value;
+    const q31b = document.getElementById('q31b').value;
+    const q31Ok = q31a === '2' && q31b === '4';
+    if (q31Ok) score++;
+    setFeedback('fb-q31', q31Ok, 'par-TIC-u-lar-ly (2nd) & im-ag-i-NA-tion (4th)', `a:${q31a}, b:${q31b}`);
+
+    const q32a = document.getElementById('q32a').value;
+    const q32b = document.getElementById('q32b').value;
+    const q32Ok = q32a === '3' && q32b === '2';
+    if (q32Ok) score++;
+    setFeedback('fb-q32', q32Ok, 'ed-u-CA-tion (3rd) & il-LIT-er-ate (2nd)', `a:${q32a}, b:${q32b}`);
+
+    const q33a = document.getElementById('q33a').value;
+    const q33b = document.getElementById('q33b').value;
+    const q33Ok = q33a === '2' && q33b === '2';
+    if (q33Ok) score++;
+    setFeedback('fb-q33', q33Ok, 'as-SIGN-ment (2nd) & re-LAX (2nd)', `a:${q33a}, b:${q33b}`);
+
+    const q34Sel = document.querySelector('input[name="q34"]:checked');
+    const q34Val = q34Sel ? q34Sel.value : '';
+    const q34Ok = q34Val === 'B';
+    if (q34Ok) score++;
+    setFeedback('fb-q34', q34Ok, 'B (SEC-on-dar-y — 1st syllable stress)', q34Val);
+
+    const q35Sel = document.querySelector('input[name="q35"]:checked');
+    const q35Val = q35Sel ? q35Sel.value : '';
+    const q35Ok = q35Val === 'C';
+    if (q35Ok) score++;
+    setFeedback('fb-q35', q35Ok, 'C (pre-FER — 2nd syllable stress)', q35Val);
+
+    const badge = document.getElementById('score-05');
+    badge.style.display = 'inline-block';
+    badge.textContent = `Score: ${score} / ${total}`;
+    return score;
+  }
+
+  // Section 06 Checker
+  function checkSection06() {
+    let score = 0;
+    const total = 5;
+
+    const q36Val = trimLower(document.getElementById('q36').value);
+    const q36Ok = q36Val.includes('increased dramatically') || q36Val.includes('rose dramatically');
+    if (q36Ok) score++;
+    setFeedback('fb-q36', q36Ok, 'increased dramatically (or rose dramatically)', q36Val);
+
+    const q37Val = trimLower(document.getElementById('q37').value);
+    const q37Ok = q37Val.includes('sharp fall') || q37Val.includes('sharp decrease') || q37Val.includes('sharp drop');
+    if (q37Ok) score++;
+    setFeedback('fb-q37', q37Ok, 'a sharp fall (or sharp decrease/drop) in laptop sales', q37Val);
+
+    const q38Val = trimLower(document.getElementById('q38').value);
+    const q38Ok = q38Val.includes('decreased gradually') || q38Val.includes('fell gradually');
+    if (q38Ok) score++;
+    setFeedback('fb-q38', q38Ok, 'decreased gradually (or fell gradually)', q38Val);
+
+    const m1 = document.getElementById('q39_1').value;
+    const m2 = document.getElementById('q39_2').value;
+    const m3 = document.getElementById('q39_3').value;
+    const m4 = document.getElementById('q39_4').value;
+    const q39Ok = m1 === 'c' && m2 === 'd' && m3 === 'a' && m4 === 'b';
+    if (q39Ok) score++;
+    setFeedback('fb-q39', q39Ok, '1➔c (Hit highest point), 2➔d (Rose and fell erratically), 3➔a (Dropped considerably), 4➔b (Remained steady)', `1:${m1}, 2:${m2}, 3:${m3}, 4:${m4}`);
+
+    setInfoFeedback('fb-q40', '<strong>Model Overview:</strong> Overall, there was a steady and substantial upward trend in the proportion of households subscribing to digital newspapers over the 25-year period.');
+    if (document.getElementById('q40').value.trim().length > 10) score++;
+
+    const badge = document.getElementById('score-06');
+    badge.style.display = 'inline-block';
+    badge.textContent = `Score: ${score} / ${total}`;
+    return score;
+  }
+
+  // Section 07 Checker
+  function checkSection07() {
+    let score = 0;
+    const total = 5;
+
+    const q41a = trimLower(document.getElementById('q41a').value);
+    const q41b = trimLower(document.getElementById('q41b').value);
+    const q41Ok = q41a === 'from' && q41b === 'to';
+    if (q41Ok) score++;
+    setFeedback('fb-q41', q41Ok, 'from ... to', `${q41a} ... ${q41b}`);
+
+    const q42Val = trimLower(document.getElementById('q42').value);
+    const q42Ok = q42Val === 'at';
+    if (q42Ok) score++;
+    setFeedback('fb-q42', q42Ok, 'at (peaked at 1,400 units)', q42Val);
+
+    const q43a = trimLower(document.getElementById('q43a').value);
+    const q43b = trimLower(document.getElementById('q43b').value);
+    const q43Ok = q43a === 'by' && q43b === 'of';
+    if (q43Ok) score++;
+    setFeedback('fb-q43', q43Ok, 'fell by £30,000 ... decrease of 12%', `${q43a} ... ${q43b}`);
+
+    const q44a = trimLower(document.getElementById('q44a').value);
+    const q44b = trimLower(document.getElementById('q44b').value);
+    const q44Ok = (q44a === 'during' || q44a === 'over') && q44b === 'at';
+    if (q44Ok) score++;
+    setFeedback('fb-q44', q44Ok, 'During / Over ... at', `${q44a} ... ${q44b}`);
+
+    const e1 = trimLower(document.getElementById('q45_err1').value);
+    const e2 = trimLower(document.getElementById('q45_err2').value);
+    const e3 = trimLower(document.getElementById('q45_err3').value);
+    const q45Ok = (e1.includes('by')) && (e2.includes('in')) && (e3.includes('at'));
+    if (q45Ok) score++;
+    setFeedback('fb-q45', q45Ok, '1: increased by | 2: in 2021 | 3: peaking at 44%', `1:${e1}, 2:${e2}, 3:${e3}`);
+
+    const badge = document.getElementById('score-07');
+    badge.style.display = 'inline-block';
+    badge.textContent = `Score: ${score} / ${total}`;
+    return score;
+  }
+
+  // Section 08 Checker
+  function checkSection08() {
+    let score = 0;
+    const total = 5;
+
+    const q46a = trimLower(document.getElementById('q46a').value);
+    const q46b = trimLower(document.getElementById('q46b').value);
+    const q46Ok = q46a === 'clearly' && q46b === 'logically';
+    if (q46Ok) score++;
+    setFeedback('fb-q46', q46Ok, 'clearly, logically', `${q46a}, ${q46b}`);
+
+    const q47a = trimLower(document.getElementById('q47a').value);
+    const q47b = trimLower(document.getElementById('q47b').value);
+    const q47Ok = q47a === 'dramatically' && q47b === 'steadily';
+    if (q47Ok) score++;
+    setFeedback('fb-q47', q47Ok, 'dramatically, steadily', `${q47a}, ${q47b}`);
+
+    const q48a = trimLower(document.getElementById('q48a').value);
+    const q48b = trimLower(document.getElementById('q48b').value);
+    const q48Ok = q48a === 'thoroughly' && q48b === 'gently';
+    if (q48Ok) score++;
+    setFeedback('fb-q48', q48Ok, 'thoroughly, gently', `${q48a}, ${q48b}`);
+
+    const q49Val = trimLower(document.getElementById('q49').value);
+    const q49Ok = q49Val === 'basically';
+    if (q49Ok) score++;
+    setFeedback('fb-q49', q49Ok, 'basically', q49Val);
+
+    const s1 = trimLower(document.getElementById('q50_1').value);
+    const s2 = trimLower(document.getElementById('q50_2').value);
+    const s3 = trimLower(document.getElementById('q50_3').value);
+    const q50Ok = s1 === 'slightly' && s2 === 'steadily' && s3 === 'gently';
+    if (q50Ok) score++;
+    setFeedback('fb-q50', q50Ok, '1: slightly | 2: steadily | 3: gently', `${s1}, ${s2}, ${s3}`);
+
+    const badge = document.getElementById('score-08');
+    badge.style.display = 'inline-block';
+    badge.textContent = `Score: ${score} / ${total}`;
+    return score;
+  }
+
+  // SAVE TO SUBMIT FUNCTION
+  function saveSection(secNumber) {
+    // 1. Run check first to evaluate current section
+    let score = 0;
+    let totalQuestions = 0;
+
+    if (secNumber === 1) { score = checkSection01(); totalQuestions = 8; }
+    else if (secNumber === 2) { score = checkSection02(); totalQuestions = 8; }
+    else if (secNumber === 3) { score = checkSection03(); totalQuestions = 7; }
+    else if (secNumber === 4) { score = checkSection04(); totalQuestions = 7; }
+    else if (secNumber === 5) { score = checkSection05(); totalQuestions = 5; }
+    else if (secNumber === 6) { score = checkSection06(); totalQuestions = 5; }
+    else if (secNumber === 7) { score = checkSection07(); totalQuestions = 5; }
+    else if (secNumber === 8) { score = checkSection08(); totalQuestions = 5; }
+
+    const studentName = document.getElementById('studentName').value.trim() || 'Student';
+    const studentId = document.getElementById('studentId').value.trim() || 'Unassigned';
+    const pageStr = String(secNumber).padStart(2, '0');
+    const filename = `UNIT 07 SUBMISSION ${pageStr}.md`;
+    const timestamp = new Date().toLocaleString();
+
+    // 2. Build Markdown content
+    let md = `# UNIT 07 SUBMISSION ${pageStr}\n\n`;
+    md += `**Student Name:** ${studentName}  \n`;
+    md += `**Cohort/ID:** ${studentId}  \n`;
+    md += `**Date/Time:** ${timestamp}  \n`;
+    md += `**Section:** ${secNumber} of 8  \n`;
+    md += `**Automated Evaluation Score:** ${score} / ${totalQuestions}  \n\n`;
+    md += `---\n\n## Section Questions & Student Responses\n\n`;
+
+    const secContainer = document.getElementById(`section-${pageStr}`);
+    const cards = secContainer.querySelectorAll('.q-card');
+
+    cards.forEach((card) => {
+      const qNum = card.querySelector('.q-number')?.textContent || 'Question';
+      const qText = card.querySelector('.q-text')?.innerText.replace(/\n+/g, ' ') || '';
+      
+      // Extract inputs
+      const textInputs = card.querySelectorAll('input[type="text"], textarea');
+      const radios = card.querySelectorAll('input[type="radio"]:checked');
+      const selects = card.querySelectorAll('select');
+      const feedback = card.querySelector('.feedback-box')?.innerText.replace(/\n+/g, ' ') || '';
+
+      let studentAns = [];
+      radios.forEach(r => studentAns.push(`Option ${r.value}`));
+      selects.forEach(s => {
+        if (s.value) {
+          const selectedText = s.options[s.selectedIndex]?.text || s.value;
+          studentAns.push(selectedText);
+        }
+      });
+      textInputs.forEach(ti => {
+        if (ti.value.trim()) studentAns.push(ti.value.trim());
+      });
+
+      const finalAns = studentAns.length > 0 ? studentAns.join(' | ') : '*[No answer entered]*';
+
+      md += `### ${qNum}\n`;
+      md += `* **Prompt:** ${qText}\n`;
+      md += `* **Student Answer:** ${finalAns}\n`;
+      if (feedback) {
+        md += `* **Evaluation / Key:** ${feedback}\n`;
+      }
+      md += `\n`;
+    });
+
+    md += `---\n*Generated by Complete IELTS Band 4-5 Interactive Activity Sheet*\n`;
+
+    // 3. Trigger Markdown file download
+    const blob = new Blob([md], { type: 'text/markdown;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const downloadAnchor = document.createElement('a');
+    downloadAnchor.href = url;
+    downloadAnchor.download = filename;
+    document.body.appendChild(downloadAnchor);
+    downloadAnchor.click();
+    document.body.removeChild(downloadAnchor);
+    URL.revokeObjectURL(url);
+  }
+</script>
+
+</body>
+</html>
