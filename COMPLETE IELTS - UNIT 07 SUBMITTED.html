@@ -1,0 +1,1571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Complete IELTS Bands 4-5 | Unit 7: Literacy Skills</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --secondary: #475569;
+      --accent: #0ea5e9;
+      --bg-page: #f8fafc;
+      --bg-card: #ffffff;
+      --border: #e2e8f0;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --success: #10b981;
+      --success-dark: #059669;
+      --error: #ef4444;
+      --correct-bg: #ecfdf5;
+      --incorrect-bg: #fef2f2;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 24px;
+    }
+
+    .container {
+      max-width: 1040px;
+      margin: 0 auto;
+      background: var(--bg-card);
+      border-radius: 12px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1e293b, #0f172a);
+      color: #ffffff;
+      padding: 28px 32px;
+      border-bottom: 3px solid var(--primary);
+    }
+
+    header h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    header p {
+      color: #94a3b8;
+      font-size: 0.95rem;
+      margin-top: 4px;
+    }
+
+    .nav-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      background: #f1f5f9;
+      border-bottom: 1px solid var(--border);
+      padding: 8px 16px 0;
+      gap: 6px;
+    }
+
+    .nav-tab {
+      padding: 10px 16px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      border: 1px solid transparent;
+      border-bottom: none;
+      border-radius: 8px 8px 0 0;
+      background: transparent;
+      color: var(--secondary);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .nav-tab:hover {
+      background: #e2e8f0;
+      color: var(--text-main);
+    }
+
+    .nav-tab.active {
+      background: var(--bg-card);
+      color: var(--primary);
+      border-color: var(--border);
+      position: relative;
+      margin-bottom: -1px;
+      border-bottom: 2px solid var(--bg-card);
+    }
+
+    .tab-content {
+      display: none;
+      padding: 32px;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      color: #1e293b;
+      margin-bottom: 16px;
+      border-bottom: 2px solid #f1f5f9;
+      padding-bottom: 8px;
+    }
+
+    h3 {
+      font-size: 1.1rem;
+      color: #334155;
+      margin: 24px 0 12px;
+    }
+
+    .instructions {
+      background: #f8fafc;
+      border-left: 4px solid var(--primary);
+      padding: 12px 16px;
+      margin-bottom: 20px;
+      font-size: 0.92rem;
+      color: var(--secondary);
+      border-radius: 0 6px 6px 0;
+    }
+
+    .exam-advice {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin: 20px 0;
+      font-size: 0.9rem;
+      color: #1e40af;
+    }
+
+    .exam-advice strong {
+      display: block;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+    }
+
+    .collapsible-trigger {
+      display: inline-block;
+      margin: 12px 0 16px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--primary);
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 6px;
+      padding: 6px 12px;
+      cursor: pointer;
+    }
+
+    .collapsible-box {
+      display: none;
+      background: #fafafa;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      font-size: 0.88rem;
+      line-height: 1.7;
+      margin-bottom: 20px;
+      max-height: 380px;
+      overflow-y: auto;
+    }
+
+    .card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .reading-passage {
+      background: #fafafa;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      line-height: 1.8;
+      font-size: 0.95rem;
+      margin-bottom: 24px;
+    }
+
+    .reading-passage p {
+      margin-bottom: 14px;
+    }
+
+    .q-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px dashed #f1f5f9;
+    }
+
+    .q-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .q-label {
+      font-size: 0.92rem;
+      font-weight: 500;
+    }
+
+    .q-options {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 4px;
+      margin-left: 8px;
+    }
+
+    .q-options label {
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    input[type="text"], select, textarea {
+      padding: 8px 12px;
+      font-size: 0.92rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: #ffffff;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      font-family: inherit;
+    }
+
+    input[type="text"]:focus, select:focus, textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15);
+    }
+
+    .inline-input {
+      width: 190px;
+      display: inline-block;
+      margin: 0 4px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .table-activity {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 0.9rem;
+    }
+
+    .table-activity th, .table-activity td {
+      border: 1px solid var(--border);
+      padding: 10px 14px;
+      text-align: left;
+      vertical-align: middle;
+    }
+
+    .table-activity th {
+      background: #f8fafc;
+      font-weight: 600;
+      color: #334155;
+    }
+
+    .actions-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 32px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    .score-badge {
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 6px 14px;
+      border-radius: 20px;
+      display: none;
+    }
+
+    .score-badge.show {
+      display: inline-block;
+    }
+
+    .score-badge.good {
+      background: #d1fae5;
+      color: #065f46;
+    }
+
+    .score-badge.average {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .score-badge.retry {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .button-group-right {
+      margin-left: auto;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .btn {
+      padding: 10px 22px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-check {
+      background: #334155;
+      color: #ffffff;
+    }
+
+    .btn-check:hover {
+      background: #1e293b;
+    }
+
+    .btn-save {
+      background: var(--success);
+      color: #ffffff;
+      box-shadow: 0 2px 4px rgba(16, 185, 129, 0.25);
+    }
+
+    .btn-save:hover {
+      background: var(--success-dark);
+      box-shadow: 0 4px 6px rgba(16, 185, 129, 0.35);
+      transform: translateY(-1px);
+    }
+
+    .is-correct {
+      border-color: var(--success) !important;
+      background-color: var(--correct-bg) !important;
+    }
+
+    .is-incorrect {
+      border-color: var(--error) !important;
+      background-color: var(--incorrect-bg) !important;
+    }
+
+    .status-msg {
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-left: 6px;
+    }
+
+    .status-correct {
+      color: var(--success-dark);
+    }
+
+    .status-incorrect {
+      color: var(--error);
+    }
+
+    .word-counter {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 6px;
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>Complete IELTS Bands 4-5</h1>
+    <p>Unit 7: Literacy Skills | Interactive Section Practice & Markdown Submission</p>
+  </header>
+
+  <!-- Navigation Tabs -->
+  <nav class="nav-tabs" role="tablist">
+    <button class="nav-tab active" onclick="switchTab(1)" id="tab-btn-1">01 Starting & Vocab</button>
+    <button class="nav-tab" onclick="switchTab(2)" id="tab-btn-2">02 Listening</button>
+    <button class="nav-tab" onclick="switchTab(3)" id="tab-btn-3">03 Reading</button>
+    <button class="nav-tab" onclick="switchTab(4)" id="tab-btn-4">04 Speaking & Stress</button>
+    <button class="nav-tab" onclick="switchTab(5)" id="tab-btn-5">05 Writing: Trends</button>
+    <button class="nav-tab" onclick="switchTab(6)" id="tab-btn-6">06 Grammar & Spelling</button>
+    <button class="nav-tab" onclick="switchTab(7)" id="tab-btn-7">07 Task 1 Practice</button>
+  </nav>
+
+  <!-- ========================================================================= -->
+  <!-- SECTION 01: Starting Off & Vocabulary -->
+  <!-- ========================================================================= -->
+  <section class="tab-content active" id="sec-1">
+    <h2>Section 01: Starting Off & Vocabulary (Raise vs. Rise)</h2>
+    
+    <div class="instructions">
+      <strong>Part 1: Study Activities</strong> &mdash; Match each academic situation description (1–6) with the correct phrase from the box.
+    </div>
+
+    <div class="card">
+      <div class="q-item" data-qid="sec1_q1" data-ans="d">
+        <label class="q-label">1. A student working alone in a quiet hall with reference books, catalogues, and stacks:</label>
+        <select class="inline-input">
+          <option value="">-- Choose phrase --</option>
+          <option value="a">a attending a lecture</option>
+          <option value="b">b talking to a tutor</option>
+          <option value="c">c writing an assignment</option>
+          <option value="d">d using the library</option>
+          <option value="e">e giving a presentation</option>
+          <option value="f">f participating in a seminar</option>
+        </select>
+      </div>
+
+      <div class="q-item" data-qid="sec1_q2" data-ans="a">
+        <label class="q-label">2. Sitting in a large auditorium listening to a professor speak from a podium:</label>
+        <select class="inline-input">
+          <option value="">-- Choose phrase --</option>
+          <option value="a">a attending a lecture</option>
+          <option value="b">b talking to a tutor</option>
+          <option value="c">c writing an assignment</option>
+          <option value="d">d using the library</option>
+          <option value="e">e giving a presentation</option>
+          <option value="f">f participating in a seminar</option>
+        </select>
+      </div>
+
+      <div class="q-item" data-qid="sec1_q3" data-ans="c">
+        <label class="q-label">3. Drafting and producing an essay or coursework report on paper or laptop:</label>
+        <select class="inline-input">
+          <option value="">-- Choose phrase --</option>
+          <option value="a">a attending a lecture</option>
+          <option value="b">b talking to a tutor</option>
+          <option value="c">c writing an assignment</option>
+          <option value="d">d using the library</option>
+          <option value="e">e giving a presentation</option>
+          <option value="f">f participating in a seminar</option>
+        </select>
+      </div>
+
+      <div class="q-item" data-qid="sec1_q4" data-ans="b">
+        <label class="q-label">4. Having a one-to-one consultation or academic review in an instructor's office:</label>
+        <select class="inline-input">
+          <option value="">-- Choose phrase --</option>
+          <option value="a">a attending a lecture</option>
+          <option value="b">b talking to a tutor</option>
+          <option value="c">c writing an assignment</option>
+          <option value="d">d using the library</option>
+          <option value="e">e giving a presentation</option>
+          <option value="f">f participating in a seminar</option>
+        </select>
+      </div>
+
+      <div class="q-item" data-qid="sec1_q5" data-ans="f">
+        <label class="q-label">5. Joining in a small group academic discussion guided by a course instructor:</label>
+        <select class="inline-input">
+          <option value="">-- Choose phrase --</option>
+          <option value="a">a attending a lecture</option>
+          <option value="b">b talking to a tutor</option>
+          <option value="c">c writing an assignment</option>
+          <option value="d">d using the library</option>
+          <option value="e">e giving a presentation</option>
+          <option value="f">f participating in a seminar</option>
+        </select>
+      </div>
+
+      <div class="q-item" data-qid="sec1_q6" data-ans="e">
+        <label class="q-label">6. Standing in front of a class and delivering a prepared talk with slides or visual aids:</label>
+        <select class="inline-input">
+          <option value="">-- Choose phrase --</option>
+          <option value="a">a attending a lecture</option>
+          <option value="b">b talking to a tutor</option>
+          <option value="c">c writing an assignment</option>
+          <option value="d">d using the library</option>
+          <option value="e">e giving a presentation</option>
+          <option value="f">f participating in a seminar</option>
+        </select>
+      </div>
+    </div>
+
+    <h3>Vocabulary: Raise vs. Rise</h3>
+    <div class="exam-advice">
+      <strong>Grammar Rule</strong>
+      • <strong>raise</strong> (regular: <em>raise, raised, raised</em>): transitive &mdash; takes an object. <em>e.g. The government has raised the price.</em><br>
+      • <strong>rise</strong> (irregular: <em>rise, rose, risen</em>; noun: <em>rise</em>): intransitive &mdash; no object. <em>e.g. The price of petrol is rising.</em>
+    </div>
+
+    <div class="card">
+      <p style="margin-bottom: 12px; font-weight: 600;">Choose the correct verb in each sentence:</p>
+      
+      <div class="q-item" data-qid="sec1_q7" data-ans="raise">
+        <label class="q-label">1. I just want to</label>
+        <div>
+          <select class="inline-input">
+            <option value="">-- Select --</option>
+            <option value="raise">raise</option>
+            <option value="rise">rise</option>
+          </select> the standard of my own writing.
+        </div>
+      </div>
+
+      <div class="q-item" data-qid="sec1_q8" data-ans="rise">
+        <label class="q-label">2. I'd like my salary to</label>
+        <div>
+          <select class="inline-input">
+            <option value="">-- Select --</option>
+            <option value="raise">raise</option>
+            <option value="rise">rise</option>
+          </select>.
+        </div>
+      </div>
+
+      <div class="q-item" data-qid="sec1_q9" data-ans="raised">
+        <label class="q-label">3. They've just</label>
+        <div>
+          <select class="inline-input">
+            <option value="">-- Select --</option>
+            <option value="raised">raised</option>
+            <option value="risen">risen</option>
+          </select> the prices.
+        </div>
+      </div>
+
+      <div class="q-item" data-qid="sec1_q10" data-ans="rose">
+        <label class="q-label">4. Fees</label>
+        <div>
+          <select class="inline-input">
+            <option value="">-- Select --</option>
+            <option value="raised">raised</option>
+            <option value="rose">rose</option>
+          </select> a month ago, I'm afraid.
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <p style="margin-bottom: 12px; font-weight: 600;">Candidate Error Correction &mdash; Type the correct replacement word for the underlined mistake:</p>
+
+      <div class="q-item" data-qid="sec1_q11" data-ans="risen">
+        <label class="q-label">1. "The number of internet users in Asia has <u>rised</u> from 1.1 to 1.5 million."</label>
+        <div>Replacement: <input type="text" class="inline-input" placeholder="correct verb"></div>
+      </div>
+
+      <div class="q-item" data-qid="sec1_q12" data-ans="rises">
+        <label class="q-label">2. "For women today, the trend <u>raises</u> a little bit to 41 percent."</label>
+        <div>Replacement: <input type="text" class="inline-input" placeholder="correct verb"></div>
+      </div>
+
+      <div class="q-item" data-qid="sec1_q13" data-ans="raise">
+        <label class="q-label">3. "The government is trying to <u>rise</u> educational standards."</label>
+        <div>Replacement: <input type="text" class="inline-input" placeholder="correct verb"></div>
+      </div>
+
+      <div class="q-item" data-qid="sec1_q14" data-ans="rose">
+        <label class="q-label">4. "In 2010, the figure <u>rised</u> gently from 1.8 to 2 million."</label>
+        <div>Replacement: <input type="text" class="inline-input" placeholder="correct verb"></div>
+      </div>
+    </div>
+
+    <div class="actions-footer">
+      <span class="score-badge" id="score-1"></span>
+      <div class="button-group-right">
+        <button class="btn btn-check" onclick="gradeSection(1)">CHECK ANSWERS</button>
+        <button class="btn btn-save" onclick="saveToSubmit(1)">SAVE TO SUBMIT</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- SECTION 02: Listening -->
+  <!-- ========================================================================= -->
+  <section class="tab-content" id="sec-2">
+    <h2>Section 02: Listening &mdash; Online Writing Course</h2>
+    
+    <div class="instructions">
+      Complete the form and multiple choice questions. You can expand the audio transcript below if you do not have the external audio file playing.
+    </div>
+
+    <button class="collapsible-trigger" onclick="toggleVisibility('script-sec2')">▶ Toggle Listening Script (Track 7 &amp; 8)</button>
+    <div id="script-sec2" class="collapsible-box">
+      <p><strong>Advisor:</strong> Good morning. The Writing School, can I help you?</p>
+      <p><strong>Caller:</strong> Oh, hi. I'm ringing about the online writing courses you advertise on the Internet...</p>
+      <p><strong>Advisor:</strong> Yes... would you like me to send you a brochure?</p>
+      <p><strong>Caller:</strong> Um, I would, but I also have some questions.</p>
+      <p><strong>Advisor:</strong> OK, well, let me take your details first, and then I can deal with the questions after that. First name?</p>
+      <p><strong>Caller:</strong> Yes, it's Alex.</p>
+      <p><strong>Advisor:</strong> And last name?</p>
+      <p><strong>Caller:</strong> It's Sachdeva. S-A-C-H-D-E-V-A.</p>
+      <p><strong>Advisor:</strong> OK, and address?</p>
+      <p><strong>Caller:</strong> Flat 4A, 396 New Valley Road, Preston. Postcode PN6 3BZ.</p>
+      <p><strong>Advisor:</strong> Phone number?</p>
+      <p><strong>Caller:</strong> 0787 345077.</p>
+      <p><strong>Advisor:</strong> Email is Alex7@ptu.com. As you're moving, I'll put 'deliver brochure next week' in the message box...</p>
+      <p><strong>Caller:</strong> Well, I work in an advertising agency, so I'd like to write better so that... well, I'd like my salary to rise.</p>
+      <p><strong>Advisor:</strong> We'll send the brochure for business writing. Course pack contains books, an audio course on CDs and instructional DVDs, and lesson texts...</p>
+      <p><strong>Caller:</strong> How much?</p>
+      <p><strong>Advisor:</strong> Fees rose a month ago by 10% &mdash; it was £340, but it's £375 now.</p>
+      <p><strong>Advisor:</strong> Your first assignment is about the future: what you want to get from the course, and how it will help your ambitions. Continuous online support includes a web-based facility for all students to get together and share ideas.</p>
+    </div>
+
+    <h3>Questions 1–5: Form Completion</h3>
+    <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 12px;">Write <strong>NO MORE THAN TWO WORDS AND/OR A NUMBER</strong> for each answer.</p>
+
+    <div class="card">
+      <table class="table-activity">
+        <tr>
+          <th colspan="2">Online Writing Course &mdash; Request for brochure</th>
+        </tr>
+        <tr>
+          <td style="width: 25%;">First name:</td>
+          <td>Alex (Example)</td>
+        </tr>
+        <tr>
+          <td>Last name:</td>
+          <td>
+            <div class="q-item" data-qid="sec2_q1" data-ans="Sachdeva" style="border:none; margin:0; padding:0;">
+              1. <input type="text" class="inline-input" placeholder="Last name">
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>Address:</td>
+          <td>
+            <div class="q-item" data-qid="sec2_q2" data-ans="New Valley" style="border:none; margin:0; padding:0;">
+              Flat 4A, 396 2. <input type="text" class="inline-input" placeholder="Road name"> Road
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>Town/City:</td>
+          <td>Preston</td>
+        </tr>
+        <tr>
+          <td>Postcode:</td>
+          <td>
+            <div class="q-item" data-qid="sec2_q3" data-ans="PN6 3BZ" style="border:none; margin:0; padding:0;">
+              3. <input type="text" class="inline-input" placeholder="Postcode">
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>Phone number:</td>
+          <td>
+            <div class="q-item" data-qid="sec2_q4" data-ans="0787 345077" style="border:none; margin:0; padding:0;">
+              4. <input type="text" class="inline-input" placeholder="Phone number">
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>Email address:</td>
+          <td>alex7@ptu.com</td>
+        </tr>
+        <tr>
+          <td>Message box:</td>
+          <td>
+            <div class="q-item" data-qid="sec2_q5" data-ans="next week" style="border:none; margin:0; padding:0;">
+              deliver brochure 5. <input type="text" class="inline-input" placeholder="time/instructions">
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <h3>Questions 6–10: Multiple Choice</h3>
+    <div class="card">
+      <div class="q-item" data-qid="sec2_q6" data-ans="B">
+        <label class="q-label">6. The caller wants to do a writing course to help with</label>
+        <div class="q-options">
+          <label><input type="radio" name="sec2_q6" value="A"> A his hobby.</label>
+          <label><input type="radio" name="sec2_q6" value="B"> B his job.</label>
+          <label><input type="radio" name="sec2_q6" value="C"> C his children's education.</label>
+        </div>
+      </div>
+
+      <div class="q-item" data-qid="sec2_q7" data-ans="A">
+        <label class="q-label">7. What does the course pack include?</label>
+        <div class="q-options">
+          <label><input type="radio" name="sec2_q7" value="A"> A multimedia items</label>
+          <label><input type="radio" name="sec2_q7" value="B"> B a list of books to buy</label>
+          <label><input type="radio" name="sec2_q7" value="C"> C lesson and assignment dates</label>
+        </div>
+      </div>
+
+      <div class="q-item" data-qid="sec2_q8" data-ans="B">
+        <label class="q-label">8. How much does the course cost?</label>
+        <div class="q-options">
+          <label><input type="radio" name="sec2_q8" value="A"> A £340</label>
+          <label><input type="radio" name="sec2_q8" value="B"> B £375</label>
+          <label><input type="radio" name="sec2_q8" value="C"> C £400</label>
+        </div>
+      </div>
+
+      <div class="q-item" data-qid="sec2_q9" data-ans="C">
+        <label class="q-label">9. Alex's first assignment will be about his</label>
+        <div class="q-options">
+          <label><input type="radio" name="sec2_q9" value="A"> A family life.</label>
+          <label><input type="radio" name="sec2_q9" value="B"> B school experiences.</label>
+          <label><input type="radio" name="sec2_q9" value="C"> C expectations of the course.</label>
+        </div>
+      </div>
+
+      <div class="q-item" data-qid="sec2_q10" data-ans="C">
+        <label class="q-label">10. What does the feedback include?</label>
+        <div class="q-options">
+          <label><input type="radio" name="sec2_q10" value="A"> A a tutorial</label>
+          <label><input type="radio" name="sec2_q10" value="B"> B an exercise</label>
+          <label><input type="radio" name="sec2_q10" value="C"> C a discussion group</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions-footer">
+      <span class="score-badge" id="score-2"></span>
+      <div class="button-group-right">
+        <button class="btn btn-check" onclick="gradeSection(2)">CHECK ANSWERS</button>
+        <button class="btn btn-save" onclick="saveToSubmit(2)">SAVE TO SUBMIT</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- SECTION 03: Reading -->
+  <!-- ========================================================================= -->
+  <section class="tab-content" id="sec-3">
+    <h2>Section 03: Reading &mdash; Speed Reading</h2>
+
+    <div class="reading-passage">
+      <h3 style="margin-top:0; color:#0f172a;">Speed reading &mdash; What is speed reading, and why do we need it?</h3>
+      <p><strong>A</strong> Speed reading is not just about reading fast. It is also about how much information you can remember when you have finished reading. The World Championship Speed-Reading Competition says that its top competitors average between 1,000 and 2,000 words a minute. But they must remember at least 50 percent of this in order to qualify for the competition.</p>
+      <p><strong>B</strong> Nowadays, speed reading has become an essential skill in any environment where people have to master a large volume of information. Professional workers need reading skills to help them get through many documents every day, while students under pressure to deal with assignments may feel they have to read more and read faster all the time.</p>
+      <p><strong>C</strong> Although there are various methods to increase reading speed, the trick is deciding what information you want first. For example, if you only want a rough outline of an issue, then you can skim the material quickly and extract the key facts. However, if you need to understand every detail in a document, then you must read it slowly enough to understand this.</p>
+      <p><strong>D</strong> Even when you know how to ignore irrelevant detail, there are other improvements you can make to your reading style which will increase your speed. For example, most people can read much faster if they read silently. Reading each word aloud takes time for the information to make a complete circuit in your brain before being pronounced. Some researchers believe that as long as the first and last letters are in place, the brain can still understand the arrangement of the other letters in the word because it logically puts each piece into place.</p>
+      <p><strong>E</strong> Chunking is another important method. Most people learn to read either letter by letter or word by word. As you improve, this changes. You will probably find that you are fixing your eyes on a block of words, then moving your eyes to the next block of words, and so on. You are reading blocks of words at a time, not individual words one by one. You may also notice that you do not always go from one block to the next: sometimes you may move back to a previous block if you are unsure about something.</p>
+      <p><strong>F</strong> A skilled reader will read a lot of words in each block. He or she will only look at each block for an instant and will then move on. Only rarely will the reader's eyes skip back to a previous block of words. This reduces the amount of work that the reader's eyes have to do. It also increases the volume of information that can be taken in over a given period of time.</p>
+      <p><strong>G</strong> On the other hand, a slow reader will spend a lot of time reading small blocks of words. He or she will skip back often, losing the flow and structure of the text, and muddling their overall understanding of the subject. This irregular eye movement quickly makes the reader tired. Poor readers tend to dislike reading because they feel it is difficult to concentrate and comprehend written information.</p>
+      <p><strong>H</strong> The best tip anyone can have to improve their reading speed is to practise. In order to do this effectively, a person must be engaged in the material and want to know more. If you find yourself constantly having to re-read the same paragraph, you may want to switch to reading material that grabs your attention. If you enjoy what you are reading, you will make quicker progress.</p>
+    </div>
+
+    <h3>Questions 1–6: Matching Information</h3>
+    <div class="instructions">
+      Which paragraph contains the following information? Write the correct letter, <strong>A–H</strong>. You may use any letter more than once.
+    </div>
+
+    <div class="card">
+      <div class="q-item" data-qid="sec3_q1" data-ans="B">
+        <label class="q-label">1. The types of people who need to read more quickly</label>
+        <select class="inline-input">
+          <option value="">-- Letter --</option>
+          <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option>
+          <option value="E">E</option><option value="F">F</option><option value="G">G</option><option value="H">H</option>
+        </select>
+      </div>
+
+      <div class="q-item" data-qid="sec3_q2" data-ans="A">
+        <label class="q-label">2. The fastest reading speeds</label>
+        <select class="inline-input">
+          <option value="">-- Letter --</option>
+          <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option>
+          <option value="E">E</option><option value="F">F</option><option value="G">G</option><option value="H">H</option>
+        </select>
+      </div>
+
+      <div class="q-item" data-qid="sec3_q3" data-ans="G">
+        <label class="q-label">3. How a reader can become confused</label>
+        <select class="inline-input">
+          <option value="">-- Letter --</option>
+          <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option>
+          <option value="E">E</option><option value="F">F</option><option value="G">G</option><option value="H">H</option>
+        </select>
+      </div>
+
+      <div class="q-item" data-qid="sec3_q4" data-ans="H">
+        <label class="q-label">4. Why reading material should be interesting</label>
+        <select class="inline-input">
+          <option value="">-- Letter --</option>
+          <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option>
+          <option value="E">E</option><option value="F">F</option><option value="G">G</option><option value="H">H</option>
+        </select>
+      </div>
+
+      <div class="q-item" data-qid="sec3_q5" data-ans="A">
+        <label class="q-label">5. A definition of speed reading</label>
+        <select class="inline-input">
+          <option value="">-- Letter --</option>
+          <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option>
+          <option value="E">E</option><option value="F">F</option><option value="G">G</option><option value="H">H</option>
+        </select>
+      </div>
+
+      <div class="q-item" data-qid="sec3_q6" data-ans="C">
+        <label class="q-label">6. What you should consider before you start reading</label>
+        <select class="inline-input">
+          <option value="">-- Letter --</option>
+          <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option>
+          <option value="E">E</option><option value="F">F</option><option value="G">G</option><option value="H">H</option>
+        </select>
+      </div>
+    </div>
+
+    <h3>Questions 7–13: Table Completion</h3>
+    <div class="instructions">
+      Complete the table below. Choose <strong>NO MORE THAN TWO WORDS</strong> from the passage for each answer.
+    </div>
+
+    <div class="card">
+      <table class="table-activity">
+        <thead>
+          <tr>
+            <th>Type of reader</th>
+            <th>Reading method</th>
+            <th>Effect of method on reader</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Skilled reader</strong></td>
+            <td>
+              • reads many 
+              <span class="q-item" data-qid="sec3_q7" data-ans="words" style="display:inline; border:none; margin:0; padding:0;">
+                7. <input type="text" class="inline-input" style="width:130px;" placeholder="words">
+              </span> in a block<br>
+              • reader hardly ever goes back
+            </td>
+            <td>
+              • reader's 
+              <span class="q-item" data-qid="sec3_q8" data-ans="eyes" style="display:inline; border:none; margin:0; padding:0;">
+                8. <input type="text" class="inline-input" style="width:120px;" placeholder="eyes">
+              </span> do less work<br>
+              • more 
+              <span class="q-item" data-qid="sec3_q9" data-ans="information" style="display:inline; border:none; margin:0; padding:0;">
+                9. <input type="text" class="inline-input" style="width:140px;" placeholder="information">
+              </span> is processed
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="q-item" data-qid="sec3_q10" data-ans="slow reader" style="border:none; margin:0; padding:0;">
+                10. <input type="text" class="inline-input" style="width:150px;" placeholder="type of reader">
+              </span>
+            </td>
+            <td>
+              • reads small blocks<br>
+              • reader 
+              <span class="q-item" data-qid="sec3_q11" data-ans="often" style="display:inline; border:none; margin:0; padding:0;">
+                11. <input type="text" class="inline-input" style="width:120px;" placeholder="frequency">
+              </span> goes back
+            </td>
+            <td>
+              • reader easily gets 
+              <span class="q-item" data-qid="sec3_q12" data-ans="tired" style="display:inline; border:none; margin:0; padding:0;">
+                12. <input type="text" class="inline-input" style="width:120px;" placeholder="adjective">
+              </span><br>
+              • finds it hard to 
+              <span class="q-item" data-qid="sec3_q13" data-ans="concentrate" style="display:inline; border:none; margin:0; padding:0;">
+                13. <input type="text" class="inline-input" style="width:140px;" placeholder="verb">
+              </span> on passage
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="actions-footer">
+      <span class="score-badge" id="score-3"></span>
+      <div class="button-group-right">
+        <button class="btn btn-check" onclick="gradeSection(3)">CHECK ANSWERS</button>
+        <button class="btn btn-save" onclick="saveToSubmit(3)">SAVE TO SUBMIT</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- SECTION 04: Speaking & Pronunciation -->
+  <!-- ========================================================================= -->
+  <section class="tab-content" id="sec-4">
+    <h2>Section 04: Speaking &amp; Pronunciation (Word Stress)</h2>
+
+    <div class="instructions">
+      <strong>Part 1: Speaking Part 3 Discourse Functions</strong> &mdash; Classify whether each spoken phrase is used for <em>Introducing an opinion</em> or <em>Giving a reason</em>.
+    </div>
+
+    <div class="card">
+      <div class="q-item" data-qid="sec4_q1" data-ans="opinion">
+        <label class="q-label">1. "In my view..."</label>
+        <select class="inline-input">
+          <option value="">-- Function --</option>
+          <option value="opinion">Introducing an opinion</option>
+          <option value="reason">Giving a reason</option>
+        </select>
+      </div>
+
+      <div class="q-item" data-qid="sec4_q2" data-ans="reason">
+        <label class="q-label">2. "...because it helps them relax..."</label>
+        <select class="inline-input">
+          <option value="">-- Function --</option>
+          <option value="opinion">Introducing an opinion</option>
+          <option value="reason">Giving a reason</option>
+        </select>
+      </div>
+
+      <div class="q-item" data-qid="sec4_q3" data-ans="reason">
+        <label class="q-label">3. "One reason is that books are good for children's imagination..."</label>
+        <select class="inline-input">
+          <option value="">-- Function --</option>
+          <option value="opinion">Introducing an opinion</option>
+          <option value="reason">Giving a reason</option>
+        </select>
+      </div>
+
+      <div class="q-item" data-qid="sec4_q4" data-ans="opinion">
+        <label class="q-label">4. "I would say that..."</label>
+        <select class="inline-input">
+          <option value="">-- Function --</option>
+          <option value="opinion">Introducing an opinion</option>
+          <option value="reason">Giving a reason</option>
+        </select>
+      </div>
+
+      <div class="q-item" data-qid="sec4_q5" data-ans="reason">
+        <label class="q-label">5. "...perhaps because they want to do things like play on the computer."</label>
+        <select class="inline-input">
+          <option value="">-- Function --</option>
+          <option value="opinion">Introducing an opinion</option>
+          <option value="reason">Giving a reason</option>
+        </select>
+      </div>
+
+      <div class="q-item" data-qid="sec4_q6" data-ans="reason">
+        <label class="q-label">6. "...as they seem less interesting."</label>
+        <select class="inline-input">
+          <option value="">-- Function --</option>
+          <option value="opinion">Introducing an opinion</option>
+          <option value="reason">Giving a reason</option>
+        </select>
+      </div>
+    </div>
+
+    <h3>Part 2: Pronunciation &mdash; Word Stress</h3>
+    <div class="instructions">
+      Identify the syllable carrying primary stress in each academic word from Unit 7.
+    </div>
+
+    <div class="card">
+      <div class="q-item" data-qid="sec4_q7" data-ans="tic">
+        <label class="q-label">7. <strong>par - tic - u - lar - ly</strong></label>
+        <select class="inline-input">
+          <option value="">-- Stressed syllable --</option>
+          <option value="par">1st: par</option>
+          <option value="tic">2nd: tic</option>
+          <option value="u">3rd: u</option>
+          <option value="lar">4th: lar</option>
+          <option value="ly">5th: ly</option>
+        </select>
+      </div>
+
+      <div class="q-item" data-qid="sec4_q8" data-ans="lax">
+        <label class="q-label">8. <strong>re - lax</strong></label>
+        <select class="inline-input">
+          <option value="">-- Stressed syllable --</option>
+          <option value="re">1st: re</option>
+          <option value="lax">2nd: lax</option>
+        </select>
+      </div>
+
+      <div class="q-item" data-qid="sec4_q9" data-ans="tiv">
+        <label class="q-label">9. <strong>ac - tiv - i - ties</strong></label>
+        <select class="inline-input">
+          <option value="">-- Stressed syllable --</option>
+          <option value="ac">1st: ac</option>
+          <option value="tiv">2nd: tiv</option>
+          <option value="i">3rd: i</option>
+          <option value="ties">4th: ties</option>
+        </select>
+      </div>
+
+      <div class="q-item" data-qid="sec4_q10" data-ans="na">
+        <label class="q-label">10. <strong>i - mag - i - na - tion</strong></label>
+        <select class="inline-input">
+          <option value="">-- Stressed syllable --</option>
+          <option value="i">1st: i</option>
+          <option value="mag">2nd: mag</option>
+          <option value="i2">3rd: i</option>
+          <option value="na">4th: na</option>
+          <option value="tion">5th: tion</option>
+        </select>
+      </div>
+
+      <div class="q-item" data-qid="sec4_q11" data-ans="ca">
+        <label class="q-label">11. <strong>ed - u - ca - tion</strong></label>
+        <select class="inline-input">
+          <option value="">-- Stressed syllable --</option>
+          <option value="ed">1st: ed</option>
+          <option value="u">2nd: u</option>
+          <option value="ca">3rd: ca</option>
+          <option value="tion">4th: tion</option>
+        </select>
+      </div>
+
+      <div class="q-item" data-qid="sec4_q12" data-ans="lit">
+        <label class="q-label">12. <strong>il - lit - er - ate</strong></label>
+        <select class="inline-input">
+          <option value="">-- Stressed syllable --</option>
+          <option value="il">1st: il</option>
+          <option value="lit">2nd: lit</option>
+          <option value="er">3rd: er</option>
+          <option value="ate">4th: ate</option>
+        </select>
+      </div>
+    </div>
+
+    <h3>Part 3: Speaking Part 2 Self-Practice Notes</h3>
+    <div class="card">
+      <p style="font-size: 0.9rem; margin-bottom: 8px;">
+        <strong>Topic:</strong> Describe a book or article that you enjoyed reading for your studies.<br>
+        <em>Key prompts: what it was about, why you read it, how long it took, and explain why you enjoyed reading it.</em>
+      </p>
+      <div class="q-item" data-qid="sec4_notes" style="border:none;">
+        <textarea id="part2_notes_box" placeholder="Write your preparation keywords, points, and collocations here..."></textarea>
+      </div>
+    </div>
+
+    <div class="actions-footer">
+      <span class="score-badge" id="score-4"></span>
+      <div class="button-group-right">
+        <button class="btn btn-check" onclick="gradeSection(4)">CHECK ANSWERS</button>
+        <button class="btn btn-save" onclick="saveToSubmit(4)">SAVE TO SUBMIT</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- SECTION 05: Writing - Trends & Prepositions -->
+  <!-- ========================================================================= -->
+  <section class="tab-content" id="sec-5">
+    <h2>Section 05: Writing Task 1 &mdash; Describing Trends &amp; Prepositions</h2>
+
+    <div class="instructions">
+      <strong>Context: Lees College Student Enrolment 2011</strong><br>
+      • Jan–Mar: 90 to 100 | Mar–Jun: 100 to 225 | Jun: Peak at 225 | Jun–Aug: 225 to 120 | Aug–Dec: 120 to 85.
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0;">1. Noun Phrases vs. Verb Phrases</h3>
+      <p style="font-size: 0.9rem; margin-bottom: 12px;">Complete the sentences describing the trend using appropriate <strong>noun phrases</strong> (adjective + noun) or <strong>verb phrases</strong> (verb + adverb):</p>
+
+      <div class="q-item" data-qid="sec5_q1" data-ans="dramatic increase|dramatic rise">
+        <label class="q-label">1. Between March and June, there was a [adjective + noun]:</label>
+        <input type="text" class="inline-input" placeholder="e.g. dramatic rise"> in student numbers.
+      </div>
+
+      <div class="q-item" data-qid="sec5_q2" data-ans="peak">
+        <label class="q-label">2. In June, enrolments reached a [noun]:</label>
+        <input type="text" class="inline-input" placeholder="e.g. peak">.
+      </div>
+
+      <div class="q-item" data-qid="sec5_q3" data-ans="sharp fall|sharp decrease">
+        <label class="q-label">3. From June to August, there was a [adjective + noun]:</label>
+        <input type="text" class="inline-input" placeholder="e.g. sharp fall"> in numbers.
+      </div>
+
+      <div class="q-item" data-qid="sec5_q4" data-ans="gradual fall|gradual decrease">
+        <label class="q-label">4. From August to December, there was a [adjective + noun]:</label>
+        <input type="text" class="inline-input" placeholder="e.g. gradual fall">.
+      </div>
+
+      <div class="q-item" data-qid="sec5_q5" data-ans="peaked">
+        <label class="q-label">5. Using a verb phrase: Enrolments [verb] in June:</label>
+        <input type="text" class="inline-input" placeholder="past tense verb">.
+      </div>
+
+      <div class="q-item" data-qid="sec5_q6" data-ans="fluctuated">
+        <label class="q-label">6. Over the whole year, the numbers [verb]:</label>
+        <input type="text" class="inline-input" placeholder="past tense verb">.
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0;">2. Prepositions for Trends (at, of, to, from, by)</h3>
+      <p style="font-size: 0.9rem; margin-bottom: 12px;">Fill in each blank with the correct preposition:</p>
+
+      <div class="q-item" data-qid="sec5_q7" data-ans="of">
+        <label class="q-label">1. Between January and March, there was a slight increase</label>
+        <div><input type="text" class="inline-input" style="width:100px;" placeholder="preposition"> ten students.</div>
+      </div>
+
+      <div class="q-item" data-qid="sec5_q8" data-ans="at">
+        <label class="q-label">2. In June, numbers peaked</label>
+        <div><input type="text" class="inline-input" style="width:100px;" placeholder="preposition"> 225 students.</div>
+      </div>
+
+      <div class="q-item" data-qid="sec5_q9" data-ans="to">
+        <label class="q-label">3. From June to August, numbers fell</label>
+        <div><input type="text" class="inline-input" style="width:100px;" placeholder="preposition"> 120 students.</div>
+      </div>
+
+      <div class="q-item" data-qid="sec5_q10" data-ans="from">
+        <label class="q-label">4. Numbers fell [start point]</label>
+        <div><input type="text" class="inline-input" style="width:100px;" placeholder="preposition"> 120 in August to 90 in December.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0;">3. Graph Overview Selection</h3>
+      <div class="q-item" data-qid="sec5_q11" data-ans="a downward">
+        <label class="q-label">Choose the correct overview trend for World Illiteracy (1970: 37% &rarr; Present: 18%):</label>
+        <div>
+          "Overall, there has been 
+          <select class="inline-input">
+            <option value="">-- Select --</option>
+            <option value="an upward">an upward</option>
+            <option value="a downward">a downward</option>
+            <option value="a stable">a stable</option>
+          </select> trend in world illiteracy over the past 40 years."
+        </div>
+      </div>
+    </div>
+
+    <div class="actions-footer">
+      <span class="score-badge" id="score-5"></span>
+      <div class="button-group-right">
+        <button class="btn btn-check" onclick="gradeSection(5)">CHECK ANSWERS</button>
+        <button class="btn btn-save" onclick="saveToSubmit(5)">SAVE TO SUBMIT</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- SECTION 06: Grammar & Spelling -->
+  <!-- ========================================================================= -->
+  <section class="tab-content" id="sec-6">
+    <h2>Section 06: Grammar &amp; Spelling for Writing Task 1</h2>
+
+    <div class="instructions">
+      <strong>Part 1: Verb Tenses in Graph Summaries</strong> &mdash; Put the verbs in brackets into the correct tense (Present Simple, Past Simple, or Present Perfect).
+    </div>
+
+    <div class="card">
+      <p style="line-height: 2;">
+        The graph <strong>1</strong> (give) 
+        <span class="q-item" data-qid="sec6_q1" data-ans="gives" style="display:inline; border:none; margin:0; padding:0;">
+          <input type="text" class="inline-input" style="width:110px;" value="gives" readonly>
+        </span> 
+        information about unemployment. It <strong>2</strong> (show) 
+        <span class="q-item" data-qid="sec6_q2" data-ans="shows" style="display:inline; border:none; margin:0; padding:0;">
+          <input type="text" class="inline-input" style="width:110px;" placeholder="verb">
+        </span> 
+        the trends between 2000 and the present day. These trends <strong>3</strong> (follow) 
+        <span class="q-item" data-qid="sec6_q3" data-ans="have followed" style="display:inline; border:none; margin:0; padding:0;">
+          <input type="text" class="inline-input" style="width:150px;" placeholder="verb">
+        </span> 
+        a similar pattern since 2000. However, more high-school leavers <strong>4</strong> (always be) 
+        <span class="q-item" data-qid="sec6_q4" data-ans="have always been" style="display:inline; border:none; margin:0; padding:0;">
+          <input type="text" class="inline-input" style="width:170px;" placeholder="verb">
+        </span> 
+        unemployed than graduates.
+      </p>
+      <p style="line-height: 2; margin-top: 10px;">
+        In 2000, 1.5 percent of graduates and 3 percent of school leavers <strong>5</strong> (not have) 
+        <span class="q-item" data-qid="sec6_q5" data-ans="did not have|didn't have" style="display:inline; border:none; margin:0; padding:0;">
+          <input type="text" class="inline-input" style="width:150px;" placeholder="verb">
+        </span> 
+        a job. Between 2000 and 2003, these percentages <strong>6</strong> (rise) 
+        <span class="q-item" data-qid="sec6_q6" data-ans="rose" style="display:inline; border:none; margin:0; padding:0;">
+          <input type="text" class="inline-input" style="width:110px;" placeholder="verb">
+        </span> 
+        to 3 and 5.5 respectively. After that, there was a gradual fall in numbers until 2006, when figures <strong>7</strong> (remain) 
+        <span class="q-item" data-qid="sec6_q7" data-ans="remained" style="display:inline; border:none; margin:0; padding:0;">
+          <input type="text" class="inline-input" style="width:130px;" placeholder="verb">
+        </span> 
+        stable for a year.
+      </p>
+      <p style="line-height: 2; margin-top: 10px;">
+        Since 2007, the percentage of unemployed high-school leavers <strong>8</strong> (rise) 
+        <span class="q-item" data-qid="sec6_q8" data-ans="has risen" style="display:inline; border:none; margin:0; padding:0;">
+          <input type="text" class="inline-input" style="width:130px;" placeholder="verb">
+        </span> 
+        dramatically and reached 10 percent. Although the figure for graduates is lower, it <strong>9</strong> (also increase) 
+        <span class="q-item" data-qid="sec6_q9" data-ans="has also increased" style="display:inline; border:none; margin:0; padding:0;">
+          <input type="text" class="inline-input" style="width:180px;" placeholder="verb">
+        </span> 
+        to 4 percent. Overall, there <strong>10</strong> (be) 
+        <span class="q-item" data-qid="sec6_q10" data-ans="has been" style="display:inline; border:none; margin:0; padding:0;">
+          <input type="text" class="inline-input" style="width:120px;" placeholder="verb">
+        </span> 
+        an upward trend in unemployment rates. However, the difference <strong>11</strong> (become) 
+        <span class="q-item" data-qid="sec6_q11" data-ans="has become" style="display:inline; border:none; margin:0; padding:0;">
+          <input type="text" class="inline-input" style="width:140px;" placeholder="verb">
+        </span> 
+        much greater in recent years.
+      </p>
+    </div>
+
+    <h3>Part 2: Spelling &mdash; Forming Adverbs from Adjectives</h3>
+    <div class="card">
+      <p style="font-size:0.9rem; margin-bottom:12px;">Type the correct adverb form for each adjective:</p>
+
+      <div class="q-item" data-qid="sec6_q12" data-ans="clearly">
+        <label class="q-label">1. clear &rarr;</label>
+        <div><input type="text" class="inline-input" placeholder="adverb"></div>
+      </div>
+
+      <div class="q-item" data-qid="sec6_q13" data-ans="factually">
+        <label class="q-label">2. factual &rarr;</label>
+        <div><input type="text" class="inline-input" placeholder="adverb"></div>
+      </div>
+
+      <div class="q-item" data-qid="sec6_q14" data-ans="extremely">
+        <label class="q-label">3. extreme &rarr;</label>
+        <div><input type="text" class="inline-input" placeholder="adverb"></div>
+      </div>
+
+      <div class="q-item" data-qid="sec6_q15" data-ans="easily">
+        <label class="q-label">4. easy &rarr;</label>
+        <div><input type="text" class="inline-input" placeholder="adverb"></div>
+      </div>
+
+      <div class="q-item" data-qid="sec6_q16" data-ans="logically">
+        <label class="q-label">5. logical &rarr;</label>
+        <div><input type="text" class="inline-input" placeholder="adverb"></div>
+      </div>
+
+      <div class="q-item" data-qid="sec6_q17" data-ans="thoroughly">
+        <label class="q-label">6. thorough &rarr;</label>
+        <div><input type="text" class="inline-input" placeholder="adverb"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0;">Part 3: Candidate Spelling Error Corrections</h3>
+      <p style="font-size:0.9rem; margin-bottom:12px;">Correct the misspelled word in each sentence:</p>
+
+      <div class="q-item" data-qid="sec6_q18" data-ans="steadily">
+        <label class="q-label">1. "The trend fell <u>steadly</u> from 1990 to 2010." &rarr;</label>
+        <div><input type="text" class="inline-input" placeholder="correction"></div>
+      </div>
+
+      <div class="q-item" data-qid="sec6_q19" data-ans="dramatically">
+        <label class="q-label">2. "The graph shows the figures will rise <u>dramaticlly</u> in the future." &rarr;</label>
+        <div><input type="text" class="inline-input" placeholder="correction"></div>
+      </div>
+
+      <div class="q-item" data-qid="sec6_q20" data-ans="slightly">
+        <label class="q-label">3. "It has been increasing <u>slighty</u> and will get higher." &rarr;</label>
+        <div><input type="text" class="inline-input" placeholder="correction"></div>
+      </div>
+
+      <div class="q-item" data-qid="sec6_q21" data-ans="gentle">
+        <label class="q-label">4. "There was a <u>gentley</u> decrease from 1990 to the present." &rarr;</label>
+        <div><input type="text" class="inline-input" placeholder="correction"></div>
+      </div>
+
+      <div class="q-item" data-qid="sec6_q22" data-ans="rapidly">
+        <label class="q-label">5. "Spending on equipment rose <u>rapid</u>." &rarr;</label>
+        <div><input type="text" class="inline-input" placeholder="correction"></div>
+      </div>
+    </div>
+
+    <div class="actions-footer">
+      <span class="score-badge" id="score-6"></span>
+      <div class="button-group-right">
+        <button class="btn btn-check" onclick="gradeSection(6)">CHECK ANSWERS</button>
+        <button class="btn btn-save" onclick="saveToSubmit(6)">SAVE TO SUBMIT</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- SECTION 07: Writing Task 1 Practice -->
+  <!-- ========================================================================= -->
+  <section class="tab-content" id="sec-7">
+    <h2>Section 07: Writing Task 1 Practice &amp; Final Report</h2>
+
+    <div class="instructions">
+      <strong>Task 1 Prompt:</strong> The graph shows the number of library books read by boys and girls at Starmouth School from 2009 to 2012.<br>
+      <em>Summarise the information by selecting and reporting the main features, and make comparisons where relevant. Write at least 150 words.</em>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0;">Key Data Points (Starmouth School Library)</h3>
+      <table class="table-activity">
+        <thead>
+          <tr>
+            <th>Year</th>
+            <th>Boys (Books Read)</th>
+            <th>Girls (Books Read)</th>
+            <th>Key Observations</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>2009</strong></td>
+            <td>50</td>
+            <td>25</td>
+            <td>Boys read double the number of books compared to girls.</td>
+          </tr>
+          <tr>
+            <td><strong>2010</strong></td>
+            <td>80</td>
+            <td>40</td>
+            <td>Both groups increased; boys maintained a higher total.</td>
+          </tr>
+          <tr>
+            <td><strong>2011</strong></td>
+            <td>100</td>
+            <td>100</td>
+            <td>Both groups met at the same point (100 books each).</td>
+          </tr>
+          <tr>
+            <td><strong>2012</strong></td>
+            <td>80</td>
+            <td>140</td>
+            <td>Girls peaked sharply at 140; boys declined back to 80.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0;">Planning &amp; Pre-Writing Checklist</h3>
+      <div class="q-item" data-qid="sec7_q1" data-ans="yes">
+        <label class="q-label">1. Does your response include an overview identifying the overall upward trend for girls and fluctuating pattern for boys?</label>
+        <select class="inline-input">
+          <option value="">-- Confirm --</option>
+          <option value="yes">Yes, included in my plan</option>
+          <option value="no">Not yet</option>
+        </select>
+      </div>
+
+      <div class="q-item" data-qid="sec7_q2" data-ans="yes">
+        <label class="q-label">2. Have you avoided personal opinions or external speculations (e.g. why boys liked sports)?</label>
+        <select class="inline-input">
+          <option value="">-- Confirm --</option>
+          <option value="yes">Yes, strictly objective facts only</option>
+          <option value="no">Need to review</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0;">Your Written Report (Minimum 150 words)</h3>
+      <div class="q-item" data-qid="sec7_essay" style="border:none;">
+        <textarea id="task1_essay_input" oninput="updateWordCount()" placeholder="Write your full Academic Task 1 summary here..."></textarea>
+        <div class="word-counter">Word count: <span id="word-count-val">0</span> / 150 words</div>
+      </div>
+    </div>
+
+    <button class="collapsible-trigger" onclick="toggleVisibility('model-answer-box')">▶ View Cambridge Band 9 Model Answer Reference</button>
+    <div id="model-answer-box" class="collapsible-box">
+      <p><em>The graph gives information about Starmouth School library between 2009 and 2012. It shows how many library books pupils read over this four-year period.</em></p>
+      <p><em>According to the graph, there were different trends for boys and girls. The number of books read by girls increased steadily between 2009 and 2010, from about 25 to 40. After that, the numbers rose dramatically to 140 books in 2012. This was the highest figure in the period.</em></p>
+      <p><em>Boys started off reading more books than girls, but their numbers followed a different pattern. Between 2009 and 2010, there was an increase of 30 from 50 books to 80 books, and then a gradual rise to 100 books in 2011. However, in 2012, their numbers fell back to 80 again.</em></p>
+      <p><em>Overall, there was a strong upward trend in the number of books read by girls. Although boys read more books than girls in 2009, their reading fell to below the level of girls in 2012.</em></p>
+    </div>
+
+    <div class="actions-footer">
+      <span class="score-badge" id="score-7"></span>
+      <div class="button-group-right">
+        <button class="btn btn-check" onclick="gradeSection(7)">CHECK COMPLETION</button>
+        <button class="btn btn-save" onclick="saveToSubmit(7)">SAVE TO SUBMIT</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+  // Navigation tabs switcher
+  function switchTab(tabIndex) {
+    document.querySelectorAll('.nav-tab').forEach((tab, i) => {
+      tab.classList.toggle('active', i === tabIndex - 1);
+    });
+    document.querySelectorAll('.tab-content').forEach((content, i) => {
+      content.classList.toggle('active', i === tabIndex - 1);
+    });
+  }
+
+  // Collapsible toggle helper
+  function toggleVisibility(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+  }
+
+  // Word count helper for Section 7
+  function updateWordCount() {
+    const text = document.getElementById('task1_essay_input').value.trim();
+    const words = text ? text.split(/\s+/).filter(Boolean).length : 0;
+    const counterEl = document.getElementById('word-count-val');
+    counterEl.textContent = words;
+    if (words >= 150) {
+      counterEl.style.color = 'var(--success-dark)';
+      counterEl.style.fontWeight = 'bold';
+    } else {
+      counterEl.style.color = 'var(--text-muted)';
+      counterEl.style.fontWeight = 'normal';
+    }
+  }
+
+  // Answer verification helper
+  function cleanVal(v) {
+    return (v || '').trim().toLowerCase().replace(/[.,/#!$%^&*;:{}=\-_`~()]/g, "").replace(/\s+/g, " ");
+  }
+
+  // Auto-grading logic per section
+  function gradeSection(secNum) {
+    const secEl = document.getElementById(`sec-${secNum}`);
+    const items = secEl.querySelectorAll('.q-item[data-ans]');
+    let correctCount = 0;
+    const totalCount = items.length;
+
+    items.forEach(item => {
+      const expectedRaw = item.getAttribute('data-ans');
+      const expectedOptions = expectedRaw.split('|').map(cleanVal);
+      
+      let userVal = '';
+      const textInput = item.querySelector('input[type="text"]');
+      const select = item.querySelector('select');
+      const radioChecked = item.querySelector('input[type="radio"]:checked');
+
+      if (textInput) {
+        userVal = textInput.value;
+      } else if (select) {
+        userVal = select.value;
+      } else if (radioChecked) {
+        userVal = radioChecked.value;
+      }
+
+      const isMatch = expectedOptions.includes(cleanVal(userVal));
+      
+      const targetControl = textInput || select;
+      if (targetControl) {
+        targetControl.classList.remove('is-correct', 'is-incorrect');
+        targetControl.classList.add(isMatch ? 'is-correct' : 'is-incorrect');
+      }
+
+      if (isMatch) {
+        correctCount++;
+      }
+    });
+
+    const badge = document.getElementById(`score-${secNum}`);
+    if (badge && totalCount > 0) {
+      const pct = Math.round((correctCount / totalCount) * 100);
+      badge.textContent = `Score: ${correctCount} / ${totalCount} (${pct}%)`;
+      badge.className = 'score-badge show ' + (pct >= 80 ? 'good' : (pct >= 50 ? 'average' : 'retry'));
+    } else if (secNum === 7) {
+      const text = document.getElementById('task1_essay_input').value.trim();
+      const words = text ? text.split(/\s+/).filter(Boolean).length : 0;
+      badge.textContent = `Essay status: ${words} words submitted`;
+      badge.className = 'score-badge show ' + (words >= 150 ? 'good' : 'average');
+    }
+  }
+
+  // Build and save Markdown file for local submission
+  function saveToSubmit(secNum) {
+    const padNum = String(secNum).padStart(2, '0');
+    const secEl = document.getElementById(`sec-${secNum}`);
+    const titleEl = secEl.querySelector('h2');
+    const secTitle = titleEl ? titleEl.textContent : `Section ${padNum}`;
+    const timestamp = new Date().toLocaleString();
+
+    let correctCount = 0;
+    let totalCount = 0;
+    let questionsMd = '';
+
+    const items = secEl.querySelectorAll('.q-item');
+    items.forEach((item, index) => {
+      const qid = item.getAttribute('data-qid') || `q_${index + 1}`;
+      const expectedRaw = item.getAttribute('data-ans');
+      const labelEl = item.querySelector('.q-label');
+      const qPrompt = labelEl ? labelEl.textContent.trim() : `Question ${index + 1}`;
+
+      let userVal = '';
+      const textInput = item.querySelector('input[type="text"]');
+      const select = item.querySelector('select');
+      const radioChecked = item.querySelector('input[type="radio"]:checked');
+      const textarea = item.querySelector('textarea');
+
+      if (textInput) {
+        userVal = textInput.value.trim();
+      } else if (select) {
+        userVal = select.options[select.selectedIndex]?.text.trim() || select.value;
+      } else if (radioChecked) {
+        userVal = radioChecked.value;
+      } else if (textarea) {
+        userVal = textarea.value.trim();
+      }
+
+      if (expectedRaw) {
+        totalCount++;
+        const expectedOptions = expectedRaw.split('|').map(cleanVal);
+        const isMatch = expectedOptions.includes(cleanVal(userVal));
+        if (isMatch) correctCount++;
+
+        questionsMd += `### ${index + 1}. ${qPrompt}\n`;
+        questionsMd += `- **Student's Answer:** ${userVal || '*(No answer provided)*'}\n`;
+        questionsMd += `- **Expected Answer:** ${expectedRaw.replace(/\|/g, ' OR ')}\n`;
+        questionsMd += `- **Result:** ${isMatch ? '✅ Correct' : '❌ Needs Review'}\n\n`;
+      } else if (textarea) {
+        const words = userVal ? userVal.split(/\s+/).filter(Boolean).length : 0;
+        questionsMd += `### Open Response / Practice Notes\n`;
+        questionsMd += `- **Prompt:** ${qPrompt}\n`;
+        questionsMd += `- **Word Count:** ${words} words\n\n`;
+        questionsMd += `\`\`\`text\n${userVal || '(Empty submission)'}\n\`\`\`\n\n`;
+      }
+    });
+
+    let scoreHeader = '';
+    if (totalCount > 0) {
+      const pct = Math.round((correctCount / totalCount) * 100);
+      scoreHeader = `**Score:** ${correctCount} / ${totalCount} (${pct}%)\n`;
+    } else {
+      scoreHeader = `**Activity Type:** Free-form Academic Writing / Practice\n`;
+    }
+
+    const mdContent = `# COMPLETE IELTS BANDS 4-5
+## ${secTitle}
+- **Submission Date & Time:** ${timestamp}
+- ${scoreHeader}
+
+---
+
+## Detailed Responses
+
+${questionsMd}
+
+---
+*Generated by Complete IELTS Digital Learning Commons*
+`;
+
+    // Download Markdown Blob
+    const filename = `UNIT 07 SUBMITTED ${padNum}.md`;
+    const blob = new Blob([mdContent], { type: 'text/markdown;charset=utf-8;' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    link.setAttribute('href', url);
+    link.setAttribute('download', filename);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  }
+</script>
+
+</body>
+</html>
