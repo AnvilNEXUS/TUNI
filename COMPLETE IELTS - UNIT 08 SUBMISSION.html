@@ -1,0 +1,1532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete IELTS — Unit 8 Interactive Module</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+
+        /* Top Navigation Bar */
+        .top-nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: #1a365d;
+            color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            padding: 10px 20px;
+        }
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .nav-brand {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #ffffff;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .nav-brand:hover {
+            color: #63b3ed;
+        }
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .nav-btn {
+            background: #2d3748;
+            color: #e2e8f0;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .nav-btn:hover, .nav-btn.active {
+            background-color: #3182ce;
+            color: #ffffff;
+        }
+
+        /* Main Container & Layout */
+        .main-wrapper {
+            padding: 20px;
+        }
+        .container {
+            max-width: 950px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        /* Section Display Control */
+        .page-section {
+            display: none;
+        }
+        .page-section.active-section {
+            display: block;
+        }
+
+        /* Typography & Header Elements */
+        h1 {
+            color: #1a365d;
+            margin-top: 0;
+            margin-bottom: 5px;
+        }
+        h2 {
+            color: #2b6cb0;
+            margin-top: 5px;
+            border-bottom: 2px solid #edf2f7;
+            padding-bottom: 8px;
+        }
+        h3 {
+            color: #2d3748;
+            margin-top: 20px;
+        }
+        .subtitle {
+            color: #4a5568;
+            font-size: 1.1em;
+            margin-bottom: 25px;
+        }
+
+        /* Cards & Content Blocks */
+        .instructions-card {
+            background-color: #ebf8ff;
+            border-left: 5px solid #3182ce;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 30px;
+        }
+        .instructions-card h3 {
+            margin-top: 0;
+            color: #2b6cb0;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .section-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-top: 4px solid #3182ce;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .section-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+        .section-number {
+            font-size: 0.85em;
+            font-weight: bold;
+            color: #718096;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .section-title {
+            font-size: 1.2em;
+            color: #2d3748;
+            margin: 8px 0 15px 0;
+            font-weight: bold;
+        }
+        .activity-block {
+            margin-bottom: 30px;
+            background: #fafafa;
+            padding: 20px;
+            border-radius: 6px;
+            border: 1px solid #eee;
+        }
+        .reading-passage {
+            background: #eef2f3;
+            padding: 20px;
+            border-left: 5px solid #007bff;
+            margin-bottom: 25px;
+            font-size: 15px;
+            border-radius: 0 6px 6px 0;
+        }
+        .summary-box, .people-box, .prompt-box {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            padding: 20px;
+            line-height: 2;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+        .people-box, .prompt-box {
+            background: #eef2f3;
+            border-left: 5px solid #007bff;
+            line-height: 1.6;
+        }
+        .instructions {
+            font-weight: bold;
+            color: #d9534f;
+            margin-bottom: 15px;
+        }
+
+        /* Form Elements & Inputs */
+        .question {
+            margin-bottom: 18px;
+            padding: 10px;
+            background: #ffffff;
+            border-radius: 6px;
+            border: 1px solid #edf2f7;
+        }
+        select, textarea, input[type="text"] {
+            padding: 8px 12px;
+            margin-top: 5px;
+            border: 1px solid #cbd5e0;
+            border-radius: 4px;
+            font-size: 15px;
+            transition: all 0.2s ease;
+        }
+        select {
+            max-width: 100%;
+        }
+        textarea {
+            width: 100%;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+        input[type="text"] {
+            min-width: 120px;
+        }
+
+        /* Immediate Feedback Interactive Styles */
+        .is-correct {
+            background-color: #e6fffa !important;
+            border-color: #38a169 !important;
+            color: #22543d !important;
+            box-shadow: 0 0 0 2px rgba(56, 161, 105, 0.2);
+        }
+        .is-incorrect {
+            background-color: #fff5f5 !important;
+            border-color: #e53e3e !important;
+            color: #742a2a !important;
+            box-shadow: 0 0 0 2px rgba(229, 62, 62, 0.2);
+        }
+        .feedback {
+            margin-left: 10px;
+            font-weight: bold;
+            font-size: 14px;
+            display: inline-block;
+        }
+        .feedback.correct {
+            color: #38a169;
+        }
+        .feedback.incorrect {
+            color: #e53e3e;
+        }
+
+        /* Buttons & Footer */
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px solid #e2e8f0;
+            flex-wrap: wrap;
+        }
+        .btn-group-right {
+            display: flex;
+            gap: 15px;
+            margin-left: auto;
+        }
+        button, .btn-launch {
+            padding: 10px 18px;
+            font-size: 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background-color 0.2s, transform 0.1s;
+            display: inline-block;
+        }
+        button:active {
+            transform: scale(0.98);
+        }
+        .btn-home {
+            background-color: #718096;
+            color: white;
+        }
+        .btn-home:hover {
+            background-color: #4a5568;
+        }
+        .btn-launch {
+            background-color: #3182ce;
+            color: white;
+            text-align: center;
+        }
+        .btn-launch:hover {
+            background-color: #2b6cb0;
+        }
+        .btn-check {
+            background-color: #3182ce;
+            color: white;
+        }
+        .btn-check:hover {
+            background-color: #2b6cb0;
+        }
+        .btn-save {
+            background-color: #38a169;
+            color: white;
+        }
+        .btn-save:hover {
+            background-color: #2f855a;
+        }
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.9em;
+            color: #718096;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 15px;
+        }
+
+        /* Tables */
+        .listening-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            margin-bottom: 25px;
+        }
+        .listening-table th, .listening-table td {
+            border: 1px solid #cbd5e0;
+            padding: 12px;
+            text-align: left;
+        }
+        .listening-table th {
+            background-color: #3182ce;
+            color: white;
+        }
+
+        /* Responsiveness */
+        @media (max-width: 600px) {
+            .nav-container { flex-direction: column; align-items: flex-start; }
+            .button-container { flex-direction: column; align-items: stretch; }
+            .btn-group-right { flex-direction: column; width: 100%; }
+            button { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sticky Top Navigation -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <span class="nav-brand" onclick="navigateTo('section-home')">
+                📚 Complete IELTS Band 4–5 — Unit 8
+            </span>
+            <div class="nav-links">
+                <button class="nav-btn active" data-target="section-home" onclick="navigateTo('section-home')">Home</button>
+                <button class="nav-btn" data-target="section-01" onclick="navigateTo('section-01')">Sec 1</button>
+                <button class="nav-btn" data-target="section-02" onclick="navigateTo('section-02')">Sec 2</button>
+                <button class="nav-btn" data-target="section-03" onclick="navigateTo('section-03')">Sec 3</button>
+                <button class="nav-btn" data-target="section-04" onclick="navigateTo('section-04')">Sec 4</button>
+                <button class="nav-btn" data-target="section-05" onclick="navigateTo('section-05')">Sec 5</button>
+                <button class="nav-btn" data-target="section-06" onclick="navigateTo('section-06')">Sec 6</button>
+                <button class="nav-btn" data-target="section-07" onclick="navigateTo('section-07')">Sec 7</button>
+                <button class="nav-btn" data-target="section-08" onclick="navigateTo('section-08')">Sec 8</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-wrapper">
+        <div class="container">
+
+            <!-- HOME / DASHBOARD SECTION -->
+            <section id="section-home" class="page-section active-section">
+                <h1>Complete IELTS — Unit 8</h1>
+                <div class="subtitle">Tourist Attractions — Interactive Activity Modules</div>
+
+                <div class="instructions-card">
+                    <h3>Student Instructions</h3>
+                    <ol>
+                        <li>Click <strong>Start Activity</strong> on any section below or use the top navigation bar to jump directly to an exercise.</li>
+                        <li>Type answers or select dropdown options. Correct answers will immediately highlight in <strong style="color:#2f855a;">green</strong> with instant feedback.</li>
+                        <li>Questions and dropdown choices are automatically randomized to test your comprehension.</li>
+                        <li>Click <strong>CHECK ANSWERS</strong> at any time to verify your current score, or <strong>SAVE TO SUBMIT</strong> to download your answers as a Markdown file.</li>
+                    </ol>
+                </div>
+
+                <div class="grid-container">
+                    <!-- Section 1 -->
+                    <div class="section-card">
+                        <div>
+                            <div class="section-number">Section 1</div>
+                            <div class="section-title">Starting Off</div>
+                            <p style="color:#4a5568; font-size:0.95em;">Matching holiday activities and introductory discussion questions.</p>
+                        </div>
+                        <button class="btn-launch" onclick="navigateTo('section-01')">Start Activity 01</button>
+                    </div>
+
+                    <!-- Section 2 -->
+                    <div class="section-card">
+                        <div>
+                            <div class="section-number">Section 2</div>
+                            <div class="section-title">Reading: Summary Completion</div>
+                            <p style="color:#4a5568; font-size:0.95em;">"Here today, gone tomorrow" reading text with gap-fill summary.</p>
+                        </div>
+                        <button class="btn-launch" onclick="navigateTo('section-02')">Start Activity 02</button>
+                    </div>
+
+                    <!-- Section 3 -->
+                    <div class="section-card">
+                        <div>
+                            <div class="section-number">Section 3</div>
+                            <div class="section-title">Reading & Vocabulary</div>
+                            <p style="color:#4a5568; font-size:0.95em;">Matching features (People to statements) and <i>tourism</i> vs. <i>tourist</i> vocabulary.</p>
+                        </div>
+                        <button class="btn-launch" onclick="navigateTo('section-03')">Start Activity 03</button>
+                    </div>
+
+                    <!-- Section 4 -->
+                    <div class="section-card">
+                        <div>
+                            <div class="section-number">Section 4</div>
+                            <div class="section-title">Listening</div>
+                            <p style="color:#4a5568; font-size:0.95em;">Science Museum tour — Sentence completion and 3D cinema table completion.</p>
+                        </div>
+                        <button class="btn-launch" onclick="navigateTo('section-04')">Start Activity 04</button>
+                    </div>
+
+                    <!-- Section 5 -->
+                    <div class="section-card">
+                        <div>
+                            <div class="section-number">Section 5</div>
+                            <div class="section-title">Speaking</div>
+                            <p style="color:#4a5568; font-size:0.95em;">Adjective opposites, speaking chunking practice, and Part 1/2 cue card note-taking.</p>
+                        </div>
+                        <button class="btn-launch" onclick="navigateTo('section-05')">Start Activity 05</button>
+                    </div>
+
+                    <!-- Section 6 -->
+                    <div class="section-card">
+                        <div>
+                            <div class="section-number">Section 6</div>
+                            <div class="section-title">Writing Task 2 & Key Grammar</div>
+                            <p style="color:#4a5568; font-size:0.95em;">Task 2 essay analysis, relative pronouns (<i>who, which, that, where</i>), and spelling review.</p>
+                        </div>
+                        <button class="btn-launch" onclick="navigateTo('section-06')">Start Activity 06</button>
+                    </div>
+
+                    <!-- Section 7 -->
+                    <div class="section-card">
+                        <div>
+                            <div class="section-number">Section 7</div>
+                            <div class="section-title">Review: Unit 7</div>
+                            <p style="color:#4a5568; font-size:0.95em;">Vocabulary review for <i>raise</i> vs <i>rise</i>, graph prepositions, and sentence rewriting.</p>
+                        </div>
+                        <button class="btn-launch" onclick="navigateTo('section-07')">Start Activity 07</button>
+                    </div>
+
+                    <!-- Section 8 -->
+                    <div class="section-card">
+                        <div>
+                            <div class="section-number">Section 8</div>
+                            <div class="section-title">Review: Unit 8</div>
+                            <p style="color:#4a5568; font-size:0.95em;">Unit 8 vocabulary review in dialogues and Space Tourism relative clause gap-fill.</p>
+                        </div>
+                        <button class="btn-launch" onclick="navigateTo('section-08')">Start Activity 08</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 1: STARTING OFF -->
+            <section id="section-01" class="page-section">
+                <h1>Unit 8: Tourist attractions</h1>
+                <h2>Section 1: Starting off</h2>
+                
+                <div class="activity-block">
+                    <p><strong>Match the holiday destinations around the world with the activities (a-f):</strong></p>
+                    
+                    <div class="randomize-container" id="sec1-matching">
+                        <div class="question" data-answer="a">
+                            <label>1. Visiting historical monuments and famous landmarks in a city:</label><br>
+                            <select class="answer-select randomize-options">
+                                <option value="">--Select Activity--</option>
+                                <option value="a">a. sightseeing</option>
+                                <option value="b">b. backpacking</option>
+                                <option value="c">c. a safari</option>
+                                <option value="d">d. skiing</option>
+                                <option value="e">e. shopping</option>
+                                <option value="f">f. an Arctic cruise</option>
+                            </select>
+                            <span class="feedback"></span>
+                        </div>
+                        
+                        <div class="question" data-answer="b">
+                            <label>2. Travelling affordably with your clothes and belongings in a rucksack:</label><br>
+                            <select class="answer-select randomize-options">
+                                <option value="">--Select Activity--</option>
+                                <option value="a">a. sightseeing</option>
+                                <option value="b">b. backpacking</option>
+                                <option value="c">c. a safari</option>
+                                <option value="d">d. skiing</option>
+                                <option value="e">e. shopping</option>
+                                <option value="f">f. an Arctic cruise</option>
+                            </select>
+                            <span class="feedback"></span>
+                        </div>
+
+                        <div class="question" data-answer="c">
+                            <label>3. A journey, typically in Africa, to observe wildlife:</label><br>
+                            <select class="answer-select randomize-options">
+                                <option value="">--Select Activity--</option>
+                                <option value="a">a. sightseeing</option>
+                                <option value="b">b. backpacking</option>
+                                <option value="c">c. a safari</option>
+                                <option value="d">d. skiing</option>
+                                <option value="e">e. shopping</option>
+                                <option value="f">f. an Arctic cruise</option>
+                            </select>
+                            <span class="feedback"></span>
+                        </div>
+                        
+                        <div class="question" data-answer="d">
+                            <label>4. Gliding over snow in a mountainous region:</label><br>
+                            <select class="answer-select randomize-options">
+                                <option value="">--Select Activity--</option>
+                                <option value="a">a. sightseeing</option>
+                                <option value="b">b. backpacking</option>
+                                <option value="c">c. a safari</option>
+                                <option value="d">d. skiing</option>
+                                <option value="e">e. shopping</option>
+                                <option value="f">f. an Arctic cruise</option>
+                            </select>
+                            <span class="feedback"></span>
+                        </div>
+
+                        <div class="question" data-answer="e">
+                            <label>5. Buying designer clothes or souvenirs from stores:</label><br>
+                            <select class="answer-select randomize-options">
+                                <option value="">--Select Activity--</option>
+                                <option value="a">a. sightseeing</option>
+                                <option value="b">b. backpacking</option>
+                                <option value="c">c. a safari</option>
+                                <option value="d">d. skiing</option>
+                                <option value="e">e. shopping</option>
+                                <option value="f">f. an Arctic cruise</option>
+                            </select>
+                            <span class="feedback"></span>
+                        </div>
+
+                        <div class="question" data-answer="f">
+                            <label>6. Travelling by boat through icy polar waters:</label><br>
+                            <select class="answer-select randomize-options">
+                                <option value="">--Select Activity--</option>
+                                <option value="a">a. sightseeing</option>
+                                <option value="b">b. backpacking</option>
+                                <option value="c">c. a safari</option>
+                                <option value="d">d. skiing</option>
+                                <option value="e">e. shopping</option>
+                                <option value="f">f. an Arctic cruise</option>
+                            </select>
+                            <span class="feedback"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="activity-block">
+                    <p><strong>Discuss and answer these questions:</strong></p>
+                    <div class="question open-ended">
+                        <label>1. Where do you think each photo was taken? (Give a brief guess for the above activities)</label>
+                        <textarea rows="3" placeholder="Type your answer here..."></textarea>
+                    </div>
+                    <div class="question open-ended">
+                        <label>2. What do people find enjoyable about each of these holidays?</label>
+                        <textarea rows="3" placeholder="Type your answer here..."></textarea>
+                    </div>
+                    <div class="question open-ended">
+                        <label>3. Which holiday would you enjoy most? Why?</label>
+                        <textarea rows="3" placeholder="Type your answer here..."></textarea>
+                    </div>
+                </div>
+
+                <div class="button-container">
+                    <button class="btn-home" onclick="navigateTo('section-home')">← Back to Dashboard</button>
+                    <div class="btn-group-right">
+                        <button class="btn-check" onclick="checkAnswers(1)">CHECK ANSWERS</button>
+                        <button class="btn-save" onclick="saveToSubmit(1)">SAVE TO SUBMIT</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 2: READING (SUMMARY COMPLETION) -->
+            <section id="section-02" class="page-section">
+                <h1>Unit 8: Tourist attractions</h1>
+                <h2>Section 2: Reading</h2>
+                
+                <div class="reading-passage">
+                    <h3>Here today, gone tomorrow</h3>
+                    <p>The Arctic and Antarctica are now within reach of the modern tourist, with many going to see these icy wildernesses before it's too late. Christian Amodeo reports on the growth of polar tourism.</p>
+                    <p>Travel at the North and South Poles has become an expensive leisure activity, suitable for tourists of all ages. The poles may be inhospitable places, but they are seeing increasing numbers of visitors. Annual figures for the Arctic, where tourism has existed since the 19th century, have increased from about a million in the early 1990s to more than 1.5 million today. This is partly because of the lengthening summer season brought about by climate change.</p>
+                    <p>Most visitors arrive by ship... Iceland, a country where tourism is the second-largest industry, has enjoyed an annual growth rate of nine percent since 1990... Greenland has seen the most rapid growth in marine tourism, with a sharp increase in cruise-ship arrivals of 250 percent since 2004.</p>
+                    <p>The global economic downturn may have affected the annual 20.6 percent rate of increase in visitors to the Antarctic - last season saw a drop of 17 percent to 38,200 - but there has been a 760 percent rise in land-based tourism there since 1997. More people than ever are landing at fragile sites, with light aircraft, helicopters and all-terrain vehicles increasingly used for greater access... large cruise ships capable of carrying up to 800 passengers are not uncommon.</p>
+                </div>
+
+                <div class="activity-block">
+                    <p class="instructions">Questions 1-7: Complete the summary below. Choose NO MORE THAN TWO WORDS AND/OR A NUMBER from the passage for each answer.</p>
+                    
+                    <div class="summary-box">
+                        <h3 style="text-align: center; margin-top:0;">Polar tourism - the figures</h3>
+                        <p>
+                            Tourism in the Arctic began in the 
+                            <strong>1</strong> <input type="text" class="gap-fill" data-answer="19th century"> <span class="feedback"></span> 
+                            and visitor numbers have risen since that time. These days, over 
+                            <strong>2</strong> <input type="text" class="gap-fill" data-answer="1.5 million"> <span class="feedback"></span> 
+                            people travel there, mostly by ship. The country with the greatest increase in visitors is 
+                            <strong>3</strong> <input type="text" class="gap-fill" data-answer="Greenland"> <span class="feedback"></span>.
+                            Tourism has expanded in the Arctic because the 
+                            <strong>4</strong> <input type="text" class="gap-fill" data-answer="summer|summer season"> <span class="feedback"></span> 
+                            lasts longer than it used to.
+                        </p>
+                        <p>
+                            Travel to the Antarctic has fallen by 
+                            <strong>5</strong> <input type="text" class="gap-fill" data-answer="17 percent|17%"> <span class="feedback"></span> 
+                            over the past year. However, many more people are using small planes and 
+                            <strong>6</strong> <input type="text" class="gap-fill" data-answer="helicopters"> <span class="feedback"></span> 
+                            to land on the ice. Aircraft are also taking visitors to huge ships that hold as many as 
+                            <strong>7</strong> <input type="text" class="gap-fill" data-answer="800"> <span class="feedback"></span> tourists.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="button-container">
+                    <button class="btn-home" onclick="navigateTo('section-home')">← Back to Dashboard</button>
+                    <div class="btn-group-right">
+                        <button class="btn-check" onclick="checkAnswers(2)">CHECK ANSWERS</button>
+                        <button class="btn-save" onclick="saveToSubmit(2)">SAVE TO SUBMIT</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 3: READING & VOCABULARY -->
+            <section id="section-03" class="page-section">
+                <h1>Unit 8: Tourist attractions</h1>
+                <h2>Section 3: Reading (Matching Features) & Vocabulary</h2>
+
+                <!-- Activity 1: Matching Features -->
+                <div class="activity-block">
+                    <h3>Part 1: Matching Features (Questions 8–12)</h3>
+                    <p>Match each statement with the correct person (A–D). You may use any letter more than once.</p>
+                    
+                    <div class="people-box">
+                        <strong>List of People</strong><br>
+                        <strong>A</strong> Louisa Richardson (Exodus tour operator)<br>
+                        <strong>B</strong> Rod Downie (Environmental Manager, BAS)<br>
+                        <strong>C</strong> Frigg Jørgensen (General Secretary, AECO)<br>
+                        <strong>D</strong> Prisca Campbell (Marketing Director, Quark Expeditions)
+                    </div>
+
+                    <div class="randomize-container" id="sec3-part1">
+                        <div class="question" data-answer="D">
+                            <label><strong>8.</strong> Some tourists believe they should not delay their trip to the poles.</label><br>
+                            <select class="match-select randomize-options">
+                                <option value="">-- Choose Person --</option>
+                                <option value="A">A - Louisa Richardson</option>
+                                <option value="B">B - Rod Downie</option>
+                                <option value="C">C - Frigg Jørgensen</option>
+                                <option value="D">D - Prisca Campbell</option>
+                            </select>
+                            <span class="feedback"></span>
+                        </div>
+
+                        <div class="question" data-answer="B">
+                            <label><strong>9.</strong> There are some dangers to travelling in Antarctica.</label><br>
+                            <select class="match-select randomize-options">
+                                <option value="">-- Choose Person --</option>
+                                <option value="A">A - Louisa Richardson</option>
+                                <option value="B">B - Rod Downie</option>
+                                <option value="C">C - Frigg Jørgensen</option>
+                                <option value="D">D - Prisca Campbell</option>
+                            </select>
+                            <span class="feedback"></span>
+                        </div>
+
+                        <div class="question" data-answer="C">
+                            <label><strong>10.</strong> Some famous people have travelled to polar regions to look at the impacts of global warming.</label><br>
+                            <select class="match-select randomize-options">
+                                <option value="">-- Choose Person --</option>
+                                <option value="A">A - Louisa Richardson</option>
+                                <option value="B">B - Rod Downie</option>
+                                <option value="C">C - Frigg Jørgensen</option>
+                                <option value="D">D - Prisca Campbell</option>
+                            </select>
+                            <span class="feedback"></span>
+                        </div>
+
+                        <div class="question" data-answer="A">
+                            <label><strong>11.</strong> Some tourists make more than one trip to the poles.</label><br>
+                            <select class="match-select randomize-options">
+                                <option value="">-- Choose Person --</option>
+                                <option value="A">A - Louisa Richardson</option>
+                                <option value="B">B - Rod Downie</option>
+                                <option value="C">C - Frigg Jørgensen</option>
+                                <option value="D">D - Prisca Campbell</option>
+                            </select>
+                            <span class="feedback"></span>
+                        </div>
+
+                        <div class="question" data-answer="C">
+                            <label><strong>12.</strong> There is no evidence that visitors are hurrying to the poles.</label><br>
+                            <select class="match-select randomize-options">
+                                <option value="">-- Choose Person --</option>
+                                <option value="A">A - Louisa Richardson</option>
+                                <option value="B">B - Rod Downie</option>
+                                <option value="C">C - Frigg Jørgensen</option>
+                                <option value="D">D - Prisca Campbell</option>
+                            </select>
+                            <span class="feedback"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Activity 2: Vocabulary - Tourism or Tourist -->
+                <div class="activity-block">
+                    <h3>Part 2: Vocabulary — <i>tourism</i> or <i>tourist</i>?</h3>
+                    <p>Select the correct word to complete each sentence from the reading passage.</p>
+
+                    <div class="randomize-container" id="sec3-part2">
+                        <div class="question" data-answer="tourists">
+                            <label>1. Travel at the North and South Poles has become an expensive leisure activity, suitable for 
+                                <select class="vocab-select">
+                                    <option value="">-- Select --</option>
+                                    <option value="tourism">tourism</option>
+                                    <option value="tourists">tourists</option>
+                                </select> of all ages.
+                            </label>
+                            <span class="feedback"></span>
+                        </div>
+
+                        <div class="question" data-answer="tourism">
+                            <label>2. Annual figures for the Arctic, where 
+                                <select class="vocab-select">
+                                    <option value="">-- Select --</option>
+                                    <option value="tourism">tourism</option>
+                                    <option value="tourists">tourists</option>
+                                </select> has existed since the 19th century, have increased to over 1.5 million.
+                            </label>
+                            <span class="feedback"></span>
+                        </div>
+
+                        <div class="question" data-answer="tourism">
+                            <label>3. In the same period that 
+                                <select class="vocab-select">
+                                    <option value="">-- Select --</option>
+                                    <option value="tourism">tourism</option>
+                                    <option value="tourists">tourists</option>
+                                </select> has exploded, the 'health' of the poles has 'deteriorated'.
+                            </label>
+                            <span class="feedback"></span>
+                        </div>
+
+                        <div class="question" data-answer="tourist">
+                            <label>4. At the meeting of the Antarctic Treaty, member nations adopted proposals for limits to 
+                                <select class="vocab-select">
+                                    <option value="">-- Select --</option>
+                                    <option value="tourism">tourism</option>
+                                    <option value="tourist">tourist</option>
+                                </select> numbers.
+                            </label>
+                            <span class="feedback"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="button-container">
+                    <button class="btn-home" onclick="navigateTo('section-home')">← Back to Dashboard</button>
+                    <div class="btn-group-right">
+                        <button class="btn-check" onclick="checkAnswers(3)">CHECK ANSWERS</button>
+                        <button class="btn-save" onclick="saveToSubmit(3)">SAVE TO SUBMIT</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 4: LISTENING -->
+            <section id="section-04" class="page-section">
+                <h1>Unit 8: Tourist attractions</h1>
+                <h2>Section 4: Listening</h2>
+
+                <!-- Questions 1-5: Sentence Completion -->
+                <div class="activity-block">
+                    <h3>Part 1: Sentence Completion (Questions 1–5)</h3>
+                    <p class="instructions">Complete the sentences below. Write NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.</p>
+
+                    <div class="randomize-container" id="sec4-part1">
+                        <div class="question">
+                            1. Keep your <input type="text" class="gap-input" data-answer="ticket"> <span class="feedback"></span> in a safe place throughout your visit.
+                        </div>
+                        <div class="question">
+                            2. Pass through the <input type="text" class="gap-input" data-answer="grey gates"> <span class="feedback"></span> to enter and leave the museum.
+                        </div>
+                        <div class="question">
+                            3. You need to buy a <input type="text" class="gap-input" data-answer="permit"> <span class="feedback"></span> if you want to use a camera in the museum.
+                        </div>
+                        <div class="question">
+                            4. Look after your <input type="text" class="gap-input" data-answer="wallet"> <span class="feedback"></span> and mobile phone.
+                        </div>
+                        <div class="question">
+                            5. Arrive at the cinema about <input type="text" class="gap-input" data-answer="5 minutes|five minutes|5 mins"> <span class="feedback"></span> before the start of the show.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Questions 6-10: Table Completion -->
+                <div class="activity-block">
+                    <h3>Part 2: Table Completion (Questions 6–10)</h3>
+                    <p class="instructions">Complete the table below. Write NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.</p>
+
+                    <table class="listening-table">
+                        <thead>
+                            <tr>
+                                <th>Name of Film</th>
+                                <th>Time</th>
+                                <th>What you will see</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>The Secrets of the Nile</td>
+                                <td>10.00 a.m.</td>
+                                <td>The first <strong>6.</strong> <input type="text" class="gap-input" data-answer="journey"> <span class="feedback"></span> along the river Nile.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>7.</strong> <input type="text" class="gap-input" data-answer="wild"> <span class="feedback"></span> Ocean</td>
+                                <td>11.45 a.m.</td>
+                                <td>Life at the bottom of the sea.</td>
+                            </tr>
+                            <tr>
+                                <td>Dinosaurs Alive</td>
+                                <td><strong>8.</strong> <input type="text" class="gap-input" data-answer="1.45 p.m.|1.45pm|1:45 p.m.|1:45pm"> <span class="feedback"></span></td>
+                                <td>A re-creation of a <strong>9.</strong> <input type="text" class="gap-input" data-answer="new species"> <span class="feedback"></span> of dinosaur.</td>
+                            </tr>
+                            <tr>
+                                <td>Arabia</td>
+                                <td>2.30 p.m.</td>
+                                <td>A trip across the desert and a <strong>10.</strong> <input type="text" class="gap-input" data-answer="dive"> <span class="feedback"></span> in the Red Sea.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="button-container">
+                    <button class="btn-home" onclick="navigateTo('section-home')">← Back to Dashboard</button>
+                    <div class="btn-group-right">
+                        <button class="btn-check" onclick="checkAnswers(4)">CHECK ANSWERS</button>
+                        <button class="btn-save" onclick="saveToSubmit(4)">SAVE TO SUBMIT</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 5: SPEAKING -->
+            <section id="section-05" class="page-section">
+                <h1>Unit 8: Tourist attractions</h1>
+                <h2>Section 5: Speaking</h2>
+
+                <!-- Activity 1: Opposite Adjectives Matching -->
+                <div class="activity-block">
+                    <h3>Part 1: Vocabulary — Adjective Opposites</h3>
+                    <p>Match each adjective with its opposite from the options provided.</p>
+                    
+                    <div class="grid-container randomize-container" id="sec5-adjectives">
+                        <div class="question" data-answer="noisy">
+                            <label>1. peaceful &harr;</label><br>
+                            <select class="adj-select randomize-options">
+                                <option value="">-- Choose Opposite --</option>
+                                <option value="ancient">ancient</option>
+                                <option value="noisy">noisy</option>
+                                <option value="dirty">dirty</option>
+                                <option value="quiet">quiet</option>
+                                <option value="urban">urban</option>
+                                <option value="unpopular">unpopular</option>
+                                <option value="stressful">stressful</option>
+                                <option value="unimpressive">unimpressive</option>
+                                <option value="poor">poor</option>
+                                <option value="dull">dull</option>
+                                <option value="outdated">outdated</option>
+                                <option value="awful">awful</option>
+                            </select>
+                            <span class="feedback"></span>
+                        </div>
+
+                        <div class="question" data-answer="dirty">
+                            <label>2. clean &harr;</label><br>
+                            <select class="adj-select randomize-options">
+                                <option value="">-- Choose Opposite --</option>
+                                <option value="ancient">ancient</option>
+                                <option value="noisy">noisy</option>
+                                <option value="dirty">dirty</option>
+                                <option value="quiet">quiet</option>
+                                <option value="urban">urban</option>
+                                <option value="unpopular">unpopular</option>
+                                <option value="stressful">stressful</option>
+                                <option value="unimpressive">unimpressive</option>
+                                <option value="poor">poor</option>
+                                <option value="dull">dull</option>
+                                <option value="outdated">outdated</option>
+                                <option value="awful">awful</option>
+                            </select>
+                            <span class="feedback"></span>
+                        </div>
+
+                        <div class="question" data-answer="quiet">
+                            <label>3. busy &harr;</label><br>
+                            <select class="adj-select randomize-options">
+                                <option value="">-- Choose Opposite --</option>
+                                <option value="ancient">ancient</option>
+                                <option value="noisy">noisy</option>
+                                <option value="dirty">dirty</option>
+                                <option value="quiet">quiet</option>
+                                <option value="urban">urban</option>
+                                <option value="unpopular">unpopular</option>
+                                <option value="stressful">stressful</option>
+                                <option value="unimpressive">unimpressive</option>
+                                <option value="poor">poor</option>
+                                <option value="dull">dull</option>
+                                <option value="outdated">outdated</option>
+                                <option value="awful">awful</option>
+                            </select>
+                            <span class="feedback"></span>
+                        </div>
+
+                        <div class="question" data-answer="urban">
+                            <label>4. rural &harr;</label><br>
+                            <select class="adj-select randomize-options">
+                                <option value="">-- Choose Opposite --</option>
+                                <option value="ancient">ancient</option>
+                                <option value="noisy">noisy</option>
+                                <option value="dirty">dirty</option>
+                                <option value="quiet">quiet</option>
+                                <option value="urban">urban</option>
+                                <option value="unpopular">unpopular</option>
+                                <option value="stressful">stressful</option>
+                                <option value="unimpressive">unimpressive</option>
+                                <option value="poor">poor</option>
+                                <option value="dull">dull</option>
+                                <option value="outdated">outdated</option>
+                                <option value="awful">awful</option>
+                            </select>
+                            <span class="feedback"></span>
+                        </div>
+
+                        <div class="question" data-answer="unpopular">
+                            <label>5. popular &harr;</label><br>
+                            <select class="adj-select randomize-options">
+                                <option value="">-- Choose Opposite --</option>
+                                <option value="ancient">ancient</option>
+                                <option value="noisy">noisy</option>
+                                <option value="dirty">dirty</option>
+                                <option value="quiet">quiet</option>
+                                <option value="urban">urban</option>
+                                <option value="unpopular">unpopular</option>
+                                <option value="stressful">stressful</option>
+                                <option value="unimpressive">unimpressive</option>
+                                <option value="poor">poor</option>
+                                <option value="dull">dull</option>
+                                <option value="outdated">outdated</option>
+                                <option value="awful">awful</option>
+                            </select>
+                            <span class="feedback"></span>
+                        </div>
+
+                        <div class="question" data-answer="stressful">
+                            <label>6. relaxing &harr;</label><br>
+                            <select class="adj-select randomize-options">
+                                <option value="">-- Choose Opposite --</option>
+                                <option value="ancient">ancient</option>
+                                <option value="noisy">noisy</option>
+                                <option value="dirty">dirty</option>
+                                <option value="quiet">quiet</option>
+                                <option value="urban">urban</option>
+                                <option value="unpopular">unpopular</option>
+                                <option value="stressful">stressful</option>
+                                <option value="unimpressive">unimpressive</option>
+                                <option value="poor">poor</option>
+                                <option value="dull">dull</option>
+                                <option value="outdated">outdated</option>
+                                <option value="awful">awful</option>
+                            </select>
+                            <span class="feedback"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Activity 2: Speaking Part 1 Practice -->
+                <div class="activity-block">
+                    <h3>Part 2: Speaking Part 1 Notes</h3>
+                    <p>Write your answers or key speaking points for these Part 1 questions.</p>
+
+                    <div class="question">
+                        <label><strong>1. Can you describe your town or village?</strong></label>
+                        <textarea rows="3" class="speaking-note" placeholder="E.g., I live in a modern city which is situated on..."></textarea>
+                    </div>
+
+                    <div class="question">
+                        <label><strong>2. How important is tourism in your town/village? Why? / Why not?</strong></label>
+                        <textarea rows="3" class="speaking-note" placeholder="E.g., It's very important because it brings in revenue..."></textarea>
+                    </div>
+
+                    <div class="question">
+                        <label><strong>3. What places would you recommend people to visit in your local area?</strong></label>
+                        <textarea rows="3" class="speaking-note" placeholder="E.g., I would recommend visiting the ancient monuments..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Activity 3: Speaking Part 2 Cue Card -->
+                <div class="activity-block">
+                    <h3>Part 3: Speaking Part 2 (Topic Card)</h3>
+                    <div class="prompt-box">
+                        <strong>Describe a holiday you particularly enjoyed.</strong><br><br>
+                        You should say:
+                        <ul>
+                            <li>where you went</li>
+                            <li>why you went there</li>
+                            <li>what you did</li>
+                        </ul>
+                        and explain why you enjoyed the holiday so much.
+                    </div>
+
+                    <div class="question">
+                        <label><strong>Write your preparation notes and talk outline below:</strong></label>
+                        <textarea rows="5" class="speaking-note" placeholder="Outline your key points and descriptive adjectives here..."></textarea>
+                    </div>
+                </div>
+
+                <div class="button-container">
+                    <button class="btn-home" onclick="navigateTo('section-home')">← Back to Dashboard</button>
+                    <div class="btn-group-right">
+                        <button class="btn-check" onclick="checkAnswers(5)">CHECK ANSWERS</button>
+                        <button class="btn-save" onclick="saveToSubmit(5)">SAVE TO SUBMIT</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 6: WRITING TASK 2 & KEY GRAMMAR -->
+            <section id="section-06" class="page-section">
+                <h1>Unit 8: Tourist attractions</h1>
+                <h2>Section 6: Writing Task 2 & Key Grammar</h2>
+
+                <!-- Activity 1: Writing Task Analysis (True/False) -->
+                <div class="activity-block">
+                    <h3>Part 1: Writing Task Analysis (True or False)</h3>
+                    <p>Read the statements about Task 2 essay writing and select True (T) or False (F).</p>
+
+                    <div class="randomize-container" id="sec6-tf">
+                        <div class="question tf-q" data-answer="T">
+                            <label>1. The main topic of the essay prompt is tourism.</label><br>
+                            <select class="tf-select">
+                                <option value="">-- Choose --</option>
+                                <option value="T">True</option>
+                                <option value="F">False</option>
+                            </select>
+                            <span class="feedback"></span>
+                        </div>
+
+                        <div class="question tf-q" data-answer="F">
+                            <label>2. I need to give reasons why people did not travel in the past.</label><br>
+                            <select class="tf-select">
+                                <option value="">-- Choose --</option>
+                                <option value="T">True</option>
+                                <option value="F">False</option>
+                            </select>
+                            <span class="feedback"></span>
+                        </div>
+
+                        <div class="question tf-q" data-answer="T">
+                            <label>3. I need to use both present and past tenses in the response.</label><br>
+                            <select class="tf-select">
+                                <option value="">-- Choose --</option>
+                                <option value="T">True</option>
+                                <option value="F">False</option>
+                            </select>
+                            <span class="feedback"></span>
+                        </div>
+
+                        <div class="question tf-q" data-answer="T">
+                            <label>4. I need to explain why tourists do not find out about the local culture.</label><br>
+                            <select class="tf-select">
+                                <option value="">-- Choose --</option>
+                                <option value="T">True</option>
+                                <option value="F">False</option>
+                            </select>
+                            <span class="feedback"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Activity 2: Key Grammar - Relative Pronouns -->
+                <div class="activity-block">
+                    <h3>Part 2: Key Grammar — Relative Pronouns</h3>
+                    <p>Complete the sentences using <strong>who</strong>, <strong>which</strong>, <strong>that</strong>, or <strong>where</strong>.</p>
+
+                    <div class="randomize-container" id="sec6-grammar">
+                        <div class="question grammar-q" data-answer="which|that">
+                            1. My city has a shopping festival <input type="text" class="rel-input"> <span class="feedback"></span> takes place every year.
+                        </div>
+                        <div class="question grammar-q" data-answer="who|that">
+                            2. Tourists <input type="text" class="rel-input"> <span class="feedback"></span> go to Agra in India want to see the Taj Mahal.
+                        </div>
+                        <div class="question grammar-q" data-answer="where">
+                            3. St Petersburg is the city <input type="text" class="rel-input"> <span class="feedback"></span> I was born.
+                        </div>
+                        <div class="question grammar-q" data-answer="which|that">
+                            4. There is a boat <input type="text" class="rel-input"> <span class="feedback"></span> leaves the harbour at 10.30 a.m.
+                        </div>
+                        <div class="question grammar-q" data-answer="where">
+                            5. A tourist information office is a place <input type="text" class="rel-input"> <span class="feedback"></span> you can find out about the local area.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Activity 3: Spelling Correction -->
+                <div class="activity-block">
+                    <h3>Part 3: Spelling — Introductory & Linking Phrases</h3>
+                    <p>Correct the spelling mistake in each of the following expressions.</p>
+
+                    <div class="randomize-container" id="sec6-spelling">
+                        <div class="question spell-q" data-answer="century">
+                            <label>1. in the last centry &rarr; in the last </label>
+                            <input type="text" class="spell-input"> <span class="feedback"></span>
+                        </div>
+
+                        <div class="question spell-q" data-answer="nowadays">
+                            <label>2. nowdays &rarr; </label>
+                            <input type="text" class="spell-input"> <span class="feedback"></span>
+                        </div>
+
+                        <div class="question spell-q" data-answer="problem">
+                            <label>3. another probelm &rarr; another </label>
+                            <input type="text" class="spell-input"> <span class="feedback"></span>
+                        </div>
+
+                        <div class="question spell-q" data-answer="although">
+                            <label>4. althought &rarr; </label>
+                            <input type="text" class="spell-input"> <span class="feedback"></span>
+                        </div>
+
+                        <div class="question spell-q" data-answer="opinion">
+                            <label>5. in my oppinion &rarr; in my </label>
+                            <input type="text" class="spell-input"> <span class="feedback"></span>
+                        </div>
+
+                        <div class="question spell-q" data-answer="conclusion">
+                            <label>6. in conclucion &rarr; in </label>
+                            <input type="text" class="spell-input"> <span class="feedback"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="button-container">
+                    <button class="btn-home" onclick="navigateTo('section-home')">← Back to Dashboard</button>
+                    <div class="btn-group-right">
+                        <button class="btn-check" onclick="checkAnswers(6)">CHECK ANSWERS</button>
+                        <button class="btn-save" onclick="saveToSubmit(6)">SAVE TO SUBMIT</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 7: REVIEW UNIT 7 -->
+            <section id="section-07" class="page-section">
+                <h1>Unit 8: Tourist attractions</h1>
+                <h2>Section 7: Vocabulary & Grammar Review (Unit 7)</h2>
+
+                <!-- Activity 1: Raise vs Rise -->
+                <div class="activity-block">
+                    <h3>Part 1: Vocabulary — <i>raise</i> or <i>rise</i></h3>
+                    <p>Complete the sentences with the correct form of <strong>raise</strong> or <strong>rise</strong>.</p>
+
+                    <div class="randomize-container" id="sec7-raise">
+                        <div class="question raise-q" data-answer="raising">
+                            1. The government's reading programme is <input type="text" class="short-input"> <span class="feedback"></span> literacy levels in rural areas.
+                        </div>
+                        <div class="question raise-q" data-answer="rises">
+                            2. If the cost of course materials <input type="text" class="short-input"> <span class="feedback"></span>, fewer students will buy them.
+                        </div>
+                        <div class="question raise-q" data-answer="raised">
+                            3. According to the newspaper, last week's concert <input type="text" class="short-input"> <span class="feedback"></span> $500 for charity.
+                        </div>
+                        <div class="question raise-q" data-answer="raise">
+                            4. <input type="text" class="short-input"> <span class="feedback"></span> your hand if you would like to listen to the recording again!
+                        </div>
+                        <div class="question raise-q" data-answer="has risen">
+                            5. Even though we have computers, the amount of paper people use <input type="text" class="short-input"> <span class="feedback"></span> over the years.
+                        </div>
+                        <div class="question raise-q" data-answer="rose">
+                            6. Although the number of people using online English courses <input type="text" class="short-input"> <span class="feedback"></span> last year, it did not affect book sales.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Activity 2: Prepositions Summary -->
+                <div class="activity-block">
+                    <h3>Part 2: Prepositions in Graph Descriptions</h3>
+                    <p>Fill in each gap in the summary using: <i>at, between, from, in, of, over, to, by</i>.</p>
+
+                    <p style="line-height: 2;">
+                        The graph shows some changes <strong>1.</strong> in the percentage of school leavers without a qualification. 
+                        According to the graph, 16 percent <strong>2.</strong> <input type="text" class="prep-input short-input" data-answer="of"> <span class="feedback"></span> 
+                        school leavers did not have a qualification in 2001. Over the next year, there was a slight rise 
+                        <strong>3.</strong> <input type="text" class="prep-input short-input" data-answer="to"> <span class="feedback"></span> 17 percent. 
+                        <strong>4.</strong> <input type="text" class="prep-input short-input" data-answer="between"> <span class="feedback"></span> 2004 and 2006, the percentage increased more sharply and peaked 
+                        <strong>5.</strong> <input type="text" class="prep-input short-input" data-answer="at"> <span class="feedback"></span> 19 percent. After this, it fell again 
+                        <strong>6.</strong> <input type="text" class="prep-input short-input" data-answer="by"> <span class="feedback"></span> 2 percent. Finally, 
+                        <strong>7.</strong> <input type="text" class="prep-input short-input" data-answer="from"> <span class="feedback"></span> 2007 
+                        <strong>8.</strong> <input type="text" class="prep-input short-input" data-answer="to"> <span class="feedback"></span> 2010, the percentage fluctuated, but rose to 19 percent in 2010 over the 
+                        <strong>9.</strong> <input type="text" class="prep-input short-input" data-answer="over"> <span class="feedback"></span> ten-year period.
+                    </p>
+                </div>
+
+                <!-- Activity 3: Rewrite with "There" -->
+                <div class="activity-block">
+                    <h3>Part 3: Grammar — Rewriting Sentences with <i>There</i></h3>
+                    <p>Rewrite each sentence starting with <strong>There</strong> and using a noun phrase.</p>
+
+                    <div class="question">
+                        <label>1. The amount of study time fell by 20%.</label>
+                        <textarea rows="2" class="rewrite-input" placeholder="E.g., There was a fall of 20% in the amount of study time."></textarea>
+                    </div>
+                    <div class="question">
+                        <label>2. Reading speeds improved considerably.</label>
+                        <textarea rows="2" class="rewrite-input" placeholder="Type sentence here..."></textarea>
+                    </div>
+                    <div class="question">
+                        <label>3. Sales of electronic books have dropped slightly this month.</label>
+                        <textarea rows="2" class="rewrite-input" placeholder="Type sentence here..."></textarea>
+                    </div>
+                </div>
+
+                <div class="button-container">
+                    <button class="btn-home" onclick="navigateTo('section-home')">← Back to Dashboard</button>
+                    <div class="btn-group-right">
+                        <button class="btn-check" onclick="checkAnswers(7)">CHECK ANSWERS</button>
+                        <button class="btn-save" onclick="saveToSubmit(7)">SAVE TO SUBMIT</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 8: REVIEW UNIT 8 -->
+            <section id="section-08" class="page-section">
+                <h1>Unit 8: Tourist attractions</h1>
+                <h2>Section 8: Vocabulary & Grammar Review (Unit 8)</h2>
+
+                <!-- Activity 1: Conversation Adjectives -->
+                <div class="activity-block">
+                    <h3>Part 1: Conversation Adjectives</h3>
+                    <p>Complete the conversations with the adjectives: <i>dull, fashionable, impressive, outdated, relaxing, stressful</i>.</p>
+
+                    <div class="randomize-container" id="sec8-part1">
+                        <div class="question conv-q" data-answer="impressive">
+                            <label>1. That building is so </label>
+                            <select class="adj-sel randomize-options">
+                                <option value="">-- Choose --</option>
+                                <option value="impressive">impressive</option>
+                                <option value="outdated">outdated</option>
+                                <option value="fashionable">fashionable</option>
+                                <option value="dull">dull</option>
+                                <option value="stressful">stressful</option>
+                            </select> <span class="feedback"></span>!
+                        </div>
+
+                        <div class="question conv-q" data-answer="outdated">
+                            <label>2. This suitcase is rather </label>
+                            <select class="adj-sel randomize-options">
+                                <option value="">-- Choose --</option>
+                                <option value="impressive">impressive</option>
+                                <option value="outdated">outdated</option>
+                                <option value="fashionable">fashionable</option>
+                                <option value="dull">dull</option>
+                                <option value="stressful">stressful</option>
+                            </select> <span class="feedback"></span> now; it was my father's.
+                        </div>
+
+                        <div class="question conv-q" data-answer="fashionable">
+                            <label>3. You can buy </label>
+                            <select class="adj-sel randomize-options">
+                                <option value="">-- Choose --</option>
+                                <option value="impressive">impressive</option>
+                                <option value="outdated">outdated</option>
+                                <option value="fashionable">fashionable</option>
+                                <option value="dull">dull</option>
+                                <option value="stressful">stressful</option>
+                            </select> <span class="feedback"></span> clothes there at cheap prices.
+                        </div>
+
+                        <div class="question conv-q" data-answer="dull">
+                            <label>4. There wasn't much to see on the tour; it was a bit </label>
+                            <select class="adj-sel randomize-options">
+                                <option value="">-- Choose --</option>
+                                <option value="impressive">impressive</option>
+                                <option value="outdated">outdated</option>
+                                <option value="fashionable">fashionable</option>
+                                <option value="dull">dull</option>
+                                <option value="stressful">stressful</option>
+                            </select> <span class="feedback"></span>.
+                        </div>
+
+                        <div class="question conv-q" data-answer="stressful">
+                            <label>5. Awful queues at check-in are always a bit </label>
+                            <select class="adj-sel randomize-options">
+                                <option value="">-- Choose --</option>
+                                <option value="impressive">impressive</option>
+                                <option value="outdated">outdated</option>
+                                <option value="fashionable">fashionable</option>
+                                <option value="dull">dull</option>
+                                <option value="stressful">stressful</option>
+                            </select> <span class="feedback"></span>.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Activity 2: Space Tourism Grammar Passage -->
+                <div class="activity-block">
+                    <h3>Part 2: Grammar — <i>who, which, that, where</i></h3>
+                    <p>Complete the article with <strong>who</strong>, <strong>which</strong>, <strong>that</strong>, or <strong>where</strong>.</p>
+
+                    <p style="line-height: 2;">
+                        There are many people <strong>1. who/that</strong> dream of going into space, but not many 
+                        <strong>2.</strong> <input type="text" class="space-input" style="width:110px;" data-answer="who|that"> <span class="feedback"></span> can afford it. 
+                        If you have a spare $20 million, you can spend a week at the International Space Station (ISS) 
+                        <strong>3.</strong> <input type="text" class="space-input" style="width:110px;" data-answer="which|that"> <span class="feedback"></span> orbits the Earth. 
+                        However, the ISS is a place 
+                        <strong>4.</strong> <input type="text" class="space-input" style="width:110px;" data-answer="where"> <span class="feedback"></span> scientists conduct research. 
+                        It is not a luxury hotel and cannot offer the accommodation 
+                        <strong>5.</strong> <input type="text" class="space-input" style="width:110px;" data-answer="which|that"> <span class="feedback"></span> many tourists expect.<br>
+                        Companies 
+                        <strong>6.</strong> <input type="text" class="space-input" style="width:110px;" data-answer="who|which|that"> <span class="feedback"></span> are investing millions in space tourism believe it is an industry 
+                        <strong>7.</strong> <input type="text" class="space-input" style="width:110px;" data-answer="which|that"> <span class="feedback"></span> will 'take off'. They plan to build hotels 
+                        <strong>8.</strong> <input type="text" class="space-input" style="width:110px;" data-answer="where"> <span class="feedback"></span> guests can enjoy all luxuries.
+                    </p>
+                </div>
+
+                <div class="button-container">
+                    <button class="btn-home" onclick="navigateTo('section-home')">← Back to Dashboard</button>
+                    <div class="btn-group-right">
+                        <button class="btn-check" onclick="checkAnswers(8)">CHECK ANSWERS</button>
+                        <button class="btn-save" onclick="saveToSubmit(8)">SAVE TO SUBMIT</button>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+        <footer>
+            Complete IELTS Bands 4–5 — Unit 8 Single-File Digital Activity Module
+        </footer>
+    </div>
+
+    <!-- JavaScript Navigation, Randomization & Interactive Logic -->
+    <script>
+        // Single Page Navigation Handler
+        function navigateTo(sectionId) {
+            document.querySelectorAll('.page-section').forEach(sec => {
+                sec.classList.remove('active-section');
+            });
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.classList.add('active-section');
+            }
+
+            // Update Top Navigation Buttons Active State
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                if (btn.getAttribute('data-target') === sectionId) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Fisher-Yates Randomization Algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function randomizeQuestionsAndOptions() {
+            // Randomize question block order
+            document.querySelectorAll('.randomize-container').forEach(container => {
+                const children = Array.from(container.children);
+                if (children.length > 1) {
+                    shuffleArray(children);
+                    children.forEach(child => container.appendChild(child));
+                }
+            });
+
+            // Randomize options inside <select> dropdowns (keeping index 0 default placeholder intact)
+            document.querySelectorAll('select.randomize-options').forEach(select => {
+                const options = Array.from(select.options);
+                if (options.length > 2) {
+                    const defaultOption = options[0];
+                    const restOptions = options.slice(1);
+                    shuffleArray(restOptions);
+                    select.innerHTML = '';
+                    select.appendChild(defaultOption);
+                    restOptions.forEach(opt => select.appendChild(opt));
+                }
+            });
+        }
+
+        // Immediate Feedback Verification Logic
+        function evaluateElement(el) {
+            let parentQ = el.closest('.question');
+            let dataAnswer = el.getAttribute('data-answer');
+            if (!dataAnswer && parentQ) {
+                dataAnswer = parentQ.getAttribute('data-answer');
+            }
+            if (!dataAnswer) return false;
+
+            const val = el.value.trim().toLowerCase();
+            const allowedAnswers = dataAnswer.toLowerCase().split('|');
+
+            // Find or create feedback element
+            let feedback = null;
+            if (parentQ) {
+                feedback = parentQ.querySelector('.feedback');
+            }
+            if (!feedback) {
+                feedback = el.nextElementSibling;
+            }
+
+            if (val === '') {
+                el.classList.remove('is-correct', 'is-incorrect');
+                if (feedback && feedback.classList.contains('feedback')) {
+                    feedback.textContent = '';
+                    feedback.className = 'feedback';
+                }
+                return false;
+            }
+
+            const isCorrect = allowedAnswers.includes(val);
+            if (isCorrect) {
+                el.classList.add('is-correct');
+                el.classList.remove('is-incorrect');
+                if (feedback && feedback.classList.contains('feedback')) {
+                    feedback.textContent = '✔ Correct';
+                    feedback.className = 'feedback correct';
+                }
+            } else {
+                el.classList.add('is-incorrect');
+                el.classList.remove('is-correct');
+                if (feedback && feedback.classList.contains('feedback')) {
+                    feedback.textContent = '✘ Incorrect';
+                    feedback.className = 'feedback incorrect';
+                }
+            }
+            return isCorrect;
+        }
+
+        // Event Listeners for Instant Live Feedback
+        document.addEventListener('input', function(e) {
+            if (e.target.matches('input[type="text"]')) {
+                evaluateElement(e.target);
+            }
+        });
+
+        document.addEventListener('change', function(e) {
+            if (e.target.matches('select')) {
+                evaluateElement(e.target);
+            }
+        });
+
+        // Check Answers button logic for individual sections
+        function checkAnswers(sectionNum) {
+            const sectionEl = document.getElementById(`section-0${sectionNum}`);
+            if (!sectionEl) return;
+
+            let total = 0;
+            let score = 0;
+
+            const inputsAndSelects = sectionEl.querySelectorAll('input[type="text"][data-answer], select, .question[data-answer] select');
+            const processed = new Set();
+
+            inputsAndSelects.forEach(el => {
+                if (processed.has(el)) return;
+                processed.add(el);
+
+                let isCorrect = evaluateElement(el);
+                total++;
+                if (isCorrect) score++;
+            });
+
+            alert(`Section ${sectionNum} Score: ${score} out of ${total}`);
+        }
+
+        // Download Submission Markdown File
+        function saveToSubmit(sectionNum) {
+            checkAnswers(sectionNum);
+            const sectionEl = document.getElementById(`section-0${sectionNum}`);
+            let scoreStr = "";
+            
+            let mdContent = `# UNIT 08 SUBMISSION 0${sectionNum}\n\n`;
+            mdContent += `## ${sectionEl.querySelector('h2').innerText}\n\n`;
+
+            const questions = sectionEl.querySelectorAll('.question, .summary-box, p');
+            
+            // Record Inputs and Selections
+            sectionEl.querySelectorAll('input[type="text"], select, textarea').forEach((input, i) => {
+                let val = input.value || 'No answer provided';
+                let label = `Item ${i+1}`;
+                const parent = input.closest('.question, li, p');
+                if (parent) {
+                    const lEl = parent.querySelector('label, strong');
+                    if (lEl) label = lEl.innerText.replace(/\n/g, ' ');
+                }
+                mdContent += `**${label}:** ${val}\n\n`;
+            });
+
+            const blob = new Blob([mdContent], { type: 'text/markdown' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `UNIT 08 SUBMISSION 0${sectionNum}.md`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Initialize Randomization on Page Load
+        window.addEventListener('DOMContentLoaded', () => {
+            randomizeQuestionsAndOptions();
+        });
+    </script>
+</body>
+</html>
