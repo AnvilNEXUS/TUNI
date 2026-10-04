@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>IELTS Vocabulary Flashcards</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --base-font-size: 16px;
+        }
+        
+        html {
+            font-size: var(--base-font-size);
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Smooth reveal for accordions */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+            opacity: 0;
+        }
+        
+        .accordion-content.open {
+            max-height: 500px;
+            opacity: 1;
+        }
+
+        .chevron {
+            transition: transform 0.3s ease;
+        }
+
+        .chevron.open {
+            transform: rotate(180deg);
+        }
+
+        /* Card entry animation */
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .card-animate {
+            animation: slideInRight 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        /* Toast notification */
+        #toast {
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s 0.3s, opacity 0.3s linear;
+        }
+        
+        #toast.show {
+            visibility: visible;
+            opacity: 1;
+            transition: opacity 0.3s linear;
+        }
+
+        /* Hide scrollbar for a cleaner mobile look */
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        success: '#10b981',
+                        warning: '#f59e0b',
+                        danger: '#ef4444'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100 min-h-screen flex flex-col pb-28">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white dark:bg-gray-800 shadow-sm px-4 py-3 flex items-center justify-between transition-colors">
+        <div class="flex items-center gap-3">
+            <button id="btn-theme" class="p-2 rounded-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition" aria-label="Toggle Theme">
+                <svg id="icon-sun" class="w-5 h-5 hidden dark:block text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                <svg id="icon-moon" class="w-5 h-5 block dark:hidden text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+            </button>
+            <div class="flex items-center bg-gray-100 dark:bg-gray-700 rounded-full p-1">
+                <button id="btn-font-dec" class="px-3 py-1 font-bold text-sm hover:bg-gray-200 dark:hover:bg-gray-600 rounded-l-full transition">A-</button>
+                <button id="btn-font-inc" class="px-3 py-1 font-bold text-lg hover:bg-gray-200 dark:hover:bg-gray-600 rounded-r-full transition">A+</button>
+            </div>
+        </div>
+        
+        <button id="btn-export" class="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg font-medium shadow-sm hover:bg-blue-600 active:scale-95 transition">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+            <span class="hidden sm:inline">Export</span>
+        </button>
+    </header>
+
+    <!-- Progress Bar -->
+    <div class="w-full bg-gray-200 dark:bg-gray-700 h-1.5">
+        <div id="progress-bar" class="bg-primary h-1.5 transition-all duration-300" style="width: 0%"></div>
+    </div>
+    <div class="text-center text-xs text-gray-500 dark:text-gray-400 mt-2 font-medium" id="progress-text">0 / 0</div>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow w-full max-w-md mx-auto p-4 flex flex-col justify-center" id="main-container">
+        <!-- Card container will be injected here -->
+    </main>
+
+    <!-- Footer Controls -->
+    <footer class="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 shadow-[0_-4px_15px_-3px_rgba(0,0,0,0.1)] px-4 py-4 rounded-t-2xl border-t border-gray-200 dark:border-gray-700 z-40 transition-colors">
+        <div id="controls-container" class="max-w-md mx-auto grid grid-cols-3 gap-3">
+            <button onclick="handleRating('NOT SURE')" class="flex flex-col items-center justify-center p-3 rounded-xl bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-800 hover:bg-red-100 active:scale-95 transition">
+                <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14H5.236a2 2 0 01-1.789-2.894l3.5-7A2 2 0 018.736 3h4.018a2 2 0 01.485.06l3.76.94m-7 10v5a2 2 0 002 2h.096c.5 0 .905-.405.905-.904 0-.715.211-1.413.608-2.008L17 13V4m-7 10h2m5-10h2a2 2 0 012 2v6a2 2 0 01-2 2h-2.5"></path></svg>
+                <span class="text-xs font-bold">NOT SURE</span>
+            </button>
+            <button onclick="handleRating('MAYBE')" class="flex flex-col items-center justify-center p-3 rounded-xl bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-800 hover:bg-amber-100 active:scale-95 transition">
+                <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <span class="text-xs font-bold">MAYBE</span>
+            </button>
+            <button onclick="handleRating('GOT IT')" class="flex flex-col items-center justify-center p-3 rounded-xl bg-green-50 dark:bg-green-900/30 text-green-600 dark:text-green-400 border border-green-200 dark:border-green-800 hover:bg-green-100 active:scale-95 transition">
+                <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"></path></svg>
+                <span class="text-xs font-bold">GOT IT!</span>
+            </button>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed top-20 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-6 py-3 rounded-full shadow-lg z-50 text-sm font-medium flex items-center gap-2">
+        <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+        <span id="toast-message">Export successful!</span>
+    </div>
+
+    <script>
+        // Data containing vocabulary items, enriched with sentences and translations
+        const vocabData = [
+            {
+                word: "affluent",
+                definition: "having a lot of money",
+                translation: "giàu có, sung túc",
+                examples: [
+                    "The city has an affluent middle class.",
+                    "Many affluent nations consume a large amount of energy.",
+                    "He was born into an affluent family in the suburbs."
+                ]
+            },
+            {
+                word: "architecture",
+                definition: "the design and style of buildings",
+                translation: "kiến trúc",
+                examples: [
+                    "The city is known for its modern and innovative architecture.",
+                    "He is currently studying architecture at the university.",
+                    "The architecture of the ancient temple is truly unique."
+                ]
+            },
+            {
+                word: "border",
+                definition: "the line that separates two countries or states",
+                translation: "biên giới",
+                examples: [
+                    "The tourists crossed the border safely yesterday.",
+                    "The river forms a natural border between the two countries.",
+                    "Border control has become much stricter in recent years."
+                ]
+            },
+            {
+                word: "building",
+                definition: "a structure with walls and a roof, such as a house, school, etc.",
+                translation: "tòa nhà, công trình",
+                examples: [
+                    "They are constructing a new commercial building in the center.",
+                    "The historic building was carefully restored to its original state.",
+                    "She works in one of the tallest buildings in the city."
+                ]
+            },
+            {
+                word: "capital",
+                definition: "the most important city in a country or state, where the government is based",
+                translation: "thủ đô",
+                examples: [
+                    "Paris is widely known as the capital of France.",
+                    "The government invested heavily in developing the capital city.",
+                    "We spent three amazing days exploring the capital."
+                ]
+            },
+            {
+                word: "coast",
+                definition: "the land beside the sea",
+                translation: "bờ biển",
+                examples: [
+                    "We drove along the beautiful coast for hours.",
+                    "The coast is incredibly popular with tourists during summer.",
+                    "Many small, traditional towns are located on the coast."
+                ]
+            },
+            {
+                word: "community",
+                definition: "the people living in a particular area",
+                translation: "cộng đồng",
+                examples: [
+                    "The local community strongly supported the new school project.",
+                    "There is a very strong sense of community in this village.",
+                    "Community events are held in the park every weekend."
+                ]
+            },
+            {
+                word: "council",
+                definition: "the group of people elected to govern a particular area, town or city, and organise services for it",
+                translation: "hội đồng",
+                examples: [
+                    "The local council decides on planning permissions for new houses.",
+                    "He was recently elected to the city council.",
+                    "The council provides many essential public services."
+                ]
+            },
+            {
+                word: "the countryside",
+                definition: "land that is not in towns or cities and has farms, fields, forests, etc.",
+                translation: "vùng nông thôn",
+                examples: [
+                    "They went for a long, relaxing walk in the countryside.",
+                    "Life in the countryside is generally very peaceful and quiet.",
+                    "The beautiful countryside is slowly being destroyed by urban spread."
+                ]
+            },
+            {
+                word: "explore",
+                definition: "to go around a place where you have never been in order to find out what is there",
+                translation: "khám phá",
+                examples: [
+                    "We had a few hours to explore the historic city center.",
+                    "The children absolutely love to explore the woods behind their house.",
+                    "Scientists are constantly exploring new ways to produce clean energy."
+                ]
+            },
+            {
+                word: "farming",
+                definition: "working on a farm or organising the work there",
+                translation: "nông nghiệp, canh tác",
+                examples: [
+                    "Farming remains the main industry in this rural region.",
+                    "Modern farming methods have become significantly more efficient.",
+                    "Organic farming is becoming increasingly popular among consumers."
+                ]
+            },
+            {
+                word: "housing estate",
+                definition: "an area with a large number of houses that were built at the same time",
+                translation: "khu nhà ở",
+                examples: [
+                    "They currently live on a large housing estate near the city.",
+                    "The newly built housing estate unfortunately lacks green spaces.",
+                    "Crime rates have recently fallen in this particular housing estate."
+                ]
+            },
+            {
+                word: "immigrant",
+                definition: "someone who comes to live in a different country",
+                translation: "người nhập cư",
+                examples: [
+                    "The city proudly supports a large population of immigrants.",
+                    "He is a second-generation immigrant who runs a successful business.",
+                    "Immigrants often face severe challenges when adapting to a new culture."
+                ]
+            },
+            {
+                word: "inner city",
+                definition: "the part of a city that is closest to the centre, often where buildings are in a bad condition and there are social problems",
+                translation: "khu vực nội thành",
+                examples: [
+                    "The inner city often suffers from high rates of unemployment.",
+                    "Inner city schools frequently lack the necessary educational resources.",
+                    "The government is trying hard to regenerate the inner city."
+                ]
+            },
+            {
+                word: "middle class",
+                definition: "a social group that consists of well-educated people, such as doctors, lawyers and teachers, who have good jobs and are neither very rich nor very poor",
+                translation: "tầng lớp trung lưu",
+                examples: [
+                    "The middle class is growing quite rapidly in the developing country.",
+                    "These new economic policies primarily benefit the middle class.",
+                    "He comes from a very solid middle-class background."
+                ]
+            },
+            {
+                word: "neighbourhood",
+                definition: "an area of a town or city that people live in",
+                translation: "khu vực lân cận, hàng xóm",
+                examples: [
+                    "We live in a very quiet, friendly neighbourhood.",
+                    "The neighbourhood is perfectly safe for children to play outside.",
+                    "There are many convenient shops in our local neighbourhood."
+                ]
+            },
+            {
+                word: "the outskirts",
+                definition: "the outer area of a city, town or village",
+                translation: "vùng ngoại ô",
+                examples: [
+                    "They decided to buy a house on the outskirts of London.",
+                    "Large factories are often located on the outskirts of cities.",
+                    "The new shopping centre was strategically built on the outskirts."
+                ]
+            },
+            {
+                word: "province",
+                definition: "one of the large areas which some countries are divided into because of the type of government they have",
+                translation: "tỉnh",
+                examples: [
+                    "He grew up on a farm in a rural province.",
+                    "The province is extremely famous for its stunning natural beauty.",
+                    "Each province possesses its own local government structure."
+                ]
+            },
+            {
+                word: "rent",
+                definition: "to pay money to use something for a short time",
+                translation: "thuê, tiền thuê",
+                examples: [
+                    "We rent a small, cozy apartment in the city center.",
+                    "The rent is unfortunately too high for most university students.",
+                    "They decided to rent a car for their road trip."
+                ]
+            },
+            {
+                word: "resident",
+                definition: "someone who lives in a particular place",
+                translation: "cư dân",
+                examples: [
+                    "Local residents are extremely unhappy with the new road construction.",
+                    "The residents formed a committee to keep the park clean.",
+                    "Street parking is strictly restricted for residents only."
+                ]
+            },
+            {
+                word: "rough (neighbourhood)",
+                definition: "dangerous or violent",
+                translation: "khu dân cư phức tạp, nguy hiểm",
+                examples: [
+                    "He grew up in a rather rough neighbourhood.",
+                    "It can be a very rough area to walk through at night.",
+                    "The old school is located in a remarkably rough part of town."
+                ]
+            },
+            {
+                word: "run-down",
+                definition: "Run-down buildings or areas are in very bad condition.",
+                translation: "xập xệ, xuống cấp",
+                examples: [
+                    "The old hospital building is completely run-down.",
+                    "They bravely bought a run-down house to renovate it entirely.",
+                    "The run-down industrial area was targeted for immediate redevelopment."
+                ]
+            },
+            {
+                word: "safe",
+                definition: "not dangerous or not likely to cause harm",
+                translation: "an toàn",
+                examples: [
+                    "Is it genuinely safe to walk around here late at night?",
+                    "Please make sure to keep your valuables in a safe place.",
+                    "The modern cars are much safer than the older models."
+                ]
+            },
+            {
+                word: "the seaside",
+                definition: "the area near the sea, especially where people spend their holidays and enjoy themselves",
+                translation: "bờ biển, khu nghỉ mát ven biển",
+                examples: [
+                    "We used to spend all our family holidays at the seaside.",
+                    "The charming seaside town gets very busy during the summer.",
+                    "She absolutely loves the fresh, salty air at the seaside."
+                ]
+            },
+            {
+                word: "suburb",
+                definition: "an area where people live outside the centre of a city",
+                translation: "vùng ngoại ô",
+                examples: [
+                    "They moved to a quiet suburb to peacefully raise their children.",
+                    "Commuting to the city from the suburb takes over an hour.",
+                    "The modern suburb features excellent schools and large public parks."
+                ]
+            }
+        ];
+
+        // App State
+        let currentIndex = 0;
+        let baseFontSize = 16; // in px
+        const userRatings = []; // Array to keep the exact order of learning
+        
+        // DOM Elements
+        const mainContainer = document.getElementById('main-container');
+        const progressBar = document.getElementById('progress-bar');
+        const progressText = document.getElementById('progress-text');
+        const controlsContainer = document.getElementById('controls-container');
+        const htmlElement = document.documentElement;
+
+        // Initialize Application
+        function initApp() {
+            // Check system preference for dark mode
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                htmlElement.classList.add('dark');
+            }
+            renderCard();
+            updateProgress();
+        }
+
+        // Font scaling functions
+        document.getElementById('btn-font-dec').addEventListener('click', () => {
+            if (baseFontSize > 12) {
+                baseFontSize -= 2;
+                htmlElement.style.setProperty('--base-font-size', `${baseFontSize}px`);
+            }
+        });
+
+        document.getElementById('btn-font-inc').addEventListener('click', () => {
+            if (baseFontSize < 24) {
+                baseFontSize += 2;
+                htmlElement.style.setProperty('--base-font-size', `${baseFontSize}px`);
+            }
+        });
+
+        // Theme toggle
+        document.getElementById('btn-theme').addEventListener('click', () => {
+            htmlElement.classList.toggle('dark');
+        });
+
+        // Render current flashcard
+        function renderCard() {
+            if (currentIndex >= vocabData.length) {
+                renderEndScreen();
+                return;
+            }
+
+            const item = vocabData[currentIndex];
+            
+            // Build the card HTML
+            const cardHTML = `
+                <div class="card-animate bg-white dark:bg-gray-800 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] overflow-hidden border border-gray-100 dark:border-gray-700 w-full mb-6">
+                    
+                    <!-- Word Section -->
+                    <div class="p-8 text-center bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-750 border-b border-gray-100 dark:border-gray-700 relative">
+                        <h2 class="text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight leading-tight">${item.word}</h2>
+                    </div>
+
+                    <!-- Examples Section -->
+                    <div class="p-6 border-b border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800">
+                        <h3 class="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3 flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                            Example Sentences
+                        </h3>
+                        <ul class="space-y-3">
+                            ${item.examples.map(ex => `
+                                <li class="text-base text-gray-700 dark:text-gray-300 flex items-start gap-2">
+                                    <span class="text-primary mt-1">•</span>
+                                    <span>${ex}</span>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+
+                    <!-- Expandable Definition -->
+                    <div class="border-b border-gray-100 dark:border-gray-700">
+                        <button onclick="toggleAccordion('def-content', 'def-chevron')" class="w-full p-4 flex justify-between items-center bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-750 transition outline-none">
+                            <span class="font-semibold text-gray-800 dark:text-gray-200">Definition</span>
+                            <svg id="def-chevron" class="chevron w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div id="def-content" class="accordion-content bg-white dark:bg-gray-800 px-4">
+                            <p class="py-4 text-lg text-gray-700 dark:text-gray-300 border-t border-gray-100 dark:border-gray-700 italic">"${item.definition}"</p>
+                        </div>
+                    </div>
+
+                    <!-- Expandable Translation -->
+                    <div>
+                        <button onclick="toggleAccordion('trans-content', 'trans-chevron')" class="w-full p-4 flex justify-between items-center bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-750 transition outline-none">
+                            <span class="font-semibold text-gray-800 dark:text-gray-200">Vietnamese Translation</span>
+                            <svg id="trans-chevron" class="chevron w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div id="trans-content" class="accordion-content bg-white dark:bg-gray-800 px-4">
+                            <p class="py-4 text-lg font-medium text-primary border-t border-gray-100 dark:border-gray-700">${item.translation}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            mainContainer.innerHTML = cardHTML;
+            controlsContainer.parentElement.style.display = 'block';
+        }
+
+        // Accordion Toggle Logic
+        window.toggleAccordion = function(contentId, chevronId) {
+            const content = document.getElementById(contentId);
+            const chevron = document.getElementById(chevronId);
+            content.classList.toggle('open');
+            chevron.classList.toggle('open');
+        }
+
+        // Handle Rating button clicks
+        window.handleRating = function(rating) {
+            const currentWord = vocabData[currentIndex].word;
+            
+            // Record rating
+            userRatings.push({
+                word: currentWord,
+                rating: rating
+            });
+
+            // Advance
+            currentIndex++;
+            updateProgress();
+            
+            // Render next or finish
+            renderCard();
+        }
+
+        // Update progress indicators
+        function updateProgress() {
+            const total = vocabData.length;
+            const current = Math.min(currentIndex, total);
+            const percentage = (current / total) * 100;
+            
+            progressBar.style.width = `${percentage}%`;
+            progressText.innerText = `${current} / ${total}`;
+        }
+
+        // Render end screen when list is completed
+        function renderEndScreen() {
+            controlsContainer.parentElement.style.display = 'none'; // hide rating buttons
+            
+            const gotItCount = userRatings.filter(r => r.rating === 'GOT IT').length;
+            const maybeCount = userRatings.filter(r => r.rating === 'MAYBE').length;
+            const notSureCount = userRatings.filter(r => r.rating === 'NOT SURE').length;
+
+            mainContainer.innerHTML = `
+                <div class="card-animate bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 text-center border border-gray-100 dark:border-gray-700">
+                    <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 text-green-500 mb-6 shadow-inner">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    </div>
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">Great Job!</h2>
+                    <p class="text-gray-500 dark:text-gray-400 mb-8">You have completed the vocabulary list.</p>
+                    
+                    <div class="grid grid-cols-3 gap-2 mb-8">
+                        <div class="p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
+                            <div class="text-xl font-bold text-green-600 dark:text-green-400">${gotItCount}</div>
+                            <div class="text-xs text-green-800 dark:text-green-300 font-semibold uppercase">Got It</div>
+                        </div>
+                        <div class="p-3 bg-amber-50 dark:bg-amber-900/20 rounded-lg">
+                            <div class="text-xl font-bold text-amber-600 dark:text-amber-400">${maybeCount}</div>
+                            <div class="text-xs text-amber-800 dark:text-amber-300 font-semibold uppercase">Maybe</div>
+                        </div>
+                        <div class="p-3 bg-red-50 dark:bg-red-900/20 rounded-lg">
+                            <div class="text-xl font-bold text-red-600 dark:text-red-400">${notSureCount}</div>
+                            <div class="text-xs text-red-800 dark:text-red-300 font-semibold uppercase">Not Sure</div>
+                        </div>
+                    </div>
+
+                    <button onclick="exportData()" class="w-full bg-primary hover:bg-blue-600 text-white font-bold py-4 px-6 rounded-xl shadow-lg transform transition active:scale-95 flex justify-center items-center gap-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        Export MY LIST
+                    </button>
+                    
+                    <button onclick="resetApp()" class="mt-4 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 font-medium underline">
+                        Start Over
+                    </button>
+                </div>
+            `;
+        }
+
+        // Reset application
+        window.resetApp = function() {
+            currentIndex = 0;
+            userRatings.length = 0; // clear array
+            initApp();
+        }
+
+        // Show Toast Notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').innerText = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Export logic (generates Markdown and triggers download)
+        window.exportData = function() {
+            // Group words by rating
+            const groups = {
+                'GOT IT': [],
+                'MAYBE': [],
+                'NOT SURE': [],
+                'UNRATED': [] // For words skipped or if exported early
+            };
+
+            // Map ratings
+            const ratedWordsMap = {};
+            userRatings.forEach(r => {
+                ratedWordsMap[r.word] = r.rating;
+            });
+
+            vocabData.forEach(item => {
+                const rating = ratedWordsMap[item.word] || 'UNRATED';
+                groups[rating].push(item);
+            });
+
+            // Date format: YYYY-MM-DD
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const dateStr = `${year}-${month}-${day}`;
+
+            // Generate Markdown string
+            let mdContent = `# Vocabulary Review List (${dateStr})\n\n`;
+
+            const sectionOrder = [
+                { key: 'NOT SURE', title: '🔴 Needs Practice (Not Sure)' },
+                { key: 'MAYBE', title: '🟡 Needs Review (Maybe)' },
+                { key: 'GOT IT', title: '🟢 Mastered (Got It)' },
+                { key: 'UNRATED', title: '⚪ Unrated (Not Reached)' }
+            ];
+
+            sectionOrder.forEach(section => {
+                if (groups[section.key].length > 0) {
+                    mdContent += `## ${section.title}\n\n`;
+                    groups[section.key].forEach(item => {
+                        mdContent += `### **${item.word}**\n`;
+                        mdContent += `- **Definition:** ${item.definition}\n`;
+                        mdContent += `- **Translation:** ${item.translation}\n`;
+                        mdContent += `- **Examples:**\n`;
+                        item.examples.forEach(ex => {
+                            mdContent += `  - *${ex}*\n`;
+                        });
+                        mdContent += `\n`;
+                    });
+                    mdContent += `---\n\n`;
+                }
+            });
+
+            // Create Blob and Download
+            const blob = new Blob([mdContent], { type: 'text/markdown;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${dateStr}-Vocabulary-List.md`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            showToast("Exported successfully!");
+        };
+
+        // Attach export to header button
+        document.getElementById('btn-export').addEventListener('click', exportData);
+
+        // Bootstrap App
+        window.addEventListener('DOMContentLoaded', initApp);
+
+    </script>
+</body>
+</html>
