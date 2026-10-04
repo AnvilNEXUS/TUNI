@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VocabMaster - IELTS Learning</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Light Theme Variables */
+            --bg-color: #f3f4f6; /* gray-100 */
+            --surface-color: #ffffff;
+            --text-main: #1f2937; /* gray-800 */
+            --text-muted: #6b7280; /* gray-500 */
+            --border-color: #e5e7eb; /* gray-200 */
+            
+            /* Action Colors */
+            --color-gotit: #10b981;
+            --color-gotit-hover: #059669;
+            --color-maybe: #f59e0b;
+            --color-maybe-hover: #d97706;
+            --color-notsure: #ef4444;
+            --color-notsure-hover: #dc2626;
+            --color-primary: #3b82f6;
+            --color-primary-hover: #2563eb;
+            
+            font-size: 16px; /* Base font size for scaling */
+        }
+
+        .dark {
+            /* Dark Theme Variables */
+            --bg-color: #111827; /* gray-900 */
+            --surface-color: #1f2937; /* gray-800 */
+            --text-main: #f9fafb; /* gray-50 */
+            --text-muted: #9ca3af; /* gray-400 */
+            --border-color: #374151; /* gray-700 */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Custom Card Styles using variables */
+        .v-card {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border-radius: 1rem;
+            transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.1s ease;
+        }
+
+        .v-card:active {
+            transform: scale(0.98);
+        }
+
+        /* Reveal Animation Styles */
+        .revealable {
+            cursor: pointer;
+            position: relative;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .reveal-prompt {
+            color: var(--text-muted);
+            transition: opacity 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .reveal-content {
+            display: none;
+            opacity: 0;
+            font-size: 1.125rem;
+            font-weight: 500;
+        }
+
+        .revealed .reveal-prompt {
+            display: none;
+        }
+
+        .revealed .reveal-content {
+            display: block;
+            animation: fadeIn 0.4s forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Button base styles */
+        .action-btn {
+            color: white;
+            font-weight: 600;
+            padding: 1rem 0.5rem;
+            border-radius: 0.75rem;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.25rem;
+            flex: 1;
+        }
+
+        /* Header controls */
+        .control-btn {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.5rem;
+            height: 2.5rem;
+            transition: all 0.2s;
+        }
+        .control-btn:active { background-color: var(--border-color); }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <header class="sticky top-0 z-10 p-4 border-b shadow-sm" style="background-color: var(--surface-color); border-color: var(--border-color);">
+        <div class="max-w-2xl mx-auto flex justify-between items-center">
+            <h1 class="font-bold text-xl tracking-tight"><i class="fas fa-graduation-cap text-blue-500 mr-2"></i>Vocab<span class="text-blue-500">Master</span></h1>
+            
+            <div class="flex gap-2">
+                <button onclick="changeFontSize(-1)" class="control-btn" aria-label="Decrease font size" title="Smaller Font">
+                    <i class="fas fa-font text-sm"></i><i class="fas fa-minus text-[10px]"></i>
+                </button>
+                <button onclick="changeFontSize(1)" class="control-btn" aria-label="Increase font size" title="Larger Font">
+                    <i class="fas fa-font"></i><i class="fas fa-plus text-[10px]"></i>
+                </button>
+                <button onclick="toggleTheme()" class="control-btn" aria-label="Toggle theme" title="Toggle Light/Dark Mode">
+                    <i class="fas fa-moon" id="theme-icon"></i>
+                </button>
+                <button onclick="exportList()" class="control-btn w-auto px-3 bg-blue-500 text-white border-blue-600 hover:bg-blue-600 ml-2" id="header-export-btn" style="color: white; border-color: transparent;">
+                    <i class="fas fa-file-export mr-2"></i> Export
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main id="app-view" class="flex-grow p-4 md:p-6 w-full max-w-2xl mx-auto flex flex-col gap-5">
+        
+        <!-- Progress -->
+        <div class="flex justify-between items-center text-sm font-medium" style="color: var(--text-muted);">
+            <span id="progress-text">Word 1 of 10</span>
+            <div class="h-2 flex-grow mx-4 rounded-full overflow-hidden" style="background-color: var(--border-color);">
+                <div id="progress-bar" class="h-full bg-blue-500 transition-all duration-300" style="width: 10%;"></div>
+            </div>
+        </div>
+
+        <!-- Word Display -->
+        <div class="text-center py-6">
+            <h2 id="current-word" class="text-5xl md:text-6xl font-extrabold tracking-tight capitalize" style="color: var(--text-main);">word</h2>
+        </div>
+
+        <!-- Card 1: Examples -->
+        <div class="v-card p-5">
+            <h3 class="text-sm font-bold uppercase tracking-wider mb-3 flex items-center" style="color: var(--text-muted);">
+                <i class="fas fa-quote-left mr-2"></i> Example Sentences
+            </h3>
+            <ul id="examples-list" class="space-y-3 text-lg">
+                <!-- Injected via JS -->
+            </ul>
+        </div>
+
+        <!-- Card 2: Definition (Revealable) -->
+        <div id="card-definition" class="v-card revealable" onclick="revealCard('definition')">
+            <div class="reveal-prompt">
+                <i class="fas fa-book-open text-3xl mb-1"></i>
+                <span>Tap to reveal definition</span>
+            </div>
+            <div id="content-definition" class="reveal-content text-xl"></div>
+        </div>
+
+        <!-- Card 3: Translation (Revealable) -->
+        <div id="card-translation" class="v-card revealable" onclick="revealCard('translation')">
+            <div class="reveal-prompt">
+                <i class="fas fa-language text-3xl mb-1"></i>
+                <span>Tap to reveal translation</span>
+            </div>
+            <div id="content-translation" class="reveal-content text-xl" style="color: var(--color-primary);"></div>
+        </div>
+
+        <!-- Card 4: Actions -->
+        <div class="flex gap-3 mt-2">
+            <button onclick="recordWord('notSure')" class="action-btn" style="background-color: var(--color-notsure);">
+                <i class="fas fa-times-circle text-xl"></i>
+                <span>Not Sure</span>
+            </button>
+            <button onclick="recordWord('maybe')" class="action-btn" style="background-color: var(--color-maybe); color: #fff;">
+                <i class="fas fa-question-circle text-xl"></i>
+                <span>Maybe</span>
+            </button>
+            <button onclick="recordWord('gotIt')" class="action-btn" style="background-color: var(--color-gotit);">
+                <i class="fas fa-check-circle text-xl"></i>
+                <span>Got It!</span>
+            </button>
+        </div>
+    </main>
+
+    <main id="completion-view" class="hidden flex-grow p-6 w-full max-w-2xl mx-auto flex flex-col items-center justify-center text-center gap-6">
+        <div class="w-24 h-24 rounded-full flex items-center justify-center mb-4" style="background-color: rgba(16, 185, 129, 0.1); color: var(--color-gotit);">
+            <i class="fas fa-trophy text-5xl"></i>
+        </div>
+        <h2 class="text-3xl font-bold">Session Complete!</h2>
+        <p style="color: var(--text-muted);" class="text-lg mb-4">You've reviewed all vocabulary items in your list.</p>
+        
+        <div class="w-full v-card p-6 flex flex-col gap-4 text-left">
+            <h3 class="font-bold text-xl border-b pb-2 mb-2" style="border-color: var(--border-color);">Summary</h3>
+            <div class="flex justify-between items-center text-lg">
+                <span class="flex items-center gap-2"><i class="fas fa-check-circle" style="color: var(--color-gotit);"></i> Got It:</span>
+                <span id="summary-gotit" class="font-bold">0</span>
+            </div>
+            <div class="flex justify-between items-center text-lg">
+                <span class="flex items-center gap-2"><i class="fas fa-question-circle" style="color: var(--color-maybe);"></i> Maybe:</span>
+                <span id="summary-maybe" class="font-bold">0</span>
+            </div>
+            <div class="flex justify-between items-center text-lg">
+                <span class="flex items-center gap-2"><i class="fas fa-times-circle" style="color: var(--color-notsure);"></i> Not Sure:</span>
+                <span id="summary-notsure" class="font-bold">0</span>
+            </div>
+        </div>
+
+        <button onclick="exportList()" class="w-full mt-4 p-4 rounded-xl font-bold text-lg text-white shadow-lg transition-transform active:scale-95" style="background-color: var(--color-primary);">
+            <i class="fas fa-file-download mr-2"></i> Export My List (.md)
+        </button>
+        
+        <button onclick="restartSession()" class="mt-2 text-sm font-medium underline" style="color: var(--text-muted);">
+            Start Over
+        </button>
+    </main>
+
+    <script>
+        // Embedded Vocabulary Data based on instructions
+        const vocabData = [
+            {"word": "access", "definition": "when you have the opportunity to use or see something", "translation": "cơ hội tiếp cận / sự truy cập", "sentences": ["Students need reliable internet access.", "The library provides access to digital resources.", "Access to clean water is essential."]},
+            {"word": "feature", "definition": "a quality or important part of something", "translation": "đặc điểm / tính năng", "sentences": ["The best feature is its camera.", "A key feature of the essay is its tone.", "The park includes a water feature."]},
+            {"word": "nutrition", "definition": "the food that you eat and the way that it affects your health", "translation": "dinh dưỡng", "sentences": ["Good nutrition is vital for children.", "Many lack basic knowledge of nutrition.", "The course focuses on proper nutrition."]},
+            {"word": "benefit", "definition": "something that helps you or gives you an advantage", "translation": "lợi ích", "sentences": ["A major benefit is public transport.", "Exercise brings many benefits.", "Employees receive health benefits."]},
+            {"word": "degree", "definition": "a qualification given for completing a university course", "translation": "bằng cấp", "sentences": ["She is studying for a science degree.", "A degree can help you get a job.", "He holds a master's degree."]},
+            {"word": "preserve", "definition": "to keep something the same or prevent it from being damaged or destroyed", "translation": "bảo tồn", "sentences": ["We must preserve historical buildings.", "The law helps preserve the environment.", "Efforts are made to preserve the language."]},
+            {"word": "data", "definition": "information or facts about something", "translation": "dữ liệu", "sentences": ["The data was collected over two years.", "Researchers analyzed the new data.", "Personal data must be kept secure."]},
+            {"word": "facilities", "definition": "buildings, equipment or services that are provided for a particular purpose", "translation": "cơ sở vật chất", "sentences": ["The hotel has excellent sports facilities.", "Medical facilities in the area are limited.", "They plan to upgrade the school facilities."]},
+            {"word": "structure", "definition": "the way that parts of something are arranged or put together", "translation": "cấu trúc", "sentences": ["The structure of the essay is clear.", "They studied the social structure.", "The building has a solid steel structure."]},
+            {"word": "design", "definition": "the way in which something is planned and made to have a particular appearance", "translation": "thiết kế", "sentences": ["The design of the new car is modern.", "She works in graphic design.", "Good design improves user experience."]}
+        ];
+
+        // Application State
+        let currentIndex = 0;
+        let rootFontSize = 16;
+        let isDarkMode = false;
+        
+        // Results storage
+        const results = {
+            gotIt: [],
+            maybe: [],
+            notSure: []
+        };
+
+        
+        // Initialize App
+        function initApp() {
+            // Check system preference for dark mode initially
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                toggleTheme();
+            }
+            loadWord();
+        }
+
+        // Load current word into the UI
+        function loadWord() {
+            if (currentIndex >= vocabData.length) {
+                showCompletionScreen();
+                return;
+            }
+
+            const current = vocabData[currentIndex];
+            
+            // Update Progress
+            document.getElementById('progress-text').textContent = `Word ${currentIndex + 1} of ${vocabData.length}`;
+            document.getElementById('progress-bar').style.width = `${((currentIndex) / vocabData.length) * 100}%`;
+
+            // Set Word
+            document.getElementById('current-word').textContent = current.word;
+
+            // Set Examples
+            const examplesList = document.getElementById('examples-list');
+            examplesList.innerHTML = ''; // Clear previous
+            current.sentences.forEach(sentence => {
+                const li = document.createElement('li');
+                li.className = 'flex items-start gap-2';
+                // Highlight the word in the sentence (simple replace, case insensitive)
+                const regex = new RegExp(`\\b${current.word}\\b`, 'gi');
+                const highlightedSentence = sentence.replace(regex, `<span class="font-bold text-blue-500">$&</span>`);
+                
+                li.innerHTML = `<i class="fas fa-angle-right mt-1.5 text-sm" style="color: var(--text-muted)"></i> <span>${highlightedSentence}</span>`;
+                examplesList.appendChild(li);
+            });
+
+            // Reset and Set Reveal Cards
+            const defCard = document.getElementById('card-definition');
+            const transCard = document.getElementById('card-translation');
+            
+            defCard.classList.remove('revealed');
+            transCard.classList.remove('revealed');
+            
+            document.getElementById('content-definition').textContent = current.definition;
+            document.getElementById('content-translation').textContent = current.translation;
+        }
+
+        // Handle revealing hidden cards
+        function revealCard(type) {
+            const card = document.getElementById(`card-${type}`);
+            if (!card.classList.contains('revealed')) {
+                card.classList.add('revealed');
+            }
+        }
+
+        // Record user response and advance
+        function recordWord(status) {
+            const word = vocabData[currentIndex].word;
+            results[status].push(word);
+            
+            // Visual feedback on the button (optional, but good UX)
+            // Move to next word
+            currentIndex++;
+            
+            // Small delay for transition feel
+            setTimeout(loadWord, 150);
+        }
+
+
+        // Toggle Dark/Light Mode
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            document.documentElement.classList.toggle('dark');
+            const icon = document.getElementById('theme-icon');
+            if (isDarkMode) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        }
+
+        // Adjust global font size
+        function changeFontSize(step) {
+            // step is either 1 or -1
+            rootFontSize += step * 2; // change by 2px at a time
+            
+            // Limits
+            if (rootFontSize < 12) rootFontSize = 12;
+            if (rootFontSize > 24) rootFontSize = 24;
+            
+            document.documentElement.style.fontSize = `${rootFontSize}px`;
+        }
+
+        // Show Completion Screen
+        function showCompletionScreen() {
+            document.getElementById('app-view').classList.add('hidden');
+            document.getElementById('header-export-btn').classList.add('hidden'); // Hide header export button
+            
+            const completionView = document.getElementById('completion-view');
+            completionView.classList.remove('hidden');
+            
+            // Update summary stats
+            document.getElementById('summary-gotit').textContent = results.gotIt.length;
+            document.getElementById('summary-maybe').textContent = results.maybe.length;
+            document.getElementById('summary-notsure').textContent = results.notSure.length;
+            
+            // Final progress bar fill
+            document.getElementById('progress-bar').style.width = `100%`;
+        }
+
+        function restartSession() {
+            currentIndex = 0;
+            results.gotIt = [];
+            results.maybe = [];
+            results.notSure = [];
+            
+            document.getElementById('app-view').classList.remove('hidden');
+            document.getElementById('header-export-btn').classList.remove('hidden');
+            document.getElementById('completion-view').classList.add('hidden');
+            
+            loadWord();
+        }
+
+
+        // Generate and download Markdown file
+        function exportList() {
+            // Use current date from context: October 4, 2026
+            // In a real app we'd use new Date(), but strictly following the prompt's filename format
+            const dateStr = "2026-10-04"; 
+            const filename = `${dateStr}-MyList.md`;
+            
+            let markdownContent = `# Vocabulary Review - ${dateStr}\n\n`;
+            
+            markdownContent += `### Got It\n`;
+            if (results.gotIt.length === 0) markdownContent += `*None*\n`;
+            results.gotIt.forEach(word => markdownContent += `- ${word}\n`);
+            markdownContent += `\n`;
+            
+            markdownContent += `### Maybe\n`;
+            if (results.maybe.length === 0) markdownContent += `*None*\n`;
+            results.maybe.forEach(word => markdownContent += `- ${word}\n`);
+            markdownContent += `\n`;
+            
+            markdownContent += `### Not Sure\n`;
+            if (results.notSure.length === 0) markdownContent += `*None*\n`;
+            results.notSure.forEach(word => markdownContent += `- ${word}\n`);
+            
+            // Create Blob and trigger download
+            const blob = new Blob([markdownContent], { type: 'text/markdown' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            
+            // Append to body, click, and remove to ensure it works across browsers
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            
+            // Clean up memory
+            URL.revokeObjectURL(url);
+        }
+
+        // Start the app when DOM is loaded
+        document.addEventListener('DOMContentLoaded', initApp);
+
+    </script>
+</body>
+</html>
