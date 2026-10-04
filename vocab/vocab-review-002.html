@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VocabMaster - Learn Vocabulary</title>
+    
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            light: '#f8fafc',
+                            dark: '#0f172a',
+                            cardLight: '#ffffff',
+                            cardDark: '#1e293b'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Load Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Custom Styles -->
+    <style>
+        :root {
+            --base-font-size: 16px;
+        }
+
+        html {
+            font-size: var(--base-font-size);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: theme('colors.brand.light');
+            color: theme('colors.slate.800');
+        }
+
+        .dark body {
+            background-color: theme('colors.brand.dark');
+            color: theme('colors.slate.100');
+        }
+
+        /* Reveal Card Styles */
+        .reveal-card {
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            min-height: 4rem;
+        }
+
+        .reveal-card:active {
+            transform: scale(0.98);
+        }
+
+        .reveal-content {
+            display: none;
+            opacity: 0;
+        }
+
+        .reveal-card.revealed .reveal-cover {
+            display: none;
+        }
+
+        .reveal-card.revealed .reveal-content {
+            display: block;
+            animation: fadeIn 0.3s forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Custom Range Slider */
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100px;
+            background: transparent;
+        }
+        
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: #3b82f6;
+            cursor: pointer;
+            margin-top: -6px;
+        }
+
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #cbd5e1;
+            border-radius: 2px;
+        }
+
+        .dark input[type=range]::-webkit-slider-runnable-track {
+            background: #475569;
+        }
+    </style>
+</head>
+
+<body class="flex flex-col min-h-screen antialiased selection:bg-blue-200 dark:selection:bg-blue-900">
+
+    <!-- Header Section -->
+    <header class="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-700 p-4 shadow-sm">
+        <div class="max-w-3xl mx-auto flex flex-wrap items-center justify-between gap-4">
+            <h1 class="text-xl font-extrabold tracking-tight flex items-center gap-2">
+                <i class="fa-solid fa-layer-group text-blue-500"></i>
+                <span>Vocab<span class="text-blue-500">Master</span></span>
+            </h1>
+            
+            <div class="flex items-center gap-4 bg-slate-100 dark:bg-slate-800 rounded-full px-4 py-2 border border-slate-200 dark:border-slate-700">
+                <!-- Font Size Scaler -->
+                <div class="flex items-center gap-2" title="Adjust Font Size">
+                    <i class="fa-solid fa-font text-xs text-slate-500 dark:text-slate-400"></i>
+                    <input type="range" id="font-slider" min="16" max="32" value="16" aria-label="Font size scaler">
+                    <i class="fa-solid fa-font text-lg text-slate-500 dark:text-slate-400"></i>
+                </div>
+                
+                <div class="w-px h-6 bg-slate-300 dark:bg-slate-600"></div>
+                
+                <!-- Theme Toggle -->
+                <button id="theme-toggle" class="text-slate-600 dark:text-slate-300 hover:text-blue-500 dark:hover:text-blue-400 transition-colors w-6 h-6 flex items-center justify-center" aria-label="Toggle Dark Mode">
+                    <i id="theme-icon" class="fa-solid fa-moon text-lg"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Flashcard Container -->
+    <main id="app-container" class="flex-grow w-full max-w-3xl mx-auto p-4 md:p-6 flex flex-col gap-6">
+        
+        <!-- Progress Bar -->
+        <div class="flex items-center gap-4 text-sm font-semibold text-slate-500 dark:text-slate-400">
+            <span id="progress-text">Word 1 of X</span>
+            <div class="flex-grow h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                <div id="progress-bar" class="h-full bg-blue-500 transition-all duration-300 w-0"></div>
+            </div>
+        </div>
+
+        <!-- The Word -->
+        <div class="text-center py-6 md:py-10 bg-white dark:bg-brand-cardDark rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700">
+            <h2 id="card-word" class="text-5xl md:text-6xl font-black text-slate-900 dark:text-white capitalize tracking-tight break-words px-4">
+                word
+            </h2>
+        </div>
+
+        <!-- Detail Cards -->
+        <div class="flex flex-col gap-4">
+            
+            <!-- Examples Card (Always visible) -->
+            <div class="bg-white dark:bg-brand-cardDark rounded-2xl p-5 shadow-sm border border-slate-100 dark:border-slate-700">
+                <h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-quote-left"></i> Examples
+                </h3>
+                <ul id="card-examples" class="space-y-3 text-[1.125rem] md:text-[1.25rem] text-slate-700 dark:text-slate-300 list-disc list-inside marker:text-blue-500">
+                    <!-- Populated by JS -->
+                </ul>
+            </div>
+
+            <!-- Definition Card (Click to reveal) -->
+            <div id="def-card" onclick="toggleReveal('def-card')" class="reveal-card bg-blue-50 dark:bg-slate-800/50 rounded-2xl p-5 border border-blue-100 dark:border-slate-700 shadow-sm flex flex-col justify-center">
+                <div class="reveal-cover text-center text-blue-600 dark:text-blue-400 font-semibold flex items-center justify-center gap-2 text-[1.125rem]">
+                    <i class="fa-solid fa-book-open"></i> Tap to reveal Definition
+                </div>
+                <div class="reveal-content text-center">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-blue-400 dark:text-slate-500 mb-2">Definition</h3>
+                    <p id="card-definition" class="text-[1.25rem] font-medium text-slate-800 dark:text-slate-200">
+                        <!-- Populated by JS -->
+                    </p>
+                </div>
+            </div>
+
+            <!-- Translation Card (Click to reveal) -->
+            <div id="trans-card" onclick="toggleReveal('trans-card')" class="reveal-card bg-emerald-50 dark:bg-slate-800/50 rounded-2xl p-5 border border-emerald-100 dark:border-slate-700 shadow-sm flex flex-col justify-center">
+                <div class="reveal-cover text-center text-emerald-600 dark:text-emerald-400 font-semibold flex items-center justify-center gap-2 text-[1.125rem]">
+                    <i class="fa-solid fa-language"></i> Tap to reveal Translation
+                </div>
+                <div class="reveal-content text-center">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-emerald-400 dark:text-slate-500 mb-2">Vietnamese Translation</h3>
+                    <p id="card-translation" class="text-[1.25rem] font-medium text-slate-800 dark:text-slate-200">
+                        <!-- Populated by JS -->
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="grid grid-cols-3 gap-3 mt-4 mb-20 md:mb-4">
+            <button onclick="recordChoice('NOT SURE')" class="flex flex-col items-center justify-center gap-2 bg-red-100 hover:bg-red-200 text-red-700 dark:bg-red-900/30 dark:hover:bg-red-900/50 dark:text-red-400 p-4 rounded-2xl transition-all active:scale-95 font-bold border border-red-200 dark:border-red-800/50 text-[1rem]">
+                <i class="fa-regular fa-face-frown text-2xl"></i> Not Sure
+            </button>
+            <button onclick="recordChoice('MAYBE')" class="flex flex-col items-center justify-center gap-2 bg-amber-100 hover:bg-amber-200 text-amber-700 dark:bg-amber-900/30 dark:hover:bg-amber-900/50 dark:text-amber-400 p-4 rounded-2xl transition-all active:scale-95 font-bold border border-amber-200 dark:border-amber-800/50 text-[1rem]">
+                <i class="fa-regular fa-face-meh text-2xl"></i> Maybe
+            </button>
+            <button onclick="recordChoice('GOT IT')" class="flex flex-col items-center justify-center gap-2 bg-green-100 hover:bg-green-200 text-green-700 dark:bg-green-900/30 dark:hover:bg-green-900/50 dark:text-green-400 p-4 rounded-2xl transition-all active:scale-95 font-bold border border-green-200 dark:border-green-800/50 text-[1rem]">
+                <i class="fa-regular fa-face-smile text-2xl"></i> Got It!
+            </button>
+        </div>
+    </main>
+
+    <!-- Completion Screen (Hidden by default) -->
+    <main id="completion-screen" class="hidden flex-grow w-full max-w-3xl mx-auto p-6 flex flex-col items-center justify-center text-center gap-6 min-h-[70vh]">
+        <div class="w-24 h-24 bg-green-100 dark:bg-green-900/40 text-green-500 rounded-full flex items-center justify-center mb-2 shadow-inner">
+            <i class="fa-solid fa-trophy text-5xl"></i>
+        </div>
+        <h2 class="text-4xl font-extrabold text-slate-800 dark:text-white">Awesome Job!</h2>
+        <p class="text-slate-600 dark:text-slate-400 text-xl max-w-md">You have completed all the vocabulary flashcards for this session.</p>
+        
+        <!-- Summary Stats -->
+        <div class="w-full max-w-sm bg-white dark:bg-brand-cardDark rounded-2xl p-6 shadow-sm border border-slate-100 dark:border-slate-700 mt-4 text-left">
+            <h3 class="font-bold text-lg border-b border-slate-200 dark:border-slate-700 pb-3 mb-4 text-slate-800 dark:text-white">Your Results</h3>
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-green-600 dark:text-green-400 font-medium flex items-center gap-2"><i class="fa-solid fa-check"></i> Got It</span>
+                <span id="stat-gotit" class="font-bold text-lg dark:text-white">0</span>
+            </div>
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-amber-600 dark:text-amber-400 font-medium flex items-center gap-2"><i class="fa-solid fa-minus"></i> Maybe</span>
+                <span id="stat-maybe" class="font-bold text-lg dark:text-white">0</span>
+            </div>
+            <div class="flex justify-between items-center">
+                <span class="text-red-600 dark:text-red-400 font-medium flex items-center gap-2"><i class="fa-solid fa-xmark"></i> Not Sure</span>
+                <span id="stat-notsure" class="font-bold text-lg dark:text-white">0</span>
+            </div>
+        </div>
+
+        <button onclick="exportData()" class="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-full shadow-lg hover:shadow-xl transition-all active:scale-95 flex items-center gap-3 text-lg w-full max-w-sm justify-center">
+            <i class="fa-solid fa-download"></i> Export Markdown Report
+        </button>
+    </main>
+
+    <!-- Floating Export Button -->
+    <button id="fab-export" onclick="exportData()" class="fixed bottom-6 right-6 bg-slate-900 dark:bg-blue-600 text-white p-4 rounded-full shadow-2xl hover:shadow-lg transition-all active:scale-90 flex items-center justify-center group z-40" title="Export My List">
+        <i class="fa-solid fa-file-export text-xl group-hover:-translate-y-1 transition-transform"></i>
+    </button>
+
+    <script>
+        // Exact Vocabulary Data from Prompt
+        const vocabData = [
+            {"word": "affluent", "definition": "having a lot of money", "translation": "giàu có, khá giả", "sentences": ["Many affluent families live in this part of the city.", "He comes from an affluent background.", "The affluent neighbourhood has many large houses."]},
+            {"word": "architecture", "definition": "the design and style of buildings", "translation": "kiến trúc", "sentences": ["The architecture of the old museum is truly beautiful.", "Tourists visit the city to admire its modern architecture.", "He is studying architecture at the university."]},
+            {"word": "border", "definition": "the line that separates two countries or states", "translation": "biên giới", "sentences": ["We had to show our passports at the border.", "The river forms a natural border.", "They crossed the border during the night."]},
+            {"word": "explore", "definition": "to go around a place where you have never been in order to find out what is there", "translation": "khám phá", "sentences": ["We spent the afternoon exploring the old town.", "The best way to explore the countryside is on foot.", "Children love to explore their surroundings."]},
+            {"word": "immigrant", "definition": "someone who comes to live in a different country", "translation": "người nhập cư", "sentences": ["The city has a large population of immigrants.", "My grandfather was an immigrant from Italy.", "Immigrants often face challenges when learning a new language."]},
+            {"word": "rent", "definition": "to pay money to use something for a short time", "translation": "thuê", "sentences": ["We decided to rent a car for our holiday.", "It is cheaper to rent an apartment than to buy one.", "She rents a room in a shared house."]},
+            {"word": "trendy", "definition": "fashionable at the moment", "translation": "thịnh hành, hợp thời trang", "sentences": ["She always wears trendy clothes.", "We went to a trendy cafe in the city centre.", "That style of music is very trendy right now."]},
+            {"word": "achievement", "definition": "something good that you have succeeded in doing", "translation": "thành tựu", "sentences": ["Winning the competition was a great achievement.", "We celebrated her academic achievements.", "It gives you a sense of achievement when you finish a difficult task."]},
+            {"word": "innovation", "definition": "a new idea or method that is being tried for the first time, or the use of such ideas or methods", "translation": "sự đổi mới", "sentences": ["Technological innovation has changed the way we work.", "The company encourages innovation and creativity.", "This new software is an important innovation."]},
+            {"word": "atmosphere", "definition": "mixture of gases around the Earth", "translation": "khí quyển, không khí", "sentences": ["The atmosphere protects the Earth from the sun.", "The factory releases harmful gases into the atmosphere.", "There was a relaxed atmosphere at the party."]},
+            {"word": "commute", "definition": "to regularly travel between work and home", "translation": "đi lại", "sentences": ["I commute to London every day by train.", "His morning commute takes about an hour.", "Many people commute from the suburbs to the city centre."]},
+            {"word": "pollution", "definition": "damage caused to water, air, etc. by harmful substances or waste", "translation": "sự ô nhiễm", "sentences": ["Air pollution is a major problem in big cities.", "The government is trying to reduce water pollution.", "Plastic waste is a significant source of pollution."]},
+            {"word": "ticket", "definition": "a small piece of paper that shows you have paid to do something", "translation": "vé", "sentences": ["I bought a ticket for the concert online.", "You need to show your train ticket to the inspector.", "The entrance ticket was quite expensive."]},
+            {"word": "device", "definition": "a piece of equipment that is used for a particular purpose", "translation": "thiết bị", "sentences": ["A smartphone is a very useful communication device.", "The new device tracks your heart rate.", "He invented a clever device for opening bottles."]},
+            {"word": "industrial", "definition": "connected with industry", "translation": "thuộc về công nghiệp", "sentences": ["The city is located in an industrial area.", "Industrial development has led to economic growth.", "The factory produces industrial chemicals."]}
+        ];
+
+        // Application State
+        let currentIndex = 0;
+        const userProgress = {
+            'GOT IT': [],
+            'MAYBE': [],
+            'NOT SURE': []
+        };
+
+        // DOM Elements
+        const elAppContainer = document.getElementById('app-container');
+        const elCompletionScreen = document.getElementById('completion-screen');
+        const elProgressText = document.getElementById('progress-text');
+        const elProgressBar = document.getElementById('progress-bar');
+        
+        const elWord = document.getElementById('card-word');
+        const elExamples = document.getElementById('card-examples');
+        const elDefinition = document.getElementById('card-definition');
+        const elTranslation = document.getElementById('card-translation');
+        
+        const cardDef = document.getElementById('def-card');
+        const cardTrans = document.getElementById('trans-card');
+        
+        const elFontSlider = document.getElementById('font-slider');
+        const btnThemeToggle = document.getElementById('theme-toggle');
+        const iconTheme = document.getElementById('theme-icon');
+        const fabExport = document.getElementById('fab-export');
+
+        // Initialization
+        function initApp() {
+            // Check system dark mode preference
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.documentElement.classList.add('dark');
+                updateThemeIcon();
+            }
+            renderCard();
+        }
+
+        // Render current flashcard
+        function renderCard() {
+            if (currentIndex >= vocabData.length) {
+                showCompletionScreen();
+                return;
+            }
+
+            const currentData = vocabData[currentIndex];
+
+            // Update Progress
+            elProgressText.innerText = `Word ${currentIndex + 1} of ${vocabData.length}`;
+            elProgressBar.style.width = `${((currentIndex) / vocabData.length) * 100}%`;
+
+            // Reset Reveal Cards
+            cardDef.classList.remove('revealed');
+            cardTrans.classList.remove('revealed');
+
+            // Populate Data
+            elWord.innerText = currentData.word;
+            elDefinition.innerText = currentData.definition;
+            elTranslation.innerText = currentData.translation;
+
+            // Populate Examples with highlight
+            elExamples.innerHTML = '';
+            const regex = new RegExp(`\\b${currentData.word}\\b`, 'gi');
+            
+            currentData.sentences.forEach(sentence => {
+                const li = document.createElement('li');
+                // Highlight the target word in the sentence
+                const highlighted = sentence.replace(regex, `<strong class="text-blue-600 dark:text-blue-400">$&</strong>`);
+                li.innerHTML = highlighted;
+                elExamples.appendChild(li);
+            });
+        }
+
+        // Handle Card Reveal
+        function toggleReveal(cardId) {
+            document.getElementById(cardId).classList.add('revealed');
+        }
+
+        // Handle Button Clicks (Got it, Maybe, Not Sure)
+        function recordChoice(choice) {
+            const currentData = vocabData[currentIndex];
+            // Store the entire word object for easier export later
+            userProgress[choice].push(currentData);
+            
+            currentIndex++;
+            renderCard();
+        }
+
+        // Show Completion View
+        function showCompletionScreen() {
+            elAppContainer.classList.add('hidden');
+            fabExport.classList.add('hidden'); // Hide floating button since there is a big one here
+            
+            document.getElementById('stat-gotit').innerText = userProgress['GOT IT'].length;
+            document.getElementById('stat-maybe').innerText = userProgress['MAYBE'].length;
+            document.getElementById('stat-notsure').innerText = userProgress['NOT SURE'].length;
+            
+            elCompletionScreen.classList.remove('hidden');
+            elProgressBar.style.width = '100%';
+        }
+
+        // Export Markdown logic
+        function exportData() {
+            // Get current local date YYYY-MM-DD
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const dateStr = `${year}-${month}-${day}`;
+            
+            const filename = `${dateStr}-My-List.md`;
+            let markdown = `# Vocabulary Progress Report\n`;
+            markdown += `*Date: ${dateStr}*\n\n`;
+
+            const categories = [
+                { title: '🟢 GOT IT', key: 'GOT IT' },
+                { title: '🟠 MAYBE', key: 'MAYBE' },
+                { title: '🔴 NOT SURE', key: 'NOT SURE' }
+            ];
+
+            categories.forEach(cat => {
+                markdown += `## ${cat.title} (${userProgress[cat.key].length})\n`;
+                if (userProgress[cat.key].length === 0) {
+                    markdown += `*No words in this category.*\n\n`;
+                } else {
+                    userProgress[cat.key].forEach(item => {
+                        markdown += `- **${item.word}**: ${item.definition} (*${item.translation}*)\n`;
+                    });
+                    markdown += `\n`;
+                }
+            });
+
+            // Create and trigger download
+            const blob = new Blob([markdown], { type: 'text/markdown;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.setAttribute('href', url);
+            link.setAttribute('download', filename);
+            link.style.display = 'none';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+
+        // Font Size Scaler Event
+        elFontSlider.addEventListener('input', function(e) {
+            const newSize = e.target.value + 'px';
+            document.documentElement.style.setProperty('--base-font-size', newSize);
+        });
+
+        // Theme Toggle Event
+        function updateThemeIcon() {
+            if (document.documentElement.classList.contains('dark')) {
+                iconTheme.classList.remove('fa-moon');
+                iconTheme.classList.add('fa-sun');
+            } else {
+                iconTheme.classList.remove('fa-sun');
+                iconTheme.classList.add('fa-moon');
+            }
+        }
+
+        btnThemeToggle.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            updateThemeIcon();
+        });
+
+        // Start App
+        document.addEventListener('DOMContentLoaded', initApp);
+
+    </script>
+</body>
+</html>
