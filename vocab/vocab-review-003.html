@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VocabMaster - IELTS Learner</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            900: '#14532d',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --base-font-size: 16px;
+        }
+
+        html {
+            font-size: var(--base-font-size);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: #1e293b;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .dark body {
+            background-color: #0f172a;
+            color: #f1f5f9;
+        }
+
+        /* Reveal Card Animations */
+        .reveal-card {
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+        
+        .reveal-card:active {
+            transform: scale(0.98);
+        }
+
+        .reveal-content {
+            display: none;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        .reveal-card.revealed {
+            cursor: default;
+        }
+        
+        .reveal-card.revealed:active {
+            transform: scale(1);
+        }
+
+        .reveal-card.revealed .reveal-cover {
+            display: none;
+        }
+
+        .reveal-card.revealed .reveal-content {
+            display: block;
+            animation: slideUpFade 0.3s forwards ease-out;
+        }
+
+        @keyframes slideUpFade {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Glassmorphism Header */
+        .glass-header {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .dark .glass-header {
+            background: rgba(15, 23, 42, 0.85);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        /* Highlight styling for sentences */
+        .highlight-word {
+            font-weight: 700;
+            color: #3b82f6; /* Blue-500 */
+            text-decoration: underline;
+            text-decoration-color: #93c5fd;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 2px;
+        }
+        
+        .dark .highlight-word {
+            color: #60a5fa; /* Blue-400 */
+            text-decoration-color: #1e3a8a;
+        }
+    </style>
+</head>
+
+<body class="flex flex-col min-h-screen">
+
+    <header class="sticky top-0 z-50 glass-header p-4">
+        <div class="max-w-md mx-auto flex items-center justify-between">
+            <h1 class="text-xl font-extrabold tracking-tight flex items-center gap-2">
+                <i class="fa-solid fa-graduation-cap text-blue-600 dark:text-blue-400"></i>
+                <span class="text-slate-800 dark:text-slate-100">Vocab<span class="text-blue-600 dark:text-blue-400">Master</span></span>
+            </h1>
+            
+            <div class="flex items-center gap-2 bg-slate-200/50 dark:bg-slate-800/50 rounded-full p-1 border border-slate-200 dark:border-slate-700">
+                <!-- Font Size Controls -->
+                <button onclick="changeFontSize(-1)" class="w-8 h-8 flex items-center justify-center rounded-full text-slate-600 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-700 transition-colors" aria-label="Decrease Font Size">
+                    <span class="text-sm font-bold">A-</span>
+                </button>
+                <button onclick="changeFontSize(1)" class="w-8 h-8 flex items-center justify-center rounded-full text-slate-600 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-700 transition-colors" aria-label="Increase Font Size">
+                    <span class="text-lg font-bold">A+</span>
+                </button>
+                
+                <div class="w-px h-5 bg-slate-300 dark:bg-slate-600 mx-1"></div>
+                
+                <!-- Theme Toggle -->
+                <button onclick="toggleTheme()" class="w-8 h-8 flex items-center justify-center rounded-full text-slate-600 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-700 transition-colors" aria-label="Toggle Theme">
+                    <i id="theme-icon" class="fa-solid fa-moon"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Progress Bar -->
+        <div class="max-w-md mx-auto mt-4">
+            <div class="flex justify-between items-center text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1">
+                <span id="progress-text">Word 1 of 25</span>
+                <span id="progress-percent">0%</span>
+            </div>
+            <div class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                <div id="progress-bar" class="h-full bg-blue-500 transition-all duration-300 ease-out" style="width: 0%"></div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow w-full max-w-md mx-auto p-4 flex flex-col gap-5 pb-24 relative">
+        
+        <!-- Flashcard View (Visible by default) -->
+        <div id="flashcard-container" class="flex flex-col gap-5 w-full">
+            
+            <!-- Big Word Display -->
+            <div class="text-center py-8 bg-white dark:bg-slate-800 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700 transition-colors">
+                <h2 id="card-word" class="text-5xl font-black text-slate-900 dark:text-white capitalize tracking-tight px-4 break-words">
+                    <!-- Word goes here -->
+                </h2>
+            </div>
+
+            <!-- Examples Card -->
+            <div class="bg-white dark:bg-slate-800 rounded-2xl p-5 shadow-sm border border-slate-100 dark:border-slate-700 transition-colors">
+                <h3 class="text-[0.75rem] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-quote-left"></i> Examples
+                </h3>
+                <ul id="card-examples" class="space-y-4 text-[1.125rem] text-slate-700 dark:text-slate-200 list-none pl-1">
+                    <!-- Examples go here -->
+                </ul>
+            </div>
+
+            <!-- Definition Card (Reveal) -->
+            <div id="def-card" onclick="revealCard('def-card')" class="reveal-card bg-blue-50/80 dark:bg-blue-900/20 rounded-2xl p-5 border border-blue-100 dark:border-blue-900/50 shadow-sm flex flex-col justify-center min-h-[5rem]">
+                <div class="reveal-cover text-center text-blue-600 dark:text-blue-400 font-semibold flex items-center justify-center gap-2 text-[1rem]">
+                    <i class="fa-solid fa-eye"></i> Tap to reveal Definition
+                </div>
+                <div class="reveal-content">
+                    <h3 class="text-[0.75rem] font-bold uppercase tracking-widest text-blue-500 dark:text-blue-400 mb-2">Definition</h3>
+                    <p id="card-definition" class="text-[1.125rem] font-medium text-slate-800 dark:text-slate-200">
+                        <!-- Definition goes here -->
+                    </p>
+                </div>
+            </div>
+
+            <!-- Translation Card (Reveal) -->
+            <div id="trans-card" onclick="revealCard('trans-card')" class="reveal-card bg-emerald-50/80 dark:bg-emerald-900/20 rounded-2xl p-5 border border-emerald-100 dark:border-emerald-900/50 shadow-sm flex flex-col justify-center min-h-[5rem]">
+                <div class="reveal-cover text-center text-emerald-600 dark:text-emerald-400 font-semibold flex items-center justify-center gap-2 text-[1rem]">
+                    <i class="fa-solid fa-language"></i> Tap to reveal Translation
+                </div>
+                <div class="reveal-content">
+                    <h3 class="text-[0.75rem] font-bold uppercase tracking-widest text-emerald-600 dark:text-emerald-400 mb-2">Vietnamese Translation</h3>
+                    <p id="card-translation" class="text-[1.125rem] font-medium text-slate-800 dark:text-slate-200">
+                        <!-- Translation goes here -->
+                    </p>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="grid grid-cols-3 gap-3 mt-2">
+                <button onclick="recordAssessment('NOT SURE')" class="flex flex-col items-center justify-center gap-2 bg-red-50 hover:bg-red-100 text-red-600 dark:bg-red-900/20 dark:hover:bg-red-900/40 dark:text-red-400 p-4 rounded-2xl transition-transform active:scale-95 font-bold border border-red-100 dark:border-red-900/50 shadow-sm">
+                    <i class="fa-regular fa-face-frown text-2xl mb-1"></i>
+                    <span class="text-[0.875rem]">Not Sure</span>
+                </button>
+                <button onclick="recordAssessment('MAYBE')" class="flex flex-col items-center justify-center gap-2 bg-amber-50 hover:bg-amber-100 text-amber-600 dark:bg-amber-900/20 dark:hover:bg-amber-900/40 dark:text-amber-400 p-4 rounded-2xl transition-transform active:scale-95 font-bold border border-amber-100 dark:border-amber-900/50 shadow-sm">
+                    <i class="fa-regular fa-face-meh text-2xl mb-1"></i>
+                    <span class="text-[0.875rem]">Maybe</span>
+                </button>
+                <button onclick="recordAssessment('GOT IT')" class="flex flex-col items-center justify-center gap-2 bg-green-50 hover:bg-green-100 text-green-600 dark:bg-green-900/20 dark:hover:bg-green-900/40 dark:text-green-400 p-4 rounded-2xl transition-transform active:scale-95 font-bold border border-green-100 dark:border-green-900/50 shadow-sm">
+                    <i class="fa-regular fa-face-smile text-2xl mb-1"></i>
+                    <span class="text-[0.875rem]">Got It!</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Completion View (Hidden by default) -->
+        <div id="completion-container" class="hidden flex-col items-center justify-center text-center gap-6 py-10">
+            <div class="w-24 h-24 bg-gradient-to-tr from-green-400 to-blue-500 rounded-full flex items-center justify-center text-white shadow-lg shadow-blue-500/30">
+                <i class="fa-solid fa-check-double text-4xl"></i>
+            </div>
+            <h2 class="text-3xl font-black text-slate-800 dark:text-white">Session Complete!</h2>
+            <p class="text-slate-500 dark:text-slate-400 text-[1.125rem]">You've assessed all vocabulary words.</p>
+            
+            <div class="w-full bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-100 dark:border-slate-700 text-left space-y-4">
+                <h3 class="font-bold text-slate-800 dark:text-white border-b border-slate-100 dark:border-slate-700 pb-2">Your Summary</h3>
+                <div class="flex justify-between items-center text-[1.125rem]">
+                    <span class="text-green-600 dark:text-green-400 font-semibold"><i class="fa-solid fa-circle-check mr-2"></i>Got It</span>
+                    <span id="summary-gotit" class="font-bold text-slate-800 dark:text-white">0</span>
+                </div>
+                <div class="flex justify-between items-center text-[1.125rem]">
+                    <span class="text-amber-600 dark:text-amber-400 font-semibold"><i class="fa-solid fa-circle-minus mr-2"></i>Maybe</span>
+                    <span id="summary-maybe" class="font-bold text-slate-800 dark:text-white">0</span>
+                </div>
+                <div class="flex justify-between items-center text-[1.125rem]">
+                    <span class="text-red-600 dark:text-red-400 font-semibold"><i class="fa-solid fa-circle-xmark mr-2"></i>Not Sure</span>
+                    <span id="summary-notsure" class="font-bold text-slate-800 dark:text-white">0</span>
+                </div>
+            </div>
+
+            <button onclick="exportMarkdown()" class="w-full mt-4 bg-slate-900 dark:bg-blue-600 text-white font-bold py-4 rounded-2xl shadow-lg active:scale-95 transition-transform flex items-center justify-center gap-3 text-[1.125rem]">
+                <i class="fa-solid fa-download"></i> Export Markdown Report
+            </button>
+            <button onclick="resetApp()" class="w-full text-slate-500 dark:text-slate-400 font-semibold py-3 hover:text-slate-800 dark:hover:text-white transition-colors">
+                Restart Session
+            </button>
+        </div>
+    </main>
+
+    <button id="fab-export" onclick="exportMarkdown()" class="fixed bottom-6 right-6 bg-slate-900 dark:bg-blue-600 text-white p-4 rounded-full shadow-2xl hover:shadow-lg transition-transform active:scale-90 flex items-center justify-center z-40" title="Export My List">
+        <i class="fa-solid fa-file-export text-xl"></i>
+    </button>
+
+    <script>
+        // --- 1. VOCABULARY DATA (25 Items exact from prompt) ---
+        const vocabData = [
+            {
+                word: "access",
+                definition: "when you have the right or opportunity to use or see something",
+                translation: "quyền truy cập, cơ hội tiếp cận",
+                examples: [
+                    "Students must have access to good educational resources.",
+                    "The new system allows users faster access to the internet.",
+                    "Rural areas often lack access to modern healthcare facilities."
+                ]
+            },
+            {
+                word: "conclude",
+                definition: "to decide something after studying all the information about it very carefully",
+                translation: "kết luận",
+                examples: [
+                    "The report concluded that pollution was the main cause.",
+                    "After reading the article, I concluded that the author was biased.",
+                    "The committee will conclude its investigation next week."
+                ]
+            },
+            {
+                word: "conduct research",
+                definition: "to study a subject to find information about it",
+                translation: "tiến hành nghiên cứu",
+                examples: [
+                    "Scientists conduct research to find new treatments for diseases.",
+                    "Students usually conduct research before writing a long essay.",
+                    "The university received funding to conduct research on climate change."
+                ]
+            },
+            {
+                word: "consume",
+                definition: "to use something such as a product, energy or fuel",
+                translation: "tiêu thụ",
+                examples: [
+                    "Large cars tend to consume a lot of expensive fuel.",
+                    "People who consume too much sugar may face health problems.",
+                    "The new factory will consume a vast amount of electricity."
+                ]
+            },
+            {
+                word: "crime rate",
+                definition: "the amount of crime that happens in a place or during a period of time",
+                translation: "tỷ lệ tội phạm",
+                examples: [
+                    "The crime rate has decreased significantly in the city center.",
+                    "A high crime rate can negatively affect local businesses.",
+                    "Governments are trying to lower the crime rate by increasing police presence."
+                ]
+            },
+            {
+                word: "culture",
+                definition: "the habits, traditions and beliefs of a country, society or group of people",
+                translation: "văn hóa",
+                examples: [
+                    "When travelling, it is important to respect the local culture.",
+                    "Language is a crucial part of any nation's culture.",
+                    "The festival celebrates the diverse culture of the region."
+                ]
+            },
+            {
+                word: "diverse",
+                definition: "including many different types",
+                translation: "đa dạng",
+                examples: [
+                    "London is known for its culturally diverse population.",
+                    "The library offers a diverse range of books and magazines.",
+                    "A diverse diet is essential for maintaining good health."
+                ]
+            },
+            {
+                word: "environment",
+                definition: "the situation that you live or work in, and how it influences how you feel",
+                translation: "môi trường (sống, làm việc)",
+                examples: [
+                    "A supportive work environment improves employee productivity.",
+                    "Children need a safe environment to learn and play.",
+                    "The stress of the urban environment can affect mental health."
+                ]
+            },
+            {
+                word: "feature",
+                definition: "a quality or important part of something",
+                translation: "đặc điểm, tính năng",
+                examples: [
+                    "The most interesting feature of this software is its speed.",
+                    "The ancient castle has many unique architectural features.",
+                    "Safety is a key feature of modern vehicle design."
+                ]
+            },
+            {
+                word: "grow up",
+                definition: "to become older or an adult",
+                translation: "lớn lên, trưởng thành",
+                examples: [
+                    "Children grow up very quickly these days.",
+                    "She wants to be a doctor when she grows up.",
+                    "Many people who grow up in the country prefer a quiet life."
+                ]
+            },
+            {
+                word: "ignore",
+                definition: "to pay no attention to something or someone",
+                translation: "phớt lờ, lờ đi",
+                examples: [
+                    "It is dangerous to ignore the warnings about climate change.",
+                    "He chose to ignore the negative comments and focus on his work.",
+                    "You cannot simply ignore the rules of the competition."
+                ]
+            },
+            {
+                word: "impact",
+                definition: "the effect that a person, event or situation has on someone or something",
+                translation: "tác động, ảnh hưởng",
+                examples: [
+                    "The economic crisis had a massive impact on small businesses.",
+                    "Technology has a significant impact on how we communicate.",
+                    "We need to consider the environmental impact of our actions."
+                ]
+            },
+            {
+                word: "income",
+                definition: "money that you earn by working, investing or producing goods",
+                translation: "thu nhập",
+                examples: [
+                    "Families with a low income struggle to afford basic housing.",
+                    "He relies on his rental properties for a steady income.",
+                    "Tourism provides a valuable source of income for the town."
+                ]
+            },
+            {
+                word: "industrial",
+                definition: "with a lot of factories",
+                translation: "thuộc về công nghiệp, có nhiều nhà máy",
+                examples: [
+                    "The northern part of the country is highly industrial.",
+                    "Industrial pollution has damaged the local river system.",
+                    "The city has an industrial history dating back to the 19th century."
+                ]
+            },
+            {
+                word: "influence",
+                definition: "to affect or change how someone or something develops, behaves or thinks",
+                translation: "ảnh hưởng, tác động đến",
+                examples: [
+                    "Parents heavily influence the choices their children make.",
+                    "The media can influence public opinion on important issues.",
+                    "Weather conditions strongly influence agricultural production."
+                ]
+            },
+            {
+                word: "landscape",
+                definition: "the appearance of an area of land, especially in the countryside",
+                translation: "phong cảnh, cảnh quan",
+                examples: [
+                    "The rural landscape was completely covered in snow.",
+                    "Tourism has changed the natural landscape of the coastal area.",
+                    "Artists often paint the beautiful landscape of the mountains."
+                ]
+            },
+            {
+                word: "lifestyle",
+                definition: "the way that you live",
+                translation: "lối sống",
+                examples: [
+                    "Regular exercise is part of a healthy lifestyle.",
+                    "Winning the lottery completely changed their lifestyle.",
+                    "Many young people prefer a busy, urban lifestyle."
+                ]
+            },
+            {
+                word: "local",
+                definition: "someone who lives in the area you are talking about",
+                translation: "người địa phương",
+                examples: [
+                    "The locals were very friendly and welcoming to the tourists.",
+                    "It is often best to ask a local for restaurant recommendations.",
+                    "The festival is organized primarily by enthusiastic locals."
+                ]
+            },
+            {
+                word: "measurement",
+                definition: "a way of measuring something",
+                translation: "sự đo lường, phương pháp đo",
+                examples: [
+                    "Exact measurement is crucial in scientific experiments.",
+                    "Tests are a common measurement of student progress.",
+                    "We need an accurate measurement of the room before buying furniture."
+                ]
+            },
+            {
+                word: "nutrition",
+                definition: "the food that you eat and the way that it affects your health",
+                translation: "dinh dưỡng",
+                examples: [
+                    "Good nutrition is vital for a child's physical development.",
+                    "Schools should teach students about the importance of nutrition.",
+                    "Poor nutrition can lead to numerous health problems later in life."
+                ]
+            },
+            {
+                word: "outcome",
+                definition: "the final result of an activity or process",
+                translation: "kết quả",
+                examples: [
+                    "The outcome of the election surprised many political analysts.",
+                    "Hard work will usually lead to a successful outcome.",
+                    "We are still waiting for the final outcome of the medical tests."
+                ]
+            },
+            {
+                word: "reputation",
+                definition: "the opinion that people have about someone or something based on their behaviour or character in the past",
+                translation: "danh tiếng",
+                examples: [
+                    "The restaurant has an excellent reputation for fresh seafood.",
+                    "A bad customer review can damage a company's reputation.",
+                    "He built a strong reputation as a reliable business partner."
+                ]
+            },
+            {
+                word: "resources",
+                definition: "things that a country, person or organisation has which they can use",
+                translation: "tài nguyên, nguồn lực",
+                examples: [
+                    "The country is rich in natural resources like oil and gas.",
+                    "Schools need more financial resources to buy new computers.",
+                    "We must learn to manage our water resources more carefully."
+                ]
+            },
+            {
+                word: "status",
+                definition: "the position that you have in relation to other people because of your job or social position",
+                translation: "địa vị (xã hội)",
+                examples: [
+                    "In some cultures, teachers have a very high social status.",
+                    "Owning a luxury car is often seen as a symbol of status.",
+                    "His promotion significantly improved his professional status."
+                ]
+            },
+            {
+                word: "surround",
+                definition: "to be or go everywhere around something or someone",
+                translation: "bao quanh, vây quanh",
+                examples: [
+                    "Tall, beautiful trees surround the old wooden cabin.",
+                    "Fans tried to surround the famous singer after the concert.",
+                    "The island is completely surrounded by crystal clear water."
+                ]
+            }
+        ];
+
+        // --- 2. STATE MANAGEMENT ---
+        let currentIndex = 0;
+        let fontSizeBase = 16;
+        let assessmentResults = {
+            'GOT IT': [],
+            'MAYBE': [],
+            'NOT SURE': []
+        };
+
+        // --- 3. DOM ELEMENTS ---
+        const els = {
+            html: document.documentElement,
+            themeIcon: document.getElementById('theme-icon'),
+            progressText: document.getElementById('progress-text'),
+            progressPercent: document.getElementById('progress-percent'),
+            progressBar: document.getElementById('progressBar'),
+            
+            flashcardContainer: document.getElementById('flashcard-container'),
+            completionContainer: document.getElementById('completion-container'),
+            fabExport: document.getElementById('fab-export'),
+            
+            cardWord: document.getElementById('card-word'),
+            cardExamples: document.getElementById('card-examples'),
+            defCard: document.getElementById('def-card'),
+            cardDefinition: document.getElementById('card-definition'),
+            transCard: document.getElementById('trans-card'),
+            cardTranslation: document.getElementById('card-translation'),
+
+            sumGotIt: document.getElementById('summary-gotit'),
+            sumMaybe: document.getElementById('summary-maybe'),
+            sumNotSure: document.getElementById('summary-notsure'),
+        };
+
+        // --- 4. INITIALIZATION ---
+        function init() {
+            // Check system dark mode preference
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                els.html.classList.add('dark');
+                updateThemeIcon();
+            }
+            loadWord();
+        }
+
+        // --- 5. CORE LOGIC ---
+        function loadWord() {
+            if (currentIndex >= vocabData.length) {
+                showCompletion();
+                return;
+            }
+
+            const current = vocabData[currentIndex];
+
+            // Update Progress
+            const pct = Math.round((currentIndex / vocabData.length) * 100);
+            els.progressText.innerText = `Word ${currentIndex + 1} of ${vocabData.length}`;
+            els.progressPercent.innerText = `${pct}%`;
+            document.getElementById('progress-bar').style.width = `${pct}%`;
+
+            // Reset UI
+            els.defCard.classList.remove('revealed');
+            els.transCard.classList.remove('revealed');
+            els.cardExamples.innerHTML = '';
+
+            // Populate text
+            els.cardWord.innerText = current.word;
+            els.cardDefinition.innerText = current.definition;
+            els.cardTranslation.innerText = current.translation;
+
+            // Populate Examples and highlight target word
+            // We use a regex to find the word (case-insensitive)
+            // Note: Some verbs might be conjugated (e.g. concluded), so a strict boundary match might miss it.
+            // A simple includes and replace is used here. For robustness, we highlight the word root.
+            const wordRoot = current.word.length > 5 ? current.word.substring(0, current.word.length - 1) : current.word;
+            const regex = new RegExp(`(${wordRoot}[a-z]*)`, 'gi');
+            
+            current.examples.forEach(sentence => {
+                const li = document.createElement('li');
+                li.className = "flex items-start";
+                
+                const icon = document.createElement('i');
+                icon.className = "fa-solid fa-angle-right text-blue-400 mt-1 mr-3 flex-shrink-0 text-sm";
+                
+                const textSpan = document.createElement('span');
+                // Basic highlighting logic
+                textSpan.innerHTML = sentence.replace(regex, '<span class="highlight-word">$1</span>');
+                
+                li.appendChild(icon);
+                li.appendChild(textSpan);
+                els.cardExamples.appendChild(li);
+            });
+            
+            // Scroll to top of card smoothly
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function revealCard(cardId) {
+            document.getElementById(cardId).classList.add('revealed');
+        }
+
+        function recordAssessment(level) {
+            // Save current word to the selected bucket
+            assessmentResults[level].push(vocabData[currentIndex]);
+            
+            // Move to next word
+            currentIndex++;
+            loadWord();
+        }
+
+        function showCompletion() {
+            // 100% progress
+            els.progressText.innerText = "Completed!";
+            els.progressPercent.innerText = "100%";
+            document.getElementById('progress-bar').style.width = `100%`;
+
+            // Hide flashcard, show completion
+            els.flashcardContainer.classList.add('hidden');
+            els.completionContainer.classList.remove('hidden');
+            els.completionContainer.classList.add('flex');
+            
+            // Hide FAB as there's a big button here
+            els.fabExport.classList.add('hidden');
+
+            // Populate stats
+            els.sumGotIt.innerText = assessmentResults['GOT IT'].length;
+            els.sumMaybe.innerText = assessmentResults['MAYBE'].length;
+            els.sumNotSure.innerText = assessmentResults['NOT SURE'].length;
+        }
+
+        function resetApp() {
+            currentIndex = 0;
+            assessmentResults = { 'GOT IT': [], 'MAYBE': [], 'NOT SURE': [] };
+            els.completionContainer.classList.add('hidden');
+            els.completionContainer.classList.remove('flex');
+            els.flashcardContainer.classList.remove('hidden');
+            els.fabExport.classList.remove('hidden');
+            loadWord();
+        }
+
+        // --- 6. EXPORT LOGIC ---
+        function exportMarkdown() {
+            // Date formatting
+            const dateStr = new Date().toISOString().split('T')[0];
+            const filename = `${dateStr}-My-Vocabulary-List.md`;
+            
+            let mdContent = `# My Vocabulary List\n`;
+            mdContent += `**Date:** ${dateStr}\n\n`;
+            mdContent += `---\n\n`;
+
+            const sections = [
+                { title: '🟢 GOT IT', key: 'GOT IT' },
+                { title: '🟠 MAYBE', key: 'MAYBE' },
+                { title: '🔴 NOT SURE', key: 'NOT SURE' }
+            ];
+
+            sections.forEach(section => {
+                mdContent += `## ${section.title} (${assessmentResults[section.key].length})\n\n`;
+                if (assessmentResults[section.key].length === 0) {
+                    mdContent += `*No words in this category.*\n\n`;
+                } else {
+                    assessmentResults[section.key].forEach(item => {
+                        mdContent += `### **${item.word}**\n`;
+                        mdContent += `- **Definition:** ${item.definition}\n`;
+                        mdContent += `- **Translation:** *${item.translation}*\n`;
+                        mdContent += `- **Examples:**\n`;
+                        item.examples.forEach(ex => {
+                            mdContent += `  - ${ex}\n`;
+                        });
+                        mdContent += `\n`;
+                    });
+                }
+                mdContent += `---\n\n`;
+            });
+
+            // Create Download
+            const blob = new Blob([mdContent], { type: 'text/markdown;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.setAttribute('href', url);
+            link.setAttribute('download', filename);
+            link.style.display = 'none';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+
+        // --- 7. UI CONTROLS (Theme & Font) ---
+        function toggleTheme() {
+            els.html.classList.toggle('dark');
+            updateThemeIcon();
+        }
+
+        function updateThemeIcon() {
+            if (els.html.classList.contains('dark')) {
+                els.themeIcon.classList.remove('fa-moon');
+                els.themeIcon.classList.add('fa-sun');
+            } else {
+                els.themeIcon.classList.remove('fa-sun');
+                els.themeIcon.classList.add('fa-moon');
+            }
+        }
+
+        function changeFontSize(step) {
+            // Increase/Decrease root font size (Limits: 12px to 24px)
+            fontSizeBase += step;
+            if (fontSizeBase < 12) fontSizeBase = 12;
+            if (fontSizeBase > 24) fontSizeBase = 24;
+            
+            els.html.style.setProperty('--base-font-size', `${fontSizeBase}px`);
+        }
+
+        // Run Init on Load
+        window.onload = init;
+    </script>
+</body>
+</html>
