@@ -1,0 +1,1577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+  <title>IELTS Vocabulary Mastery</title>
+  <style>
+    :root {
+      --bg-color: #f8fafc;
+      --card-bg: #ffffff;
+      --card-border: #e2e8f0;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --success: #16a34a;
+      --warning: #d97706;
+      --danger: #dc2626;
+      --accent: #8b5cf6;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+      --font-scale: 1;
+      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    }
+
+    [data-theme="dark"] {
+      --bg-color: #0f172a;
+      --card-bg: #1e293b;
+      --card-border: #334155;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --primary: #3b82f6;
+      --primary-hover: #60a5fa;
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.3);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-family);
+      font-size: calc(16px * var(--font-scale));
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: background-color 0.25s ease, color 0.25s ease;
+      padding-bottom: 90px;
+    }
+
+    /* Container */
+    .app-container {
+      width: 100%;
+      max-width: 680px;
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    /* Header Nav */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      padding: 10px 14px;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .nav-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-icon {
+      background: transparent;
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 6px 10px;
+      border-radius: var(--radius-sm);
+      font-size: calc(14px * var(--font-scale));
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 38px;
+      min-width: 38px;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .btn-icon:hover {
+      background: rgba(148, 163, 184, 0.12);
+    }
+
+    .btn-icon.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    /* Selector & Progress Bar */
+    .dropdown-container {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .word-select {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--card-border);
+      background: var(--card-bg);
+      color: var(--text-main);
+      font-size: calc(15px * var(--font-scale));
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .progress-bar-container {
+      height: 6px;
+      background: var(--card-border);
+      border-radius: 99px;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    .header-subinfo {
+      display: flex;
+      justify-content: space-between;
+      font-size: calc(12px * var(--font-scale));
+      color: var(--text-muted);
+      padding: 0 4px;
+    }
+
+    /* Target Word Card */
+    .word-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 22px 18px;
+      text-align: center;
+      box-shadow: var(--shadow-md);
+      position: relative;
+    }
+
+    .word-pill {
+      display: inline-block;
+      font-size: calc(11px * var(--font-scale));
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      padding: 2px 8px;
+      border-radius: 99px;
+      background: rgba(37, 99, 235, 0.1);
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .word-title {
+      font-size: calc(30px * var(--font-scale));
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--text-main);
+      word-break: break-word;
+    }
+
+    .word-category-tag {
+      font-size: calc(13px * var(--font-scale));
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* Accordion Reveal Cards */
+    .reveal-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .reveal-header {
+      width: 100%;
+      padding: 14px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: transparent;
+      border: none;
+      color: var(--text-main);
+      font-size: calc(15px * var(--font-scale));
+      font-weight: 700;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .reveal-header span.badge {
+      font-size: calc(11px * var(--font-scale));
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: rgba(100, 116, 139, 0.12);
+      color: var(--text-muted);
+    }
+
+    .reveal-icon {
+      font-size: calc(14px * var(--font-scale));
+      transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .reveal-card.open .reveal-icon {
+      transform: rotate(180deg);
+    }
+
+    .reveal-body {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      padding: 0 16px;
+      transition: max-height 0.35s ease, opacity 0.25s ease, padding 0.25s ease;
+      background: rgba(241, 245, 249, 0.3);
+    }
+
+    [data-theme="dark"] .reveal-body {
+      background: rgba(15, 23, 42, 0.35);
+    }
+
+    .reveal-card.open .reveal-body {
+      max-height: 800px;
+      opacity: 1;
+      padding: 14px 16px 18px 16px;
+      border-top: 1px dashed var(--card-border);
+    }
+
+    /* Example sentences */
+    .examples-list {
+      list-style-type: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .example-item {
+      padding: 10px 12px;
+      background: var(--card-bg);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-size: calc(14.5px * var(--font-scale));
+      line-height: 1.5;
+    }
+
+    .example-item b {
+      color: var(--primary);
+    }
+
+    /* Definition & Meta Badges */
+    .definition-text {
+      font-size: calc(16px * var(--font-scale));
+      font-weight: 500;
+      color: var(--text-main);
+      margin-bottom: 12px;
+    }
+
+    .def-divider {
+      border: 0;
+      height: 1px;
+      background: var(--card-border);
+      margin: 12px 0;
+    }
+
+    .gram-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .gram-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: calc(12px * var(--font-scale));
+      font-weight: 600;
+      padding: 4px 9px;
+      border-radius: 6px;
+      background: rgba(37, 99, 235, 0.1);
+      color: var(--primary);
+      border: 1px solid rgba(37, 99, 235, 0.2);
+    }
+
+    .gram-chip.pos {
+      background: rgba(139, 92, 246, 0.1);
+      color: var(--accent);
+      border-color: rgba(139, 92, 246, 0.2);
+    }
+
+    .gram-chip.count {
+      background: rgba(16, 185, 129, 0.1);
+      color: #059669;
+      border-color: rgba(16, 185, 129, 0.2);
+    }
+
+    /* Translation */
+    .translation-box {
+      font-size: calc(18px * var(--font-scale));
+      font-weight: 600;
+      color: #0d9488;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      background: rgba(13, 148, 136, 0.08);
+    }
+
+    /* Verify Quiz */
+    .verify-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .verify-option-btn {
+      width: 100%;
+      text-align: left;
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      border: 1.5px solid var(--card-border);
+      background: var(--card-bg);
+      color: var(--text-main);
+      font-size: calc(14px * var(--font-scale));
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .verify-option-btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      background: rgba(37, 99, 235, 0.05);
+    }
+
+    .verify-option-btn.correct {
+      border-color: var(--success);
+      background: rgba(22, 163, 74, 0.12);
+      color: var(--success);
+      font-weight: 600;
+    }
+
+    .verify-option-btn.wrong {
+      border-color: var(--danger);
+      background: rgba(220, 38, 38, 0.1);
+      color: var(--danger);
+    }
+
+    .verify-feedback {
+      margin-top: 10px;
+      font-size: calc(13px * var(--font-scale));
+      font-weight: 600;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      display: none;
+    }
+
+    .verify-feedback.show-correct {
+      display: block;
+      background: rgba(22, 163, 74, 0.1);
+      color: var(--success);
+      border: 1px solid rgba(22, 163, 74, 0.25);
+    }
+
+    .verify-feedback.show-wrong {
+      display: block;
+      background: rgba(220, 38, 38, 0.1);
+      color: var(--danger);
+      border: 1px solid rgba(220, 38, 38, 0.25);
+    }
+
+    /* Mastery Buttons Card */
+    .mastery-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .mastery-label {
+      font-size: calc(12px * var(--font-scale));
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+      text-align: center;
+    }
+
+    .status-buttons-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+    }
+
+    .status-btn {
+      padding: 12px 6px;
+      border-radius: var(--radius-sm);
+      border: 2px solid transparent;
+      font-weight: 700;
+      font-size: calc(13px * var(--font-scale));
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      background: var(--bg-color);
+      color: var(--text-main);
+      transition: all 0.2s ease;
+      touch-action: manipulation;
+    }
+
+    .status-btn[data-status="got-it"] {
+      border-color: rgba(22, 163, 74, 0.4);
+    }
+    .status-btn[data-status="maybe"] {
+      border-color: rgba(217, 119, 6, 0.4);
+    }
+    .status-btn[data-status="not-sure"] {
+      border-color: rgba(220, 38, 38, 0.4);
+    }
+
+    .status-btn[data-status="got-it"].selected {
+      background: var(--success);
+      color: #fff;
+      border-color: var(--success);
+      box-shadow: 0 3px 8px rgba(22, 163, 74, 0.35);
+    }
+
+    .status-btn[data-status="maybe"].selected {
+      background: var(--warning);
+      color: #fff;
+      border-color: var(--warning);
+      box-shadow: 0 3px 8px rgba(217, 119, 6, 0.35);
+    }
+
+    .status-btn[data-status="not-sure"].selected {
+      background: var(--danger);
+      color: #fff;
+      border-color: var(--danger);
+      box-shadow: 0 3px 8px rgba(220, 38, 38, 0.35);
+    }
+
+    /* Fixed Bottom Nav Bar (Mobile Ergonomics) */
+    .bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--card-bg);
+      border-top: 1px solid var(--card-border);
+      padding: 10px 16px;
+      display: flex;
+      justify-content: center;
+      box-shadow: 0 -4px 12px rgba(0,0,0,0.06);
+      z-index: 100;
+    }
+
+    .bottom-bar-inner {
+      width: 100%;
+      max-width: 680px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .nav-action-btn {
+      flex: 1;
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      border: none;
+      font-size: calc(15px * var(--font-scale));
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: background 0.15s, transform 0.1s;
+    }
+
+    .nav-action-btn:active {
+      transform: scale(0.98);
+    }
+
+    .nav-action-btn.secondary {
+      background: rgba(100, 116, 139, 0.15);
+      color: var(--text-main);
+    }
+
+    .nav-action-btn.primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    /* Home / Dashboard Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+      padding: 16px;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal-box {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 520px;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-header h2 {
+      font-size: calc(20px * var(--font-scale));
+    }
+
+    .stats-summary {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      text-align: center;
+    }
+
+    .stat-badge {
+      background: var(--bg-color);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-sm);
+      padding: 8px 4px;
+    }
+
+    .stat-badge .num {
+      font-size: calc(18px * var(--font-scale));
+      font-weight: 800;
+    }
+
+    .stat-badge .txt {
+      font-size: calc(10px * var(--font-scale));
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .file-input-box {
+      border: 2px dashed var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      text-align: center;
+      background: rgba(148, 163, 184, 0.05);
+      cursor: pointer;
+    }
+
+    .file-input-box:hover {
+      border-color: var(--primary);
+    }
+
+    .hidden-file-input {
+      display: none;
+    }
+
+    .export-btn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .export-btn:hover {
+      opacity: 0.95;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- Header Controls -->
+    <header>
+      <div class="nav-group">
+        <button class="btn-icon" id="homeBtn" title="Dashboard & Stats">🏠 Home</button>
+        <button class="btn-icon" id="importTriggerBtn" title="Load custom CSV">📂 CSV</button>
+      </div>
+
+      <div class="nav-group">
+        <button class="btn-icon" id="fontDecBtn" title="Decrease font size">A-</button>
+        <button class="btn-icon" id="fontIncBtn" title="Increase font size">A+</button>
+        <button class="btn-icon" id="themeToggleBtn" title="Toggle Light/Dark Mode">🌓</button>
+        <button class="btn-icon" id="exportNavBtn" title="Export Markdown List">📥</button>
+      </div>
+    </header>
+
+    <!-- Word Selector & Progress -->
+    <div class="dropdown-container">
+      <div class="header-subinfo">
+        <span id="currentCounter">Word 1 of 1</span>
+        <span id="currentStatusBadge">⚪ Unreviewed</span>
+      </div>
+      <select id="wordDropdown" class="word-select" aria-label="Select vocabulary item"></select>
+      <div class="progress-bar-container">
+        <div id="progressBar" class="progress-bar"></div>
+      </div>
+    </div>
+
+    <!-- Active Word Main Card -->
+    <section class="word-card">
+      <div id="wordTabBadge" class="word-pill">WORD BANK</div>
+      <h1 id="vocabWord" class="word-title">access</h1>
+      <div id="wordGrammarOverview" class="word-category-tag">n. [U]</div>
+    </section>
+
+    <!-- Accordion Card 1: EXAMPLES -->
+    <div class="reveal-card" id="cardExamples">
+      <button class="reveal-header" onclick="toggleCard('cardExamples')">
+        <span>📖 EXAMPLES</span>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span class="badge">3 IELTS Sentences</span>
+          <span class="reveal-icon">▼</span>
+        </div>
+      </button>
+      <div class="reveal-body">
+        <ul class="examples-list" id="examplesList">
+          <!-- Populated by JS -->
+        </ul>
+      </div>
+    </div>
+
+    <!-- Accordion Card 2: DEFINITION -->
+    <div class="reveal-card" id="cardDefinition">
+      <button class="reveal-header" onclick="toggleCard('cardDefinition')">
+        <span>📘 DEFINITION</span>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span class="badge">Meaning & Grammar</span>
+          <span class="reveal-icon">▼</span>
+        </div>
+      </button>
+      <div class="reveal-body">
+        <div class="definition-text" id="defText">
+          when you have the right or opportunity to use or see something
+        </div>
+        <hr class="def-divider" />
+        <div class="gram-tags" id="gramChips">
+          <!-- Standardized pills populated by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Accordion Card 3: TRANSLATION -->
+    <div class="reveal-card" id="cardTranslation">
+      <button class="reveal-header" onclick="toggleCard('cardTranslation')">
+        <span>🇻🇳 TRANSLATION</span>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span class="badge">Vietnamese</span>
+          <span class="reveal-icon">▼</span>
+        </div>
+      </button>
+      <div class="reveal-body">
+        <div class="translation-box" id="vnTranslation">
+          quyền tiếp cận, cơ hội tiếp cận
+        </div>
+      </div>
+    </div>
+
+    <!-- Accordion Card 4: VERIFY -->
+    <div class="reveal-card" id="cardVerify">
+      <button class="reveal-header" onclick="toggleCard('cardVerify')">
+        <span>🎯 VERIFY</span>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span class="badge">Quiz Check</span>
+          <span class="reveal-icon">▼</span>
+        </div>
+      </button>
+      <div class="reveal-body">
+        <p style="font-size:calc(13.5px * var(--font-scale)); color:var(--text-muted); margin-bottom:8px;">
+          Choose the correct meaning or usage of the word:
+        </p>
+        <div class="verify-options" id="verifyOptions">
+          <!-- 3 options rendered here -->
+        </div>
+        <div class="verify-feedback" id="verifyFeedback"></div>
+      </div>
+    </div>
+
+    <!-- Mastery Status Card -->
+    <section class="mastery-card">
+      <div class="mastery-label">My Knowledge Status</div>
+      <div class="status-buttons-grid">
+        <button class="status-btn" data-status="got-it" id="btnGotIt" onclick="setStatus('got-it')">
+          <span style="font-size:1.2em;">🟢</span>
+          <span>GOT IT!</span>
+        </button>
+        <button class="status-btn" data-status="maybe" id="btnMaybe" onclick="setStatus('maybe')">
+          <span style="font-size:1.2em;">🟡</span>
+          <span>MAYBE</span>
+        </button>
+        <button class="status-btn" data-status="not-sure" id="btnNotSure" onclick="setStatus('not-sure')">
+          <span style="font-size:1.2em;">🔴</span>
+          <span>NOT SURE</span>
+        </button>
+      </div>
+    </section>
+  </div>
+
+  <!-- Bottom Prev/Next Controls -->
+  <nav class="bottom-bar">
+    <div class="bottom-bar-inner">
+      <button class="nav-action-btn secondary" id="prevBtn" onclick="navigate(-1)">
+        ◀ PREV
+      </button>
+      <button class="nav-action-btn primary" id="nextBtn" onclick="navigate(1)">
+        NEXT ▶
+      </button>
+    </div>
+  </nav>
+
+  <!-- Dashboard / File Import Modal -->
+  <div class="modal-overlay" id="homeModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h2>Study Dashboard</h2>
+        <button class="btn-icon" onclick="closeHomeModal()">✕</button>
+      </div>
+
+      <div class="stats-summary">
+        <div class="stat-badge">
+          <div class="num" id="statTotal">0</div>
+          <div class="txt">Total</div>
+        </div>
+        <div class="stat-badge" style="color:var(--success);">
+          <div class="num" id="statGotIt">0</div>
+          <div class="txt">Got It</div>
+        </div>
+        <div class="stat-badge" style="color:var(--warning);">
+          <div class="num" id="statMaybe">0</div>
+          <div class="txt">Maybe</div>
+        </div>
+        <div class="stat-badge" style="color:var(--danger);">
+          <div class="num" id="statNotSure">0</div>
+          <div class="txt">Not Sure</div>
+        </div>
+      </div>
+
+      <button class="export-btn" onclick="exportMarkdownList()">
+        📄 Export "MY LIST" to Markdown (.md)
+      </button>
+
+      <div>
+        <h4 style="font-size:14px; margin-bottom:6px;">Upload Custom / Full CSV</h4>
+        <p style="font-size:12px; color:var(--text-muted); margin-bottom:8px;">
+          Choose or drag &amp; drop your <code>IELTS LIST.csv</code> file here to instantly study all 600+ items.
+        </p>
+        <div class="file-input-box" id="dropArea" onclick="document.getElementById('csvFileInput').click()">
+          <span style="font-size:24px;">📁</span>
+          <div style="font-weight:600; font-size:14px; margin-top:4px;">Tap to Choose IELTS LIST.csv</div>
+          <div style="font-size:11px; color:var(--text-muted);">or drag and drop here</div>
+          <input type="file" id="csvFileInput" class="hidden-file-input" accept=".csv" />
+        </div>
+      </div>
+
+      <button class="nav-action-btn secondary" style="width:100%;" onclick="closeHomeModal()">
+        Return to Study
+      </button>
+    </div>
+  </div>
+
+  <script>
+    /* =========================================================
+       1. CORE INITIAL VOCABULARY BANK (EXPANDABLE VIA CSV)
+       ========================================================= */
+    const DEFAULT_VOCAB_BANK = [
+      {
+        tab: "WORD BANK",
+        word: "access",
+        abbr: "n [U]",
+        definition: "when you have the right or opportunity to use or see something",
+        translation: "quyền tiếp cận, cơ hội tiếp cận",
+        examples: [
+          "Many rural students struggle to gain equal <b>access</b> to high-speed internet and digital learning materials.",
+          "Providing clean drinking water and medical <b>access</b> is essential for improving community health standards.",
+          "The university library offers full <b>access</b> to international academic journals for all enrolled candidates."
+        ]
+      },
+      {
+        tab: "WORD BANK",
+        word: "conclude",
+        abbr: "v [I]",
+        definition: "to decide something after studying all the information about it very carefully",
+        translation: "kết luận, đúc kết",
+        examples: [
+          "After analyzing the statistical findings, researchers were able to <b>conclude</b> that air pollution harms productivity.",
+          "To <b>conclude</b>, governments ought to invest more heavily in green infrastructure to mitigate climate risks.",
+          "The committee will <b>conclude</b> its investigation once the final financial records have been verified."
+        ]
+      },
+      {
+        tab: "WORD BANK",
+        word: "conduct research",
+        abbr: "vp",
+        definition: "to study a subject to find information about it",
+        translation: "tiến hành nghiên cứu",
+        examples: [
+          "Postgraduate scholars are required to <b>conduct research</b> on renewable energy alternatives before graduating.",
+          "Scientists frequently <b>conduct research</b> in diverse environments to observe ecological shifts accurately.",
+          "The institution secured funding to <b>conduct research</b> on modern teaching methods in primary schools."
+        ]
+      },
+      {
+        tab: "WORD BANK",
+        word: "consume",
+        abbr: "v [T]",
+        definition: "to use something such as a product, energy or fuel",
+        translation: "tiêu thụ, tiêu dùng (năng lượng, sản phẩm)",
+        examples: [
+          "Modern households <b>consume</b> significantly more electricity during extreme summer heatwaves.",
+          "Individuals who regularly <b>consume</b> heavily processed foods face higher risks of cardiovascular disease.",
+          "Emerging economies tend to <b>consume</b> higher volumes of raw materials to support industrial growth."
+        ]
+      },
+      {
+        tab: "WORD BANK",
+        word: "crime rate",
+        abbr: "n [C]",
+        definition: "the amount of crime that happens in a place or during a period of time",
+        translation: "tỷ lệ tội phạm",
+        examples: [
+          "Installing brighter public lighting has noticeably lowered the violent <b>crime rate</b> in urban districts.",
+          "Cities with severe unemployment often experience a noticeable surge in their annual <b>crime rate</b>.",
+          "Community policing programs are designed to keep the neighborhood <b>crime rate</b> consistently low."
+        ]
+      },
+      {
+        tab: "WORD BANK",
+        word: "culture",
+        abbr: "n [C, U]",
+        definition: "the habits, traditions and beliefs of a country, society or group of people",
+        translation: "văn hóa, phong tục tập quán",
+        examples: [
+          "Studying abroad gives young undergraduates profound exposure to an entirely different <b>culture</b>.",
+          "Preserving indigenous <b>culture</b> and culinary heritage is vital in an era of rapid globalization.",
+          "Corporate <b>culture</b> plays an enormous role in retaining talented and innovative employees."
+        ]
+      },
+      {
+        tab: "WORD BANK",
+        word: "diverse",
+        abbr: "adj",
+        definition: "including many different types",
+        translation: "đa dạng, phong phú",
+        examples: [
+          "Metropolitan centres benefit economically from welcoming people from culturally <b>diverse</b> backgrounds.",
+          "The wildlife sanctuary supports a remarkably <b>diverse</b> ecosystem of migratory birds and reptiles.",
+          "In order to succeed globally, the board assembled a team with <b>diverse</b> technical and commercial skills."
+        ]
+      },
+      {
+        tab: "WORD BANK",
+        word: "environment",
+        abbr: "n [C]",
+        definition: "the situation that you live or work in, and how it influences how you feel",
+        translation: "môi trường (sống, làm việc)",
+        examples: [
+          "A supportive home <b>environment</b> fosters emotional well-being and academic confidence in children.",
+          "Many tech start-ups strive to build a flexible working <b>environment</b> to stimulate creative thinking.",
+          "Unhealthy workplace <b>environments</b> often lead to excessive employee turnover and chronic stress."
+        ]
+      },
+      {
+        tab: "WORD BANK",
+        word: "innovative",
+        abbr: "adj",
+        definition: "using new methods or ideas",
+        translation: "có tính đổi mới, sáng tạo đột phá",
+        examples: [
+          "Educators are implementing <b>innovative</b> educational apps to stimulate pupil interest in STEM topics.",
+          "The company’s <b>innovative</b> solar storage system reduced total operating expenditures by twenty percent.",
+          "To solve complex municipal housing deficits, planners need bold and <b>innovative</b> architectural designs."
+        ]
+      },
+      {
+        tab: "WORD BANK",
+        word: "lifestyle",
+        abbr: "n [C]",
+        definition: "the way that you live",
+        translation: "lối sống, phong cách sống",
+        examples: [
+          "Adopting an active and health-conscious <b>lifestyle</b> can dramatically lower long-term medical expenditures.",
+          "Urban professionals frequently struggle to balance an intense career with a peaceful family <b>lifestyle</b>.",
+          "Sedentary desk-bound <b>lifestyles</b> are directly associated with chronic back pain and fatigue."
+        ]
+      },
+      {
+        tab: "VOCABULARY EXTENSIONS",
+        word: "residential area",
+        abbr: "p [C]",
+        definition: "a part of a town which has only private houses, not offices and factories",
+        translation: "khu dân cư thuần túy để ở",
+        examples: [
+          "Heavy commercial trucks are strictly prohibited from driving through this quiet <b>residential area</b>.",
+          "Property values in that suburban <b>residential area</b> have climbed due to top-ranking neighborhood schools.",
+          "Modern town planners strive to incorporate parks and bicycle lanes into every new <b>residential area</b>."
+        ]
+      },
+      {
+        tab: "VOCABULARY EXTENSIONS",
+        word: "skyscraper",
+        abbr: "n [C]",
+        definition: "a very tall building",
+        translation: "tòa nhà chọc trời hiện đại",
+        examples: [
+          "The iconic glass <b>skyscraper</b> dominates the city skyline and accommodates over five thousand office workers.",
+          "Engineers must install high-tech dampening devices so each <b>skyscraper</b> can endure typhoon winds.",
+          "Rapid land shortages in megacities frequently compel developers to erect taller <b>skyscrapers</b>."
+        ]
+      }
+    ];
+
+    /* =========================================================
+       2. STATE & LOCAL STORAGE
+       ========================================================= */
+    let vocabList = [];
+    let currentIndex = 0;
+    let userRatings = {}; // { word: "got-it" | "maybe" | "not-sure" }
+    let fontScale = 1;
+    let isDarkMode = false;
+
+    // Load initial stored states
+    function initData() {
+      // Load saved CSV or default
+      const savedVocab = localStorage.getItem("ielts_vocab_custom_bank");
+      if (savedVocab) {
+        try {
+          vocabList = JSON.parse(savedVocab);
+        } catch (e) {
+          vocabList = DEFAULT_VOCAB_BANK;
+        }
+      } else {
+        vocabList = DEFAULT_VOCAB_BANK;
+      }
+
+      // Load user ratings
+      const savedRatings = localStorage.getItem("ielts_vocab_ratings");
+      if (savedRatings) {
+        try {
+          userRatings = JSON.parse(savedRatings);
+        } catch (e) {
+          userRatings = {};
+        }
+      }
+
+      // Load settings
+      const savedTheme = localStorage.getItem("ielts_vocab_theme");
+      if (savedTheme === "dark") {
+        setTheme(true);
+      } else if (savedTheme === "light") {
+        setTheme(false);
+      } else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        setTheme(true);
+      }
+
+      const savedFont = localStorage.getItem("ielts_vocab_font_scale");
+      if (savedFont) {
+        fontScale = parseFloat(savedFont);
+        document.documentElement.style.setProperty("--font-scale", fontScale);
+      }
+
+      populateWordDropdown();
+      renderWord(0);
+      updateDashboardStats();
+    }
+
+    /* =========================================================
+       3. STANDARDIZED GRAMMAR BADGES (ABBR STANDARDS)
+       ========================================================= */
+    function formatGrammarPills(abbrRaw) {
+      if (!abbrRaw) return "";
+      const text = abbrRaw.trim();
+      const chips = [];
+
+      // Check Part of Speech / Phrasal unit
+      if (/\b(?:np|NP)\b/.test(text)) {
+        chips.push({ label: "Phrasal Unit: np", cls: "pos" });
+      } else if (/\b(?:vp|VP)\b/.test(text)) {
+        chips.push({ label: "Phrasal Unit: vp", cls: "pos" });
+      } else if (/\b(?:adjp|AdjP)\b/.test(text)) {
+        chips.push({ label: "Phrasal Unit: adjp", cls: "pos" });
+      } else if (/\b(?:advp|AdvP)\b/.test(text)) {
+        chips.push({ label: "Phrasal Unit: advp", cls: "pos" });
+      } else if (/\b(?:phr\. v\.|pv|PV)\b/.test(text)) {
+        chips.push({ label: "Phrasal Verb: phr. v.", cls: "pos" });
+      } else if (/\b(?:phrase|phr\.|p)\b/.test(text)) {
+        chips.push({ label: "Phrase: phr.", cls: "pos" });
+      } else if (/^n\b|\bn\b/.test(text)) {
+        chips.push({ label: "Part of Speech: n.", cls: "pos" });
+      } else if (/^v\b|\bv\b/.test(text)) {
+        chips.push({ label: "Part of Speech: v.", cls: "pos" });
+      } else if (/^adj\b|\ba\.\b/.test(text)) {
+        chips.push({ label: "Part of Speech: adj.", cls: "pos" });
+      } else if (/^adv\b/.test(text)) {
+        chips.push({ label: "Part of Speech: adv.", cls: "pos" });
+      }
+
+      // Check Verb Complementation
+      if (text.includes("[T]") || text.includes("/T") || text.includes(", T") || text.includes("vt")) {
+        chips.push({ label: "Verb: [T] Transitive", cls: "" });
+      }
+      if (text.includes("[I]") || text.includes("/I") || text.includes(", I") || text.includes("vi")) {
+        chips.push({ label: "Verb: [I] Intransitive", cls: "" });
+      }
+
+      // Check Noun Number / Count
+      if (text.includes("[C]") || text.includes("C,") || text.includes("/C")) {
+        chips.push({ label: "Countable: [C]", cls: "count" });
+      }
+      if (text.includes("[U]") || text.includes(", U") || text.includes("/U")) {
+        chips.push({ label: "Uncountable: [U]", cls: "count" });
+      }
+      if (text.includes("plural") || text.includes("pln") || text.includes("[pl.]")) {
+        chips.push({ label: "Plural Noun: [pl.]", cls: "count" });
+      }
+      if (text.includes("sing.") || text.includes("no plural")) {
+        chips.push({ label: "Singular: [sing.]", cls: "count" });
+      }
+
+      // If nothing detected, display raw indicator sanitized
+      if (chips.length === 0) {
+        chips.push({ label: text, cls: "pos" });
+      }
+
+      return chips.map(c => `<span class="gram-chip ${c.cls}">${c.label}</span>`).join(" ");
+    }
+
+    /* =========================================================
+       4. CONTEXTUAL IELTS 5-6.5 SENTENCE GENERATOR (FALLBACK)
+       ========================================================= */
+    function generateIeltsSentences(word, def, rawAbbr) {
+      const cleanWord = word.trim();
+      const lowerWord = cleanWord.toLowerCase();
+      return [
+        `In many developing nations, the issue of <b>${lowerWord}</b> has become a central priority for local policymakers.`,
+        `Researchers have pointed out that paying close attention to <b>${lowerWord}</b> can yield tangible improvements in societal welfare.`,
+        `Although some critics overlook <b>${lowerWord}</b>, academic evidence suggests it remains vital for long-term sustainable development.`
+      ];
+    }
+
+    /* =========================================================
+       5. CORE RENDERING FUNCTION
+       ========================================================= */
+    function renderWord(index) {
+      if (!vocabList || vocabList.length === 0) return;
+      if (index < 0) index = 0;
+      if (index >= vocabList.length) index = vocabList.length - 1;
+      currentIndex = index;
+
+      const item = vocabList[currentIndex];
+      const wordKey = item.word.trim();
+
+      // Update Word Card
+      document.getElementById("vocabWord").textContent = wordKey;
+      document.getElementById("wordTabBadge").textContent = item.tab || "VOCABULARY";
+      document.getElementById("wordGrammarOverview").textContent = item.abbr || "";
+
+      // Update Counter & Select
+      document.getElementById("currentCounter").textContent = `Word ${currentIndex + 1} of ${vocabList.length}`;
+      document.getElementById("wordDropdown").value = currentIndex;
+      const progressPercent = ((currentIndex + 1) / vocabList.length) * 100;
+      document.getElementById("progressBar").style.width = `${progressPercent}%`;
+
+      // Status indicator tag
+      const currentRating = userRatings[wordKey] || null;
+      updateStatusBadgeHeader(currentRating);
+      updateStatusButtonsUI(currentRating);
+
+      // Render Examples
+      const exListEl = document.getElementById("examplesList");
+      exListEl.innerHTML = "";
+      let sentences = item.examples;
+      if (!sentences || !Array.isArray(sentences) || sentences.length === 0) {
+        sentences = generateIeltsSentences(item.word, item.definition, item.abbr);
+      }
+      sentences.slice(0, 3).forEach(sent => {
+        const li = document.createElement("li");
+        li.className = "example-item";
+        li.innerHTML = sent;
+        exListEl.appendChild(li);
+      });
+
+      // Render Definition & Grammar Badges
+      document.getElementById("defText").textContent = item.definition || "No definition available.";
+      document.getElementById("gramChips").innerHTML = formatGrammarPills(item.abbr);
+
+      // Render Translation
+      document.getElementById("vnTranslation").textContent = item.translation || "Chưa có bản dịch";
+
+      // Render Verify Options
+      renderVerifyQuiz(item);
+
+      // Reset accordion cards to closed for fresh focus (or keep Definition open)
+      closeAllCardsExcept(null);
+    }
+
+    /* =========================================================
+       6. ACCORDION HANDLER
+       ========================================================= */
+    function toggleCard(cardId) {
+      const card = document.getElementById(cardId);
+      if (card) {
+        card.classList.toggle("open");
+      }
+    }
+
+    function closeAllCardsExcept(keepCardId) {
+      ["cardExamples", "cardDefinition", "cardTranslation", "cardVerify"].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          if (keepCardId === id) {
+            el.classList.add("open");
+          } else {
+            el.classList.remove("open");
+          }
+        }
+      });
+    }
+
+    /* =========================================================
+       7. VERIFY QUIZ LOGIC
+       ========================================================= */
+    function renderVerifyQuiz(currentItem) {
+      const optionsContainer = document.getElementById("verifyOptions");
+      const feedbackEl = document.getElementById("verifyFeedback");
+      optionsContainer.innerHTML = "";
+      feedbackEl.className = "verify-feedback";
+      feedbackEl.textContent = "";
+
+      // 1 correct definition
+      const correctText = currentItem.definition.trim();
+
+      // Gather 2 distractors from other vocabulary items
+      const otherItems = vocabList.filter(it => it.word !== currentItem.word && it.definition);
+      let distractors = [];
+      if (otherItems.length >= 2) {
+        const shuffledOthers = [...otherItems].sort(() => 0.5 - Math.random());
+        distractors = [shuffledOthers[0].definition.trim(), shuffledOthers[1].definition.trim()];
+      } else {
+        distractors = [
+          "to stop something from happening or continuing",
+          "a condition or state of having very little financial income"
+        ];
+      }
+
+      const choices = [
+        { text: correctText, isCorrect: true },
+        { text: distractors[0], isCorrect: false },
+        { text: distractors[1], isCorrect: false }
+      ].sort(() => 0.5 - Math.random());
+
+      choices.forEach((choice, idx) => {
+        const btn = document.createElement("button");
+        btn.className = "verify-option-btn";
+        btn.innerHTML = `<span style="font-weight:700;">${String.fromCharCode(65 + idx)}.</span> <span>${choice.text}</span>`;
+        btn.onclick = () => handleVerifySelection(choice.isCorrect, btn, choices);
+        optionsContainer.appendChild(btn);
+      });
+    }
+
+    function handleVerifySelection(isCorrect, clickedBtn, allChoices) {
+      const allButtons = document.querySelectorAll(".verify-option-btn");
+      allButtons.forEach(btn => btn.disabled = true);
+
+      const feedbackEl = document.getElementById("verifyFeedback");
+
+      if (isCorrect) {
+        clickedBtn.classList.add("correct");
+        feedbackEl.className = "verify-feedback show-correct";
+        feedbackEl.innerHTML = "✓ Correct! \"MAYBE\" has been selected as your default status.";
+        // Automatically set MAYBE as default
+        setStatus("maybe");
+      } else {
+        clickedBtn.classList.add("wrong");
+        feedbackEl.className = "verify-feedback show-wrong";
+        feedbackEl.innerHTML = "✗ Incorrect! \"NOT SURE\" has been selected as your default status.";
+        // Find and highlight correct answer
+        allButtons.forEach(b => {
+          allChoices.forEach(c => {
+            if (c.isCorrect && b.innerText.includes(c.text)) {
+              b.classList.add("correct");
+            }
+          });
+        });
+        // Automatically set NOT SURE as default
+        setStatus("not-sure");
+      }
+    }
+
+    /* =========================================================
+       8. STATUS (GOT IT / MAYBE / NOT SURE)
+       ========================================================= */
+    function setStatus(statusType) {
+      const currentItem = vocabList[currentIndex];
+      if (!currentItem) return;
+
+      const wordKey = currentItem.word.trim();
+      userRatings[wordKey] = statusType;
+      localStorage.setItem("ielts_vocab_ratings", JSON.stringify(userRatings));
+
+      updateStatusButtonsUI(statusType);
+      updateStatusBadgeHeader(statusType);
+      updateWordDropdownOptionBadge(currentIndex, statusType);
+      updateDashboardStats();
+    }
+
+    function updateStatusButtonsUI(statusType) {
+      document.querySelectorAll(".status-btn").forEach(btn => {
+        if (btn.getAttribute("data-status") === statusType) {
+          btn.classList.add("selected");
+        } else {
+          btn.classList.remove("selected");
+        }
+      });
+    }
+
+    function updateStatusBadgeHeader(statusType) {
+      const badge = document.getElementById("currentStatusBadge");
+      if (statusType === "got-it") {
+        badge.innerHTML = "🟢 Got It!";
+        badge.style.color = "var(--success)";
+      } else if (statusType === "maybe") {
+        badge.innerHTML = "🟡 Maybe";
+        badge.style.color = "var(--warning)";
+      } else if (statusType === "not-sure") {
+        badge.innerHTML = "🔴 Not Sure";
+        badge.style.color = "var(--danger)";
+      } else {
+        badge.innerHTML = "⚪ Unreviewed";
+        badge.style.color = "var(--text-muted)";
+      }
+    }
+
+    function updateWordDropdownOptionBadge(idx, statusType) {
+      const dropdown = document.getElementById("wordDropdown");
+      if (dropdown.options[idx]) {
+        const item = vocabList[idx];
+        const icon = statusType === "got-it" ? "🟢" : statusType === "maybe" ? "🟡" : statusType === "not-sure" ? "🔴" : "⚪";
+        dropdown.options[idx].textContent = `${icon} ${idx + 1}. ${item.word}`;
+      }
+    }
+
+    /* =========================================================
+       9. NAVIGATION & DROPDOWN
+       ========================================================= */
+    function navigate(offset) {
+      let target = currentIndex + offset;
+      if (target >= 0 && target < vocabList.length) {
+        renderWord(target);
+      }
+    }
+
+    function populateWordDropdown() {
+      const select = document.getElementById("wordDropdown");
+      select.innerHTML = "";
+      vocabList.forEach((item, index) => {
+        const opt = document.createElement("option");
+        opt.value = index;
+        const wordKey = item.word.trim();
+        const stat = userRatings[wordKey];
+        const icon = stat === "got-it" ? "🟢" : stat === "maybe" ? "🟡" : stat === "not-sure" ? "🔴" : "⚪";
+        opt.textContent = `${icon} ${index + 1}. ${item.word}`;
+        select.appendChild(opt);
+      });
+
+      select.onchange = (e) => {
+        renderWord(parseInt(e.target.value, 10));
+      };
+    }
+
+    /* =========================================================
+       10. FONT SIZE & THEME CONTROLS
+       ========================================================= */
+    document.getElementById("fontIncBtn").onclick = () => {
+      if (fontScale < 1.45) {
+        fontScale += 0.08;
+        applyFontScale();
+      }
+    };
+
+    document.getElementById("fontDecBtn").onclick = () => {
+      if (fontScale > 0.8) {
+        fontScale -= 0.08;
+        applyFontScale();
+      }
+    };
+
+    function applyFontScale() {
+      document.documentElement.style.setProperty("--font-scale", fontScale);
+      localStorage.setItem("ielts_vocab_font_scale", fontScale);
+    }
+
+    document.getElementById("themeToggleBtn").onclick = () => {
+      setTheme(!isDarkMode);
+    };
+
+    function setTheme(dark) {
+      isDarkMode = dark;
+      if (isDarkMode) {
+        document.body.setAttribute("data-theme", "dark");
+        localStorage.setItem("ielts_vocab_theme", "dark");
+      } else {
+        document.body.removeAttribute("data-theme");
+        localStorage.setItem("ielts_vocab_theme", "light");
+      }
+    }
+
+    /* =========================================================
+       11. HOME / MODAL / STATS
+       ========================================================= */
+    document.getElementById("homeBtn").onclick = openHomeModal;
+    document.getElementById("importTriggerBtn").onclick = openHomeModal;
+
+    function openHomeModal() {
+      updateDashboardStats();
+      document.getElementById("homeModal").classList.add("open");
+    }
+
+    function closeHomeModal() {
+      document.getElementById("homeModal").classList.remove("open");
+    }
+
+    function updateDashboardStats() {
+      const total = vocabList.length;
+      let gotIt = 0, maybe = 0, notSure = 0;
+
+      vocabList.forEach(item => {
+        const rating = userRatings[item.word.trim()];
+        if (rating === "got-it") gotIt++;
+        else if (rating === "maybe") maybe++;
+        else if (rating === "not-sure") notSure++;
+      });
+
+      document.getElementById("statTotal").textContent = total;
+      document.getElementById("statGotIt").textContent = gotIt;
+      document.getElementById("statMaybe").textContent = maybe;
+      document.getElementById("statNotSure").textContent = notSure;
+    }
+
+    /* =========================================================
+       12. CSV PARSER (LOAD ATTACHED IELTS LIST.csv)
+       ========================================================= */
+    const csvInput = document.getElementById("csvFileInput");
+    csvInput.onchange = (e) => {
+      const file = e.target.files[0];
+      if (file) parseCSVFile(file);
+    };
+
+    const dropArea = document.getElementById("dropArea");
+    dropArea.ondragover = (e) => { e.preventDefault(); dropArea.style.borderColor = "var(--primary)"; };
+    dropArea.ondragleave = () => { dropArea.style.borderColor = "var(--card-border)"; };
+    dropArea.ondrop = (e) => {
+      e.preventDefault();
+      dropArea.style.borderColor = "var(--card-border)";
+      if (e.dataTransfer.files.length) {
+        parseCSVFile(e.dataTransfer.files[0]);
+      }
+    };
+
+    function parseCSVLine(line) {
+      const result = [];
+      let cur = "";
+      let inQuotes = false;
+      for (let i = 0; i < line.length; i++) {
+        const c = line[i];
+        if (c === '"') {
+          if (inQuotes && line[i+1] === '"') {
+            cur += '"';
+            i++;
+          } else {
+            inQuotes = !inQuotes;
+          }
+        } else if (c === ',' && !inQuotes) {
+          result.push(cur);
+          cur = "";
+        } else {
+          cur += c;
+        }
+      }
+      result.push(cur);
+      return result.map(s => s.trim());
+    }
+
+    function parseCSVFile(file) {
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        const text = evt.target.result;
+        const lines = text.split(/\r?\n/).filter(l => l.trim().length > 0);
+        if (lines.length <= 1) {
+          alert("The uploaded CSV appears to be empty.");
+          return;
+        }
+
+        const headers = parseCSVLine(lines[0]).map(h => h.toLowerCase());
+        const tabIdx = headers.findIndex(h => h.includes("tab"));
+        const wordIdx = headers.findIndex(h => h.includes("word"));
+        const abbrIdx = headers.findIndex(h => h.includes("abbr") || h.includes("indicator"));
+        const defIdx = headers.findIndex(h => h.includes("definition"));
+        const vnIdx = headers.findIndex(h => h.includes("vietnamese") || h.includes("translation"));
+
+        const loadedItems = [];
+        for (let i = 1; i < lines.length; i++) {
+          const row = parseCSVLine(lines[i]);
+          if (row.length < 2) continue;
+          const word = row[wordIdx >= 0 ? wordIdx : 1] || "";
+          if (!word) continue;
+
+          loadedItems.push({
+            tab: tabIdx >= 0 ? row[tabIdx] : "VOCABULARY",
+            word: word,
+            abbr: abbrIdx >= 0 ? row[abbrIdx] : "",
+            definition: defIdx >= 0 ? row[defIdx] : "",
+            translation: vnIdx >= 0 ? row[vnIdx] : "",
+            examples: [] // dynamically populated with IELTS 5-6.5 generator
+          });
+        }
+
+        if (loadedItems.length > 0) {
+          vocabList = loadedItems;
+          localStorage.setItem("ielts_vocab_custom_bank", JSON.stringify(vocabList));
+          populateWordDropdown();
+          renderWord(0);
+          updateDashboardStats();
+          closeHomeModal();
+          alert(`Successfully loaded ${loadedItems.length} vocabulary items from ${file.name}!`);
+        } else {
+          alert("Could not extract valid vocabulary rows from this file.");
+        }
+      };
+      reader.readAsText(file, "UTF-8");
+    }
+
+    /* =========================================================
+       13. MARKDOWN EXPORT (DATE-PREFIXED)
+       ========================================================= */
+    document.getElementById("exportNavBtn").onclick = exportMarkdownList;
+
+    function exportMarkdownList() {
+      // Date format: YYYY-MM-DD
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, "0");
+      const day = String(now.getDate()).padStart(2, "0");
+      const datePrefix = `${year}-${month}-${day}`;
+
+      let gotItItems = [];
+      let maybeItems = [];
+      let notSureItems = [];
+      let unreviewedItems = [];
+
+      vocabList.forEach(item => {
+        const key = item.word.trim();
+        const stat = userRatings[key];
+        const row = `- **${item.word}** *(${item.abbr || "n/a"})*: ${item.definition || ""} _[VN: ${item.translation || ""}]_`;
+
+        if (stat === "got-it") gotItItems.push(row);
+        else if (stat === "maybe") maybeItems.push(row);
+        else if (stat === "not-sure") notSureItems.push(row);
+        else unreviewedItems.push(row);
+      });
+
+      let mdContent = `# IELTS Vocabulary Tracker - ${datePrefix}\n\n`;
+      mdContent += `**Export Date:** ${now.toLocaleDateString()} ${now.toLocaleTimeString()}\n`;
+      mdContent += `**Total Vocabulary Bank:** ${vocabList.length}\n`;
+      mdContent += `- 🟢 **Mastered (Got It):** ${gotItItems.length}\n`;
+      mdContent += `- 🟡 **Review Needed (Maybe):** ${maybeItems.length}\n`;
+      mdContent += `- 🔴 **Needs Focus (Not Sure):** ${notSureItems.length}\n`;
+      mdContent += `- ⚪ **Unreviewed:** ${unreviewedItems.length}\n\n`;
+      mdContent += `---\n\n`;
+
+      mdContent += `## 🟢 Mastered ("GOT IT!") (${gotItItems.length})\n\n`;
+      mdContent += gotItItems.length ? gotItItems.join("\n") + "\n\n" : "_No items marked as Got It yet._\n\n";
+
+      mdContent += `## 🟡 Reviewing ("MAYBE") (${maybeItems.length})\n\n`;
+      mdContent += maybeItems.length ? maybeItems.join("\n") + "\n\n" : "_No items marked as Maybe._\n\n";
+
+      mdContent += `## 🔴 Needs Focus ("NOT SURE") (${notSureItems.length})\n\n`;
+      mdContent += notSureItems.length ? notSureItems.join("\n") + "\n\n" : "_No items marked as Not Sure._\n\n";
+
+      mdContent += `## ⚪ Unreviewed (${unreviewedItems.length})\n\n`;
+      mdContent += unreviewedItems.length ? unreviewedItems.join("\n") + "\n\n" : "_All items have been reviewed!_\n\n";
+
+      // Trigger download
+      const blob = new Blob([mdContent], { type: "text/markdown;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `${datePrefix}-ielts-vocabulary-list.md`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    /* =========================================================
+       14. KEYBOARD SHORTCUTS
+       ========================================================= */
+    window.addEventListener("keydown", (e) => {
+      if (document.getElementById("homeModal").classList.contains("open")) return;
+      if (e.key === "ArrowLeft") {
+        navigate(-1);
+      } else if (e.key === "ArrowRight") {
+        navigate(1);
+      }
+    });
+
+    // Start App
+    window.onload = initData;
+  </script>
+</body>
+</html>
