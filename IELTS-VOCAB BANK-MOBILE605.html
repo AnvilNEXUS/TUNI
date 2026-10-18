@@ -1,0 +1,1578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+  <title>IELTS Vocabulary Mastery</title>
+  <style>
+    :root {
+      --bg-color: #f8fafc;
+      --card-bg: #ffffff;
+      --card-border: #e2e8f0;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --success: #16a34a;
+      --warning: #d97706;
+      --danger: #dc2626;
+      --accent: #8b5cf6;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+      --font-scale: 1;
+      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    }
+
+    [data-theme="dark"] {
+      --bg-color: #0f172a;
+      --card-bg: #1e293b;
+      --card-border: #334155;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --primary: #3b82f6;
+      --primary-hover: #60a5fa;
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.3);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-family);
+      font-size: calc(16px * var(--font-scale));
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: background-color 0.25s ease, color 0.25s ease;
+      padding-bottom: 90px;
+    }
+
+    /* Container */
+    .app-container {
+      width: 100%;
+      max-width: 680px;
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    /* Header Nav */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      padding: 10px 14px;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .nav-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-icon {
+      background: transparent;
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 6px 10px;
+      border-radius: var(--radius-sm);
+      font-size: calc(14px * var(--font-scale));
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 38px;
+      min-width: 38px;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .btn-icon:hover {
+      background: rgba(148, 163, 184, 0.12);
+    }
+
+    .btn-icon.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    /* Selector & Progress Bar */
+    .dropdown-container {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .word-select {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--card-border);
+      background: var(--card-bg);
+      color: var(--text-main);
+      font-size: calc(15px * var(--font-scale));
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .progress-bar-container {
+      height: 6px;
+      background: var(--card-border);
+      border-radius: 99px;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    .header-subinfo {
+      display: flex;
+      justify-content: space-between;
+      font-size: calc(12px * var(--font-scale));
+      color: var(--text-muted);
+      padding: 0 4px;
+    }
+
+    /* Target Word Card */
+    .word-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 22px 18px;
+      text-align: center;
+      box-shadow: var(--shadow-md);
+      position: relative;
+    }
+
+    .word-pill {
+      display: inline-block;
+      font-size: calc(11px * var(--font-scale));
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      padding: 2px 8px;
+      border-radius: 99px;
+      background: rgba(37, 99, 235, 0.1);
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .word-title {
+      font-size: calc(30px * var(--font-scale));
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--text-main);
+      word-break: break-word;
+    }
+
+    .word-category-tag {
+      font-size: calc(13px * var(--font-scale));
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* Accordion Reveal Cards */
+    .reveal-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .reveal-header {
+      width: 100%;
+      padding: 14px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: transparent;
+      border: none;
+      color: var(--text-main);
+      font-size: calc(15px * var(--font-scale));
+      font-weight: 700;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .reveal-header span.badge {
+      font-size: calc(11px * var(--font-scale));
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: rgba(100, 116, 139, 0.12);
+      color: var(--text-muted);
+    }
+
+    .reveal-icon {
+      font-size: calc(14px * var(--font-scale));
+      transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .reveal-card.open .reveal-icon {
+      transform: rotate(180deg);
+    }
+
+    .reveal-body {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      padding: 0 16px;
+      transition: max-height 0.35s ease, opacity 0.25s ease, padding 0.25s ease;
+      background: rgba(241, 245, 249, 0.3);
+    }
+
+    [data-theme="dark"] .reveal-body {
+      background: rgba(15, 23, 42, 0.35);
+    }
+
+    .reveal-card.open .reveal-body {
+      max-height: 800px;
+      opacity: 1;
+      padding: 14px 16px 18px 16px;
+      border-top: 1px dashed var(--card-border);
+    }
+
+    /* Example sentences */
+    .examples-list {
+      list-style-type: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .example-item {
+      padding: 10px 12px;
+      background: var(--card-bg);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-size: calc(14.5px * var(--font-scale));
+      line-height: 1.5;
+    }
+
+    .example-item b {
+      color: var(--primary);
+    }
+
+    /* Definition & Meta Badges */
+    .definition-text {
+      font-size: calc(16px * var(--font-scale));
+      font-weight: 500;
+      color: var(--text-main);
+      margin-bottom: 12px;
+    }
+
+    .def-divider {
+      border: 0;
+      height: 1px;
+      background: var(--card-border);
+      margin: 12px 0;
+    }
+
+    .gram-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .gram-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: calc(12px * var(--font-scale));
+      font-weight: 600;
+      padding: 4px 9px;
+      border-radius: 6px;
+      background: rgba(37, 99, 235, 0.1);
+      color: var(--primary);
+      border: 1px solid rgba(37, 99, 235, 0.2);
+    }
+
+    .gram-chip.pos {
+      background: rgba(139, 92, 246, 0.1);
+      color: var(--accent);
+      border-color: rgba(139, 92, 246, 0.2);
+    }
+
+    .gram-chip.count {
+      background: rgba(16, 185, 129, 0.1);
+      color: #059669;
+      border-color: rgba(16, 185, 129, 0.2);
+    }
+
+    /* Translation */
+    .translation-box {
+      font-size: calc(18px * var(--font-scale));
+      font-weight: 600;
+      color: #0d9488;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      background: rgba(13, 148, 136, 0.08);
+    }
+
+    /* Verify Quiz */
+    .verify-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .verify-option-btn {
+      width: 100%;
+      text-align: left;
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      border: 1.5px solid var(--card-border);
+      background: var(--card-bg);
+      color: var(--text-main);
+      font-size: calc(14px * var(--font-scale));
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .verify-option-btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      background: rgba(37, 99, 235, 0.05);
+    }
+
+    .verify-option-btn.correct {
+      border-color: var(--success);
+      background: rgba(22, 163, 74, 0.12);
+      color: var(--success);
+      font-weight: 600;
+    }
+
+    .verify-option-btn.wrong {
+      border-color: var(--danger);
+      background: rgba(220, 38, 38, 0.1);
+      color: var(--danger);
+    }
+
+    .verify-feedback {
+      margin-top: 10px;
+      font-size: calc(13px * var(--font-scale));
+      font-weight: 600;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      display: none;
+    }
+
+    .verify-feedback.show-correct {
+      display: block;
+      background: rgba(22, 163, 74, 0.1);
+      color: var(--success);
+      border: 1px solid rgba(22, 163, 74, 0.25);
+    }
+
+    .verify-feedback.show-wrong {
+      display: block;
+      background: rgba(220, 38, 38, 0.1);
+      color: var(--danger);
+      border: 1px solid rgba(220, 38, 38, 0.25);
+    }
+
+    /* Mastery Buttons Card */
+    .mastery-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .mastery-label {
+      font-size: calc(12px * var(--font-scale));
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+      text-align: center;
+    }
+
+    .status-buttons-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+    }
+
+    .status-btn {
+      padding: 12px 6px;
+      border-radius: var(--radius-sm);
+      border: 2px solid transparent;
+      font-weight: 700;
+      font-size: calc(13px * var(--font-scale));
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      background: var(--bg-color);
+      color: var(--text-main);
+      transition: all 0.2s ease;
+      touch-action: manipulation;
+    }
+
+    .status-btn[data-status="got-it"] {
+      border-color: rgba(22, 163, 74, 0.4);
+    }
+    .status-btn[data-status="maybe"] {
+      border-color: rgba(217, 119, 6, 0.4);
+    }
+    .status-btn[data-status="not-sure"] {
+      border-color: rgba(220, 38, 38, 0.4);
+    }
+
+    .status-btn[data-status="got-it"].selected {
+      background: var(--success);
+      color: #fff;
+      border-color: var(--success);
+      box-shadow: 0 3px 8px rgba(22, 163, 74, 0.35);
+    }
+
+    .status-btn[data-status="maybe"].selected {
+      background: var(--warning);
+      color: #fff;
+      border-color: var(--warning);
+      box-shadow: 0 3px 8px rgba(217, 119, 6, 0.35);
+    }
+
+    .status-btn[data-status="not-sure"].selected {
+      background: var(--danger);
+      color: #fff;
+      border-color: var(--danger);
+      box-shadow: 0 3px 8px rgba(220, 38, 38, 0.35);
+    }
+
+    /* Fixed Bottom Nav Bar (Mobile Ergonomics) */
+    .bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--card-bg);
+      border-top: 1px solid var(--card-border);
+      padding: 10px 16px;
+      display: flex;
+      justify-content: center;
+      box-shadow: 0 -4px 12px rgba(0,0,0,0.06);
+      z-index: 100;
+    }
+
+    .bottom-bar-inner {
+      width: 100%;
+      max-width: 680px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .nav-action-btn {
+      flex: 1;
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      border: none;
+      font-size: calc(15px * var(--font-scale));
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: background 0.15s, transform 0.1s;
+    }
+
+    .nav-action-btn:active {
+      transform: scale(0.98);
+    }
+
+    .nav-action-btn.secondary {
+      background: rgba(100, 116, 139, 0.15);
+      color: var(--text-main);
+    }
+
+    .nav-action-btn.primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    /* Home / Dashboard Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+      padding: 16px;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal-box {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 520px;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-header h2 {
+      font-size: calc(20px * var(--font-scale));
+    }
+
+    .stats-summary {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      text-align: center;
+    }
+
+    .stat-badge {
+      background: var(--bg-color);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-sm);
+      padding: 8px 4px;
+    }
+
+    .stat-badge .num {
+      font-size: calc(18px * var(--font-scale));
+      font-weight: 800;
+    }
+
+    .stat-badge .txt {
+      font-size: calc(10px * var(--font-scale));
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .file-input-box {
+      border: 2px dashed var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      text-align: center;
+      background: rgba(148, 163, 184, 0.05);
+      cursor: pointer;
+    }
+
+    .file-input-box:hover {
+      border-color: var(--primary);
+    }
+
+    .hidden-file-input {
+      display: none;
+    }
+
+    .export-btn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .export-btn:hover {
+      opacity: 0.95;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- Header Controls -->
+    <header>
+      <div class="nav-group">
+        <button class="btn-icon" id="homeBtn" title="Dashboard & Stats">🏠 Home</button>
+        <button class="btn-icon" id="importTriggerBtn" title="Load custom CSV">📂 CSV</button>
+      </div>
+
+      <div class="nav-group">
+        <button class="btn-icon" id="fontDecBtn" title="Decrease font size">A-</button>
+        <button class="btn-icon" id="fontIncBtn" title="Increase font size">A+</button>
+        <button class="btn-icon" id="themeToggleBtn" title="Toggle Light/Dark Mode">🌓</button>
+        <button class="btn-icon" id="exportNavBtn" title="Export Markdown List">📥</button>
+      </div>
+    </header>
+
+    <!-- Word Selector & Progress -->
+    <div class="dropdown-container">
+      <div class="header-subinfo">
+        <span id="currentCounter">Word 1 of 1</span>
+        <span id="currentStatusBadge">⚪ Unreviewed</span>
+      </div>
+      <select id="wordDropdown" class="word-select" aria-label="Select vocabulary item"></select>
+      <div class="progress-bar-container">
+        <div id="progressBar" class="progress-bar"></div>
+      </div>
+    </div>
+
+    <!-- Active Word Main Card -->
+    <section class="word-card">
+      <div id="wordTabBadge" class="word-pill">WORD BANK</div>
+      <h1 id="vocabWord" class="word-title">access</h1>
+      <div id="wordGrammarOverview" class="word-category-tag">n. [U]</div>
+    </section>
+
+    <!-- Accordion Card 1: EXAMPLES -->
+    <div class="reveal-card" id="cardExamples">
+      <button class="reveal-header" onclick="toggleCard('cardExamples')">
+        <span>📖 EXAMPLES</span>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span class="badge">3 IELTS Sentences</span>
+          <span class="reveal-icon">▼</span>
+        </div>
+      </button>
+      <div class="reveal-body">
+        <ul class="examples-list" id="examplesList">
+          <!-- Populated by JS -->
+        </ul>
+      </div>
+    </div>
+
+    <!-- Accordion Card 2: DEFINITION -->
+    <div class="reveal-card" id="cardDefinition">
+      <button class="reveal-header" onclick="toggleCard('cardDefinition')">
+        <span>📘 DEFINITION</span>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span class="badge">Meaning & Grammar</span>
+          <span class="reveal-icon">▼</span>
+        </div>
+      </button>
+      <div class="reveal-body">
+        <div class="definition-text" id="defText">
+          when you have the right or opportunity to use or see something
+        </div>
+        <hr class="def-divider" />
+        <div class="gram-tags" id="gramChips">
+          <!-- Standardized pills populated by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Accordion Card 3: TRANSLATION -->
+    <div class="reveal-card" id="cardTranslation">
+      <button class="reveal-header" onclick="toggleCard('cardTranslation')">
+        <span>🇻🇳 TRANSLATION</span>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span class="badge">Vietnamese</span>
+          <span class="reveal-icon">▼</span>
+        </div>
+      </button>
+      <div class="reveal-body">
+        <div class="translation-box" id="vnTranslation">
+          quyền tiếp cận, cơ hội tiếp cận
+        </div>
+      </div>
+    </div>
+
+    <!-- Accordion Card 4: VERIFY -->
+    <div class="reveal-card" id="cardVerify">
+      <button class="reveal-header" onclick="toggleCard('cardVerify')">
+        <span>🎯 VERIFY</span>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span class="badge">Quiz Check</span>
+          <span class="reveal-icon">▼</span>
+        </div>
+      </button>
+      <div class="reveal-body">
+        <p style="font-size:calc(13.5px * var(--font-scale)); color:var(--text-muted); margin-bottom:8px;">
+          Choose the correct meaning or usage of the word:
+        </p>
+        <div class="verify-options" id="verifyOptions">
+          <!-- 3 options rendered here -->
+        </div>
+        <div class="verify-feedback" id="verifyFeedback"></div>
+      </div>
+    </div>
+
+    <!-- Mastery Status Card -->
+    <section class="mastery-card">
+      <div class="mastery-label">My Knowledge Status</div>
+      <div class="status-buttons-grid">
+        <button class="status-btn" data-status="got-it" id="btnGotIt" onclick="setStatus('got-it')">
+          <span style="font-size:1.2em;">🟢</span>
+          <span>GOT IT!</span>
+        </button>
+        <button class="status-btn" data-status="maybe" id="btnMaybe" onclick="setStatus('maybe')">
+          <span style="font-size:1.2em;">🟡</span>
+          <span>MAYBE</span>
+        </button>
+        <button class="status-btn" data-status="not-sure" id="btnNotSure" onclick="setStatus('not-sure')">
+          <span style="font-size:1.2em;">🔴</span>
+          <span>NOT SURE</span>
+        </button>
+      </div>
+    </section>
+  </div>
+
+  <!-- Bottom Prev/Next Controls -->
+  <nav class="bottom-bar">
+    <div class="bottom-bar-inner">
+      <button class="nav-action-btn secondary" id="prevBtn" onclick="navigate(-1)">
+        ◀ PREV
+      </button>
+      <button class="nav-action-btn primary" id="nextBtn" onclick="navigate(1)">
+        NEXT ▶
+      </button>
+    </div>
+  </nav>
+
+  <!-- Dashboard / File Import Modal -->
+  <div class="modal-overlay" id="homeModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h2>Study Dashboard</h2>
+        <button class="btn-icon" onclick="closeHomeModal()">✕</button>
+      </div>
+
+      <div class="stats-summary">
+        <div class="stat-badge">
+          <div class="num" id="statTotal">0</div>
+          <div class="txt">Total</div>
+        </div>
+        <div class="stat-badge" style="color:var(--success);">
+          <div class="num" id="statGotIt">0</div>
+          <div class="txt">Got It</div>
+        </div>
+        <div class="stat-badge" style="color:var(--warning);">
+          <div class="num" id="statMaybe">0</div>
+          <div class="txt">Maybe</div>
+        </div>
+        <div class="stat-badge" style="color:var(--danger);">
+          <div class="num" id="statNotSure">0</div>
+          <div class="txt">Not Sure</div>
+        </div>
+      </div>
+
+      <button class="export-btn" onclick="exportMarkdownList()">
+        📄 Export "MY LIST" to Markdown (.md)
+      </button>
+
+      <div>
+        <h4 style="font-size:14px; margin-bottom:6px;">Upload Custom / Full CSV</h4>
+        <p style="font-size:12px; color:var(--text-muted); margin-bottom:8px;">
+          Choose or drag &amp; drop your <code>IELTS LIST.csv</code> file here to instantly study all 600+ items.
+        </p>
+        <div class="file-input-box" id="dropArea" onclick="document.getElementById('csvFileInput').click()">
+          <span style="font-size:24px;">📁</span>
+          <div style="font-weight:600; font-size:14px; margin-top:4px;">Tap to Choose IELTS LIST.csv</div>
+          <div style="font-size:11px; color:var(--text-muted);">or drag and drop here</div>
+          <input type="file" id="csvFileInput" class="hidden-file-input" accept=".csv" />
+        </div>
+      </div>
+
+      <button class="nav-action-btn secondary" style="width:100%;" onclick="closeHomeModal()">
+        Return to Study
+      </button>
+    </div>
+  </div>
+
+  <script>
+    /* =========================================================
+       1. CORE INITIAL VOCABULARY BANK (EXPANDABLE VIA CSV)
+       ========================================================= */
+    const DEFAULT_VOCAB_BANK = [{"tab": "WORD BANK", "word": "access", "abbr": "n [U]", "definition": "when you have the right or opportunity to use or see something", "translation": "quyền tiếp cận, cơ hội tiếp cận", "examples": []}, {"tab": "WORD BANK", "word": "conclude", "abbr": "v [I]", "definition": "to decide something after studying all the information about it very carefully", "translation": "kết luận, đúc kết", "examples": []}, {"tab": "WORD BANK", "word": "conduct research", "abbr": "vp", "definition": "to study a subject to find information about it", "translation": "tiến hành nghiên cứu", "examples": []}, {"tab": "WORD BANK", "word": "consume", "abbr": "v [T]", "definition": "to use something such as a product, energy or fuel", "translation": "tiêu thụ, tiêu dùng (năng lượng, sản phẩm)", "examples": []}, {"tab": "WORD BANK", "word": "crime rate", "abbr": "n [C]", "definition": "the amount of crime that happens in a place or during a period of time", "translation": "tỷ lệ tội phạm", "examples": []}, {"tab": "WORD BANK", "word": "culture", "abbr": "n [C, U]", "definition": "the habits, traditions and beliefs of a country, society or group of people", "translation": "văn hóa, phong tục tập quán", "examples": []}, {"tab": "WORD BANK", "word": "diverse", "abbr": "adj", "definition": "including many different types", "translation": "đa dạng, phong phú", "examples": []}, {"tab": "WORD BANK", "word": "environment", "abbr": "n [C]", "definition": "the situation that you live or work in, and how it influences how you feel", "translation": "môi trường (sống, làm việc)", "examples": []}, {"tab": "WORD BANK", "word": "feature", "abbr": "n [C]", "definition": "a quality or important part of something", "translation": "nét đặc trưng, đặc điểm nổi bật", "examples": []}, {"tab": "WORD BANK", "word": "grow up", "abbr": "vp", "definition": "to become older or an adult", "translation": "trưởng thành, lớn lên", "examples": []}, {"tab": "WORD BANK", "word": "have access to something", "abbr": "vp", "definition": "to have the right or opportunity to have, use or see something", "translation": "có quyền tiếp cận/sử dụng cái gì", "examples": []}, {"tab": "WORD BANK", "word": "ignore", "abbr": "v [T]", "definition": "to pay no attention to something or someone", "translation": "phớt lờ, bỏ qua", "examples": []}, {"tab": "WORD BANK", "word": "impact", "abbr": "n", "definition": "the effect that a person, event or situation has on someone or something", "translation": "tác động, ảnh hưởng sâu sắc", "examples": []}, {"tab": "WORD BANK", "word": "income", "abbr": "n [C, U]", "definition": "money that you earn by working, investing or producing goods", "translation": "thu nhập", "examples": []}, {"tab": "WORD BANK", "word": "industrial", "abbr": "adj", "definition": "with a lot of factories", "translation": "thuộc về công nghiệp, tập trung nhiều nhà máy", "examples": []}, {"tab": "WORD BANK", "word": "influence", "abbr": "v [T]", "definition": "to affect or change how someone or something develops, behaves or thinks", "translation": "ảnh hưởng, chi phối", "examples": []}, {"tab": "WORD BANK", "word": "landscape", "abbr": "n [C]", "definition": "the appearance of an area of land, especially in the countryside", "translation": "cảnh quan, phong cảnh địa hình", "examples": []}, {"tab": "WORD BANK", "word": "lifestyle", "abbr": "n [C]", "definition": "the way that you live", "translation": "lối sống, phong cách sống", "examples": []}, {"tab": "WORD BANK", "word": "local", "abbr": "n [C]", "definition": "someone who lives in the area you are talking about", "translation": "người dân bản địa/địa phương", "examples": []}, {"tab": "WORD BANK", "word": "measurement", "abbr": "n [C, U]", "definition": "a way of measuring something", "translation": "phép đo, phương pháp đo lường", "examples": []}, {"tab": "WORD BANK", "word": "nutrition", "abbr": "n [U]", "definition": "the food that you eat and the way that it affects your health", "translation": "dinh dưỡng, chế độ dinh dưỡng", "examples": []}, {"tab": "WORD BANK", "word": "outcome", "abbr": "n [C]", "definition": "the final result of an activity or process", "translation": "kết quả đầu ra, hậu quả chung cuộc", "examples": []}, {"tab": "WORD BANK", "word": "rank", "abbr": "v [T]", "definition": "to give someone or something a position in a list which shows them in order of importance or quality", "translation": "xếp hạng, phân hạng", "examples": []}, {"tab": "WORD BANK", "word": "reaction", "abbr": "n [C, U]", "definition": "something you say, feel or do because of something that has happened", "translation": "phản ứng, sự hồi đáp", "examples": []}, {"tab": "WORD BANK", "word": "reputation", "abbr": "n [C]", "definition": "the opinion that people have about someone or something based on their behaviour or character in the past", "translation": "danh tiếng, uy tín", "examples": []}, {"tab": "WORD BANK", "word": "resources", "abbr": "n plural", "definition": "things that a country, person or organisation has which they can use", "translation": "tài nguyên, nguồn lực", "examples": []}, {"tab": "WORD BANK", "word": "short of", "abbr": "adjp", "definition": "If you are short of something, you do not have enough of it.", "translation": "thiếu thốn, không có đủ", "examples": []}, {"tab": "WORD BANK", "word": "status", "abbr": "n [U]", "definition": "the position that you have in relation to other people because of your job or social position", "translation": "địa vị xã hội, thân thế", "examples": []}, {"tab": "WORD BANK", "word": "surround", "abbr": "v [T]", "definition": "to be or go everywhere around something or someone", "translation": "vây quanh, bao bọc", "examples": []}, {"tab": "WORD BANK", "word": "tend to be", "abbr": "vp", "definition": "to often be in a particular state", "translation": "thường có xu hướng ở trạng thái", "examples": []}, {"tab": "WORD BANK", "word": "way of life", "abbr": "np", "definition": "the manner in which a person lives", "translation": "lối sống, nếp sống", "examples": []}, {"tab": "WORD BANK", "word": "account", "abbr": "n [C]", "definition": "a written or spoken description of something that has happened", "translation": "bản tường thuật, lời kể lại", "examples": []}, {"tab": "WORD BANK", "word": "ancient", "abbr": "adj", "definition": "from a long time ago", "translation": "cổ xưa, thời thượng cổ", "examples": []}, {"tab": "WORD BANK", "word": "award", "abbr": "v [T]", "definition": "to officially give someone something such as a prize or an amount of money", "translation": "trao giải, trao tặng chính thức", "examples": []}, {"tab": "WORD BANK", "word": "benefit", "abbr": "n [C, U]", "definition": "something that helps you or gives you an advantage", "translation": "lợi ích, điểm thuận lợi", "examples": []}, {"tab": "WORD BANK", "word": "combine", "abbr": "v [T]", "definition": "to mix or join things together", "translation": "kết hợp, phối hợp", "examples": []}, {"tab": "WORD BANK", "word": "commentary", "abbr": "n [C, U]", "definition": "a description or discussion of an event", "translation": "bài bình luận, lời bình", "examples": []}, {"tab": "WORD BANK", "word": "community", "abbr": "n [C]", "definition": "the people living in a particular area", "translation": "cộng đồng dân cư", "examples": []}, {"tab": "WORD BANK", "word": "compass", "abbr": "n [C]", "definition": "a piece of equipment which shows you which direction you are going in", "translation": "la bàn", "examples": []}, {"tab": "WORD BANK", "word": "context", "abbr": "n [C, U]", "definition": "all the facts, opinions, situations, etc. relating to a particular thing or event", "translation": "bối cảnh, ngữ cảnh", "examples": []}, {"tab": "WORD BANK", "word": "definition", "abbr": "n [C]", "definition": "an explanation of the meaning of a word or phrase", "translation": "định nghĩa, lời giải nghĩa", "examples": []}, {"tab": "WORD BANK", "word": "degree", "abbr": "n [C]", "definition": "a qualification given for completing a university course", "translation": "bằng đại học", "examples": []}, {"tab": "WORD BANK", "word": "establish", "abbr": "v [T]", "definition": "to make something start to exist or happen", "translation": "thành lập, thiết lập vững chắc", "examples": []}, {"tab": "WORD BANK", "word": "eventually", "abbr": "adv", "definition": "in the end, especially after a long time", "translation": "rốt cuộc, cuối cùng thì", "examples": []}, {"tab": "WORD BANK", "word": "expedition", "abbr": "n [C]", "definition": "an organised journey, especially a long one for a particular purpose", "translation": "cuộc thám hiểm, đoàn thám hiểm", "examples": []}, {"tab": "WORD BANK", "word": "experiment", "abbr": "n [C]", "definition": "a test, especially a scientific one, that you do in order to learn something or discover if something is true", "translation": "thí nghiệm, cuộc thử nghiệm", "examples": []}, {"tab": "WORD BANK", "word": "extensive", "abbr": "adj", "definition": "large in amount or size", "translation": "sâu rộng, quy mô lớn, bao quát", "examples": []}, {"tab": "WORD BANK", "word": "formal education", "abbr": "np [U]", "definition": "Formal education happens in a school, college or university.", "translation": "nền giáo dục chính quy/trường quy", "examples": []}, {"tab": "WORD BANK", "word": "generation", "abbr": "n [C]", "definition": "all the people in a society or family who are approximately the same age", "translation": "thế hệ", "examples": []}, {"tab": "WORD BANK", "word": "individual", "abbr": "adj", "definition": "considered separately from other things in a group", "translation": "mang tính cá thể, riêng lẻ", "examples": []}, {"tab": "WORD BANK", "word": "interrupt", "abbr": "v [T]", "definition": "to stop an action or activity, usually for a short period of time", "translation": "làm gián đoạn, ngắt lời", "examples": []}, {"tab": "WORD BANK", "word": "memorise", "abbr": "v", "definition": "to learn something so that you remember it exactly", "translation": "ghi nhớ, học thuộc lòng", "examples": []}, {"tab": "WORD BANK", "word": "preserve", "abbr": "v [T]", "definition": "to keep something the same or prevent it from being damaged or destroyed", "translation": "bảo tồn, gìn giữ", "examples": []}, {"tab": "WORD BANK", "word": "prove", "abbr": "v [T]", "definition": "to show that something is true", "translation": "chứng minh, làm sáng tỏ", "examples": []}, {"tab": "WORD BANK", "word": "regard as", "abbr": "pv", "definition": "to think of something in a particular way", "translation": "được xem như là, coi là", "examples": []}, {"tab": "WORD BANK", "word": "save money", "abbr": "vp", "definition": "to keep money so that you can buy something with it in the future", "translation": "tiết kiệm tiền", "examples": []}, {"tab": "WORD BANK", "word": "skill", "abbr": "n [C, U]", "definition": "the ability to do an activity or job well, especially because you have practised it", "translation": "kỹ năng, kỹ xảo thuần thục", "examples": []}, {"tab": "WORD BANK", "word": "support", "abbr": "v [T]", "definition": "to help and be kind to someone when they have problems", "translation": "hỗ trợ, giúp đỡ, động viên", "examples": []}, {"tab": "WORD BANK", "word": "technique", "abbr": "n [C]", "definition": "a particular or special way of doing something", "translation": "kỹ thuật, phương pháp chuyên môn", "examples": []}, {"tab": "WORD BANK", "word": "traditional", "abbr": "adj", "definition": "following the customs or ways of behaving that have continued in a group of people or society for a long time", "translation": "truyền thống, theo tập tục cổ truyền", "examples": []}, {"tab": "WORD BANK", "word": "voyage", "abbr": "n [C]", "definition": "a long journey, especially by ship", "translation": "chuyến hải trình dài ngày", "examples": []}, {"tab": "WORD BANK", "word": "wave", "abbr": "n [C]", "definition": "a line of higher water that moves across the surface of a sea or lake", "translation": "ngọn sóng, lượn sóng", "examples": []}, {"tab": "WORD BANK", "word": "aim to do something", "abbr": "vp", "definition": "to try to achieve something", "translation": "nhằm mục đích, đặt mục tiêu làm gì", "examples": []}, {"tab": "WORD BANK", "word": "alternative", "abbr": "adj", "definition": "An alternative plan, method, etc. is one that you can use if you do not want to use another one.", "translation": "thay thế, có thể chọn lựa thay cho cái khác", "examples": []}, {"tab": "WORD BANK", "word": "at a reduced price", "abbr": "phrase", "definition": "for less money than something usually costs", "translation": "với mức giá ưu đãi/được giảm giá", "examples": []}, {"tab": "WORD BANK", "word": "avoid", "abbr": "v [T]", "definition": "to not do something", "translation": "tránh, né tránh", "examples": []}, {"tab": "WORD BANK", "word": "cancel", "abbr": "v [T]", "definition": "to say that an organised event will not now happen", "translation": "hủy bỏ (lịch trình, sự kiện)", "examples": []}, {"tab": "WORD BANK", "word": "competition", "abbr": "n [C]", "definition": "an organised event in which people try to win a prize by being the best, fastest, etc.", "translation": "cuộc thi, sự cạnh tranh", "examples": []}, {"tab": "WORD BANK", "word": "convenience", "abbr": "n [U]", "definition": "when something is easy to use and suitable for what you want to do", "translation": "sự tiện lợi, thuận tiện", "examples": []}, {"tab": "WORD BANK", "word": "convert", "abbr": "v [T]", "definition": "to change the appearance, form or purpose of something into something else", "translation": "chuyển đổi (hình thức, công năng)", "examples": []}, {"tab": "WORD BANK", "word": "data", "abbr": "n plural", "definition": "information or facts about something", "translation": "dữ liệu, số liệu thống kê", "examples": []}, {"tab": "WORD BANK", "word": "destination", "abbr": "n [C]", "definition": "the place where someone or something is going", "translation": "điểm đến, đích đến", "examples": []}, {"tab": "WORD BANK", "word": "environmentalist", "abbr": "n [C]", "definition": "someone who tries to protect the natural environment from being damaged", "translation": "nhà hoạt động bảo vệ môi trường", "examples": []}, {"tab": "WORD BANK", "word": "facilities", "abbr": "n plural", "definition": "buildings, equipment or services that are provided for a particular purpose", "translation": "cơ sở vật chất, tiện nghi phục vụ", "examples": []}, {"tab": "WORD BANK", "word": "fashion show", "abbr": "np [C]", "definition": "a show for the public where models wear new styles of clothes", "translation": "buổi trình diễn thời trang", "examples": []}, {"tab": "WORD BANK", "word": "forward-thinking", "abbr": "adj", "definition": "thinking about and planning for the future", "translation": "có tư duy tiến bộ, nhìn xa trông rộng", "examples": []}, {"tab": "WORD BANK", "word": "funding", "abbr": "n [U]", "definition": "money given by a government or organisation for an event or activity", "translation": "nguồn vốn tài trợ, ngân sách cấp", "examples": []}, {"tab": "WORD BANK", "word": "increase capacity", "abbr": "vp", "definition": "to increase the amount or number of something that something can hold or deal with", "translation": "nâng cao công suất, tăng sức chứa", "examples": []}, {"tab": "WORD BANK", "word": "innovative", "abbr": "adj", "definition": "using new methods or ideas", "translation": "có tính đổi mới, sáng tạo đột phá", "examples": []}, {"tab": "WORD BANK", "word": "installation", "abbr": "n [U]", "definition": "when equipment or furniture is put into position", "translation": "sự lắp đặt, quá trình cài đặt", "examples": []}, {"tab": "WORD BANK", "word": "on average", "abbr": "np", "definition": "usually, or based on an average", "translation": "trung bình, tính bình quân", "examples": []}, {"tab": "WORD BANK", "word": "passenger", "abbr": "n [C]", "definition": "someone who is travelling in a vehicle but is not controlling it", "translation": "hành khách", "examples": []}, {"tab": "WORD BANK", "word": "pedestrian", "abbr": "n [C]", "definition": "a person who is walking and not travelling in a vehicle", "translation": "người đi bộ", "examples": []}, {"tab": "WORD BANK", "word": "privacy", "abbr": "n [U]", "definition": "when you are alone and people cannot see or hear what you are doing", "translation": "sự riêng tư", "examples": []}, {"tab": "WORD BANK", "word": "range", "abbr": "n [C]", "definition": "a group of different things of the same general type", "translation": "loạt, chuỗi, phạm vi đa dạng", "examples": []}, {"tab": "WORD BANK", "word": "revolutionary", "abbr": "adj", "definition": "completely different from what was done before", "translation": "mang tính cách mạng, mang tính đột phá toàn diện", "examples": []}, {"tab": "WORD BANK", "word": "smog", "abbr": "n [U]", "definition": "air pollution in a city that is a mixture of smoke, gases and chemicals", "translation": "khói bụi ô nhiễm đô thị", "examples": []}, {"tab": "WORD BANK", "word": "souvenir", "abbr": "n [C]", "definition": "something which you buy or keep to remember a special event or holiday", "translation": "quà lưu niệm", "examples": []}, {"tab": "WORD BANK", "word": "structure", "abbr": "n [C, U]", "definition": "the way that parts of something are arranged or put together", "translation": "cơ cấu, cấu trúc tổ chức", "examples": []}, {"tab": "WORD BANK", "word": "system", "abbr": "n [C]", "definition": "a way or method of doing things", "translation": "hệ thống, phương thức vận hành", "examples": []}, {"tab": "WORD BANK", "word": "unique feature", "abbr": "np [C]", "definition": "something that only happens once or does not exist anywhere else", "translation": "đặc điểm độc nhất vô nhị", "examples": []}, {"tab": "WORD BANK", "word": "unwilling", "abbr": "adj", "definition": "not wanting to do something", "translation": "miễn cưỡng, không sẵn lòng", "examples": []}, {"tab": "WORD BANK", "word": "upgrade", "abbr": "v [T]", "definition": "to improve something so that it is of a higher quality or a newer model", "translation": "nâng cấp (chất lượng, phiên bản)", "examples": []}, {"tab": "WORD BANK", "word": "vehicle", "abbr": "n [C]", "definition": "something such as a car, train or aircraft that takes people or goods from one place to another", "translation": "phương tiện giao thông", "examples": []}, {"tab": "WORD BANK", "word": "atmosphere", "abbr": "n [U]", "definition": "the feeling which exists in a place or situation", "translation": "bầu không khí (tâm lý, cảm giác tại nơi chốn)", "examples": []}, {"tab": "WORD BANK", "word": "attractive", "abbr": "adj", "definition": "beautiful or pleasant to look at", "translation": "hấp dẫn, lôi cuốn, ưa nhìn", "examples": []}, {"tab": "WORD BANK", "word": "cite", "abbr": "v [T]", "definition": "to mention something as an example or proof of something else", "translation": "trích dẫn, dẫn chứng minh họa", "examples": []}, {"tab": "WORD BANK", "word": "consist of", "abbr": "vp", "definition": "to be formed or made from two or more things", "translation": "bao gồm, cấu thành từ", "examples": []}, {"tab": "WORD BANK", "word": "cool", "abbr": "v [T]", "definition": "to make something become less hot", "translation": "làm mát, làm hạ nhiệt độ", "examples": []}, {"tab": "WORD BANK", "word": "demonstrate", "abbr": "v [I, T]", "definition": "to show someone how to do something or how something works", "translation": "hướng dẫn, thị phạm, minh họa cách hoạt động", "examples": []}, {"tab": "WORD BANK", "word": "design", "abbr": "n [U]", "definition": "the way in which something is planned and made to have a particular appearance", "translation": "bản thiết kế, kiểu dáng tạo hình", "examples": []}, {"tab": "WORD BANK", "word": "device", "abbr": "n [C]", "definition": "a piece of equipment that is used for a particular purpose", "translation": "thiết bị, công cụ chuyên dụng", "examples": []}, {"tab": "WORD BANK", "word": "diagonally", "abbr": "adv", "definition": "going from the top corner of a square to the bottom corner on the other side", "translation": "theo đường chéo", "examples": []}, {"tab": "WORD BANK", "word": "drop", "abbr": "n [C]", "definition": "a small, round-shaped amount of liquid", "translation": "giọt (chất lỏng)", "examples": []}, {"tab": "WORD BANK", "word": "end up with", "abbr": "vp", "definition": "to finally have something", "translation": "kết cục là nhận được/có được cái gì", "examples": []}, {"tab": "WORD BANK", "word": "ensure", "abbr": "v [I, T]", "definition": "to make certain that something is done or happens", "translation": "đảm bảo, chắc chắn rằng", "examples": []}, {"tab": "WORD BANK", "word": "entrance", "abbr": "n [C]", "definition": "a door or other opening which you use to enter a building or place", "translation": "lối vào, cổng vào", "examples": []}, {"tab": "WORD BANK", "word": "equipment", "abbr": "n [U]", "definition": "the things that are used for a particular activity or purpose", "translation": "trang thiết bị", "examples": []}, {"tab": "WORD BANK", "word": "extent", "abbr": "n [U]", "definition": "the amount or importance of something", "translation": "mức độ, phạm vi ảnh hưởng", "examples": []}, {"tab": "WORD BANK", "word": "factor", "abbr": "n [C]", "definition": "one of the things that has an effect on a particular situation, decision, event, etc.", "translation": "yếu tố, nhân tố tác động", "examples": []}, {"tab": "WORD BANK", "word": "go on to do something", "abbr": "vp", "definition": "to do something else in the future", "translation": "tiếp tục tiến tới làm gì sau đó", "examples": []}, {"tab": "WORD BANK", "word": "humidity", "abbr": "n [U]", "definition": "a measurement of how much water there is in the air", "translation": "độ ẩm không khí", "examples": []}, {"tab": "WORD BANK", "word": "interior", "abbr": "n [C]", "definition": "the inside part of something", "translation": "phần nội thất, bên trong", "examples": []}, {"tab": "WORD BANK", "word": "interior design", "abbr": "np [U]", "definition": "the job of choosing colours, designs, etc for the inside of a house or room", "translation": "nghề thiết kế nội thất", "examples": []}, {"tab": "WORD BANK", "word": "investigate", "abbr": "v [I, T]", "definition": "to try to discover all the facts about something, especially a crime or an accident", "translation": "điều tra, nghiên cứu kỹ lưỡng", "examples": []}, {"tab": "WORD BANK", "word": "moisture", "abbr": "n [U]", "definition": "very small drops of water in the air or on a surface", "translation": "hơi ẩm, độ ẩm đọng lại", "examples": []}, {"tab": "WORD BANK", "word": "money-conscious", "abbr": "adj", "definition": "not wanting to spend too much money", "translation": "có ý thức tiết kiệm tiền, căn ke chi tiêu", "examples": []}, {"tab": "WORD BANK", "word": "permit", "abbr": "v [T]", "definition": "to allow something", "translation": "cho phép", "examples": []}, {"tab": "WORD BANK", "word": "persuade", "abbr": "v [T]", "definition": "to make someone agree to do something by talking to them a lot about it", "translation": "thuyết phục ai làm gì", "examples": []}, {"tab": "WORD BANK", "word": "printing", "abbr": "n [U]", "definition": "when writing or images are produced on paper or other material using a machine", "translation": "ngành in ấn, việc in ấn", "examples": []}, {"tab": "WORD BANK", "word": "reasonable amount", "abbr": "np [C]", "definition": "an amount that is not too much and not too little", "translation": "số lượng vừa phải, lượng hợp lý", "examples": []}, {"tab": "WORD BANK", "word": "smoothly", "abbr": "adv", "definition": "happening without any sudden movements or changes", "translation": "một cách êm ả, suôn sẻ, trôi chảy", "examples": []}, {"tab": "WORD BANK", "word": "special occasion", "abbr": "n [C]", "definition": "an event that is important and enjoyable, such as a birthday or a wedding", "translation": "dịp đặc biệt, ngày lễ kỷ niệm", "examples": []}, {"tab": "WORD BANK", "word": "take up space", "abbr": "vp", "definition": "to use an amount of space", "translation": "chiếm dụng không gian/diện tích", "examples": []}, {"tab": "WORD BANK", "word": "three-dimensional", "abbr": "adj", "definition": "having length, depth and height", "translation": "ba chiều (3D)", "examples": []}, {"tab": "WORD BANK", "word": "transfer", "abbr": "v [T]", "definition": "to move someone or something from one place to another", "translation": "chuyển giao, điều chuyển", "examples": []}, {"tab": "WORD BANK", "word": "twist", "abbr": "v [T]", "definition": "to turn something using your hand", "translation": "xoay, vặn (bằng tay)", "examples": []}, {"tab": "WORD BANK", "word": "widespread", "abbr": "adj", "definition": "affecting or including a lot of places, people, etc.", "translation": "lan rộng, phổ biến trên diện rộng", "examples": []}, {"tab": "WORD BANK", "word": "worldwide", "abbr": "adv", "definition": "in all parts of the world", "translation": "trên toàn cầu, khắp thế giới", "examples": []}, {"tab": "WORD BANK", "word": "agricultural land", "abbr": "np [U]", "definition": "land which is used for or suitable for farming", "translation": "đất canh tác nông nghiệp", "examples": []}, {"tab": "WORD BANK", "word": "archive", "abbr": "n [C]", "definition": "a collection of historical documents that provides information about the past, or a place where they are kept", "translation": "kho lưu trữ tài liệu lịch sử", "examples": []}, {"tab": "WORD BANK", "word": "beehive", "abbr": "n [C]", "definition": "a special container where people keep bees, or a place where bees live", "translation": "tổ ong, thùng nuôi ong", "examples": []}, {"tab": "WORD BANK", "word": "brilliant", "abbr": "adj", "definition": "full of light or colour", "translation": "rực rỡ, chói lọi, xuất sắc", "examples": []}, {"tab": "WORD BANK", "word": "colony", "abbr": "n [C]", "definition": "a group of the same type of animals, insects or plants living together in a particular place", "translation": "bầy đàn, quần thể sinh vật", "examples": []}, {"tab": "WORD BANK", "word": "come upon", "abbr": "vp", "definition": "to discover something by chance", "translation": "tình cờ phát hiện ra", "examples": []}, {"tab": "WORD BANK", "word": "cut off", "abbr": "vp", "definition": "to stop the supply of something", "translation": "cắt đứt (nguồn cung, liên lạc)", "examples": []}, {"tab": "WORD BANK", "word": "destination", "abbr": "n [C]", "definition": "the place where someone or something is going", "translation": "điểm đến", "examples": []}, {"tab": "WORD BANK", "word": "distinctive markings", "abbr": "np", "definition": "marks on living creatures that make them easy to recognise", "translation": "đốm vằn/dấu hiệu nhận dạng đặc trưng", "examples": []}, {"tab": "WORD BANK", "word": "ecology", "abbr": "n [U]", "definition": "the relationship between living things and the environment, or the scientific study of this", "translation": "sinh thái học, hệ sinh thái", "examples": []}, {"tab": "WORD BANK", "word": "estimate", "abbr": "v [T]", "definition": "to guess the cost, size, value, etc. of something", "translation": "ước tính, ước lượng", "examples": []}, {"tab": "WORD BANK", "word": "extend", "abbr": "v [I]", "definition": "to reach, stretch or continue for a particular distance", "translation": "kéo dài, trải dài tới", "examples": []}, {"tab": "WORD BANK", "word": "farmland", "abbr": "n [U]", "definition": "land which is used for or suitable for farming", "translation": "đất nông trại", "examples": []}, {"tab": "WORD BANK", "word": "focus efforts on something", "abbr": "vp", "definition": "to give all your attention or effort to something", "translation": "tập trung toàn bộ nỗ lực vào việc gì", "examples": []}, {"tab": "WORD BANK", "word": "get rid of", "abbr": "vp", "definition": "to make something unpleasant go away", "translation": "loại bỏ, tống khứ", "examples": []}, {"tab": "WORD BANK", "word": "grassland", "abbr": "n [C, U]", "definition": "a large area of land covered with grass", "translation": "đồng cỏ, thảo nguyên", "examples": []}, {"tab": "WORD BANK", "word": "harmless", "abbr": "adj", "definition": "not able or not likely to cause any hurt or damage", "translation": "vô hại, lành tính", "examples": []}, {"tab": "WORD BANK", "word": "hemisphere", "abbr": "n [C]", "definition": "one half of the Earth", "translation": "bán cầu", "examples": []}, {"tab": "WORD BANK", "word": "hostile environment", "abbr": "np [C]", "definition": "a place where the weather or conditions make it difficult or dangerous to be", "translation": "môi trường khắc nghiệt/thù địch", "examples": []}, {"tab": "WORD BANK", "word": "indicate", "abbr": "v [T]", "definition": "to show that something exists or is likely to be true", "translation": "chỉ ra, biểu thị, cho thấy", "examples": []}, {"tab": "WORD BANK", "word": "near-extinction", "abbr": "n [U]", "definition": "the state where a type of creature is so rare that it may soon not exist at all", "translation": "nguy cơ tuyệt chủng cận kề", "examples": []}, {"tab": "WORD BANK", "word": "observe", "abbr": "v [T]", "definition": "to watch someone or something carefully", "translation": "quan sát, theo dõi cẩn thận", "examples": []}, {"tab": "WORD BANK", "word": "pattern", "abbr": "n [C]", "definition": "a particular way that something is often done or repeated", "translation": "mô thức, quy luật lặp lại", "examples": []}, {"tab": "WORD BANK", "word": "pesticide", "abbr": "n [C, U]", "definition": "a chemical that is used to kill insects which damage plants", "translation": "thuốc trừ sâu", "examples": []}, {"tab": "WORD BANK", "word": "poison", "abbr": "n [C, U]", "definition": "a substance that can make you ill or kill you if it gets in your body", "translation": "chất độc, thuốc độc", "examples": []}, {"tab": "WORD BANK", "word": "risky", "abbr": "adj", "definition": "dangerous because something bad might happen", "translation": "đầy rủi ro, mạo hiểm", "examples": []}, {"tab": "WORD BANK", "word": "shift", "abbr": "v [I]", "definition": "to change", "translation": "chuyển dịch, thay đổi hướng", "examples": []}, {"tab": "WORD BANK", "word": "soil", "abbr": "n [U]", "definition": "the top layer of earth that plants grow in", "translation": "đất trồng, thổ nhưỡng", "examples": []}, {"tab": "WORD BANK", "word": "source of food", "abbr": "np [C]", "definition": "something that is used as food by a person or creature", "translation": "nguồn thức ăn", "examples": []}, {"tab": "WORD BANK", "word": "spot", "abbr": "v [T]", "definition": "to see or notice something or someone", "translation": "nhận ra, phát hiện ra tại chỗ", "examples": []}, {"tab": "WORD BANK", "word": "underestimate", "abbr": "n [C]", "definition": "a guess that is lower than the real size or amount of something", "translation": "sự đánh giá quá thấp", "examples": []}, {"tab": "WORD BANK", "word": "achievement", "abbr": "n [C]", "definition": "something good that you achieve", "translation": "thành tựu, thành quả đạt được", "examples": []}, {"tab": "WORD BANK", "word": "background", "abbr": "n [C]", "definition": "a person's education, family and experience of life", "translation": "nền tảng học vấn và xuất thân", "examples": []}, {"tab": "WORD BANK", "word": "be good at something", "abbr": "vp", "definition": "to be able to do something well", "translation": "giỏi giang về lĩnh vực gì", "examples": []}, {"tab": "WORD BANK", "word": "charity", "abbr": "n [C, U]", "definition": "an official organisation that gives money, food or help to people who need it", "translation": "tổ chức từ thiện", "examples": []}, {"tab": "WORD BANK", "word": "demand", "abbr": "n [U, no plural]", "definition": "a need for something to be sold or supplied", "translation": "nhu cầu thị trường, lực cầu", "examples": []}, {"tab": "WORD BANK", "word": "diary", "abbr": "n [C]", "definition": "a book containing spaces for all the days and months of the year, in which you write meetings and other things that you must remember", "translation": "sổ tay lịch trình cá nhân", "examples": []}, {"tab": "WORD BANK", "word": "elderly people", "abbr": "np", "definition": "people who are old", "translation": "người cao tuổi", "examples": []}, {"tab": "WORD BANK", "word": "encourage", "abbr": "v [T]", "definition": "to make someone more likely to do something, or make something more likely to happen", "translation": "khuyến khích, thúc đẩy", "examples": []}, {"tab": "WORD BANK", "word": "experience", "abbr": "n [C]", "definition": "something that happens to you that affects how you feel", "translation": "trải nghiệm thực tế", "examples": []}, {"tab": "WORD BANK", "word": "fall asleep", "abbr": "pv", "definition": "to start sleeping", "translation": "chìm vào giấc ngủ", "examples": []}, {"tab": "WORD BANK", "word": "familiar", "abbr": "adj", "definition": "easy to recognise because of being seen, met, heard, etc. before", "translation": "quen thuộc, gần gũi", "examples": []}, {"tab": "WORD BANK", "word": "flood", "abbr": "n [C]", "definition": "when a lot of water covers an area of land that is usually dry", "translation": "trận lũ lụt", "examples": []}, {"tab": "WORD BANK", "word": "generous", "abbr": "adj", "definition": "giving other people a lot of money, presents or time in a kind way", "translation": "hào phóng, rộng lượng", "examples": []}, {"tab": "WORD BANK", "word": "get to the top", "abbr": "vp", "definition": "to be very successful in a job or activity", "translation": "chạm tới đỉnh cao danh vọng/thành công", "examples": []}, {"tab": "WORD BANK", "word": "graduate", "abbr": "n [C]", "definition": "someone who has studied for and received a degree from a university", "translation": "người đã tốt nghiệp đại học", "examples": []}, {"tab": "WORD BANK", "word": "identify", "abbr": "v [T]", "definition": "to find a particular thing or all the things of a particular group", "translation": "xác định, nhận diện", "examples": []}, {"tab": "WORD BANK", "word": "image", "abbr": "n [C, U]", "definition": "the way that other people think someone or something is", "translation": "hình tượng, hình ảnh công chúng", "examples": []}, {"tab": "WORD BANK", "word": "in conclusion", "abbr": "np", "definition": "finally (used to introduce the last part of a speech or piece of writing)", "translation": "kết luận lại, tóm lại", "examples": []}, {"tab": "WORD BANK", "word": "keen on (doing) something", "abbr": "vp", "definition": "very interested in something or wanting (to do) something very much", "translation": "say mê, thiết tha làm việc gì", "examples": []}, {"tab": "WORD BANK", "word": "key to success", "abbr": "np [C]", "definition": "the most important thing that will help you achieve success", "translation": "chìa khóa dẫn tới thành công", "examples": []}, {"tab": "WORD BANK", "word": "natural ability", "abbr": "np [C]", "definition": "a skill or quality that someone is born with", "translation": "năng khiếu bẩm sinh", "examples": []}, {"tab": "WORD BANK", "word": "plans", "abbr": "n plural", "definition": "drawings from which something is made or built", "translation": "bản vẽ kỹ thuật/thiết kế mặt bằng", "examples": []}, {"tab": "WORD BANK", "word": "presentation", "abbr": "n [C]", "definition": "a talk giving information about something", "translation": "bài thuyết trình, phần trình bày", "examples": []}, {"tab": "WORD BANK", "word": "quality of life", "abbr": "np [U]", "definition": "the level of enjoyment, comfort and health in someone's life", "translation": "chất lượng cuộc sống", "examples": []}, {"tab": "WORD BANK", "word": "reject", "abbr": "v [T]", "definition": "to refuse to accept or agree with something", "translation": "bác bỏ, từ chối tiếp nhận", "examples": []}, {"tab": "WORD BANK", "word": "seminar", "abbr": "n [C]", "definition": "a meeting of a group of people with a teacher or expert for training, discussion, or study of a subject", "translation": "hội thảo chuyên đề", "examples": []}, {"tab": "WORD BANK", "word": "try hard", "abbr": "vp", "definition": "to do everything you can to do your best at something", "translation": "nỗ lực hết sức mình", "examples": []}, {"tab": "WORD BANK", "word": "unexpected", "abbr": "adj", "definition": "Something that is unexpected surprises you because you did not know it was going to happen.", "translation": "bất ngờ, ngoài dự kiến", "examples": []}, {"tab": "WORD BANK", "word": "vital element", "abbr": "np [C]", "definition": "a necessary part of something", "translation": "yếu tố cốt lõi/sống còn", "examples": []}, {"tab": "WORD BANK", "word": "wealthy", "abbr": "adj", "definition": "rich", "translation": "giàu có, thịnh vượng", "examples": []}, {"tab": "WORD BANK", "word": "well-paid job", "abbr": "np [C]", "definition": "a job in which you earn a lot of money", "translation": "công việc được trả lương cao", "examples": []}, {"tab": "WORD BANK", "word": "assignment", "abbr": "n [C]", "definition": "a piece of work that you are given to do as part of your studies", "translation": "bài tập lớn, bài tập được giao", "examples": []}, {"tab": "WORD BANK", "word": "attend a lecture", "abbr": "vp", "definition": "to go to a formal talk that is given to students to teach them about a subject", "translation": "tham dự bài giảng giảng đường", "examples": []}, {"tab": "WORD BANK", "word": "be engaged in something", "abbr": "phrase", "definition": "to be very interested in something and give it all your attention", "translation": "tập trung tham gia/chú tâm vào", "examples": []}, {"tab": "WORD BANK", "word": "brochure", "abbr": "n [C]", "definition": "a thin book with pictures and information, usually advertising something", "translation": "tờ bướm, tập gấp quảng cáo", "examples": []}, {"tab": "WORD BANK", "word": "concentrate", "abbr": "v [I]", "definition": "to think very carefully about something you are doing and nothing else", "translation": "tập trung cao độ", "examples": []}, {"tab": "WORD BANK", "word": "decrease", "abbr": "v [I, T]", "definition": "to become less, or to make something become less", "translation": "suy giảm, làm giảm bớt", "examples": []}, {"tab": "WORD BANK", "word": "dramatically", "abbr": "adv", "definition": "in a very sudden or noticeable way", "translation": "đột ngột, rõ rệt, đáng kể", "examples": []}, {"tab": "WORD BANK", "word": "ebook", "abbr": "n [C]", "definition": "a book that can be read on a computer screen or special device", "translation": "sách điện tử", "examples": []}, {"tab": "WORD BANK", "word": "effectively", "abbr": "adv", "definition": "in a way that is successful and achieves what you want", "translation": "một cách hiệu quả", "examples": []}, {"tab": "WORD BANK", "word": "enrol", "abbr": "v [I]", "definition": "to become an official member of a course, college or group", "translation": "đăng ký nhập học, ghi danh", "examples": []}, {"tab": "WORD BANK", "word": "enrolment", "abbr": "n [C, U]", "definition": "the process of becoming a member of a course, college, university, etc.", "translation": "sự ghi danh, thủ tục nhập học", "examples": []}, {"tab": "WORD BANK", "word": "essential", "abbr": "adj", "definition": "very important and necessary", "translation": "thiết yếu, cực kỳ quan trọng", "examples": []}, {"tab": "WORD BANK", "word": "expectations", "abbr": "n plural", "definition": "the things that people expect and want to happen or to have", "translation": "sự kỳ vọng, mong đợi", "examples": []}, {"tab": "WORD BANK", "word": "fall down", "abbr": "vp", "definition": "to break into pieces and drop to the ground", "translation": "sụp đổ xuống đất", "examples": []}, {"tab": "WORD BANK", "word": "feedback", "abbr": "n [U]", "definition": "an opinion from someone about something that you have done or made", "translation": "ý kiến phản hồi, nhận xét đánh giá", "examples": []}, {"tab": "WORD BANK", "word": "fill out a form", "abbr": "vp", "definition": "to complete the information on a printed document with spaces for you to add information", "translation": "điền vào biểu mẫu đơn từ", "examples": []}, {"tab": "WORD BANK", "word": "flow", "abbr": "n [U]", "definition": "when something moves or seems to move continuously and easily", "translation": "dòng chảy, sự lưu thông liên tục", "examples": []}, {"tab": "WORD BANK", "word": "illiterate", "abbr": "adj", "definition": "not able to read or write", "translation": "mù chữ, không biết đọc biết viết", "examples": []}, {"tab": "WORD BANK", "word": "key facts", "abbr": "np", "definition": "very important facts (things that you know are true or have happened)", "translation": "những dữ kiện then chốt", "examples": []}, {"tab": "WORD BANK", "word": "online", "abbr": "adv", "definition": "connected to a system of computers, especially the Internet", "translation": "trực tuyến, trên mạng internet", "examples": []}, {"tab": "WORD BANK", "word": "outline", "abbr": "n [C]", "definition": "a short description of the most important ideas or facts about something", "translation": "dàn ý, nét phác thảo đại cương", "examples": []}, {"tab": "WORD BANK", "word": "practise", "abbr": "v [I, T]", "definition": "to repeat something regularly in order to improve your ability", "translation": "thực hành, rèn luyện kỹ năng", "examples": []}, {"tab": "WORD BANK", "word": "make progress", "abbr": "vp", "definition": "to develop and improve skills, knowledge, etc.", "translation": "tiến bộ, đạt được bước phát triển", "examples": []}, {"tab": "WORD BANK", "word": "qualify", "abbr": "v [I]", "definition": "to succeed in getting into a competition", "translation": "đủ điều kiện, vượt qua vòng loại", "examples": []}, {"tab": "WORD BANK", "word": "reduce", "abbr": "v [T]", "definition": "to make something less", "translation": "cắt giảm, hạ bớt", "examples": []}, {"tab": "WORD BANK", "word": "structure", "abbr": "n [C]", "definition": "a building or something that has been built", "translation": "công trình kiến trúc đã xây cất", "examples": []}, {"tab": "WORD BANK", "word": "trend", "abbr": "n [C]", "definition": "a general development or change in a situation", "translation": "xu hướng, chiều hướng phát triển", "examples": []}, {"tab": "WORD BANK", "word": "tutorial", "abbr": "n [C]", "definition": "a class (especially at a British university) in which a small group of students talks about a subject with their tutor", "translation": "buổi thảo luận nhóm có trợ giảng kèm", "examples": []}, {"tab": "WORD BANK", "word": "under pressure", "abbr": "np", "definition": "in a difficult situation that makes you feel worried or unhappy", "translation": "chịu áp lực nặng nề", "examples": []}, {"tab": "WORD BANK", "word": "unemployment rate", "abbr": "np [C]", "definition": "the number of people who do not have a job in a place or during a period of time", "translation": "tỷ lệ thất nghiệp", "examples": []}, {"tab": "WORD BANK", "word": "abroad", "abbr": "adv", "definition": "in or to a foreign country", "translation": "ở nước ngoài, ra nước ngoài", "examples": []}, {"tab": "WORD BANK", "word": "accompany", "abbr": "v [T]", "definition": "to go somewhere with someone", "translation": "đi cùng, đồng hành cùng ai", "examples": []}, {"tab": "WORD BANK", "word": "aircraft", "abbr": "n [C]", "definition": "a vehicle that can fly", "translation": "tàu bay, phi cơ", "examples": []}, {"tab": "WORD BANK", "word": "backpacking", "abbr": "n [U]", "definition": "travelling or camping with your clothes and belongings in a backpack", "translation": "du lịch ba lô, đi phượt", "examples": []}, {"tab": "WORD BANK", "word": "breathtaking", "abbr": "adj", "definition": "very beautiful or surprising", "translation": "ngoạn mục, đẹp đến ngạt thở", "examples": []}, {"tab": "WORD BANK", "word": "capable of (doing something)", "abbr": "phrase", "definition": "having the ability or qualities to be able to do something", "translation": "có năng lực, đủ khả năng làm gì", "examples": []}, {"tab": "WORD BANK", "word": "continent", "abbr": "n [C]", "definition": "one of the seven main areas of land on the Earth, such as Asia, Africa or Europe", "translation": "châu lục, đại lục", "examples": []}, {"tab": "WORD BANK", "word": "cruise", "abbr": "n [C]", "definition": "a holiday on a ship, sailing from place to place", "translation": "chuyến du ngoạn bằng du thuyền", "examples": []}, {"tab": "WORD BANK", "word": "delay", "abbr": "v [I/T]", "definition": "to make something happen at a later time than originally planned or expected", "translation": "trì hoãn, làm chậm trễ tiến độ", "examples": []}, {"tab": "WORD BANK", "word": "evidence", "abbr": "n [U]", "definition": "something that makes you believe that something is true or exists", "translation": "bằng chứng, minh chứng xác thực", "examples": []}, {"tab": "WORD BANK", "word": "expand", "abbr": "v [I/T]", "definition": "to increase in size or amount, or to make something increase", "translation": "mở rộng quy mô, bành trướng", "examples": []}, {"tab": "WORD BANK", "word": "fashionable", "abbr": "adj", "definition": "popular at a particular time", "translation": "thời thượng, hợp mốt", "examples": []}, {"tab": "WORD BANK", "word": "global warming", "abbr": "np [U]", "definition": "when the air around the world becomes warmer because of pollution", "translation": "hiện tượng nóng lên toàn cầu", "examples": []}, {"tab": "WORD BANK", "word": "impact", "abbr": "n [C, no plural]", "definition": "the effect that a person, event or situation has on someone or something", "translation": "sức ảnh hưởng, sự tác động", "examples": []}, {"tab": "WORD BANK", "word": "impressive", "abbr": "adj", "definition": "Someone or something that is impressive makes you admire and respect them.", "translation": "ấn tượng, đáng khâm phục", "examples": []}, {"tab": "WORD BANK", "word": "leisure activity", "abbr": "np [C]", "definition": "something that you do for enjoyment when you are not working", "translation": "hoạt động vui chơi giải trí khi rảnh rỗi", "examples": []}, {"tab": "WORD BANK", "word": "local culture", "abbr": "np [U]", "definition": "the habits, traditions and beliefs of the area you are in", "translation": "bản sắc văn hóa địa phương", "examples": []}, {"tab": "WORD BANK", "word": "magical", "abbr": "adj", "definition": "special or exciting", "translation": "kỳ diệu, huyền ảo đầy hấp dẫn", "examples": []}, {"tab": "WORD BANK", "word": "memorable", "abbr": "adj", "definition": "If an occasion or experience is memorable, you will remember it for a long time because it is so good.", "translation": "đáng nhớ, không thể nào quên", "examples": []}, {"tab": "WORD BANK", "word": "monument", "abbr": "n [C]", "definition": "a building or other structure that is built to make people remember an event in history or a famous person", "translation": "đài tưởng niệm, tượng đài lịch sử", "examples": []}, {"tab": "WORD BANK", "word": "outdated", "abbr": "adj", "definition": "old-fashioned and therefore not as good or as fashionable as something modern", "translation": "lỗi thời, lạc hậu", "examples": []}, {"tab": "WORD BANK", "word": "package deal", "abbr": "np [C]", "definition": "a type of holiday where you pay a fixed price and the travel, accommodation and sometimes food are arranged for you", "translation": "gói du lịch trọn gói", "examples": []}, {"tab": "WORD BANK", "word": "recommend someone to do something", "abbr": "phrase", "definition": "to tell someone that they would probably enjoy doing something", "translation": "khuyên/gợi ý ai nên làm gì", "examples": []}, {"tab": "WORD BANK", "word": "resort", "abbr": "n [C]", "definition": "a place where many people go for a holiday", "translation": "khu nghỉ dưỡng sinh thái/nghỉ mát", "examples": []}, {"tab": "WORD BANK", "word": "safari", "abbr": "n [C]", "definition": "journey, usually to Africa, to see or hunt wild animals", "translation": "chuyến đi thám hiểm động vật hoang dã", "examples": []}, {"tab": "WORD BANK", "word": "sightseeing", "abbr": "n [U]", "definition": "the activity of visiting places which are interesting because they are historical, famous, etc.", "translation": "hoạt động tham quan ngắm cảnh", "examples": []}, {"tab": "WORD BANK", "word": "stressful", "abbr": "adj", "definition": "making you feel worried and nervous", "translation": "gây căng thẳng, áp lực thần kinh", "examples": []}, {"tab": "WORD BANK", "word": "survey", "abbr": "n [C]", "definition": "an examination of something to find information about it", "translation": "cuộc khảo sát, thăm dò ý kiến", "examples": []}, {"tab": "WORD BANK", "word": "tour guide", "abbr": "np [C]", "definition": "someone whose job is to take tourists around interesting places and tell them about them", "translation": "hướng dẫn viên du lịch", "examples": []}, {"tab": "WORD BANK", "word": "urban", "abbr": "adj", "definition": "belonging or relating to a town or city", "translation": "thuộc đô thị, thành thị", "examples": []}, {"tab": "WORD BANK", "word": "within reach", "abbr": "phrase", "definition": "close enough to travel to", "translation": "ở gần, trong tầm với tới được", "examples": []}, {"tab": "WORD BANK", "word": "vacation", "abbr": "n [C, U]", "definition": "a period of time when you are not at home but are staying somewhere else for enjoyment", "translation": "kỳ nghỉ phép", "examples": []}, {"tab": "WORD BANK", "word": "access", "abbr": "n [U]", "definition": "when you have the right or opportunity to use or see something", "translation": "quyền truy cập, cơ hội tiếp cận", "examples": []}, {"tab": "WORD BANK", "word": "accessible", "abbr": "adj", "definition": "easy to find or reach", "translation": "dễ tiếp cận, dễ tới gần", "examples": []}, {"tab": "WORD BANK", "word": "account for something", "abbr": "vp", "definition": "to be the reason for something", "translation": "chiếm tỷ lệ, giải thích cho nguyên nhân", "examples": []}, {"tab": "WORD BANK", "word": "benefit", "abbr": "n [C]", "definition": "something that helps you or gives you an advantage", "translation": "điểm lợi thế, lợi ích nhận được", "examples": []}, {"tab": "WORD BANK", "word": "construct", "abbr": "v [C]", "definition": "something large that is built", "translation": "công trình xây dựng quy mô lớn", "examples": []}, {"tab": "WORD BANK", "word": "construction", "abbr": "n [U]", "definition": "the work of building houses, offices, bridges, etc.", "translation": "ngành xây dựng, công tác thi công", "examples": []}, {"tab": "WORD BANK", "word": "cultivate crops", "abbr": "vp", "definition": "to grow plants such as grains, fruit or vegetables in large amounts", "translation": "trồng trọt hoa màu lương thực", "examples": []}, {"tab": "WORD BANK", "word": "the developing world", "abbr": "np", "definition": "describes an area of the world which is poorer and has less-advanced industries, especially in Africa, Latin America or Asia", "translation": "các quốc gia đang phát triển", "examples": []}, {"tab": "WORD BANK", "word": "drain away", "abbr": "vp", "definition": "If a liquid drains away, it flows out of a place.", "translation": "chảy tiêu thoát đi, thoát nước", "examples": []}, {"tab": "WORD BANK", "word": "drought", "abbr": "n [C]", "definition": "a long period when there is no rain and people do not have enough water", "translation": "hạn hán kéo dài", "examples": []}, {"tab": "WORD BANK", "word": "fetch", "abbr": "v [T]", "definition": "to go to another place to get something or someone and bring them back", "translation": "đi lấy về, mang về", "examples": []}, {"tab": "WORD BANK", "word": "follow", "abbr": "v [I, T]", "definition": "to understand something", "translation": "theo dõi, hiểu kịp mạch ý", "examples": []}, {"tab": "WORD BANK", "word": "geological", "abbr": "adj", "definition": "relating to geology (the study of rocks and the structure of the Earth)", "translation": "thuộc địa chất học", "examples": []}, {"tab": "WORD BANK", "word": "human consumption", "abbr": "np [U]", "definition": "when people eat or use something", "translation": "sự tiêu dùng/tiêu thụ của con người", "examples": []}, {"tab": "WORD BANK", "word": "human waste", "abbr": "np [U]", "definition": "substances that come out of your body after your food has been digested", "translation": "chất thải bài tiết của con người", "examples": []}, {"tab": "WORD BANK", "word": "hygiene", "abbr": "n [U]", "definition": "the process of keeping things clean, especially to prevent disease", "translation": "vệ sinh phòng dịch, giữ vệ sinh sạch sẽ", "examples": []}, {"tab": "WORD BANK", "word": "irrigation", "abbr": "n [U]", "definition": "the process of providing water to an area of land so that crops can be grown", "translation": "hệ thống tưới tiêu nông nghiệp", "examples": []}, {"tab": "WORD BANK", "word": "the natural world", "abbr": "np", "definition": "all the things in the world that were not created by people, especially the countryside, animals, etc.", "translation": "thế giới tự nhiên, giới tự nhiên", "examples": []}, {"tab": "WORD BANK", "word": "polluted", "abbr": "adj", "definition": "water, air, soil, etc. that has become dirty or harmful to humans or animals", "translation": "bị ô nhiễm độc hại", "examples": []}, {"tab": "WORD BANK", "word": "pour", "abbr": "v [T]", "definition": "to make a liquid flow from or into a container", "translation": "rót, trút, đổ chất lỏng", "examples": []}, {"tab": "WORD BANK", "word": "the pros and cons", "abbr": "np", "definition": "the advantages and disadvantages of something", "translation": "những mặt ưu và khuyết điểm", "examples": []}, {"tab": "WORD BANK", "word": "rainwater", "abbr": "n [U]", "definition": "water that has fallen as rain, rather than water which has come from a tap", "translation": "nước mưa tự nhiên", "examples": []}, {"tab": "WORD BANK", "word": "running water", "abbr": "n [U]", "definition": "water that comes through a system of pipes", "translation": "nước máy, nước dẫn qua đường ống", "examples": []}, {"tab": "WORD BANK", "word": "rural", "abbr": "adj", "definition": "relating to the countryside and not to towns", "translation": "thuộc nông thôn, vùng quê", "examples": []}, {"tab": "WORD BANK", "word": "specialist", "abbr": "adj", "definition": "having a lot of experience, knowledge or skill in a particular subject", "translation": "mang tính chuyên môn hóa cao", "examples": []}, {"tab": "WORD BANK", "word": "treat someone for a disease", "abbr": "vp", "definition": "to give medical care to someone to try to cure their illness", "translation": "điều trị bệnh cho ai", "examples": []}, {"tab": "WORD BANK", "word": "turn on a tap", "abbr": "vp", "definition": "to turn the part at the end of a pipe to start the flow of water", "translation": "mở vòi nước", "examples": []}, {"tab": "WORD BANK", "word": "water supplies", "abbr": "np", "definition": "amounts of water that are available to be used", "translation": "nguồn cấp nước sinh hoạt/sản xuất", "examples": []}, {"tab": "WORD BANK", "word": "water source", "abbr": "np [C]", "definition": "a place where water comes from, especially under the ground", "translation": "nguồn nước (ngầm, thiên nhiên)", "examples": []}, {"tab": "WORD BANK", "word": "water sports", "abbr": "np", "definition": "sports which take place on or in water", "translation": "các môn thể thao dưới nước", "examples": []}, {"tab": "WORD BANK", "word": "water purification", "abbr": "np [U]", "definition": "the process of removing harmful substances from water", "translation": "quá trình lọc và tinh chế nước", "examples": []}, {"tab": "WORD BANK", "word": "wet suit", "abbr": "np [C]", "definition": "a piece of clothing covering the whole body that keeps you warm when you are under water", "translation": "bộ đồ lặn giữ nhiệt", "examples": []}, {"tab": "WORD BANK", "word": "accommodation", "abbr": "n [U]", "definition": "a place where you live or stay", "translation": "chỗ ở, nơi lưu trú", "examples": []}, {"tab": "WORD BANK", "word": "affordable", "abbr": "adj", "definition": "cheap enough for most people", "translation": "hợp túi tiền, giá cả phải chăng", "examples": []}, {"tab": "WORD BANK", "word": "architecture", "abbr": "n [U]", "definition": "the design and style of buildings", "translation": "kiến trúc, phong cách kiến trúc", "examples": []}, {"tab": "WORD BANK", "word": "available", "abbr": "adj", "definition": "If something is available, you can use it or get it.", "translation": "sẵn có, có sẵn để sử dụng", "examples": []}, {"tab": "WORD BANK", "word": "benefit from", "abbr": "vp", "definition": "to be helped by something", "translation": "hưởng lợi ích từ", "examples": []}, {"tab": "WORD BANK", "word": "building materials", "abbr": "np", "definition": "the materials, e.g. bricks or wood, that buildings are made of", "translation": "vật liệu xây dựng", "examples": []}, {"tab": "WORD BANK", "word": "citizen", "abbr": "n [C]", "definition": "someone who lives in a particular town or city", "translation": "người dân đô thị, công dân", "examples": []}, {"tab": "WORD BANK", "word": "decorate", "abbr": "v [T]", "definition": "to make something look more attractive by putting things on it or around it", "translation": "trang trí, tô điểm", "examples": []}, {"tab": "WORD BANK", "word": "demand", "abbr": "n [U, no plural]", "definition": "a need for something to be sold or supplied", "translation": "nhu cầu thị trường", "examples": []}, {"tab": "WORD BANK", "word": "engineer", "abbr": "n [C]", "definition": "someone whose job is to design, build or repair machines, engines, roads, bridges, etc.", "translation": "kỹ sư", "examples": []}, {"tab": "WORD BANK", "word": "escalator", "abbr": "n [C]", "definition": "moving stairs that take people from one level of a building to another", "translation": "thang cuốn tự động", "examples": []}, {"tab": "WORD BANK", "word": "external surroundings", "abbr": "np", "definition": "the things that are around the outside of something", "translation": "môi trường cảnh quan xung quanh bên ngoài", "examples": []}, {"tab": "WORD BANK", "word": "flexible", "abbr": "adj", "definition": "able to change or be changed easily according to the situation", "translation": "linh hoạt, dễ thích ứng", "examples": []}, {"tab": "WORD BANK", "word": "foundations", "abbr": "n plural", "definition": "the part of a building, road, bridge, etc. that is under the ground and supports it", "translation": "móng công trình, nền móng", "examples": []}, {"tab": "WORD BANK", "word": "housing", "abbr": "n [U]", "definition": "buildings for people to live in", "translation": "nhà ở, công trình gia cư", "examples": []}, {"tab": "WORD BANK", "word": "improve", "abbr": "v [I, T]", "definition": "to get better or to make something better", "translation": "cải thiện, nâng cao chất lượng", "examples": []}, {"tab": "WORD BANK", "word": "knock down", "abbr": "vp", "definition": "to destroy a building or part of a building", "translation": "phá dỡ, đánh sập công trình", "examples": []}, {"tab": "WORD BANK", "word": "landmark", "abbr": "n [C]", "definition": "a building that you can easily recognise, especially one that helps you to know where you are", "translation": "công trình biểu tượng, mốc định vị địa danh", "examples": []}, {"tab": "WORD BANK", "word": "material", "abbr": "n [C, U]", "definition": "a solid substance from which things can be made", "translation": "chất liệu, nguyên vật liệu", "examples": []}, {"tab": "WORD BANK", "word": "occupant", "abbr": "n [C]", "definition": "someone who lives or works in a room or building", "translation": "người cư ngụ, người thuê phòng", "examples": []}, {"tab": "WORD BANK", "word": "old-fashioned", "abbr": "adj", "definition": "not modern", "translation": "cổ hủ, kiểu dáng xưa cũ", "examples": []}, {"tab": "WORD BANK", "word": "stand out", "abbr": "vp", "definition": "to be very easy to see or notice", "translation": "nổi bật, đập ngay vào mắt", "examples": []}, {"tab": "WORD BANK", "word": "steel", "abbr": "n [U]", "definition": "a very strong metal made from iron, used for making knives, machines, etc.", "translation": "thép công nghiệp", "examples": []}, {"tab": "WORD BANK", "word": "straight away", "abbr": "adv", "definition": "immediately", "translation": "ngay lập tức, tức thì", "examples": []}, {"tab": "WORD BANK", "word": "thatched", "abbr": "adj", "definition": "A thatched building has a roof that is made of straw (dried grass-like stems).", "translation": "lợp bằng tranh/rơm rạ", "examples": []}, {"tab": "WORD BANK", "word": "timber", "abbr": "n [U]", "definition": "wood that is used for building", "translation": "gỗ xây dựng", "examples": []}, {"tab": "WORD BANK", "word": "tower block", "abbr": "np [C]", "definition": "a very tall building divided into apartments or offices", "translation": "tòa nhà cao tầng, chung cư/cao ốc văn phòng", "examples": []}, {"tab": "WORD BANK", "word": "traditional", "abbr": "adj", "definition": "following the customs or ways of behaving that have continued in a group of people or society for a long time", "translation": "mang tính truyền thống văn hóa lâu đời", "examples": []}, {"tab": "WORD BANK", "word": "-shaped", "abbr": "suffix", "definition": "made to look like a particular shape", "translation": "có hình dạng như...", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "affluent", "abbr": "adj", "definition": "having a lot of money", "translation": "giàu có, khá giả, thượng lưu", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "architecture", "abbr": "n [U]", "definition": "the design and style of buildings", "translation": "ngành/phong cách kiến trúc", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "border", "abbr": "n [C]", "definition": "the line that separates two countries or states", "translation": "đường biên giới quốc gia/ranh giới", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "building", "abbr": "n [C]", "definition": "a structure with walls and a roof, such as a house, school, etc.", "translation": "tòa nhà, công trình xây dựng", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "capital", "abbr": "n [C]", "definition": "the most important city in a country or state, where the government is based", "translation": "thủ đô", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "coast", "abbr": "n [C/U]", "definition": "the land beside the sea", "translation": "đường bờ biển, miền duyên hải", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "community", "abbr": "n [C]", "definition": "the people living in a particular area", "translation": "cộng đồng dân cư địa phương", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "council", "abbr": "n [C]", "definition": "the group of people elected to govern a particular area, town or city, and organise services for it", "translation": "hội đồng thành phố/địa phương", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "the countryside", "abbr": "n [U]", "definition": "land that is not in towns or cities and has farms, fields, forests, etc.", "translation": "vùng nông thôn, ngoại ô đồng quê", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "explore", "abbr": "v [I/T]", "definition": "to go around a place where you have never been in order to find out what is there", "translation": "khám phá, thám hiểm vùng đất mới", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "farming", "abbr": "n [U]", "definition": "working on a farm or organising the work there", "translation": "hoạt động canh tác nông nghiệp", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "housing estate", "abbr": "n [C]", "definition": "an area with a large number of houses that were built at the same time", "translation": "khu đô thị nhà ở quy hoạch đồng bộ", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "immigrant", "abbr": "n [C]", "definition": "someone who comes to live in a different country", "translation": "người nhập cư", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "inner city", "abbr": "n [C]", "definition": "the part of a city that is closest to the centre, often where buildings are in a bad condition and there are social problems", "translation": "khu ổ chuột/khu vực nội đô cũ nghèo nàn", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "middle class", "abbr": "n [C]", "definition": "a social group that consists of well-educated people, such as doctors, lawyers and teachers, who have good jobs and are neither very rich nor very poor", "translation": "tầng lớp trung lưu", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "neighbourhood", "abbr": "n [C]", "definition": "an area of a town or city that people live in", "translation": "khu dân cư lân cận, xóm làng", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "the outskirts", "abbr": "pln [U]", "definition": "the outer area of a city, town or village", "translation": "khu vực ngoại ô, vùng ven đô", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "province", "abbr": "n [C]", "definition": "one of the large areas which some countries are divided into because of the type of government they have", "translation": "tỉnh lỵ, tỉnh thành", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "rent", "abbr": "v [T]", "definition": "to pay money to use something for a short time", "translation": "thuê mướn ngắn hạn", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "resident", "abbr": "n [C]", "definition": "someone who lives in a particular place", "translation": "cư dân sinh sống tại khu vực", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "rough (neighbourhood)", "abbr": "adj", "definition": "dangerous or violent", "translation": "bất an, phức tạp, an ninh kém", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "run-down", "abbr": "adj", "definition": "Run-down buildings or areas are in very bad condition.", "translation": "xuống cấp trầm trọng, tồi tàn", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "safe", "abbr": "adj", "definition": "not dangerous or not likely to cause harm", "translation": "an toàn, an ninh tốt", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "the seaside", "abbr": "n [U]", "definition": "the area near the sea, especially where people spend their holidays and enjoy themselves", "translation": "vùng nghỉ mát ven biển", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "suburb", "abbr": "n [C]", "definition": "an area where people live outside the centre of a city", "translation": "vùng ven đô, khu ngoại ô", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "surroundings", "abbr": "pln", "definition": "the place where someone or something is and the things that are in it", "translation": "khung cảnh bao quanh, môi trường lân cận", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "trendy", "abbr": "adj", "definition": "fashionable at the moment", "translation": "thịnh hành, rất hợp xu thế thời trang", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "woodland", "abbr": "n [C/U]", "definition": "an area of land with a lot of trees", "translation": "vùng đất rừng, vùng nhiều cây cối", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "working class", "abbr": "n [C]", "definition": "the social class of people who have little money and who usually do physical work", "translation": "tầng lớp lao động chân tay/bình dân", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "academic", "abbr": "adj", "definition": "related to education, schools, universities, etc.", "translation": "thuộc về học thuật, mang tính học thuật", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "achievement", "abbr": "n [C]", "definition": "something good that you have succeeded in doing", "translation": "thành quả, kỳ tích đã làm được", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "ambition", "abbr": "n [C]", "definition": "something you want to achieve in your life", "translation": "hoài bão lớn, khát vọng tương lai", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "applicant", "abbr": "n [C]", "definition": "someone who asks for something officially, often in writing", "translation": "người nộp hồ sơ ứng tuyển", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "artistic", "abbr": "adj", "definition": "showing skill and imagination in creating things, especially in painting, drawing, etc", "translation": "có hoa tay, giàu tính nghệ thuật", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "award", "abbr": "v [T]", "definition": "to officially give someone something such as a prize or an amount of money", "translation": "trao tặng giải thưởng danh giá", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "candidate", "abbr": "n [C]", "definition": "someone who is taking an exam", "translation": "thí sinh dự thi, ứng viên", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "considerable", "abbr": "adj", "definition": "large or important enough to have an effect", "translation": "đáng kể, có tác động to lớn", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "courage", "abbr": "n [U]", "definition": "the ability to deal with dangerous or difficult situations without being frightened", "translation": "lòng dũng cảm, sự can trường", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "deserve", "abbr": "v [T]", "definition": "If you deserve something good or bad, it should happen to you because of the way you have behaved.", "translation": "xứng đáng nhận được", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "encourage", "abbr": "v [T]", "definition": "to make someone more likely to do something, or make something more likely to happen", "translation": "động viên, khích lệ", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "ensure", "abbr": "v [T]", "definition": "to make certain that something is done or happens", "translation": "đảm bảo chắc chắn xảy ra", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "gain (a qualification)", "abbr": "v [T]", "definition": "to get something useful or positive", "translation": "đạt được chứng chỉ/văn bằng", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "impressive", "abbr": "adj", "definition": "Someone or something that is impressive makes you admire and respect them.", "translation": "ấn tượng, đáng nể phục", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "innovation", "abbr": "n [C/U]", "definition": "a new idea or method that is being tried for the first time, or the use of such ideas or methods", "translation": "sự đổi mới sáng tạo kỹ thuật", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "knowledge", "abbr": "n [U]", "definition": "information and understanding that you have in your mind", "translation": "tri thức, vốn hiểu biết", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "objective", "abbr": "n [C]", "definition": "something that you are trying to achieve", "translation": "mục tiêu cụ thể đề ra", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "obtain", "abbr": "v [T]", "definition": "to get something", "translation": "thu được, đạt được", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "outstanding", "abbr": "adj", "definition": "excellent and much better than most", "translation": "xuất chúng, vượt trội hàng đầu", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "persuade", "abbr": "v [T]", "definition": "to make someone agree to do something by talking to them a lot about it", "translation": "thuyết phục hoàn toàn", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "postgraduate", "abbr": "adj", "definition": "describes university studies or students at a more advanced level than a first degree", "translation": "sau đại học (thạc sĩ, tiến sĩ)", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "professional", "abbr": "adj", "definition": "relating to a job that needs special training or education", "translation": "mang tính chuyên nghiệp cao", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "pride", "abbr": "n [U]", "definition": "a feeling of satisfaction at your achievements or the achievements of your family or friends", "translation": "niềm tự hào, lòng hãnh diện", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "recognise", "abbr": "v [T]", "definition": "to officially show respect for someone for an achievement", "translation": "công nhận, tuyên dương thành tích", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "satisfaction", "abbr": "n [U]", "definition": "the pleasant feeling you have when you get something that you wanted or do something that you wanted to do", "translation": "sự hài lòng, thỏa mãn ước nguyện", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "skill", "abbr": "n [C/U]", "definition": "the ability to do an activity or job well, especially because you have practised it", "translation": "kỹ năng điêu luyện", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "talent", "abbr": "n [C/U]", "definition": "a natural ability to do something", "translation": "tài năng thiên phú", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "training", "abbr": "n [U]", "definition": "the process of learning the skills you need to do a particular job or activity", "translation": "quá trình đào tạo, tập huấn", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "vocational", "abbr": "adj", "definition": "Vocational education and skills prepare you for a particular type of work.", "translation": "thuộc đào tạo nghề, định hướng nghề nghiệp", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "atmosphere", "abbr": "n [C]", "definition": "mixture of gases around the Earth", "translation": "tầng khí quyển trái đất", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "board", "abbr": "v [T]", "definition": "to get on a bus, boat, aircraft, etc.", "translation": "lên tàu, lên máy bay, bước lên xe", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "communications", "abbr": "pln", "definition": "ways of moving between one place and another", "translation": "mạng lưới giao thông liên lạc", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "commute", "abbr": "v [I]", "definition": "to regularly travel between work and home", "translation": "đi lại hằng ngày giữa nơi làm và nơi ở", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "delay", "abbr": "n [C/U]", "definition": "when you have to wait longer than expected for something to happen, or the time that you have to wait", "translation": "sự trì hoãn, sự chậm trễ chuyến đi", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "efficient", "abbr": "adj", "definition": "working well and not wasting time or energy", "translation": "hiệu suất cao, tối ưu năng suất", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "the environment", "abbr": "n", "definition": "the air, land, and water where people, animals, and plants live", "translation": "môi trường sinh thái tự nhiên", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "exhaust", "abbr": "n [U]", "definition": "the waste gas from a vehicle's engine", "translation": "khí thải động cơ xe cộ", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "fare", "abbr": "n [C]", "definition": "the price that you pay to travel on an aircraft, train, bus, etc.", "translation": "giá vé tàu xe/máy bay", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "infrastructure", "abbr": "n [C]", "definition": "the basic systems, such as transport and communication, that a country or organisation uses in order to work effectively", "translation": "cơ sở hạ tầng kỹ thuật", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "journey", "abbr": "n [C]", "definition": "when you travel from one place to another", "translation": "hành trình di chuyển đường dài", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "limit", "abbr": "v [T]", "definition": "to control something so that it is less than a particular amount or number", "translation": "giới hạn, hạn chế định mức", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "load", "abbr": "n [C]", "definition": "something that is carried, often by a vehicle", "translation": "tải trọng hàng hóa chuyên chở", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "long-distance", "abbr": "adj", "definition": "travelling or communicating between two places that are a long way apart", "translation": "đường dài, liên tỉnh/quốc tế", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "luggage", "abbr": "n [U]", "definition": "bags and cases that you carry with you when you are travelling", "translation": "hành lý xách tay/ký gửi", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "motorist", "abbr": "n [C]", "definition": "someone who drives a car", "translation": "người điều khiển xe ô tô", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "motorway", "abbr": "n [C]", "definition": "a long, wide road, usually used by traffic travelling fast over long distances", "translation": "đường cao tốc liên tỉnh", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "passenger", "abbr": "n [C]", "definition": "someone who is travelling in a vehicle, but not controlling the vehicle", "translation": "hành khách trên xe", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "pollution", "abbr": "n [U]", "definition": "damage caused to water, air, etc. by harmful substances or waste", "translation": "tình trạng ô nhiễm môi trường", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "prevent", "abbr": "v [T]", "definition": "to stop something happening or to stop someone doing something", "translation": "ngăn chặn, phòng ngừa", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "profitable", "abbr": "adj", "definition": "making or likely to make a profit", "translation": "sinh lời tốt, có lãi", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "public", "abbr": "adj", "definition": "Public parks/toilets/transport, etc. are for everyone to use and are not private.", "translation": "công cộng, dành cho đại chúng", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "reliable", "abbr": "adj", "definition": "able to be trusted or believed", "translation": "đáng tin cậy, chuẩn xác", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "ride", "abbr": "v [I/T]", "definition": "to travel by sitting on a horse, bicycle, or motorcycle and controlling it", "translation": "cưỡi ngựa, lái xe máy/xe đạp", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "route", "abbr": "n [C]", "definition": "the roads or paths you follow to get from one place to another place", "translation": "tuyến đường di chuyển", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "system", "abbr": "n [C]", "definition": "a way or method of doing things", "translation": "hệ thống phương pháp luận", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "ticket", "abbr": "n [C]", "definition": "a small piece of paper that shows you have paid to do something, for example travel on a bus, watch a film, etc.", "translation": "vé thông hành, vé tham quan", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "timetable", "abbr": "n [C]", "definition": "a list of times when buses, trains, etc. arrive and leave", "translation": "lịch trình chạy xe/thời gian biểu", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "the underground", "abbr": "n [U]", "definition": "a railway system in which electric trains travel along passages below ground", "translation": "tàu điện ngầm", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "urban", "abbr": "adj", "definition": "belonging or relating to a town or city", "translation": "thuộc khu vực đô thị lớn", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "assist", "abbr": "v [I/T]", "definition": "to help", "translation": "hỗ trợ đắc lực, trợ giúp", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "attach", "abbr": "v [T]", "definition": "to fasten, join or connect", "translation": "đính kèm, gắn kết nối vào", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "attempt", "abbr": "n [C]", "definition": "when you try to do something", "translation": "sự cố gắng, nỗ lực thử sức", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "measure", "abbr": "v [T]", "definition": "to find the size, weight, amount, or speed of something", "translation": "đo lường, định lượng kích thước/tốc độ", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "operate (a machine)", "abbr": "v [T]", "definition": "If you operate a machine you make it do what it is designed to do.", "translation": "vận hành thiết bị máy móc", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "portable", "abbr": "adj", "definition": "able to be carried", "translation": "xách tay, mang theo di động tiện lợi", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "automatic", "abbr": "adj", "definition": "An automatic machine works by itself or with little human control.", "translation": "tự động hóa hoàn toàn", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "break down", "abbr": "pv [I]", "definition": "If a machine or vehicle breaks down, it stops working.", "translation": "bị hỏng hóc giữa chừng", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "combine", "abbr": "v [I/T]", "definition": "to become mixed or joined, or to mix or join things together", "translation": "kết hợp lại với nhau", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "connect", "abbr": "v [I/T]", "definition": "to join two things or places together", "translation": "kết nối liên thông", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "consist of", "abbr": "pv [T]", "definition": "to be made of or formed from something", "translation": "bao gồm các thành phần", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "demonstrate", "abbr": "v [T]", "definition": "to show someone how to do something, or how something works", "translation": "hướng dẫn cách vận hành máy móc", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "design", "abbr": "v [T]", "definition": "to draw or plan something before making it", "translation": "thiết kế bản vẽ sơ bộ", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "device", "abbr": "n [C]", "definition": "a piece of equipment that is used for a particular purpose", "translation": "thiết bị tiện ích chuyên dụng", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "display", "abbr": "v [I/T]", "definition": "to show something electronically, such as on a computer screen", "translation": "hiển thị dữ liệu lên màn hình", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "electronic", "abbr": "adj", "definition": "Electronic equipment consists of things such as computers, televisions and radios.", "translation": "thuộc về điện tử viễn thông", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "gadget", "abbr": "n [C]", "definition": "a small piece of equipment that does a particular job, especially a new type", "translation": "dụng cụ công nghệ tiện ích nhỏ gọn", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "hand-held", "abbr": "adj", "definition": "describes something that is designed to be held and used easily with one or two hands", "translation": "cầm tay, điều khiển bằng tay", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "industrial", "abbr": "adj", "definition": "connected with industry", "translation": "thuộc về ngành công nghiệp sản xuất", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "install", "abbr": "v [I/T]", "definition": "to put software onto a computer", "translation": "cài đặt phần mềm vào máy tính", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "labour-saving", "abbr": "adj", "definition": "describes a device or method which saves a lot of effort and time", "translation": "giải phóng sức lao động, tiết kiệm nhân lực", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "manufacture", "abbr": "v [T]", "definition": "to produce something, usually in large numbers in a factory", "translation": "sản xuất hàng loạt tại nhà máy", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "powerful (machine)", "abbr": "adj", "definition": "having a lot of strength or force", "translation": "công suất cực mạnh", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "purchase", "abbr": "v [T]", "definition": "to buy something", "translation": "mua sắm, thu mua vật tư", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "purpose", "abbr": "n [C]", "definition": "why you do something or why something exists", "translation": "mục đích chính yếu", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "replace", "abbr": "v [T]", "definition": "to start using another thing or person instead of the one that you are using now", "translation": "thay thế bộ phận/người khác", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "simple", "abbr": "adj", "definition": "not difficult to do, or to understand", "translation": "đơn giản, dễ thực hiện", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "sophisticated", "abbr": "adj", "definition": "A sophisticated machine or system is very advanced and works in a clever way.", "translation": "tinh vi, cực kỳ phức tạp và hiện đại", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "switch on/off", "abbr": "pv [T]", "definition": "to turn on or off a light, television, etc. by using a switch", "translation": "bật/tắt công tắc điện", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "tool", "abbr": "n [C]", "definition": "something that helps you to do a particular activity", "translation": "công cụ cầm tay phục vụ công việc", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "weigh", "abbr": "v [T]", "definition": "to measure how heavy someone or something is", "translation": "cân trọng lượng", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "annual", "abbr": "adj", "definition": "happening or produced once a year", "translation": "thường niên, diễn ra hằng năm", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "behaviour", "abbr": "n [U]", "definition": "the way that you act or perform", "translation": "tập tính động vật, hành vi cá nhân", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "cage", "abbr": "n [C]", "definition": "a container made of wire or metal bars used for keeping birds or animals in", "translation": "chuồng nuôi nhốt bằng kim loại", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "circus", "abbr": "n [C]", "definition": "a show in which a group of people and animals perform in a large tent", "translation": "gánh xiếc thú", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "conservation", "abbr": "n [U]", "definition": "the protection of nature", "translation": "bảo tồn đa dạng sinh học", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "creature", "abbr": "n [C]", "definition": "anything that lives but is not a plant", "translation": "sinh vật sống", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "decline", "abbr": "v [I]", "definition": "to become less in amount, importance, quality or strength", "translation": "suy thoái, sụt giảm số lượng", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "disappear", "abbr": "v [I]", "definition": "to stop existing", "translation": "biến mất hoàn toàn", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "domestic", "abbr": "adj", "definition": "A domestic animal is kept as a pet.", "translation": "vật nuôi thuần hóa, thú nuôi trong nhà", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "ecosystem", "abbr": "n [C]", "definition": "all the living things in an area and the way they affect each other and the environment", "translation": "hệ sinh thái tự nhiên", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "endangered", "abbr": "adj", "definition": "Endangered birds/plants/species are animals or plants which may soon not exist because there are very few now alive.", "translation": "đang bên bờ vực tuyệt chủng", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "exotic", "abbr": "adj", "definition": "unusual, interesting, and often foreign", "translation": "ngoại lai, kỳ lạ độc đáo", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "extinct", "abbr": "adj", "definition": "If a type of animal is extinct, it does not now exist.", "translation": "đã tuyệt chủng hoàn toàn", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "farm", "abbr": "n [C]", "definition": "an area of land with fields and buildings that is used for growing crops and keeping animals as a business", "translation": "trang trại chăn nuôi trồng trọt", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "feed", "abbr": "v [I]", "definition": "If an animal or a baby feeds, it eats.", "translation": "ăn uống, gặm cỏ kiếm ăn", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "herd", "abbr": "n [C]", "definition": "a large group of animals such as cows that live and eat together", "translation": "đàn gia súc lớn", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "jungle", "abbr": "n [C/U]", "definition": "an area of land, usually in tropical countries, where trees and plants grow close together", "translation": "rừng rậm nhiệt đới hoang vu", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "live", "abbr": "adj", "definition": "having life", "translation": "sống động, còn sống", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "mammal", "abbr": "n [C]", "definition": "an animal that feeds its babies on milk from its body", "translation": "động vật có vú nuôi con bằng sữa mẹ", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "marine", "abbr": "adj", "definition": "found in the sea, or relating to the sea", "translation": "thuộc về biển, sinh vật hải dương", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "native", "abbr": "adj", "definition": "Your native town or country is the place where you were born.", "translation": "bản địa, loài bản xứ", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "natural habitat", "abbr": "p [C]", "definition": "the natural environment in which an animal or plant usually lives", "translation": "môi trường sống tự nhiên", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "non-native", "abbr": "adj", "definition": "Non-native animals or plants do not live or grow naturally in a place, but have been brought from somewhere else.", "translation": "sinh vật ngoại lai du nhập", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "pet", "abbr": "n [C]", "definition": "an animal that someone keeps in their home", "translation": "thú cưng", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "rare", "abbr": "adj", "definition": "very unusual", "translation": "hiếm gặp, quý hiếm", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "survive", "abbr": "v [I/T]", "definition": "to continue to live or exist, especially after coming close to dying or being destroyed or after being in a difficult or threatening situation", "translation": "sống sót qua hiểm cảnh", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "threaten (of species)", "abbr": "v [T]", "definition": "to be likely to cause harm or damage to something or someone", "translation": "đe dọa sự sinh tồn của loài", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "welfare", "abbr": "n [U]", "definition": "Someone's welfare is their health and happiness.", "translation": "phúc lợi động vật/hạnh phúc an sinh", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "wild", "abbr": "adj", "definition": "A wild animal or plant lives or grows in its natural environment and not where people live.", "translation": "hoang dã trong tự nhiên", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "wildlife", "abbr": "n [U]", "definition": "animals, birds and plants living in their natural environment", "translation": "thế giới động thực vật hoang dã", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "background", "abbr": "n [C]", "definition": "a person's education, family and experience of life", "translation": "nền tảng xuất thân gia đình", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "cast", "abbr": "v [T]", "definition": "to choose an actor for a particular part in a film or play", "translation": "chọn vai diễn viên", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "charitable", "abbr": "adj", "definition": "A charitable event, activity or organisation gives money, food or help to people who need it.", "translation": "mang tính từ thiện cứu trợ", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "composer", "abbr": "n [C]", "definition": "someone who writes music", "translation": "nhạc sĩ sáng tác cổ điển/hiện đại", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "creativity", "abbr": "n [U]", "definition": "the ability to produce new ideas or things using skill and imagination", "translation": "óc sáng tạo nghệ thuật", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "demonstrate", "abbr": "v [T]", "definition": "to express or show that you have a feeling, quality or ability", "translation": "thể hiện phẩm chất/năng lực xuất chúng", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "entertain", "abbr": "v [T]", "definition": "to keep someone interested and help them to have an enjoyable time", "translation": "chiêu đãi, phục vụ giải trí", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "event", "abbr": "n [C]", "definition": "something that happens, especially something important or unusual", "translation": "sự kiện trọng đại", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "expertise", "abbr": "n [U]", "definition": "a high level of knowledge or skill", "translation": "chuyên môn nghiệp vụ chuyên sâu", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "familiarity", "abbr": "n [U]", "definition": "a good knowledge of something, or experience of doing or using it", "translation": "sự am hiểu, quen thuộc thuần thục", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "get to the top", "abbr": "p", "definition": "achieve the most important position in a group or organisation", "translation": "đạt đến đỉnh cao trong sự nghiệp", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "have charisma", "abbr": "p", "definition": "to have a natural power to influence or attract people", "translation": "có sức hút lôi cuốn quần chúng bẩm sinh", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "have a change", "abbr": "p", "definition": "to do something different that you enjoy because it is a new experience", "translation": "thay đổi không khí cho mới lạ", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "(be) inspired", "abbr": "adj", "definition": "showing a lot of skill and good ideas", "translation": "được truyền cảm hứng tràn đầy năng lượng", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "impress someone", "abbr": "v [T]", "definition": "to make someone admire or respect you", "translation": "tạo ấn tượng tốt đẹp với ai", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "have a good/bad relationship", "abbr": "p", "definition": "the way in which two or more people feel and behave towards each other", "translation": "có mối quan hệ tốt/xấu với ai", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "lie awake", "abbr": "p", "definition": "to be in bed but unable to sleep", "translation": "nằm trằn trọc mất ngủ", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "make a change", "abbr": "p", "definition": "to make something become different or new", "translation": "tạo ra sự thay đổi bước ngoặt", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "mood", "abbr": "n [C]", "definition": "the way someone feels at a particular time", "translation": "tâm trạng tại một thời điểm", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "musician", "abbr": "n [C]", "definition": "someone who plays a musical instrument, often as a job", "translation": "nhạc công, nghệ sĩ âm nhạc", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "on screen", "abbr": "p", "definition": "appearing on a computer or television screen", "translation": "xuất hiện trên màn ảnh nhỏ/rộng", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "originality", "abbr": "n [U]", "definition": "the quality of being interesting and different from everyone or everything else", "translation": "tính độc đáo, tính nguyên bản sáng tạo", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "overshadow", "abbr": "v [T]", "definition": "to cause someone or something to seem less important or successful", "translation": "lấn át hào quang, làm lu mờ ai khác", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "play in a band", "abbr": "p", "definition": "to be one of a group of musicians who play modern music together", "translation": "chơi nhạc trong ban nhạc", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "paparazzi", "abbr": "pln", "definition": "photographers whose job is to follow famous people and take photographs of them for newspapers and magazines", "translation": "cánh săn ảnh ngôi sao", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "rare", "abbr": "adj", "definition": "(of a skill or talent) very unusual", "translation": "hiếm có khó tìm (năng khiếu)", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "show business", "abbr": "n [U]", "definition": "the entertainment industry, including films, television, theatre, etc.", "translation": "giới giải trí, giới showbiz", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "star quality", "abbr": "n [U]", "definition": "a special ability that makes someone seem very successful or better than other people", "translation": "khí chất ngôi sao, tố chất tỏa sáng", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "singer-songwriter", "abbr": "n [C]", "definition": "a person who sings and writes the music and words of songs", "translation": "ca nhạc sĩ tự sáng tác và biểu diễn", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "additional qualifications", "abbr": "pln", "definition": "official records showing that you have extra skills, qualities or experience", "translation": "chứng chỉ bổ sung chuyên ngành", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "(get into) bad habits", "abbr": "p", "definition": "something that you start to do that is bad for your health or is annoying", "translation": "nhiễm phải thói quen xấu", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "campus", "abbr": "n [C/U]", "definition": "the land and buildings belonging to a college or university", "translation": "khuôn viên trường đại học", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "colleague", "abbr": "n [C]", "definition": "someone that you work with", "translation": "đồng nghiệp cùng cơ quan", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "concept", "abbr": "n [C]", "definition": "an idea or principle", "translation": "khái niệm, quan niệm học thuật", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "do homework", "abbr": "p", "definition": "to do the work which teachers give their students to do at home", "translation": "làm bài tập về nhà", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "enable (somebody to do something)", "abbr": "v [T]", "definition": "to make someone able to do something, or to make something possible", "translation": "tạo điều kiện cho ai làm việc gì", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "further education", "abbr": "n [U]", "definition": "education at a college for people who have left school but are not at a university", "translation": "giáo dục thường xuyên/bổ túc sau cấp 3", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "get a place", "abbr": "p", "definition": "to be given a position in an organisation such as a university", "translation": "trúng tuyển vào trường đại học", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "get a qualification", "abbr": "p", "definition": "to be given an official record showing that you have finished a training course or have the necessary skills, etc.", "translation": "nhận văn bằng tốt nghiệp", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "give priority", "abbr": "p", "definition": "to consider that something or someone is more important than other things or people", "translation": "ưu tiên hàng đầu cho ai/cái gì", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "have a chance", "abbr": "p", "definition": "to be given the opportunity to do something", "translation": "có được cơ hội thuận lợi", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "Institution", "abbr": "n [C]", "definition": "a large and important organisation, such as a university or bank", "translation": "học viện/tổ chức giáo dục lớn", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "keen to do something", "abbr": "p", "definition": "wanting to do something very much", "translation": "tha thiết, rất muốn làm gì", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "level", "abbr": "n [C]", "definition": "someone's ability compared to other people", "translation": "trình độ chuyên môn", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "make progress", "abbr": "p", "definition": "to improve skills, knowledge, etc.", "translation": "tiến bộ vượt bậc", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "measure performance", "abbr": "p", "definition": "to judge how successful someone or something is", "translation": "đánh giá hiệu quả công việc/học tập", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "non-academic", "abbr": "adj", "definition": "related to technical subjects or practical skills rather than studying", "translation": "phi học thuật, thiên về thực hành kỹ thuật", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "one-to-one", "abbr": "adj", "definition": "describes an activity in which one person is teaching or giving information to another person", "translation": "kèm riêng 1 kèm 1", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "participate in", "abbr": "p [T]", "definition": "to be involved with other people in an activity", "translation": "tham gia tích cực vào", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "pressure", "abbr": "n [C/U]", "definition": "difficult situations that make you feel worried or unhappy", "translation": "áp lực tâm lý/thi cử", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "program(me)", "abbr": "n [C]", "definition": "a plan of activities to be done or things to be achieved", "translation": "chương trình đào tạo/dự án", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "schedule", "abbr": "n [C/U]", "definition": "a plan that gives events or activities and the times that they will happen or be done", "translation": "thời khóa biểu, lịch trình phân bổ", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "self-discipline", "abbr": "n [U]", "definition": "the ability to make yourself do things that you do not want to do", "translation": "tinh thần kỷ luật tự giác", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "semester", "abbr": "n [C]", "definition": "one of the two time periods that a school or college year is divided into", "translation": "học kỳ đại học", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "spare time", "abbr": "p", "definition": "time when you are not working", "translation": "thời gian rỗi rảnh rỗi", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "take (a course or subject)", "abbr": "v [T]", "definition": "to do a series of lessons about a particular subject", "translation": "đăng ký học một môn học/khóa học", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "textbook", "abbr": "n [C]", "definition": "a book about a particular subject, written for students", "translation": "sách giáo khoa chuyên ngành", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "undergraduate", "abbr": "n [C]", "definition": "a student who is studying for their first university degree qualification", "translation": "sinh viên đang theo học cử nhân", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "admission", "abbr": "n [U]", "definition": "the money that you pay to enter a place", "translation": "tiền vé vào cửa", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "atlas", "abbr": "n [C]", "definition": "a book of maps", "translation": "tập bản đồ địa lý", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "bank holiday", "abbr": "p", "definition": "an official holiday when all banks and most shops and offices are closed", "translation": "ngày nghỉ lễ ngân hàng/nghỉ lễ toàn quốc", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "border", "abbr": "n [C]", "definition": "the line that separates two countries or states", "translation": "đường phân chia ranh giới biên giới", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "breathtaking scenery", "abbr": "p", "definition": "very beautiful natural things that you see in the countryside", "translation": "cảnh sắc thiên nhiên ngoạn mục tuyệt mỹ", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "chalet", "abbr": "n [C]", "definition": "a small wooden house, often in a mountain area, or for people who are on holiday", "translation": "nhà gỗ nghỉ dưỡng trên núi", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "collection", "abbr": "n [C]", "definition": "a group of objects of the same type that have been collected by one person or in one place", "translation": "bộ sưu tập hiện vật quý", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "exotic", "abbr": "adj", "definition": "unusual, interesting, and often foreign", "translation": "đậm phong vị mới lạ từ phương xa", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "exhibit", "abbr": "v [T]", "definition": "to show objects such as paintings to the public", "translation": "triển lãm, trưng bày tác phẩm", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "gallery", "abbr": "n [C]", "definition": "a room or building that is used for showing paintings and other art to the public", "translation": "phòng triển lãm tranh nghệ thuật", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "go for a ride", "abbr": "p", "definition": "to have a journey on a horse or bicycle, or in a vehicle", "translation": "đi dạo mát bằng xe", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "holiday rep", "abbr": "p", "definition": "a person who takes care of people on holiday and organises activities for them", "translation": "đại diện công ty du lịch chăm sóc khách", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "honeymoon", "abbr": "n [C]", "definition": "a holiday taken by two people who have just got married", "translation": "kỳ nghỉ tuần trăng mật", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "jungle", "abbr": "n [C/U]", "definition": "an area of land, usually in tropical countries, where trees and plants grow close together", "translation": "rừng già nguyên sinh nhiệt đới", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "lake", "abbr": "n [C]", "definition": "a large area of water which has land all around it", "translation": "hồ nước ngọt tự nhiên", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "leisure time", "abbr": "p", "definition": "the time when you are not working or doing other duties", "translation": "thời gian nghỉ ngơi thư giãn", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "long-haul flight", "abbr": "n [C]", "definition": "an aeroplane journey that travels a long distance", "translation": "chuyến bay chặng dài xuyên lục địa", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "nearby", "abbr": "adv", "definition": "not far away", "translation": "ở gần ngay cạnh", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "on display", "abbr": "p", "definition": "If something is on display, it is there for people to look at.", "translation": "đang được trưng bày cho khách xem", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "overlook", "abbr": "v [T]", "definition": "to have a view of something from above", "translation": "có tầm nhìn hướng ra nhìn từ trên cao", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "pursuit", "abbr": "n [C/U]", "definition": "when you try to achieve a plan, activity, or situation, usually over a long period of time", "translation": "sự theo đuổi đam mê, thú tiêu khiển", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "remote", "abbr": "adj", "definition": "far away", "translation": "hẻo lánh, xa xôi cách trở", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "self-catering holiday", "abbr": "n [C]", "definition": "a holiday in which you cook meals for yourself rather than having them provided for you", "translation": "kỳ nghỉ tự phục vụ nấu nướng", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "take a break", "abbr": "p", "definition": "to go away for a short holiday or have a period of time away from work, school, etc.", "translation": "nghỉ xả hơi một thời gian ngắn", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "unspoilt area", "abbr": "n [C]", "definition": "An unspoilt area is beautiful because it has not been changed or damaged by people.", "translation": "khu vực còn nguyên sơ, chưa bị con người tàn phá", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "valley", "abbr": "n [C]", "definition": "an area of low land between hills or mountains", "translation": "thung lũng lòng chảo", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "bottled water", "abbr": "n [U]", "definition": "water which has been treated in order to make it very clean or which has come from a special place, and which is sold in bottles", "translation": "nước khoáng đóng chai khử trùng", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "cause damage", "abbr": "p", "definition": "to harm or spoil something", "translation": "gây ra thiệt hại hư hại nặng nề", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "control", "abbr": "v [T]", "definition": "to order, limit or rule natural events such as the weather", "translation": "kiểm soát, điều tiết hiện tượng tự nhiên", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "drinkable", "abbr": "adj", "definition": "clean and safe to drink", "translation": "có thể uống trực tiếp an toàn", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "depth", "abbr": "n [C/U]", "definition": "the distance from the top of something to the bottom", "translation": "độ sâu của nước", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "evaporate", "abbr": "v [I/T]", "definition": "If a liquid evaporates or is evaporated, it changes into gas or vapour very small drops of water.", "translation": "bốc hơi, bay hơi thành khí", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "extreme weather", "abbr": "p", "definition": "very severe or bad weather", "translation": "thời tiết cực đoan nguy hiểm", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "faucet", "abbr": "n [C]", "definition": "an object at the end of a pipe which you turn to control the flow of water", "translation": "vòi khóa nước", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "harbour", "abbr": "n [C]", "definition": "an area of water near the coast where ships are kept and are safe from the sea", "translation": "hải cảng, vũng tàu neo đậu", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "heatwave", "abbr": "n [C]", "definition": "a period of time, usually a few days or weeks, when the weather is much hotter than usual", "translation": "đợt sóng nhiệt, đợt nắng nóng gay gắt", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "liquid", "abbr": "n [C/U]", "definition": "a substance, for example water, that is not solid and that can be poured easily", "translation": "chất lỏng", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "mineral water", "abbr": "n [C/U]", "definition": "water which is taken from the ground and contains chemicals that are good for your health", "translation": "nước khoáng thiên nhiên giàu dưỡng chất", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "moisture", "abbr": "n [U]", "definition": "very small drops of water in the air or on a surface", "translation": "độ ẩm sương đọng trên bề mặt", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "mudslide", "abbr": "n [C]", "definition": "a mass of wet earth moving suddenly and quickly down a steep slope", "translation": "sạt lở đất bùn sau mưa lớn", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "pouring with rain", "abbr": "p", "definition": "raining heavily, producing a lot of water", "translation": "mưa như trút nước, mưa tầm tã", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "puddle", "abbr": "n [C]", "definition": "a pool of liquid on the ground, usually from rain", "translation": "vũng nước đọng sau cơn mưa", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "recede", "abbr": "v [I]", "definition": "to become further and further away", "translation": "nước triều rút xa dần", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "resource", "abbr": "n [C]", "definition": "something that a country, person, or organisation has which they can use", "translation": "nguồn tài nguyên có thể khai thác", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "shallow", "abbr": "adj", "definition": "not deep", "translation": "nông cạn, không sâu", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "sewage", "abbr": "n [U]", "definition": "waste water and waste from toilets", "translation": "nước thải cống rãnh đô thị", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "sink", "abbr": "v [I/T]", "definition": "to go down or make something go down below the surface of water and not come back up", "translation": "chìm nghỉm xuống đáy nước", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "soaking wet", "abbr": "p", "definition": "completely wet", "translation": "ướt sũng, ướt như chuột lột", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "stream", "abbr": "n [C]", "definition": "a small river", "translation": "con suối nhỏ", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "tank", "abbr": "n [C]", "definition": "a large container for storing liquid or gas", "translation": "bồn chứa, bể chứa nước lớn", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "tide", "abbr": "n [C]", "definition": "the regular rise and fall in the level of the sea", "translation": "thủy triều lên xuống", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "typhoon signal", "abbr": "n [C]", "definition": "a warning that violent storm with very strong winds is about to happen", "translation": "tín hiệu cảnh báo bão nhiệt đới", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "waterfall", "abbr": "n [C]", "definition": "a stream of water that flows from a high place, often to a pool below", "translation": "thác nước tự nhiên", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "water shortage", "abbr": "n [C/U]", "definition": "when there is not enough water", "translation": "tình trạng khan hiếm nguồn nước", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "widespread (drought / floods)", "abbr": "adj", "definition": "affecting or including a lot of places, people, etc.", "translation": "hạn hán/lũ lụt trên diện rộng", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "basement", "abbr": "n [C]", "definition": "a room or set of rooms that is below ground level in a building", "translation": "tầng hầm tòa nhà", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "balcony", "abbr": "n [C]", "definition": "a small area joined to the wall outside a room on a high level where you can stand or sit", "translation": "ban công phòng ngủ/chung cư", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "cave", "abbr": "n [C]", "definition": "a large hole in the side of a cliff straight, high rock next to the sea, mountain, or under the ground", "translation": "hang động trong vách đá núi", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "collapse", "abbr": "v [I/T]", "definition": "to fall down or towards the inside, or to make a structure or object fall down or towards its inside", "translation": "sập đổ hoàn toàn", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "community", "abbr": "n [C]", "definition": "the people living in a particular area", "translation": "cộng đồng cư dân địa phương", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "date back to", "abbr": "p", "definition": "to say how long ago something has existed or when it was made", "translation": "có niên đại từ thời kỳ nào", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "demolish", "abbr": "v [T]", "definition": "to destroy something such as a building", "translation": "phá dỡ công trình cũ có chủ đích", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "developer", "abbr": "n [C]", "definition": "a person or company that buys land and builds houses, factories, shops, etc.", "translation": "nhà đầu tư phát triển bất động sản", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "district", "abbr": "n [C]", "definition": "a part of a city or country, either an official area or one that is known for having a particular characteristic or business", "translation": "quận, huyện, khu vực hành chính", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "dominate the landscape", "abbr": "p", "definition": "to be the largest, most important or most noticeable part of a place", "translation": "thống lĩnh cảnh quan, nổi bật toàn cảnh", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "engineering", "abbr": "n [U]", "definition": "the work of an engineer, or the study of this work", "translation": "ngành kỹ thuật công trình", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "ground floor", "abbr": "n [C]", "definition": "the level of a building which is on the ground", "translation": "tầng trệt tòa nhà", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "insulation", "abbr": "n [U]", "definition": "when you insulate something, or when something is insulated", "translation": "vật liệu/biện pháp cách nhiệt cách âm", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "layout", "abbr": "n [C]", "definition": "the way that something is arranged", "translation": "sơ đồ bố trí mặt bằng không gian", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "neighbourhood", "abbr": "n [C]", "definition": "an area of a town or city that people live in", "translation": "khu phố sinh sống thân cận", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "occupy a building", "abbr": "p", "definition": "to move into a building and take control of it", "translation": "chuyển vào cư trú/tiếp quản tòa nhà", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "(on the) outskirts", "abbr": "pln", "definition": "the outer area of a city town, or village", "translation": "ở vùng ngoại vi thành phố", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "private property", "abbr": "n [C/U]", "definition": "a house or area that is only for the use of one person or group and not for everyone", "translation": "khu vực tư hữu, bất động sản tư nhân", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "renovate", "abbr": "v [T]", "definition": "to repair and decorate a building that is old and in bad condition", "translation": "trùng tu, tôn tạo, cải tạo nâng cấp công trình", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "x-storey building", "abbr": "p [C]", "definition": "describes how many levels a building has", "translation": "tòa nhà cao x tầng", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "residential area", "abbr": "p [C]", "definition": "a part of a town which has only private houses, not offices and factories", "translation": "khu dân cư thuần túy để ở", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "skyscraper", "abbr": "n [C]", "definition": "a very tall building", "translation": "tòa nhà chọc trời hiện đại", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "sports stadium", "abbr": "n [C]", "definition": "a large, open area with seats around it, used for playing and watching sports", "translation": "sân vận động thể thao", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "terrace", "abbr": "n [C]", "definition": "a row of houses that are joined together", "translation": "dãy nhà liền kề kiến trúc cổ", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "terraced house", "abbr": "n [C]", "definition": "one of a row of houses that are joined together", "translation": "căn nhà trong dãy nhà liền kề", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "tile", "abbr": "n [C]", "definition": "one of the flat, square pieces that are used for covering roofs, floors or walls", "translation": "viên gạch lát sàn/ngói lợp mái", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "town planning", "abbr": "n [U]", "definition": "the planning of the way in which towns and cities are built in order to make them pleasant to live in", "translation": "công tác quy hoạch đô thị", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "vacant", "abbr": "adj", "definition": "Somewhere that is vacant is available because it is not being used.", "translation": "bỏ trống, phòng/nhà chưa có người thuê", "examples": []}, {"tab": "VOCABULARY EXTENSIONS", "word": "veranda(h)", "abbr": "n [C]", "definition": "a room that is joined to the outside of a house and has a roof and a floor but no outside wall", "translation": "hiên nhà có mái che, hành lang ngoài trời", "examples": []}];
+const OLD_BANK = [
+      {
+        tab: "WORD BANK",
+        word: "access",
+        abbr: "n [U]",
+        definition: "when you have the right or opportunity to use or see something",
+        translation: "quyền tiếp cận, cơ hội tiếp cận",
+        examples: [
+          "Many rural students struggle to gain equal <b>access</b> to high-speed internet and digital learning materials.",
+          "Providing clean drinking water and medical <b>access</b> is essential for improving community health standards.",
+          "The university library offers full <b>access</b> to international academic journals for all enrolled candidates."
+        ]
+      },
+      {
+        tab: "WORD BANK",
+        word: "conclude",
+        abbr: "v [I]",
+        definition: "to decide something after studying all the information about it very carefully",
+        translation: "kết luận, đúc kết",
+        examples: [
+          "After analyzing the statistical findings, researchers were able to <b>conclude</b> that air pollution harms productivity.",
+          "To <b>conclude</b>, governments ought to invest more heavily in green infrastructure to mitigate climate risks.",
+          "The committee will <b>conclude</b> its investigation once the final financial records have been verified."
+        ]
+      },
+      {
+        tab: "WORD BANK",
+        word: "conduct research",
+        abbr: "vp",
+        definition: "to study a subject to find information about it",
+        translation: "tiến hành nghiên cứu",
+        examples: [
+          "Postgraduate scholars are required to <b>conduct research</b> on renewable energy alternatives before graduating.",
+          "Scientists frequently <b>conduct research</b> in diverse environments to observe ecological shifts accurately.",
+          "The institution secured funding to <b>conduct research</b> on modern teaching methods in primary schools."
+        ]
+      },
+      {
+        tab: "WORD BANK",
+        word: "consume",
+        abbr: "v [T]",
+        definition: "to use something such as a product, energy or fuel",
+        translation: "tiêu thụ, tiêu dùng (năng lượng, sản phẩm)",
+        examples: [
+          "Modern households <b>consume</b> significantly more electricity during extreme summer heatwaves.",
+          "Individuals who regularly <b>consume</b> heavily processed foods face higher risks of cardiovascular disease.",
+          "Emerging economies tend to <b>consume</b> higher volumes of raw materials to support industrial growth."
+        ]
+      },
+      {
+        tab: "WORD BANK",
+        word: "crime rate",
+        abbr: "n [C]",
+        definition: "the amount of crime that happens in a place or during a period of time",
+        translation: "tỷ lệ tội phạm",
+        examples: [
+          "Installing brighter public lighting has noticeably lowered the violent <b>crime rate</b> in urban districts.",
+          "Cities with severe unemployment often experience a noticeable surge in their annual <b>crime rate</b>.",
+          "Community policing programs are designed to keep the neighborhood <b>crime rate</b> consistently low."
+        ]
+      },
+      {
+        tab: "WORD BANK",
+        word: "culture",
+        abbr: "n [C, U]",
+        definition: "the habits, traditions and beliefs of a country, society or group of people",
+        translation: "văn hóa, phong tục tập quán",
+        examples: [
+          "Studying abroad gives young undergraduates profound exposure to an entirely different <b>culture</b>.",
+          "Preserving indigenous <b>culture</b> and culinary heritage is vital in an era of rapid globalization.",
+          "Corporate <b>culture</b> plays an enormous role in retaining talented and innovative employees."
+        ]
+      },
+      {
+        tab: "WORD BANK",
+        word: "diverse",
+        abbr: "adj",
+        definition: "including many different types",
+        translation: "đa dạng, phong phú",
+        examples: [
+          "Metropolitan centres benefit economically from welcoming people from culturally <b>diverse</b> backgrounds.",
+          "The wildlife sanctuary supports a remarkably <b>diverse</b> ecosystem of migratory birds and reptiles.",
+          "In order to succeed globally, the board assembled a team with <b>diverse</b> technical and commercial skills."
+        ]
+      },
+      {
+        tab: "WORD BANK",
+        word: "environment",
+        abbr: "n [C]",
+        definition: "the situation that you live or work in, and how it influences how you feel",
+        translation: "môi trường (sống, làm việc)",
+        examples: [
+          "A supportive home <b>environment</b> fosters emotional well-being and academic confidence in children.",
+          "Many tech start-ups strive to build a flexible working <b>environment</b> to stimulate creative thinking.",
+          "Unhealthy workplace <b>environments</b> often lead to excessive employee turnover and chronic stress."
+        ]
+      },
+      {
+        tab: "WORD BANK",
+        word: "innovative",
+        abbr: "adj",
+        definition: "using new methods or ideas",
+        translation: "có tính đổi mới, sáng tạo đột phá",
+        examples: [
+          "Educators are implementing <b>innovative</b> educational apps to stimulate pupil interest in STEM topics.",
+          "The company’s <b>innovative</b> solar storage system reduced total operating expenditures by twenty percent.",
+          "To solve complex municipal housing deficits, planners need bold and <b>innovative</b> architectural designs."
+        ]
+      },
+      {
+        tab: "WORD BANK",
+        word: "lifestyle",
+        abbr: "n [C]",
+        definition: "the way that you live",
+        translation: "lối sống, phong cách sống",
+        examples: [
+          "Adopting an active and health-conscious <b>lifestyle</b> can dramatically lower long-term medical expenditures.",
+          "Urban professionals frequently struggle to balance an intense career with a peaceful family <b>lifestyle</b>.",
+          "Sedentary desk-bound <b>lifestyles</b> are directly associated with chronic back pain and fatigue."
+        ]
+      },
+      {
+        tab: "VOCABULARY EXTENSIONS",
+        word: "residential area",
+        abbr: "p [C]",
+        definition: "a part of a town which has only private houses, not offices and factories",
+        translation: "khu dân cư thuần túy để ở",
+        examples: [
+          "Heavy commercial trucks are strictly prohibited from driving through this quiet <b>residential area</b>.",
+          "Property values in that suburban <b>residential area</b> have climbed due to top-ranking neighborhood schools.",
+          "Modern town planners strive to incorporate parks and bicycle lanes into every new <b>residential area</b>."
+        ]
+      },
+      {
+        tab: "VOCABULARY EXTENSIONS",
+        word: "skyscraper",
+        abbr: "n [C]",
+        definition: "a very tall building",
+        translation: "tòa nhà chọc trời hiện đại",
+        examples: [
+          "The iconic glass <b>skyscraper</b> dominates the city skyline and accommodates over five thousand office workers.",
+          "Engineers must install high-tech dampening devices so each <b>skyscraper</b> can endure typhoon winds.",
+          "Rapid land shortages in megacities frequently compel developers to erect taller <b>skyscrapers</b>."
+        ]
+      }
+    ];
+
+    /* =========================================================
+       2. STATE & LOCAL STORAGE
+       ========================================================= */
+    let vocabList = [];
+    let currentIndex = 0;
+    let userRatings = {}; // { word: "got-it" | "maybe" | "not-sure" }
+    let fontScale = 1;
+    let isDarkMode = false;
+
+    // Load initial stored states
+    function initData() {
+      // Load saved CSV or default
+      const savedVocab = localStorage.getItem("ielts_vocab_custom_bank");
+      if (savedVocab) {
+        try {
+          vocabList = JSON.parse(savedVocab);
+        } catch (e) {
+          vocabList = DEFAULT_VOCAB_BANK;
+        }
+      } else {
+        vocabList = DEFAULT_VOCAB_BANK;
+      }
+
+      // Load user ratings
+      const savedRatings = localStorage.getItem("ielts_vocab_ratings");
+      if (savedRatings) {
+        try {
+          userRatings = JSON.parse(savedRatings);
+        } catch (e) {
+          userRatings = {};
+        }
+      }
+
+      // Load settings
+      const savedTheme = localStorage.getItem("ielts_vocab_theme");
+      if (savedTheme === "dark") {
+        setTheme(true);
+      } else if (savedTheme === "light") {
+        setTheme(false);
+      } else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        setTheme(true);
+      }
+
+      const savedFont = localStorage.getItem("ielts_vocab_font_scale");
+      if (savedFont) {
+        fontScale = parseFloat(savedFont);
+        document.documentElement.style.setProperty("--font-scale", fontScale);
+      }
+
+      populateWordDropdown();
+      renderWord(0);
+      updateDashboardStats();
+    }
+
+    /* =========================================================
+       3. STANDARDIZED GRAMMAR BADGES (ABBR STANDARDS)
+       ========================================================= */
+    function formatGrammarPills(abbrRaw) {
+      if (!abbrRaw) return "";
+      const text = abbrRaw.trim();
+      const chips = [];
+
+      // Check Part of Speech / Phrasal unit
+      if (/\b(?:np|NP)\b/.test(text)) {
+        chips.push({ label: "Phrasal Unit: np", cls: "pos" });
+      } else if (/\b(?:vp|VP)\b/.test(text)) {
+        chips.push({ label: "Phrasal Unit: vp", cls: "pos" });
+      } else if (/\b(?:adjp|AdjP)\b/.test(text)) {
+        chips.push({ label: "Phrasal Unit: adjp", cls: "pos" });
+      } else if (/\b(?:advp|AdvP)\b/.test(text)) {
+        chips.push({ label: "Phrasal Unit: advp", cls: "pos" });
+      } else if (/\b(?:phr\. v\.|pv|PV)\b/.test(text)) {
+        chips.push({ label: "Phrasal Verb: phr. v.", cls: "pos" });
+      } else if (/\b(?:phrase|phr\.|p)\b/.test(text)) {
+        chips.push({ label: "Phrase: phr.", cls: "pos" });
+      } else if (/^n\b|\bn\b/.test(text)) {
+        chips.push({ label: "Part of Speech: n.", cls: "pos" });
+      } else if (/^v\b|\bv\b/.test(text)) {
+        chips.push({ label: "Part of Speech: v.", cls: "pos" });
+      } else if (/^adj\b|\ba\.\b/.test(text)) {
+        chips.push({ label: "Part of Speech: adj.", cls: "pos" });
+      } else if (/^adv\b/.test(text)) {
+        chips.push({ label: "Part of Speech: adv.", cls: "pos" });
+      }
+
+      // Check Verb Complementation
+      if (text.includes("[T]") || text.includes("/T") || text.includes(", T") || text.includes("vt")) {
+        chips.push({ label: "Verb: [T] Transitive", cls: "" });
+      }
+      if (text.includes("[I]") || text.includes("/I") || text.includes(", I") || text.includes("vi")) {
+        chips.push({ label: "Verb: [I] Intransitive", cls: "" });
+      }
+
+      // Check Noun Number / Count
+      if (text.includes("[C]") || text.includes("C,") || text.includes("/C")) {
+        chips.push({ label: "Countable: [C]", cls: "count" });
+      }
+      if (text.includes("[U]") || text.includes(", U") || text.includes("/U")) {
+        chips.push({ label: "Uncountable: [U]", cls: "count" });
+      }
+      if (text.includes("plural") || text.includes("pln") || text.includes("[pl.]")) {
+        chips.push({ label: "Plural Noun: [pl.]", cls: "count" });
+      }
+      if (text.includes("sing.") || text.includes("no plural")) {
+        chips.push({ label: "Singular: [sing.]", cls: "count" });
+      }
+
+      // If nothing detected, display raw indicator sanitized
+      if (chips.length === 0) {
+        chips.push({ label: text, cls: "pos" });
+      }
+
+      return chips.map(c => `<span class="gram-chip ${c.cls}">${c.label}</span>`).join(" ");
+    }
+
+    /* =========================================================
+       4. CONTEXTUAL IELTS 5-6.5 SENTENCE GENERATOR (FALLBACK)
+       ========================================================= */
+    function generateIeltsSentences(word, def, rawAbbr) {
+      const cleanWord = word.trim();
+      const lowerWord = cleanWord.toLowerCase();
+      return [
+        `In many developing nations, the issue of <b>${lowerWord}</b> has become a central priority for local policymakers.`,
+        `Researchers have pointed out that paying close attention to <b>${lowerWord}</b> can yield tangible improvements in societal welfare.`,
+        `Although some critics overlook <b>${lowerWord}</b>, academic evidence suggests it remains vital for long-term sustainable development.`
+      ];
+    }
+
+    /* =========================================================
+       5. CORE RENDERING FUNCTION
+       ========================================================= */
+    function renderWord(index) {
+      if (!vocabList || vocabList.length === 0) return;
+      if (index < 0) index = 0;
+      if (index >= vocabList.length) index = vocabList.length - 1;
+      currentIndex = index;
+
+      const item = vocabList[currentIndex];
+      const wordKey = item.word.trim();
+
+      // Update Word Card
+      document.getElementById("vocabWord").textContent = wordKey;
+      document.getElementById("wordTabBadge").textContent = item.tab || "VOCABULARY";
+      document.getElementById("wordGrammarOverview").textContent = item.abbr || "";
+
+      // Update Counter & Select
+      document.getElementById("currentCounter").textContent = `Word ${currentIndex + 1} of ${vocabList.length}`;
+      document.getElementById("wordDropdown").value = currentIndex;
+      const progressPercent = ((currentIndex + 1) / vocabList.length) * 100;
+      document.getElementById("progressBar").style.width = `${progressPercent}%`;
+
+      // Status indicator tag
+      const currentRating = userRatings[wordKey] || null;
+      updateStatusBadgeHeader(currentRating);
+      updateStatusButtonsUI(currentRating);
+
+      // Render Examples
+      const exListEl = document.getElementById("examplesList");
+      exListEl.innerHTML = "";
+      let sentences = item.examples;
+      if (!sentences || !Array.isArray(sentences) || sentences.length === 0) {
+        sentences = generateIeltsSentences(item.word, item.definition, item.abbr);
+      }
+      sentences.slice(0, 3).forEach(sent => {
+        const li = document.createElement("li");
+        li.className = "example-item";
+        li.innerHTML = sent;
+        exListEl.appendChild(li);
+      });
+
+      // Render Definition & Grammar Badges
+      document.getElementById("defText").textContent = item.definition || "No definition available.";
+      document.getElementById("gramChips").innerHTML = formatGrammarPills(item.abbr);
+
+      // Render Translation
+      document.getElementById("vnTranslation").textContent = item.translation || "Chưa có bản dịch";
+
+      // Render Verify Options
+      renderVerifyQuiz(item);
+
+      // Reset accordion cards to closed for fresh focus (or keep Definition open)
+      closeAllCardsExcept(null);
+    }
+
+    /* =========================================================
+       6. ACCORDION HANDLER
+       ========================================================= */
+    function toggleCard(cardId) {
+      const card = document.getElementById(cardId);
+      if (card) {
+        card.classList.toggle("open");
+      }
+    }
+
+    function closeAllCardsExcept(keepCardId) {
+      ["cardExamples", "cardDefinition", "cardTranslation", "cardVerify"].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          if (keepCardId === id) {
+            el.classList.add("open");
+          } else {
+            el.classList.remove("open");
+          }
+        }
+      });
+    }
+
+    /* =========================================================
+       7. VERIFY QUIZ LOGIC
+       ========================================================= */
+    function renderVerifyQuiz(currentItem) {
+      const optionsContainer = document.getElementById("verifyOptions");
+      const feedbackEl = document.getElementById("verifyFeedback");
+      optionsContainer.innerHTML = "";
+      feedbackEl.className = "verify-feedback";
+      feedbackEl.textContent = "";
+
+      // 1 correct definition
+      const correctText = currentItem.definition.trim();
+
+      // Gather 2 distractors from other vocabulary items
+      const otherItems = vocabList.filter(it => it.word !== currentItem.word && it.definition);
+      let distractors = [];
+      if (otherItems.length >= 2) {
+        const shuffledOthers = [...otherItems].sort(() => 0.5 - Math.random());
+        distractors = [shuffledOthers[0].definition.trim(), shuffledOthers[1].definition.trim()];
+      } else {
+        distractors = [
+          "to stop something from happening or continuing",
+          "a condition or state of having very little financial income"
+        ];
+      }
+
+      const choices = [
+        { text: correctText, isCorrect: true },
+        { text: distractors[0], isCorrect: false },
+        { text: distractors[1], isCorrect: false }
+      ].sort(() => 0.5 - Math.random());
+
+      choices.forEach((choice, idx) => {
+        const btn = document.createElement("button");
+        btn.className = "verify-option-btn";
+        btn.innerHTML = `<span style="font-weight:700;">${String.fromCharCode(65 + idx)}.</span> <span>${choice.text}</span>`;
+        btn.onclick = () => handleVerifySelection(choice.isCorrect, btn, choices);
+        optionsContainer.appendChild(btn);
+      });
+    }
+
+    function handleVerifySelection(isCorrect, clickedBtn, allChoices) {
+      const allButtons = document.querySelectorAll(".verify-option-btn");
+      allButtons.forEach(btn => btn.disabled = true);
+
+      const feedbackEl = document.getElementById("verifyFeedback");
+
+      if (isCorrect) {
+        clickedBtn.classList.add("correct");
+        feedbackEl.className = "verify-feedback show-correct";
+        feedbackEl.innerHTML = "✓ Correct! \"MAYBE\" has been selected as your default status.";
+        // Automatically set MAYBE as default
+        setStatus("maybe");
+      } else {
+        clickedBtn.classList.add("wrong");
+        feedbackEl.className = "verify-feedback show-wrong";
+        feedbackEl.innerHTML = "✗ Incorrect! \"NOT SURE\" has been selected as your default status.";
+        // Find and highlight correct answer
+        allButtons.forEach(b => {
+          allChoices.forEach(c => {
+            if (c.isCorrect && b.innerText.includes(c.text)) {
+              b.classList.add("correct");
+            }
+          });
+        });
+        // Automatically set NOT SURE as default
+        setStatus("not-sure");
+      }
+    }
+
+    /* =========================================================
+       8. STATUS (GOT IT / MAYBE / NOT SURE)
+       ========================================================= */
+    function setStatus(statusType) {
+      const currentItem = vocabList[currentIndex];
+      if (!currentItem) return;
+
+      const wordKey = currentItem.word.trim();
+      userRatings[wordKey] = statusType;
+      localStorage.setItem("ielts_vocab_ratings", JSON.stringify(userRatings));
+
+      updateStatusButtonsUI(statusType);
+      updateStatusBadgeHeader(statusType);
+      updateWordDropdownOptionBadge(currentIndex, statusType);
+      updateDashboardStats();
+    }
+
+    function updateStatusButtonsUI(statusType) {
+      document.querySelectorAll(".status-btn").forEach(btn => {
+        if (btn.getAttribute("data-status") === statusType) {
+          btn.classList.add("selected");
+        } else {
+          btn.classList.remove("selected");
+        }
+      });
+    }
+
+    function updateStatusBadgeHeader(statusType) {
+      const badge = document.getElementById("currentStatusBadge");
+      if (statusType === "got-it") {
+        badge.innerHTML = "🟢 Got It!";
+        badge.style.color = "var(--success)";
+      } else if (statusType === "maybe") {
+        badge.innerHTML = "🟡 Maybe";
+        badge.style.color = "var(--warning)";
+      } else if (statusType === "not-sure") {
+        badge.innerHTML = "🔴 Not Sure";
+        badge.style.color = "var(--danger)";
+      } else {
+        badge.innerHTML = "⚪ Unreviewed";
+        badge.style.color = "var(--text-muted)";
+      }
+    }
+
+    function updateWordDropdownOptionBadge(idx, statusType) {
+      const dropdown = document.getElementById("wordDropdown");
+      if (dropdown.options[idx]) {
+        const item = vocabList[idx];
+        const icon = statusType === "got-it" ? "🟢" : statusType === "maybe" ? "🟡" : statusType === "not-sure" ? "🔴" : "⚪";
+        dropdown.options[idx].textContent = `${icon} ${idx + 1}. ${item.word}`;
+      }
+    }
+
+    /* =========================================================
+       9. NAVIGATION & DROPDOWN
+       ========================================================= */
+    function navigate(offset) {
+      let target = currentIndex + offset;
+      if (target >= 0 && target < vocabList.length) {
+        renderWord(target);
+      }
+    }
+
+    function populateWordDropdown() {
+      const select = document.getElementById("wordDropdown");
+      select.innerHTML = "";
+      vocabList.forEach((item, index) => {
+        const opt = document.createElement("option");
+        opt.value = index;
+        const wordKey = item.word.trim();
+        const stat = userRatings[wordKey];
+        const icon = stat === "got-it" ? "🟢" : stat === "maybe" ? "🟡" : stat === "not-sure" ? "🔴" : "⚪";
+        opt.textContent = `${icon} ${index + 1}. ${item.word}`;
+        select.appendChild(opt);
+      });
+
+      select.onchange = (e) => {
+        renderWord(parseInt(e.target.value, 10));
+      };
+    }
+
+    /* =========================================================
+       10. FONT SIZE & THEME CONTROLS
+       ========================================================= */
+    document.getElementById("fontIncBtn").onclick = () => {
+      if (fontScale < 1.45) {
+        fontScale += 0.08;
+        applyFontScale();
+      }
+    };
+
+    document.getElementById("fontDecBtn").onclick = () => {
+      if (fontScale > 0.8) {
+        fontScale -= 0.08;
+        applyFontScale();
+      }
+    };
+
+    function applyFontScale() {
+      document.documentElement.style.setProperty("--font-scale", fontScale);
+      localStorage.setItem("ielts_vocab_font_scale", fontScale);
+    }
+
+    document.getElementById("themeToggleBtn").onclick = () => {
+      setTheme(!isDarkMode);
+    };
+
+    function setTheme(dark) {
+      isDarkMode = dark;
+      if (isDarkMode) {
+        document.body.setAttribute("data-theme", "dark");
+        localStorage.setItem("ielts_vocab_theme", "dark");
+      } else {
+        document.body.removeAttribute("data-theme");
+        localStorage.setItem("ielts_vocab_theme", "light");
+      }
+    }
+
+    /* =========================================================
+       11. HOME / MODAL / STATS
+       ========================================================= */
+    document.getElementById("homeBtn").onclick = openHomeModal;
+    document.getElementById("importTriggerBtn").onclick = openHomeModal;
+
+    function openHomeModal() {
+      updateDashboardStats();
+      document.getElementById("homeModal").classList.add("open");
+    }
+
+    function closeHomeModal() {
+      document.getElementById("homeModal").classList.remove("open");
+    }
+
+    function updateDashboardStats() {
+      const total = vocabList.length;
+      let gotIt = 0, maybe = 0, notSure = 0;
+
+      vocabList.forEach(item => {
+        const rating = userRatings[item.word.trim()];
+        if (rating === "got-it") gotIt++;
+        else if (rating === "maybe") maybe++;
+        else if (rating === "not-sure") notSure++;
+      });
+
+      document.getElementById("statTotal").textContent = total;
+      document.getElementById("statGotIt").textContent = gotIt;
+      document.getElementById("statMaybe").textContent = maybe;
+      document.getElementById("statNotSure").textContent = notSure;
+    }
+
+    /* =========================================================
+       12. CSV PARSER (LOAD ATTACHED IELTS LIST.csv)
+       ========================================================= */
+    const csvInput = document.getElementById("csvFileInput");
+    csvInput.onchange = (e) => {
+      const file = e.target.files[0];
+      if (file) parseCSVFile(file);
+    };
+
+    const dropArea = document.getElementById("dropArea");
+    dropArea.ondragover = (e) => { e.preventDefault(); dropArea.style.borderColor = "var(--primary)"; };
+    dropArea.ondragleave = () => { dropArea.style.borderColor = "var(--card-border)"; };
+    dropArea.ondrop = (e) => {
+      e.preventDefault();
+      dropArea.style.borderColor = "var(--card-border)";
+      if (e.dataTransfer.files.length) {
+        parseCSVFile(e.dataTransfer.files[0]);
+      }
+    };
+
+    function parseCSVLine(line) {
+      const result = [];
+      let cur = "";
+      let inQuotes = false;
+      for (let i = 0; i < line.length; i++) {
+        const c = line[i];
+        if (c === '"') {
+          if (inQuotes && line[i+1] === '"') {
+            cur += '"';
+            i++;
+          } else {
+            inQuotes = !inQuotes;
+          }
+        } else if (c === ',' && !inQuotes) {
+          result.push(cur);
+          cur = "";
+        } else {
+          cur += c;
+        }
+      }
+      result.push(cur);
+      return result.map(s => s.trim());
+    }
+
+    function parseCSVFile(file) {
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        const text = evt.target.result;
+        const lines = text.split(/\r?\n/).filter(l => l.trim().length > 0);
+        if (lines.length <= 1) {
+          alert("The uploaded CSV appears to be empty.");
+          return;
+        }
+
+        const headers = parseCSVLine(lines[0]).map(h => h.toLowerCase());
+        const tabIdx = headers.findIndex(h => h.includes("tab"));
+        const wordIdx = headers.findIndex(h => h.includes("word"));
+        const abbrIdx = headers.findIndex(h => h.includes("abbr") || h.includes("indicator"));
+        const defIdx = headers.findIndex(h => h.includes("definition"));
+        const vnIdx = headers.findIndex(h => h.includes("vietnamese") || h.includes("translation"));
+
+        const loadedItems = [];
+        for (let i = 1; i < lines.length; i++) {
+          const row = parseCSVLine(lines[i]);
+          if (row.length < 2) continue;
+          const word = row[wordIdx >= 0 ? wordIdx : 1] || "";
+          if (!word) continue;
+
+          loadedItems.push({
+            tab: tabIdx >= 0 ? row[tabIdx] : "VOCABULARY",
+            word: word,
+            abbr: abbrIdx >= 0 ? row[abbrIdx] : "",
+            definition: defIdx >= 0 ? row[defIdx] : "",
+            translation: vnIdx >= 0 ? row[vnIdx] : "",
+            examples: [] // dynamically populated with IELTS 5-6.5 generator
+          });
+        }
+
+        if (loadedItems.length > 0) {
+          vocabList = loadedItems;
+          localStorage.setItem("ielts_vocab_custom_bank", JSON.stringify(vocabList));
+          populateWordDropdown();
+          renderWord(0);
+          updateDashboardStats();
+          closeHomeModal();
+          alert(`Successfully loaded ${loadedItems.length} vocabulary items from ${file.name}!`);
+        } else {
+          alert("Could not extract valid vocabulary rows from this file.");
+        }
+      };
+      reader.readAsText(file, "UTF-8");
+    }
+
+    /* =========================================================
+       13. MARKDOWN EXPORT (DATE-PREFIXED)
+       ========================================================= */
+    document.getElementById("exportNavBtn").onclick = exportMarkdownList;
+
+    function exportMarkdownList() {
+      // Date format: YYYY-MM-DD
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, "0");
+      const day = String(now.getDate()).padStart(2, "0");
+      const datePrefix = `${year}-${month}-${day}`;
+
+      let gotItItems = [];
+      let maybeItems = [];
+      let notSureItems = [];
+      let unreviewedItems = [];
+
+      vocabList.forEach(item => {
+        const key = item.word.trim();
+        const stat = userRatings[key];
+        const row = `- **${item.word}** *(${item.abbr || "n/a"})*: ${item.definition || ""} _[VN: ${item.translation || ""}]_`;
+
+        if (stat === "got-it") gotItItems.push(row);
+        else if (stat === "maybe") maybeItems.push(row);
+        else if (stat === "not-sure") notSureItems.push(row);
+        else unreviewedItems.push(row);
+      });
+
+      let mdContent = `# IELTS Vocabulary Tracker - ${datePrefix}\n\n`;
+      mdContent += `**Export Date:** ${now.toLocaleDateString()} ${now.toLocaleTimeString()}\n`;
+      mdContent += `**Total Vocabulary Bank:** ${vocabList.length}\n`;
+      mdContent += `- 🟢 **Mastered (Got It):** ${gotItItems.length}\n`;
+      mdContent += `- 🟡 **Review Needed (Maybe):** ${maybeItems.length}\n`;
+      mdContent += `- 🔴 **Needs Focus (Not Sure):** ${notSureItems.length}\n`;
+      mdContent += `- ⚪ **Unreviewed:** ${unreviewedItems.length}\n\n`;
+      mdContent += `---\n\n`;
+
+      mdContent += `## 🟢 Mastered ("GOT IT!") (${gotItItems.length})\n\n`;
+      mdContent += gotItItems.length ? gotItItems.join("\n") + "\n\n" : "_No items marked as Got It yet._\n\n";
+
+      mdContent += `## 🟡 Reviewing ("MAYBE") (${maybeItems.length})\n\n`;
+      mdContent += maybeItems.length ? maybeItems.join("\n") + "\n\n" : "_No items marked as Maybe._\n\n";
+
+      mdContent += `## 🔴 Needs Focus ("NOT SURE") (${notSureItems.length})\n\n`;
+      mdContent += notSureItems.length ? notSureItems.join("\n") + "\n\n" : "_No items marked as Not Sure._\n\n";
+
+      mdContent += `## ⚪ Unreviewed (${unreviewedItems.length})\n\n`;
+      mdContent += unreviewedItems.length ? unreviewedItems.join("\n") + "\n\n" : "_All items have been reviewed!_\n\n";
+
+      // Trigger download
+      const blob = new Blob([mdContent], { type: "text/markdown;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `${datePrefix}-ielts-vocabulary-list.md`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    /* =========================================================
+       14. KEYBOARD SHORTCUTS
+       ========================================================= */
+    window.addEventListener("keydown", (e) => {
+      if (document.getElementById("homeModal").classList.contains("open")) return;
+      if (e.key === "ArrowLeft") {
+        navigate(-1);
+      } else if (e.key === "ArrowRight") {
+        navigate(1);
+      }
+    });
+
+    // Start App
+    window.onload = initData;
+  </script>
+</body>
+</html>
